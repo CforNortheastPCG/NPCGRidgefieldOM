@@ -1,0 +1,83 @@
+/* ═══════════════════ FLYER LAYOUT ═══════════════════
+   Two-sided landscape flyer. Each .flyer-page is a fixed 1056×816 (11×8.5in
+   @96dpi); print.cjs screenshots each and composes one landscape page per side. */
+
+.flyer-deck { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 24px; background: #d9d4ce; }
+
+.flyer-page {
+  width: 1056px;
+  height: 816px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  color: var(--carbon);
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+/* ── FRONT ── */
+.fl-hero { position: absolute; inset: 0; overflow: hidden; }
+.fl-hero-bg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fl-hero-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(20,24,30,0.50) 0%, rgba(20,24,30,0) 20%, rgba(20,24,30,0) 46%, rgba(20,24,30,0.90) 100%); }
+.fl-hero-logo { position: absolute; top: 34px; right: 40px; height: 52px; object-fit: contain; }
+.fl-hero-copy { position: absolute; left: 52px; right: 52px; bottom: 56px; color: #fff; }
+.fl-hero--top .fl-hero-scrim { background: linear-gradient(to bottom, rgba(20,24,30,0.88) 0%, rgba(20,24,30,0.4) 28%, rgba(20,24,30,0) 58%); }
+.fl-hero--top .fl-hero-copy { top: 90px; bottom: auto; }
+.fl-eyebrow { font-size: 14px; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--golden); margin-bottom: 14px; }
+.fl-title { font-size: 64px; font-weight: 800; line-height: 1.02; letter-spacing: -0.01em; }
+.fl-addresses { font-size: 16.5px; font-weight: 600; color: rgba(255,255,255,0.94); margin-top: 14px; letter-spacing: 0.01em; }
+
+.fl-front-body { position: absolute; left: 0; right: 0; top: 545px; bottom: 0; display: flex; flex-direction: column; }
+.fl-tagline { padding: 16px 44px 0; font-size: 13.5px; line-height: 1.5; color: var(--graphite); flex: 1; }
+.fl-statbar { display: grid; grid-template-columns: repeat(6, 1fr); background: var(--carbon); }
+.fl-stat { padding: 14px 8px; text-align: center; border-left: 1px solid rgba(255,255,255,0.12); }
+.fl-stat:first-child { border-left: none; }
+.fl-stat-v { font-size: 21px; font-weight: 800; color: #fff; line-height: 1; }
+.fl-stat-l { font-size: 8.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); margin-top: 5px; }
+.fl-front-footer { display: flex; align-items: center; justify-content: space-between; padding: 12px 44px; background: var(--graphite); }
+.fl-front-footer img { height: 30px; object-fit: contain; }
+.fl-front-footer .fl-cta { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; }
+.fl-front-footer .fl-cta a, .fl-front-footer .fl-cta span.u { color: var(--golden); }
+
+/* ── BACK ── */
+.fl-back-header { height: 66px; display: flex; align-items: center; justify-content: space-between; background: var(--carbon); padding: 0 36px; }
+.fl-back-header img { height: 34px; object-fit: contain; }
+.fl-back-header .fl-bh-r { text-align: right; color: #fff; }
+.fl-bh-name { font-size: 16px; font-weight: 800; }
+.fl-bh-sub { font-size: 9.5px; font-weight: 600; letter-spacing: 0.06em; color: var(--stone); text-transform: uppercase; margin-top: 2px; }
+
+.fl-back-body { position: absolute; left: 0; right: 0; top: 66px; bottom: 0; display: grid; grid-template-columns: 1.05fr 1fr; gap: 0; }
+.fl-back-left { padding: 24px 26px 40px 36px; display: flex; flex-direction: column; min-height: 0; }
+.fl-back-right { padding: 24px 36px 40px 26px; display: flex; flex-direction: column; min-height: 0; background: var(--linen); }
+
+.fl-lead { font-size: 12.5px; line-height: 1.45; font-weight: 600; color: var(--carbon); margin-bottom: 14px; padding-left: 12px; border-left: 3px solid var(--golden); }
+.fl-h3 { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--carbon); padding-bottom: 6px; border-bottom: 2px solid var(--golden); margin-bottom: 10px; }
+.fl-exec p { font-size: 10px; line-height: 1.4; color: var(--graphite); margin-bottom: 7px; }
+.fl-exec-cta { font-weight: 600; color: var(--carbon); }
+.fl-link { color: var(--golden); font-weight: 700; }
+.fl-hi { margin-top: 4px; }
+.fl-hi li { list-style: none; margin-bottom: 5px; padding-left: 15px; position: relative; font-size: 9.5px; line-height: 1.34; color: var(--graphite); }
+.fl-hi li::before { content: ''; position: absolute; left: 0; top: 5px; width: 7px; height: 7px; background: var(--golden); border-radius: 1px; }
+.fl-hi b { color: var(--carbon); }
+
+.fl-map { border-radius: 4px; overflow: hidden; border: 1px solid var(--border); height: 268px; }
+.fl-map img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fl-map-cap { font-size: 8px; color: var(--stone); margin-top: 4px; letter-spacing: 0.04em; }
+.fl-overview { font-size: 11.5px; line-height: 1.5; color: var(--graphite); }
+.fl-statgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.fl-sg { text-align: center; padding: 8px 4px; border-top: 3px solid var(--golden); background: #fff; }
+.fl-sg-v { font-size: 16px; font-weight: 800; color: var(--carbon); line-height: 1; }
+.fl-sg-l { font-size: 7.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); margin-top: 4px; }
+
+.fl-listed { margin-top: 16px; }
+.fl-bio { font-size: 10px; line-height: 1.45; color: var(--graphite); margin-bottom: 12px; }
+.fl-contact { display: flex; gap: 12px; padding-top: 2px; }
+.fl-broker { display: flex; align-items: center; gap: 9px; flex: 1; }
+.fl-broker img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--golden); flex-shrink: 0; }
+.fl-broker .fl-b-name { font-size: 12px; font-weight: 700; color: var(--carbon); line-height: 1.1; }
+.fl-broker .fl-b-title { font-size: 8px; font-weight: 500; letter-spacing: 0.02em; color: var(--stone); margin: 2px 0 3px; line-height: 1.15; }
+.fl-broker .fl-b-meta { font-size: 9.5px; color: var(--graphite); font-weight: 500; line-height: 1.35; }
+.fl-broker .fl-b-meta b { color: var(--carbon); font-weight: 600; }
+
+.fl-back-footer { position: absolute; left: 0; right: 0; bottom: 0; background: var(--carbon); color: rgba(255,255,255,0.85); font-size: 8.5px; padding: 8px 36px; display: flex; align-items: center; justify-content: space-between; letter-spacing: 0.03em; }
+.fl-back-footer .u { color: var(--golden); }

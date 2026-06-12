@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(npm create:*)",
+      "WebFetch(domain:northeastpcg.com)",
+      "Bash(where choco:*)",
+      "Bash(where scoop:*)",
+      "Bash(ls:*)",
+      "WebSearch",
+      "Bash(pkill -f vite are invesment asisctes niote)",
+      "WebFetch(domain:www.connecticut-demographics.com)",
+      "Skill(claude-api)"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+.DS_Store
+**/.DS_Store
+
+/deals
+.deals
+
+# Large generated/reference artifacts — keep on disk, out of git
+*.pdf
+ref_page_*.png
+om-drafts/
+om-exports/
