@@ -15,10 +15,18 @@ Each "slide" is a fixed **960 × 742 px** `.page`; the deck prints to landscape 
 | `om-westhaven-main` | 300 Main St & 491 Washington Ave, West Haven, CT | 10 | Tudor, two buildings; line-by-line rent roll |
 | `om-westhaven-martin` | 254 Main St & 106–108 Martin St, West Haven, CT | 19 | Brick, three buildings; unit-mix summary rent roll |
 | `om-westhaven-williston` | 711 Savin Avenue, West Haven, CT | 69 | Elevator mid-rise; unit-mix summary + real interiors |
+| `om-westhaven-campbell` | 590–608 Campbell Avenue, West Haven, CT | 39 | "The Campbell Apartments"; two-building courtyard asset |
+| `om-elm-norwalk` | 6 Elm Street, Norwalk, CT | 12 | Large unit layouts; converted commercial units |
 
-The three West Haven OMs were cloned from `om-westhaven-main`, which was itself cloned from
+The West Haven OMs were cloned from `om-westhaven-main`, which was itself cloned from
 `om-ridgefield`. Source deal data lives in `deals/` (one "deal room" per property: rent roll,
 NPCG I&E model, field card, P&L, photos).
+
+### What's in git
+
+Exported OM PDFs (`*.pdf`, including flyers), `ref_page_*.png` reference captures, `om-drafts/`,
+`om-exports/`, and `deals/` are **gitignored** — they live on disk only. Commit source code,
+logos, and property photos; never `git add -f` the ignored artifacts.
 
 ## Anatomy of a template
 
@@ -62,14 +70,21 @@ cp -R om-westhaven-main om-<newdeal>
 cd om-<deal>
 npm install            # only needed if node_modules wasn't copied
 npm run dev            # open the printed URL (e.g. http://localhost:5173)
-node print.cjs <port>  # → <deal>-OM.pdf  (Puppeteer screenshots each .page at 2×)
+node print.cjs <port>  # → <deal>-OM.pdf  (Puppeteer screenshots each .page)
 ```
 
 `print.cjs` writes frames to a temp dir and composes via `file://` to avoid memory limits.
+Each OM carries its own copy, and two generations exist:
 
-**Compress for sharing** (originals run ~40 MB). With poppler installed (`pdftoppm`), rasterize at
-~185 DPI / quality 90 and recompose — keeps text crisp and lands each file under ~10 MB. Shareable
-copies of the West Haven set live in `~/Desktop/West Haven OMs/`.
+- **Current pipeline** (`om-westhaven-main`, `-martin`, `-williston`): JPEG captures at 3× /
+  quality 77 land the finished PDF near the **~10 MB email-friendly mark** with no separate
+  compression step, and pdf-lib stamps real document metadata (title / author / subject /
+  keywords). These folders also have `shot.cjs` for capturing individual pages to verify layout.
+- **Earlier pipeline** (`om-ridgefield`, `-campbell`, `om-elm-norwalk`): PNG captures at 2× —
+  output runs 35–50 MB. If a smaller copy is needed, rasterize with poppler (`pdftoppm`) at
+  ~185 DPI / quality 90 and recompose.
+
+Final shareable PDFs are collected in `om-exports/` (untracked).
 
 ### Environment
 
