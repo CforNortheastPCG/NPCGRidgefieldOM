@@ -1,4 +1,5 @@
 import { PageHeader } from './Shell.jsx'
+import { ISOCHRONES } from './isochrones.js'
 
 /* ═══════════════════ REGIONAL POSITIONING ═══════════════════
    A tristate-scale Static Maps view with highways emphasized in golden and
@@ -79,6 +80,7 @@ const GOLDEN = '0xF8971D'
 const PURPLE = '0x884EA0'
 const TEAL = '0x117A65'
 
+
 function buildStaticMapUrl() {
   const style = [
     'feature:poi|visibility:off',
@@ -94,9 +96,12 @@ function buildStaticMapUrl() {
   const airportPins = `markers=${encodeURIComponent(`size:mid|color:${BLUE}|${AIRPORTS.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
   const academicPins = `markers=${encodeURIComponent(`size:mid|color:${PURPLE}|label:A|${ACADEMIC.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
   const industryPins = `markers=${encodeURIComponent(`size:mid|color:${TEAL}|label:I|${INDUSTRY.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
-  // The subject property marker is overlaid as a circular property photo in the
-  // component (see render) rather than a Google "R" pin. It's an interior point,
-  // so omitting it here doesn't change the auto-fit frame.
+  const subjectPin = `markers=${encodeURIComponent(`size:mid|color:${GOLDEN}|label:R|${SUBJECT.lat},${SUBJECT.lng}`)}`
+  // Real road-network drive-time isochrones (encoded polylines) — server-drawn,
+  // so they stay correctly placed/scaled in the auto-fit frame.
+  const ringPaths = ISOCHRONES.map(r =>
+    `path=${encodeURIComponent(`color:${r.color}ff|fillcolor:${r.color}14|weight:4|enc:${r.enc}`)}`
+  )
   const railPath = `path=${encodeURIComponent(`color:0xB55D37|weight:5|${RAIL.map(p => `${p[0]},${p[1]}`).join('|')}`)}`
   const params = [
     'size=640x520',
@@ -104,24 +109,31 @@ function buildStaticMapUrl() {
     'maptype=roadmap',
     'format=png',
     ...style.map(s => `style=${encodeURIComponent(s)}`),
+    ...ringPaths,
     railPath,
     cityPins,
     airportPins,
     academicPins,
     industryPins,
-    `markers=${encodeURIComponent(`size:mid|color:0x00FF00|label:R|${SUBJECT.lat},${SUBJECT.lng}`)}`,
+    subjectPin,
     `key=${API_KEY}`,
   ]
   return `https://maps.googleapis.com/maps/api/staticmap?${params.join('&')}`
 }
 
-function LegendRow({ color, label, line }) {
+function LegendRow({ color, label, line, ring }) {
+  let icon
+  if (line) {
+    icon = <span style={{ width: 14, height: 3, background: color, flexShrink: 0, borderRadius: 2 }} />
+  } else if (ring) {
+    icon = <span style={{ width: 12, height: 12, borderRadius: '50%', border: `2.5px solid ${color}`, background: 'transparent', flexShrink: 0 }} />
+  } else {
+    icon = <span style={{ width: 11, height: 11, borderRadius: '50%', background: color, flexShrink: 0 }} />
+  }
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 9 }}>
-      {line
-        ? <span style={{ width: 14, height: 3, background: color, flexShrink: 0, borderRadius: 2 }} />
-        : <span style={{ width: 11, height: 11, borderRadius: '50%', background: color, flexShrink: 0 }} />}
-      <span style={{ color: 'var(--carbon)', fontWeight: 600 }}>{label}</span>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 7.8 }}>
+      {icon}
+      <span style={{ color: 'var(--carbon)', fontWeight: 600, whiteSpace: 'nowrap' }}>{label}</span>
     </div>
   )
 }
@@ -144,6 +156,21 @@ export default function RegionalMap({ pageNum }) {
           regional executives, and a high-income local economy.
         </div>
 
+        {/* MAP KEY — compact strip above the map so it never covers the imagery */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '4px 14px', marginBottom: 10, paddingBottom: 8, borderBottom: '1px solid var(--border)' }}>
+          <LegendRow color="#F8971D" label="Subject Property — Ridgefield" />
+          <LegendRow color="#27AE60" label="15-min drive" ring />
+          <LegendRow color="#F39C12" label="30-min drive" ring />
+          <LegendRow color="#E67E22" label="45-min drive" ring />
+          <LegendRow color="#C0392B" label="60-min drive" ring />
+          <LegendRow color="#3F4753" label="Major Cities" />
+          <LegendRow color="#884EA0" label="Academic Anchors (A)" />
+          <LegendRow color="#117A65" label="Industry Anchors (I)" />
+          <LegendRow color="#2471A3" label="Airports" />
+          <LegendRow color="#F8971D" label="Major Highways" line />
+          <LegendRow color="#B55D37" label="Metro-North · Danbury → NYC" line />
+        </div>
+
         <div style={{ display: 'grid', gridTemplateColumns: '1.55fr 1fr', gap: 16, flex: 1, minHeight: 0 }}>
           {/* MAP */}
           <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', minHeight: 0 }}>
@@ -154,25 +181,6 @@ export default function RegionalMap({ pageNum }) {
                 Set VITE_GOOGLE_MAPS_API_KEY in .env.local and enable Maps Static API.
               </div>
             )}
-            {/* Subject property photo marker over Ridgefield. Position is a fixed
-                % of the (deterministic auto-fit) map frame; tip points to the spot. */}
-            {mapUrl && (
-              <div style={{ position: 'absolute', left: '21.5%', top: '60%', transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
-                <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', border: '3px solid #F8971D', boxShadow: '0 2px 7px rgba(0,0,0,0.6)', background: '#fff' }}>
-                  <img src="/photos/property-pin.jpg" alt="Subject property" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                </div>
-                <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '9px solid #F8971D', marginTop: -1 }} />
-              </div>
-            )}
-            <div style={{ position: 'absolute', left: 10, top: 10, background: 'rgba(255,255,255,0.95)', border: '1px solid var(--border)', borderRadius: 4, padding: '8px 10px', display: 'flex', flexDirection: 'column', gap: 4, boxShadow: '0 1px 6px rgba(0,0,0,0.18)' }}>
-              <LegendRow color="#F8971D" label="Subject Property — Ridgefield" />
-              <LegendRow color="#3F4753" label="Major Cities" />
-              <LegendRow color="#884EA0" label="Academic Anchors (A)" />
-              <LegendRow color="#117A65" label="Industry Anchors (I)" />
-              <LegendRow color="#2471A3" label="Airports" />
-              <LegendRow color="#F8971D" label="Major Highways" line />
-              <LegendRow color="#B55D37" label="Metro-North · Danbury → NYC" line />
-            </div>
           </div>
 
           {/* FACTS PANEL */}
@@ -192,14 +200,14 @@ export default function RegionalMap({ pageNum }) {
             </div>
             <div style={{ flex: 1, minHeight: 0 }}>
               <h3 style={{ fontSize: 11, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 6, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>Economic Anchors</h3>
-              <div style={{ fontSize: 10.5, lineHeight: 1.55, color: 'var(--graphite)' }}>
+              <div style={{ fontSize: 9, lineHeight: 1.45, color: 'var(--graphite)' }}>
                 Ridgefield rides the <strong>Boston&ndash;New York&ndash;Washington</strong> corridor &mdash; the
                 country&rsquo;s densest concentration of wealth, talent, and corporate HQs. Aerospace &amp; defense
-                (Sikorsky, Electric Boat, Pratt &amp; Whitney, RTX) anchor the regional economy; <strong>Hartford</strong>
-                is the nation&rsquo;s insurance capital; <strong>Manhattan&rsquo;s</strong> financial engine sits 50 miles
-                south. A dense Ivy / Top-20 pipeline &mdash; Yale, Harvard &amp; MIT, Princeton, Columbia, Penn &mdash;
-                feeds a high-income, highly educated renter base, with NE-Corridor rail to both <strong>Boston</strong>
-                 and <strong>Washington, D.C.</strong>
+                (Sikorsky, Electric Boat, Pratt &amp; Whitney, RTX) anchor the regional economy;{' '}
+                <strong>Hartford</strong> is the nation&rsquo;s insurance capital; <strong>Manhattan&rsquo;s</strong>{' '}
+                financial engine sits 50 miles south. A dense Ivy / Top-20 pipeline &mdash; Yale, Harvard &amp; MIT,
+                Princeton, Columbia, Penn &mdash; feeds a high-income, highly educated renter base, with NE-Corridor
+                rail to both <strong>Boston</strong> and <strong>Washington, D.C.</strong>
               </div>
             </div>
           </div>

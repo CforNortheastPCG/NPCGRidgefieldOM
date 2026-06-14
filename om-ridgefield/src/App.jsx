@@ -64,12 +64,11 @@ function ExecutiveSummary({ pageNum }) {
               heart of Ridgefield, CT.
             </p>
             <p style={{ fontSize: 9.2, lineHeight: 1.35, marginBottom: 6 }}>
-              613 Main Street is a nine-unit multifamily property in the heart of Ridgefield, one of Fairfield
-              County&rsquo;s most affluent and tightly held towns. Every unit is a two-bedroom, and the
-              building&rsquo;s clean, uniform layout reflects its 2012 construction. The property is made up of
-              townhouse and flat style residences set on a well-landscaped half-acre lot. It&rsquo;s the kind of
-              asset that&rsquo;s genuinely hard to replicate: newer construction, a simple and consistent unit
-              mix, and a location that keeps demand steady through every market cycle.
+              Ridgefield is one of Fairfield County&rsquo;s most affluent and tightly held towns, and the
+              property fits that profile. The nine units &mdash; a mix of townhouse and flat style residences,
+              all two-bedrooms &mdash; sit on a well-landscaped half-acre lot. It&rsquo;s the kind of asset
+              that&rsquo;s genuinely hard to replicate: a simple, consistent unit mix in a location that keeps
+              demand steady through every market cycle.
             </p>
             <p style={{ fontSize: 9.2, lineHeight: 1.35, marginBottom: 6 }}>
               The units are designed to keep operating costs predictable for ownership. Tenants are responsible
@@ -193,9 +192,9 @@ function BuildingDescriptions({ pageNum }) {
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Utilities</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Heat / Hot Water</span><span className="bldg-val">Gas Forced Air / Gas</span></div>
-                <div className="bldg-row"><span className="bldg-label">Electric/Gas</span><span className="bldg-val">Tenant Paid</span></div>
-                <div className="bldg-row"><span className="bldg-label">Water/Sewer</span><span className="bldg-val">Owner Paid</span></div>
+                <div className="bldg-row"><span className="bldg-label">Heat / Hot Water</span><span className="bldg-val">Propane Forced Air / Electric</span></div>
+                <div className="bldg-row"><span className="bldg-label">Electric / Propane</span><span className="bldg-val">Tenant Paid</span></div>
+                <div className="bldg-row"><span className="bldg-label">Water/Sewer</span><span className="bldg-val">Separately Metered &middot; Billed Back / Tenant Paid</span></div>
               </div>
             </div>
           </div>
@@ -204,7 +203,7 @@ function BuildingDescriptions({ pageNum }) {
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Building A — Victorian Main House</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Units</span><span className="bldg-val">3 Apartments (2BR) &middot; 3,233 SF</span></div>
-                <div className="bldg-row"><span className="bldg-label">Year Built</span><span className="bldg-val">c. 1900</span></div>
+                <div className="bldg-row"><span className="bldg-label">Year Built</span><span className="bldg-val">c. 1900 &middot; Renovated 2012</span></div>
                 <div className="bldg-row"><span className="bldg-label">Designation</span><span className="bldg-val">2 Market / 1 Affordable (60%)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Features</span><span className="bldg-val">Wraparound porch, individual entries</span></div>
               </div>

@@ -37,13 +37,14 @@ function rowsFor(n) {
   }
 }
 
-export function PhotoPage({ section, title, accent, subtitle, images, pageNum }) {
-  // Chunk images into the row sizes from rowsFor().
-  const rowSizes = rowsFor(images.length)
-  const rows = []
+export function PhotoPage({ section, title, accent, subtitle, images, rows, note, pageNum }) {
+  // Chunk images into rows — an explicit `rows` override (e.g. [1, 2] for a big
+  // hero on top + two below) wins; otherwise fall back to the balanced default.
+  const rowSizes = rows || rowsFor(images.length)
+  const rowGroups = []
   let idx = 0
   for (const size of rowSizes) {
-    rows.push(images.slice(idx, idx + size))
+    rowGroups.push(images.slice(idx, idx + size))
     idx += size
   }
   return (
@@ -58,7 +59,7 @@ export function PhotoPage({ section, title, accent, subtitle, images, pageNum })
           <div style={{ fontSize: 9.5, color: 'var(--stone)', marginBottom: 10 }}>{subtitle}</div>
         )}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1, minHeight: 0 }}>
-          {rows.map((row, ri) => (
+          {rowGroups.map((row, ri) => (
             <div key={ri} style={{ display: 'flex', gap: 10, flex: 1, minHeight: 0 }}>
               {row.map(img => (
                 <div key={img.src} style={{ flex: 1, minWidth: 0 }}>
@@ -68,6 +69,9 @@ export function PhotoPage({ section, title, accent, subtitle, images, pageNum })
             </div>
           ))}
         </div>
+        {note && (
+          <div style={{ fontSize: 7.5, fontStyle: 'italic', color: 'var(--stone)', marginTop: 6 }}>{note}</div>
+        )}
       </div>
       <PageFooter pageNum={pageNum} />
     </div>
@@ -88,9 +92,6 @@ export function FloorPlanPage({ section, title, accent, subtitle, plan, pageNum 
         )}
         <div style={{ flex: 1, minHeight: 0, border: '1px solid var(--linen)', borderRadius: 4, overflow: 'hidden', background: '#fff' }}>
           <img src={plan} alt={section} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
-        </div>
-        <div style={{ fontSize: 7.5, color: 'var(--stone)', marginTop: 6 }}>
-          Floor plan of a representative unit. Dimensions and square footage are approximate and provided by RISE Media; not to be relied upon for valuation purposes.
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
