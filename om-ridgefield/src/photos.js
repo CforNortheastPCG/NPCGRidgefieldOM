@@ -10,6 +10,15 @@
    with `images` render as a balanced photo grid (PhotoPage handles 3–6 tiles).
    Page numbers are assigned by App in render order. */
 export const PHOTO_PAGES = [
+  /* ── Property Exterior — full complex (RISE Media) ── */
+  {
+    section: 'Property Exterior', title: 'Property', accent: 'Exterior',
+    subtitle: '613-615 Main Street · Victorian main house & townhouse buildings on a landscaped half-acre',
+    images: [
+      { src: '/photos/buildings/a-76.jpg', caption: 'Complex — Main House & Townhouses' },
+    ],
+  },
+
   /* ── Building A — Victorian Main House (Unit A1 + systems) ── */
   {
     section: 'Building A — Interior', title: 'Building A —', accent: 'Living & Kitchen',
