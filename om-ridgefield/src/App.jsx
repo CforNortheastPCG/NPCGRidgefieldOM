@@ -10,14 +10,14 @@ import RegionalMap from './RegionalMap.jsx'
 import BrokerProfile from './BrokerProfile.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
-import { ADDR, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
+import { DEAL, ADDR, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
 
 /* ═══════════════════ 1 — COVER HERO ═══════════════════ */
 function CoverHero({ pageNum }) {
   return (
     <div className="page">
       <div className="cover-hero">
-        <img className="cover-hero-img" src="/photos/Exterior Edit 2.png" alt="" />
+        <img className="cover-hero-img" src={DEAL.coverImage} alt="" />
         <div className="cover-hero-shade" />
         {/* Stronger bottom scrim so the overlay text reads clearly */}
         <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '55%', background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.85) 100%)', pointerEvents: 'none' }} />
@@ -25,12 +25,12 @@ function CoverHero({ pageNum }) {
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
         <div className="cover-hero-overlay">
-          <div style={{ color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 14 }}>For Sale</div>
-          <div className="cover-hero-name">Main Street Apartments</div>
+          <div style={{ color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 14 }}>{DEAL.status}</div>
+          <div className="cover-hero-name">{DEAL.name}</div>
           <div className="cover-hero-title">{ADDR}</div>
-          <div className="cover-hero-sub">Ridgefield, Connecticut</div>
+          <div className="cover-hero-sub">{DEAL.cityLong}</div>
           <div className="cover-hero-rule" />
-          <div className="cover-hero-prep">9-Unit Multifamily Property</div>
+          <div className="cover-hero-prep">{DEAL.type}</div>
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
