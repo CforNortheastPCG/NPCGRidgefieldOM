@@ -10,6 +10,13 @@ const PORT = process.argv[2] || process.env.PORT || '5173';
 const OUT = process.argv[3] || path.join(__dirname, '613-Main-Street-OM.pdf');
 const DSF = Number(process.env.DSF || 3);
 const QUALITY = Number(process.env.QUALITY || 80);
+// Print-only brightness lift. The photos are faithful sRGB on screen, but paper
+// isn't backlit so a faithful render prints darker than it looks. 1.0 = off.
+// BRIGHTEN = mild lift on regular photos; COVER = stronger lift on the cover &
+// section dividers, whose dark text-legibility scrims print muddy. Brightening
+// the whole .cover-hero lifts those scrims while pure-white text stays white.
+const BRIGHTEN = Number(process.env.BRIGHTEN || 1.05);
+const COVER = Number(process.env.COVER || 1.18);
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'ompdf-'));
 
 (async () => {
@@ -34,12 +41,20 @@ const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'ompdf-'));
       return new Promise(res => { img.onload = img.onerror = res; }).then(() => img.decode().catch(() => {}));
     }));
   });
+  // Print-only brightness lift (paper prints darker than screen). Injected into
+  // the headless capture only — the live web app is unaffected. Regular photos
+  // get a mild lift; the cover/divider heroes get a stronger one on the whole
+  // container so their dark scrims lighten too (white text stays white).
+  await page.addStyleTag({ content: `
+    .page img:not(.cover-hero-img) { filter: brightness(${BRIGHTEN}); }
+    .cover-hero { filter: brightness(${COVER}); }
+  ` });
   // One more paint cycle so everything is composited before we capture.
   await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
   await new Promise(r => setTimeout(r, 1500));
 
   const pages = await page.$$('.page');
-  console.log(`Found ${pages.length} pages · DSF ${DSF} (~${Math.round(960 * DSF / 11)} DPI) · JPEG q${QUALITY}`);
+  console.log(`Found ${pages.length} pages · DSF ${DSF} (~${Math.round(960 * DSF / 11)} DPI) · JPEG q${QUALITY} · brighten ${BRIGHTEN} · cover ${COVER}`);
 
   const files = [];
   for (let i = 0; i < pages.length; i++) {
