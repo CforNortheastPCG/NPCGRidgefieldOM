@@ -1,44 +1,51 @@
 import { PageHeader, PageFooter } from './Shell.jsx'
 
-/* ═══════════════════ PHOTO PAGES (COMING SOON) ═══════════════════
-   Placeholder photo pages until professional photography is delivered.
-   Sequence: Aerial → per building (Exterior, Interior, Mechanical).
-   Swap a placeholder for real imagery by replacing its tile in PHOTO_PAGES
-   (or by extending PhotoComingSoon to accept image src per tile).
-*/
+/* ═══════════════════ PHOTO & FLOOR PLAN PAGES ═══════════════════
+   Real photography pages (RISE Media), grouped per building A → B → C.
+   PhotoPage renders a 2×2 grid of captioned photos; FloorPlanPage renders a
+   single full-page unit plan. Data lives in photos.js (PHOTO_PAGES). */
 
-function CameraIcon() {
+function PhotoTile({ src, caption }) {
   return (
-    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-      <circle cx="12" cy="13" r="4" />
-    </svg>
-  )
-}
-
-function PlaceholderTile({ caption }) {
-  return (
-    <div style={{
-      position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center',
-      justifyContent: 'center', gap: 8, background: 'var(--linen)', border: '1px dashed var(--stone)',
-      borderRadius: 4, minHeight: 0, overflow: 'hidden', padding: 16, textAlign: 'center',
-    }}>
+    <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', minHeight: 0, height: '100%' }}>
+      <img src={src} alt={caption} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
       <div style={{
-        position: 'absolute', top: 10, right: 10, background: 'var(--golden)', color: '#fff',
-        fontSize: 7.5, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase',
-        padding: '3px 8px', borderRadius: 2,
-      }}>Coming Soon</div>
-      <div style={{ color: 'var(--stone)' }}><CameraIcon /></div>
-      <div style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--carbon)' }}>{caption}</div>
-      <div style={{ fontSize: 8, color: 'var(--stone)', letterSpacing: '0.06em' }}>
-        Professional photography in progress
-      </div>
+        position: 'absolute', left: 0, bottom: 0, background: 'rgba(63,71,83,0.82)', color: '#fff',
+        fontSize: 8, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase',
+        padding: '4px 10px', borderTopRightRadius: 4,
+      }}>{caption}</div>
     </div>
   )
 }
 
-export function PhotoComingSoon({ section, title, accent, subtitle, tiles, pageNum }) {
+/* Split N tiles into balanced rows so any count (1–6) fills the page cleanly:
+   3→[3], 4→[2,2], 5→[3,2], 6→[3,3], etc. */
+function rowsFor(n) {
+  switch (n) {
+    case 1: return [1]
+    case 2: return [2]
+    case 3: return [3]
+    case 4: return [2, 2]
+    case 5: return [3, 2]
+    case 6: return [3, 3]
+    default: { // 7+ : rows of 3
+      const r = []
+      let left = n
+      while (left > 0) { r.push(Math.min(3, left)); left -= 3 }
+      return r
+    }
+  }
+}
+
+export function PhotoPage({ section, title, accent, subtitle, images, pageNum }) {
+  // Chunk images into the row sizes from rowsFor().
+  const rowSizes = rowsFor(images.length)
+  const rows = []
+  let idx = 0
+  for (const size of rowSizes) {
+    rows.push(images.slice(idx, idx + size))
+    idx += size
+  }
   return (
     <div className="page">
       <PageHeader section={section} />
@@ -50,8 +57,40 @@ export function PhotoComingSoon({ section, title, accent, subtitle, tiles, pageN
         {subtitle && (
           <div style={{ fontSize: 9.5, color: 'var(--stone)', marginBottom: 10 }}>{subtitle}</div>
         )}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 10, flex: 1, minHeight: 0 }}>
-          {tiles.map(t => <PlaceholderTile key={t} caption={t} />)}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1, minHeight: 0 }}>
+          {rows.map((row, ri) => (
+            <div key={ri} style={{ display: 'flex', gap: 10, flex: 1, minHeight: 0 }}>
+              {row.map(img => (
+                <div key={img.src} style={{ flex: 1, minWidth: 0 }}>
+                  <PhotoTile {...img} />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}
+
+export function FloorPlanPage({ section, title, accent, subtitle, plan, pageNum }) {
+  return (
+    <div className="page">
+      <PageHeader section={section} />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2 }}>
+          {title} <span style={{ color: '#F8971D' }}>{accent}</span>
+        </div>
+        <div className="title-rule" />
+        {subtitle && (
+          <div style={{ fontSize: 9.5, color: 'var(--stone)', marginBottom: 8 }}>{subtitle}</div>
+        )}
+        <div style={{ flex: 1, minHeight: 0, border: '1px solid var(--linen)', borderRadius: 4, overflow: 'hidden', background: '#fff' }}>
+          <img src={plan} alt={section} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+        </div>
+        <div style={{ fontSize: 7.5, color: 'var(--stone)', marginTop: 6 }}>
+          Floor plan of a representative unit. Dimensions and square footage are approximate and provided by RISE Media; not to be relied upon for valuation purposes.
         </div>
       </div>
       <PageFooter pageNum={pageNum} />

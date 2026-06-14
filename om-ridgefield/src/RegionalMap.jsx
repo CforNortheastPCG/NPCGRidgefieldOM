@@ -94,7 +94,9 @@ function buildStaticMapUrl() {
   const airportPins = `markers=${encodeURIComponent(`size:mid|color:${BLUE}|${AIRPORTS.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
   const academicPins = `markers=${encodeURIComponent(`size:mid|color:${PURPLE}|label:A|${ACADEMIC.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
   const industryPins = `markers=${encodeURIComponent(`size:mid|color:${TEAL}|label:I|${INDUSTRY.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
-  const subjectPin = `markers=${encodeURIComponent(`size:mid|color:${GOLDEN}|label:R|${SUBJECT.lat},${SUBJECT.lng}`)}`
+  // The subject property marker is overlaid as a circular property photo in the
+  // component (see render) rather than a Google "R" pin. It's an interior point,
+  // so omitting it here doesn't change the auto-fit frame.
   const railPath = `path=${encodeURIComponent(`color:0xB55D37|weight:5|${RAIL.map(p => `${p[0]},${p[1]}`).join('|')}`)}`
   const params = [
     'size=640x520',
@@ -107,7 +109,7 @@ function buildStaticMapUrl() {
     airportPins,
     academicPins,
     industryPins,
-    subjectPin,
+    `markers=${encodeURIComponent(`size:mid|color:0x00FF00|label:R|${SUBJECT.lat},${SUBJECT.lng}`)}`,
     `key=${API_KEY}`,
   ]
   return `https://maps.googleapis.com/maps/api/staticmap?${params.join('&')}`
@@ -150,6 +152,16 @@ export default function RegionalMap({ pageNum }) {
             ) : (
               <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--linen)', color: 'var(--stone)', fontSize: 10, textAlign: 'center', padding: 24 }}>
                 Set VITE_GOOGLE_MAPS_API_KEY in .env.local and enable Maps Static API.
+              </div>
+            )}
+            {/* Subject property photo marker over Ridgefield. Position is a fixed
+                % of the (deterministic auto-fit) map frame; tip points to the spot. */}
+            {mapUrl && (
+              <div style={{ position: 'absolute', left: '21.5%', top: '60%', transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+                <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', border: '3px solid #F8971D', boxShadow: '0 2px 7px rgba(0,0,0,0.6)', background: '#fff' }}>
+                  <img src="/photos/property-pin.jpg" alt="Subject property" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                </div>
+                <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '9px solid #F8971D', marginTop: -1 }} />
               </div>
             )}
             <div style={{ position: 'absolute', left: 10, top: 10, background: 'rgba(255,255,255,0.95)', border: '1px solid var(--border)', borderRadius: 4, padding: '8px 10px', display: 'flex', flexDirection: 'column', gap: 4, boxShadow: '0 1px 6px rgba(0,0,0,0.18)' }}>

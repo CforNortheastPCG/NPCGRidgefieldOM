@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Photography source masters (web-sized exports live in public/photos)
+RISE MEDIA/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

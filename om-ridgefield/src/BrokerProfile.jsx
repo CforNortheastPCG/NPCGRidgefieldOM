@@ -66,7 +66,7 @@ export default function BrokerProfile({ pageNum }) {
               <div>
                 <div className="eyebrow" style={{ marginBottom: 8 }}>Recognition</div>
                 <ul className="highlights" style={{ fontSize: 10.5 }}>
-                  <li><strong>CoStar Power Broker</strong> — Q2 2021 &amp; 2022</li>
+                  <li><strong>CoStar Power Broker</strong> — 2024 &amp; 2025</li>
                   <li><strong>Connect Media Top Broker</strong> — 2022</li>
                 </ul>
               </div>

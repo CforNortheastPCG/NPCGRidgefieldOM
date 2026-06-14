@@ -1,58 +1,130 @@
 /* ═══════════════════ PHOTO PAGES DATA ═══════════════════
-   Ordered photo sequence for the OM: Aerial → per building
-   (Exterior, Interior, Mechanical). Rendered by PhotoComingSoon until
-   professional photography is delivered. Page numbers are assigned by App
-   in render order.
-*/
+   Ordered photo + floor plan sequence for the OM, grouped per building
+   (A → B → C). Photography by RISE Media; the specific shots below are
+   Taylor's selection (per his handwritten shot list, June 2026). Source
+   masters live in /RISE MEDIA (gitignored); web-sized exports are in
+   public/photos/buildings — filenames carry the RISE photo number
+   (e.g. a-63.jpg = RISE "613 Main St-63" in folder A).
+
+   Pages with `plan` render as a full-page floor plan (FloorPlanPage); pages
+   with `images` render as a balanced photo grid (PhotoPage handles 3–6 tiles).
+   Page numbers are assigned by App in render order. */
 export const PHOTO_PAGES = [
+  /* ── Building A — Victorian Main House (Unit A1 + systems) ── */
   {
-    section: 'Aerial Photography', title: 'Aerial', accent: 'Photography',
-    subtitle: 'Drone & aerial imagery of the 613-615 Main Street complex',
-    tiles: ['Site Overview', 'Street & Context', 'Parcel & Boundaries', 'Rooftop Detail'],
+    section: 'Building A — Interior', title: 'Building A —', accent: 'Living & Kitchen',
+    subtitle: 'Victorian Main House · Unit A1 (2BR)',
+    images: [
+      { src: '/photos/buildings/a-8.jpg', caption: 'Living Area' },
+      { src: '/photos/buildings/a-9.jpg', caption: 'Living Area' },
+      { src: '/photos/buildings/a-13.jpg', caption: 'Kitchen' },
+      { src: '/photos/buildings/a-15.jpg', caption: 'Mudroom & Entry' },
+    ],
   },
   {
-    section: 'Building A — Exterior', title: 'Building A —', accent: 'Exterior',
-    subtitle: 'Victorian Main House · 3 Apartments (2BR)',
-    tiles: ['Front Elevation', 'Rear Elevation', 'Porch & Entries', 'Grounds & Parking'],
+    section: 'Building A — Interior', title: 'Building A —', accent: 'Bedroom & Bath',
+    subtitle: 'Victorian Main House · Unit A1 (2BR)',
+    images: [
+      { src: '/photos/buildings/a-2.jpg', caption: 'Bedroom' },
+      { src: '/photos/buildings/a-7.jpg', caption: 'Bath' },
+      { src: '/photos/buildings/a-11.jpg', caption: 'Bath' },
+    ],
   },
   {
-    section: 'Building A — Interior', title: 'Building A —', accent: 'Interior',
-    subtitle: 'Victorian Main House · 3 Apartments (2BR)',
-    tiles: ['Living Area', 'Kitchen', 'Bedrooms', 'Bath'],
+    section: 'Building A — Mechanicals', title: 'Building A —', accent: 'Laundry & Systems',
+    subtitle: 'Victorian Main House · In-unit laundry + basement mechanicals',
+    images: [
+      { src: '/photos/buildings/a-19.jpg', caption: 'In-Unit Laundry' },
+      { src: '/photos/buildings/a-20.jpg', caption: 'Basement' },
+      { src: '/photos/buildings/a-63.jpg', caption: 'Heating & Hot Water' },
+      { src: '/photos/buildings/a-64.jpg', caption: 'Tankless Systems' },
+      { src: '/photos/buildings/a-65.jpg', caption: 'Boiler' },
+      { src: '/photos/buildings/a-66.jpg', caption: 'Utility Area' },
+    ],
   },
   {
-    section: 'Building A — Mechanical', title: 'Building A —', accent: 'Mechanical',
-    subtitle: 'Victorian Main House · Systems & utilities',
-    tiles: ['Heating System', 'Hot Water', 'Electrical Panel', 'Laundry / Utility'],
+    section: 'Building A — Common & Exterior', title: 'Building A —', accent: 'Common Areas & Exterior',
+    subtitle: 'Victorian Main House · Shared stairwell, grounds & frontage',
+    images: [
+      { src: '/photos/buildings/a-69.jpg', caption: 'Common Stairwell' },
+      { src: '/photos/buildings/a-71.jpg', caption: 'Common Stairwell' },
+      { src: '/photos/buildings/a-77.jpg', caption: 'Exterior' },
+      { src: '/photos/buildings/a-73.jpg', caption: 'Patio & Grounds' },
+      { src: '/photos/buildings/a-74.jpg', caption: 'Parking & Mail' },
+    ],
   },
   {
-    section: 'Building B — Exterior', title: 'Building B —', accent: 'Exterior',
+    section: 'Building A — Floor Plan', title: 'Building A —', accent: 'Floor Plan',
+    subtitle: 'Unit A1 · 911 SF · Representative unit',
+    plan: '/photos/floorplans/unit-a1.jpg',
+  },
+
+  /* ── Buildings B & C — Exteriors (edited exteriors; RISE delivered no
+        dedicated B/C exterior shots) ── */
+  {
+    section: 'Buildings B & C — Exterior', title: 'Buildings B & C —', accent: 'Exterior',
+    subtitle: 'Building B · Townhouses w/ Garage — Building C · Townhouses w/ Basement',
+    images: [
+      { src: '/photos/Exterior Edit 4.png', caption: 'Building B — Front Elevation' },
+      { src: '/photos/Exterior Edit 5.png', caption: 'Building B — Side Elevation' },
+      { src: '/photos/Exterior Edit 1.png', caption: 'Building C — Front Elevation' },
+    ],
+  },
+
+  /* ── Building B — Townhouses w/ Garage ── */
+  {
+    section: 'Building B — Interior', title: 'Building B —', accent: 'Kitchen & Living',
     subtitle: 'Townhouses w/ Garage · 3 Units (2BR/1.5BA)',
-    tiles: ['Front Elevation', 'Garage & Driveway', 'Rear Elevation', 'Grounds'],
+    images: [
+      { src: '/photos/buildings/b-21.jpg', caption: 'Kitchen' },
+      { src: '/photos/buildings/b-25.jpg', caption: 'Living Area' },
+      { src: '/photos/buildings/b-27.jpg', caption: 'Living & Stairs' },
+      { src: '/photos/buildings/b-29.jpg', caption: 'Living Area' },
+    ],
   },
   {
-    section: 'Building B — Interior', title: 'Building B —', accent: 'Interior',
-    subtitle: 'Townhouses w/ Garage · 3 Units (2BR/1.5BA)',
-    tiles: ['Living Area', 'Kitchen', 'Bedrooms', 'Bath'],
+    section: 'Building B — Interior', title: 'Building B —', accent: 'Bedrooms, Bath & Systems',
+    subtitle: 'Townhouses w/ Garage · Bedrooms, bath, garage & mechanicals',
+    images: [
+      { src: '/photos/buildings/b-32.jpg', caption: 'Bedroom' },
+      { src: '/photos/buildings/b-34.jpg', caption: 'Primary Bedroom' },
+      { src: '/photos/buildings/b-31.jpg', caption: 'Bath' },
+      { src: '/photos/buildings/b-41.jpg', caption: 'Garage' },
+      { src: '/photos/buildings/b-39.jpg', caption: 'Mechanicals & Laundry' },
+      { src: '/photos/buildings/b-42.jpg', caption: 'Entry Foyer' },
+    ],
   },
   {
-    section: 'Building B — Mechanical', title: 'Building B —', accent: 'Mechanical',
-    subtitle: 'Townhouses w/ Garage · Systems & utilities',
-    tiles: ['Heating System', 'Hot Water', 'Electrical Panel', 'Garage / Utility'],
+    section: 'Building B — Floor Plan', title: 'Building B —', accent: 'Floor Plan',
+    subtitle: 'Unit B3 · 984 SF + Garage & Utility · Representative unit',
+    plan: '/photos/floorplans/unit-b3.jpg',
   },
+
+  /* ── Building C — Townhouses w/ Basement ── */
   {
-    section: 'Building C — Exterior', title: 'Building C —', accent: 'Exterior',
+    section: 'Building C — Interior', title: 'Building C —', accent: 'Living & Kitchen',
     subtitle: 'Townhouses w/ Basement · 3 Units (2BR/1.5BA)',
-    tiles: ['Front Elevation', 'Rear Elevation', 'Basement Access', 'Grounds'],
+    images: [
+      { src: '/photos/buildings/c-55.jpg', caption: 'Living & Kitchen' },
+      { src: '/photos/buildings/c-56.jpg', caption: 'Living & Stairs' },
+      { src: '/photos/buildings/c-58.jpg', caption: 'Kitchen & Dining' },
+      { src: '/photos/buildings/c-54.jpg', caption: 'Living Area' },
+    ],
   },
   {
-    section: 'Building C — Interior', title: 'Building C —', accent: 'Interior',
-    subtitle: 'Townhouses w/ Basement · 3 Units (2BR/1.5BA)',
-    tiles: ['Living Area', 'Kitchen', 'Bedrooms', 'Bath'],
+    section: 'Building C — Mechanicals', title: 'Building C —', accent: 'Basement & Systems',
+    subtitle: 'Townhouses w/ Basement · Full basement + mechanicals',
+    images: [
+      { src: '/photos/buildings/c-49.jpg', caption: 'Heating & Hot Water' },
+      { src: '/photos/buildings/c-50.jpg', caption: 'Basement & Systems' },
+      { src: '/photos/buildings/c-53.jpg', caption: 'Basement Storage' },
+      { src: '/photos/buildings/c-52.jpg', caption: 'Basement Laundry' },
+      { src: '/photos/buildings/c-51.jpg', caption: 'Utility Area' },
+    ],
   },
   {
-    section: 'Building C — Mechanical', title: 'Building C —', accent: 'Mechanical',
-    subtitle: 'Townhouses w/ Basement · Systems & utilities',
-    tiles: ['Heating System', 'Hot Water', 'Electrical Panel', 'Basement / Utility'],
+    section: 'Building C — Floor Plan', title: 'Building C —', accent: 'Floor Plan',
+    subtitle: 'Unit C2 · Representative unit',
+    plan: '/photos/floorplans/unit-c2.jpg',
   },
 ]

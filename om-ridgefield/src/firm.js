@@ -36,8 +36,8 @@ export const LEADERSHIP = [
   { name: 'Edward Jordan', title: 'CEO & Founder', phone: '857.990.6801', email: 'ejordan@northeastpcg.com', photo: `${U}/2021/10/ChatGPT-Image-Feb-17-2026-04_28_06-PM-430x488.png`, url: `${P}/edward-jordan/` },
   { name: 'Robert Paterno', title: 'Vice President, Brokerage', phone: '203.307.1582', email: 'rpaterno@northeastpcg.com', photo: `${U}/2021/11/Robert-Paterno-430x488.png`, url: `${P}/robert-paterno/` },
   { name: 'Brad Balletto', title: 'Managing Director, Investments', phone: '203.307.1574', email: 'bballetto@northeastpcg.com', photo: `${U}/2021/11/Brad-B-2-430x488.jpg`, url: `${P}/bradley-balletto/` },
-  { name: 'Jake Jordan', title: 'Vice President, Operations', phone: '203.307.1578', email: 'jjordan@northeastpcg.com', photo: `${U}/2021/11/Jake-Jordan-430x488.png`, url: `${P}/jake-jordan/` },
   { name: 'Taylor Perun', title: 'Senior Vice President, Investments', phone: '203.307.1576', email: 'tperun@northeastpcg.com', photo: `${U}/2021/11/Taylor-Perun-430x488.png`, url: `${P}/taylor-perun/` },
+  { name: 'Jake Jordan', title: 'Vice President, Operations', phone: '203.307.1578', email: 'jjordan@northeastpcg.com', photo: `${U}/2021/11/Jake-Jordan-430x488.png`, url: `${P}/jake-jordan/` },
 ]
 
 export const SENIOR_INVESTMENT_SALES = [

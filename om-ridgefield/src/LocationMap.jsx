@@ -70,7 +70,10 @@ function buildStaticMapUrl() {
     'maptype=hybrid',
     'format=png',
     ...style.map(s => `style=${encodeURIComponent(s)}`),
-    `markers=${encodeURIComponent(`size:mid|color:${GOLDEN}|label:P|${PROPERTY.lat},${PROPERTY.lng}`)}`,
+    // The subject property sits at the map center — its marker is overlaid as a
+    // circular property photo in the component (see LocationMap render), so no
+    // Google "P" pin is drawn here. PROPERTY still anchors declutter() so
+    // amenity pins steer clear of the center.
     ...categoryMarkers,
     `key=${API_KEY}`,
   ]
@@ -122,6 +125,17 @@ export default function LocationMap({ pageNum = 9 }) {
               <div style={{ width: '100%', height: 480, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--linen)', color: 'var(--stone)', fontSize: 10, textAlign: 'center', padding: 24 }}>
                 Set VITE_GOOGLE_MAPS_API_KEY in .env.local
                 <br />and enable Maps Static API to render the map.
+              </div>
+            )}
+            {/* Subject property photo marker — the map is centered on the
+                property, so this sits at dead center; the pointer tip marks the
+                exact spot. */}
+            {mapUrl && (
+              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+                <div style={{ width: 54, height: 54, borderRadius: '50%', overflow: 'hidden', border: '3px solid #F8971D', boxShadow: '0 2px 7px rgba(0,0,0,0.55)', background: '#fff' }}>
+                  <img src="/photos/property-pin.jpg" alt="Subject property" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                </div>
+                <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '9px solid #F8971D', marginTop: -1 }} />
               </div>
             )}
             {/* Branchville Station is ~3.5 mi SE, off-frame — point to it.
