@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import readXlsxFile from 'read-excel-file/browser'
 import OmDeck from './om/OmDeck.jsx'
+import { ROSTER } from './om/firm.js'
 
 /* NPCG OM Generator — full stack.
    Address → /api/enrich (Google: identity, Street View cover, Static Map,
@@ -41,13 +42,13 @@ const SECTIONS = [
     ph: 'Asking price, # units, # buildings, year built / renovated, lot size, building SF, zoning, parking, and utilities (heat / electric / water-sewer — who pays).' },
   { key: 'building', label: 'Building Information', rows: 4,
     ph: 'Construction type, foundation, roof, exterior/siding, windows, mechanicals (heating/cooling), electrical, and fire protection/sprinklers.' },
-  { key: 'rentRoll', label: 'Rent Roll', rows: 6,
-    ph: 'One unit per line: Unit / Type / SF / Designation / In-Place rent / Market rent / Pro Forma rent. e.g. "1 · 2BR/1BA · 850 · Market · 1,650 · 2,100 · 2,100".' },
-  { key: 'expenses', label: 'Expenses (T-12)', rows: 4,
-    ph: 'Annual operating expenses: taxes, insurance, water/sewer, common electric, R&M, management, trash, landscaping/snow, reserves.' },
   { key: 'location', label: 'Location & Market', rows: 4,
     ph: 'Neighborhood, employers, schools, transit/highway access, demographics, comps. Google Places auto-pulls nearby amenities — add anything it would miss.' },
 ]
+
+// Rent roll + expenses come from the uploaded .xlsx (see the Photos & spreadsheet
+// group), so they aren't typed sections — but typed notes are still honored if a
+// user adds them under "Notes" inside the relevant inputs.
 
 // The 5 section divider pages — each can take its own full-bleed cover photo.
 const DIVIDERS = [
@@ -139,6 +140,10 @@ export default function App() {
   const [sheet, setSheet] = useState(() => ({ name: ss.get('om_sheet_name'), text: ss.get('om_sheet') })) // imported rent roll / expenses
   const [deal, setDeal] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null') } catch { return null } })
   const [sectionPhotos, setSectionPhotos] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null')?.sectionPhotos || {} } catch { return {} } }) // per-divider cover photos
+  const [team, setTeam] = useState(() => { // names of the deal team on the Deal Contacts page
+    try { const t = JSON.parse(ss.get('om_deal') || 'null')?.dealTeam; if (t?.length) return t.map(m => m.name) } catch { /* */ }
+    return ['Brad Balletto', 'Jeff Wright']
+  })
   const [busy, setBusy] = useState('')
   const [status, setStatus] = useState('')
   const [chat, setChat] = useState([])
@@ -168,6 +173,14 @@ export default function App() {
       // if a deck already exists, apply the new cover immediately
       if (deal) saveDeal({ ...deal, cover: url })
     } catch { setStatus('Could not read that image.') }
+  }
+
+  function toggleTeam(name) {
+    setTeam(prev => {
+      const next = prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]
+      if (deal) saveDeal({ ...deal, dealTeam: ROSTER.filter(m => next.includes(m.name)) })
+      return next
+    })
   }
 
   async function pickSection(id, e) {
@@ -219,6 +232,7 @@ export default function App() {
     const merged = { ...enriched, ...fl.deal }
     if (coverUpload) merged.cover = coverUpload
     if (Object.keys(sectionPhotos).length) merged.sectionPhotos = sectionPhotos
+    merged.dealTeam = ROSTER.filter(m => team.includes(m.name))
     saveDeal(merged)
     setStatus(`Done.${enriched.amenities?.length ? ` ${enriched.amenities.length} nearby places.` : ''}`); setBusy('')
   }
@@ -272,6 +286,17 @@ export default function App() {
                 <input type="file" accept="image/*" onChange={e => pickSection(d.id, e)} />
                 {sectionPhotos[d.id] && <button className="ghost" type="button" onClick={() => clearSection(d.id)}>✕</button>}
               </div>
+            ))}
+          </details>
+
+          <details className="grp">
+            <summary>Deal Team <span className="grp-count">{team.length} on contacts page</span></summary>
+            {ROSTER.map(m => (
+              <label key={m.name} className="team-pick">
+                <input type="checkbox" checked={team.includes(m.name)} onChange={() => toggleTeam(m.name)} />
+                <span className="team-pick-name">{m.name}</span>
+                <span className="team-pick-title">{m.title}</span>
+              </label>
             ))}
           </details>
 

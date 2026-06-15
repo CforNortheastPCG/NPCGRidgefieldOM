@@ -6,6 +6,7 @@ import Divider from './Divider.jsx'
 import RegionalMap from './RegionalMap.jsx'
 import TeamPage from './TeamPage.jsx'
 import LocationsPage from './LocationsPage.jsx'
+import { findMember } from './firm.js'
 
 /* ═══════════════════ OM DECK RENDERER ═══════════════════
    The real NPCG OM page components (ported verbatim from the Campbell OM),
@@ -23,6 +24,8 @@ const pm = (s) => { const n = parseFloat(String(s ?? '').replace(/[^0-9.\-]/g, '
 const sum = (a, f) => (a || []).reduce((t, x) => t + pm(f(x)), 0)
 const pct = (n, d) => (d ? (n / d * 100).toFixed(2) + '%' : '—')
 const T = ({ v }) => (v == null || v === '' || v === 'TODO' ? <span style={{ color: '#b9772f', fontWeight: 700 }}>TODO</span> : v)
+const initials = (name) => String(name || '').split(/\s+/).map(p => p[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()
+const fmtPhone = (p) => { const d = String(p || '').replace(/\D/g, ''); return d.length === 10 ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : p }
 
 /* ═══════════════════ 1 — COVER HERO ═══════════════════ */
 function Cover({ deal, pageNum }) {
@@ -426,26 +429,26 @@ function GoogleLocationMap({ deal, pageNum }) {
 }
 
 /* ═══════════════════ DEAL CONTACTS (static, generic NPCG) ═══════════════════ */
-function DealContacts({ pageNum }) {
+function DealContacts({ deal, pageNum }) {
+  const team = ((deal?.dealTeam && deal.dealTeam.length)
+    ? deal.dealTeam
+    : [findMember('Brad Balletto'), findMember('Jeff Wright')]).filter(Boolean)
   return (
     <StaticShell section="Deal Contacts" title="Deal Contacts" pageNum={pageNum}>
       <div className="dc-layout">
         <aside className="dc-contacts">
           <h3 className="dc-disclaimer-title">Exclusively Listed By</h3>
-          <div className="dc-card">
-            <img className="dc-avatar" src="https://northeastpcg.com/wp-content/uploads/2021/11/Brad-B-2-430x488.jpg" alt="Brad Balletto" />
-            <div className="dc-name">Brad Balletto</div>
-            <div className="dc-title">Managing Director, Investments</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (203) 307-1574</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>bballetto@northeastpcg.com</div>
-          </div>
-          <div className="dc-card">
-            <img className="dc-avatar" src="https://northeastpcg.com/wp-content/uploads/2021/11/Jeff-Wright-430x488.png" alt="Jeff Wright" />
-            <div className="dc-name">Jeff Wright</div>
-            <div className="dc-title">Vice President, Investments</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (203) 307-1581</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>jwright@northeastpcg.com</div>
-          </div>
+          {team.map(m => (
+            <div className="dc-card" key={m.name}>
+              {m.photo
+                ? <img className="dc-avatar" src={m.photo} alt={m.name} />
+                : <div className="dc-avatar dc-avatar--ph">{initials(m.name)}</div>}
+              <div className="dc-name">{m.name}</div>
+              <div className="dc-title">{m.title}</div>
+              {m.phone && <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: {fmtPhone(m.phone)}</div>}
+              {m.email && <div className="dc-meta" style={{ fontWeight: 700 }}>{m.email}</div>}
+            </div>
+          ))}
         </aside>
         <section className="dc-disclaimer">
           <h3 className="dc-disclaimer-title">Confidentiality and Disclaimer</h3>
@@ -460,116 +463,6 @@ function DealContacts({ pageNum }) {
   )
 }
 
-/* ═══════════════════ SELLING PROCESS (static) ═══════════════════ */
-function SellingProcess({ pageNum }) {
-  const stages = [
-    { label: 'Sales and Marketing', items: ['Evaluate, underwrite, and position the property with extensive rent and sales comp research', 'Develop the offering memorandum that articulates the investment thesis to qualified buyers', 'Advocate and educate prospects on deal strengths while mitigating concerns', 'Execute broad and targeted marketing across direct, digital, and email channels', 'Coordinate tours with seller, property manager, and qualified buyers', 'Engineer a competitive environment designed to drive pricing tension', 'Track and report offers, tours, and activity in real time', 'Build and maintain the secure data room for due diligence readiness'] },
-    { label: 'Negotiation & Contract', items: ['Facilitate and negotiate offers from prospective buyers', 'Screen and qualify buyer financial capacity and track record', 'Negotiate best possible price and terms for the seller', 'Help identify the buyer with the highest probability of closing', 'Maintain deal momentum and buyer engagement through contract', 'Confirm offer terms are accurately reflected in the PSA', 'Compile and reconcile due diligence documentation to head off surprises'] },
-    { label: 'Transaction Management', items: ['Facilitate transmission of due diligence items — taxes, insurance, water, utilities', 'Coordinate with buyer, seller, lender, and attorneys on all diligence workstreams', 'Confirm receipt of third-party reports and lender commitment letters', 'Track key contract dates and manage open contingencies', 'Mitigate unforeseen issues and respond to buyer re-trade attempts', 'Track amendments and any negotiated changes through to closing'] },
-  ]
-  return (
-    <StaticShell section="Selling Process" title="Selling Process Stages" pageNum={pageNum}>
-      <div className="stages">
-        {stages.map((s, i) => (
-          <section key={s.label} className={`stages__stage ${i % 2 === 1 ? 'stages__stage--alt' : ''}`}>
-            <h3 className="stages__label">{s.label}</h3>
-            <ul className="stages__list">{s.items.map(it => <li key={it}>{it}</li>)}</ul>
-          </section>
-        ))}
-      </div>
-    </StaticShell>
-  )
-}
-
-/* ═══════════════════ MARKETING TIMELINE (static) ═══════════════════ */
-function MarketingTimeline({ pageNum }) {
-  const phases = [
-    { weeks: '1–2', label: 'Prepare', items: ['Finalize pricing and listing agreement', 'Collect property financials and diligence', 'Schedule photography / video', 'Build marketing materials (OM, flyers, email)', 'Begin quiet marketing to qualified buyers'] },
-    { weeks: '3–6', label: 'Launch', items: ['Go live on CoStar, LoopNet, CREXi, and peer platforms', 'Launch email and call campaigns', 'Conduct property tours', 'Provide weekly activity and market feedback', 'Call for Offers typically set at end of Week 6'] },
-    { weeks: '7–8', label: 'Offers', items: ['Receive and underwrite offers', 'Conduct best-and-final round if needed', 'Qualify buyers and negotiate LOI'] },
-    { weeks: '9–12', label: 'Escrow', items: ['Execute PSA', 'Manage due diligence and buyer financing', 'Coordinate closing process', 'Proactive involvement through close'] },
-  ]
-  return (
-    <StaticShell section="Marketing Timeline" title="Marketing Timeline" pageNum={pageNum}>
-      <div className="timeline">
-        <p className="timeline__lead">A proven process designed to generate urgency, drive competition, and produce the highest price the market will bear.</p>
-        <div className="timeline__track">
-          {phases.map((p, i) => (
-            <div key={p.label} className="timeline__phase">
-              <div className="timeline__bubble">
-                <div className="timeline__bubble-weeks">Weeks</div>
-                <div className="timeline__bubble-range">{p.weeks}</div>
-              </div>
-              {i < phases.length - 1 && <div className="timeline__connector" />}
-              <div className="timeline__label">{p.label}</div>
-              <ul className="timeline__items">{p.items.map(it => <li key={it}>{it}</li>)}</ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    </StaticShell>
-  )
-}
-
-/* ═══════════════════ MARKETING STRATEGY (static) ═══════════════════ */
-function MarketingStrategy({ pageNum }) {
-  return (
-    <StaticShell section="Marketing Strategy" title="Marketing Strategy & Buyer Profile" pageNum={pageNum}>
-      <div className="mkt-strategy">
-        <section>
-          <h3 className="mkt-strategy__heading">Marketing Strategy</h3>
-          <ul className="mkt-strategy__list">
-            <li><span className="mkt-strategy__tag">Professional Marketing Materials</span> — High-quality exterior, aerial, and interior photography that showcases the asset.</li>
-            <li><span className="mkt-strategy__tag">Comprehensive Offering Memorandum</span> — Full investor package detailing financials, market overview, and value-add thesis.</li>
-            <li><span className="mkt-strategy__tag">Broad Market Exposure</span> — Digital campaign across CoStar, LoopNet, CREXi, paired with targeted email outreach.</li>
-            <li><span className="mkt-strategy__tag">Relationship-Driven Outreach</span> — Leverage established relationships with active multifamily investors.</li>
-            <li><span className="mkt-strategy__tag">Organized Tour Process</span> — Scheduled tour days to build momentum and competitive tension.</li>
-            <li><span className="mkt-strategy__tag">Competitive Bidding</span> — Structured Call for Offers followed by best-and-final round.</li>
-            <li><span className="mkt-strategy__tag">Data Room & Due Diligence</span> — Secure deal room under NDA with all property documents.</li>
-            <li><span className="mkt-strategy__tag">Buyer Support</span> — Introductions to preferred lenders, managers, attorneys, and insurance providers.</li>
-          </ul>
-        </section>
-        <section>
-          <h3 className="mkt-strategy__heading">Target Buyer Profile</h3>
-          <ul className="mkt-strategy__list">
-            <li><span className="mkt-strategy__tag">Smaller Institutional Investors</span> — Groups with an existing or expanding presence in the local market.</li>
-            <li><span className="mkt-strategy__tag">1031 Exchange Buyers</span> — Seeking a turnkey multifamily asset with established rent roll.</li>
-            <li><span className="mkt-strategy__tag">High-Net-Worth Investors</span> — Individuals or family offices pursuing stable multifamily with value-add upside.</li>
-            <li><span className="mkt-strategy__tag">Trade-Up Operators</span> — Experienced regional owners moving from smaller Class B/C assets.</li>
-          </ul>
-          <div className="mkt-strategy__note"><strong>Value Optimization:</strong> Prior to launch, execute low-cost, high-impact cosmetic improvements — refreshed landscaping, selective exterior painting, general cleanup — to ensure the property shows at its best.</div>
-        </section>
-      </div>
-    </StaticShell>
-  )
-}
-
-/* ═══════════════════ NATIONAL VISIBILITY (static) ═══════════════════ */
-function NationalVisibility({ pageNum }) {
-  const platforms = [
-    { name: 'CoStar', stat: '8M monthly users' }, { name: 'LoopNet', stat: '12M monthly searches' },
-    { name: 'CREXi', stat: '2M registered buyers' }, { name: 'Brevitas', stat: '250K members' },
-    { name: 'RealNex', stat: 'National syndication' }, { name: 'theBrokerList', stat: 'CRE broker network' },
-    { name: 'CommercialEdge', stat: 'Enterprise platform' }, { name: 'MLS', stat: 'Regional listings' },
-  ]
-  return (
-    <StaticShell section="National Visibility" title="National Visibility. Maximum Market Exposure." pageNum={pageNum}>
-      <div className="visibility">
-        <p className="visibility__lead">Beyond our private database, we deploy the most powerful digital tools in commercial real estate to broadcast your property nationwide.</p>
-        <ul className="visibility__bullets">
-          <li>Featured on CoStar, LoopNet, CREXi, and top national CRE networks</li>
-          <li>Enhanced exposure through our website, email campaigns, and listing syndication</li>
-          <li>Designed to reach institutional, private, and 1031 exchange buyers coast to coast</li>
-        </ul>
-        <div className="visibility__grid">
-          {platforms.map(p => <div key={p.name} className="visibility__chip"><div className="visibility__chip-name">{p.name}</div><div className="visibility__chip-stat">{p.stat}</div></div>)}
-        </div>
-        <div className="visibility__banner">Our mission is to create a market for your asset — not wait for one.</div>
-      </div>
-    </StaticShell>
-  )
-}
-
 /* ═══════════════════ DECK ═══════════════════ */
 export default function OmDeck({ deal }) {
   if (!deal) return null
@@ -578,7 +471,7 @@ export default function OmDeck({ deal }) {
   const pages = [
     <Cover deal={deal} />,
     <Toc />,
-    <DealContacts />,
+    <DealContacts deal={deal} />,
     <ExecutiveSummary deal={deal} />,
     <Divider eyebrow="01" title="The Property" sec="property" />,
     <PropertyOverview deal={deal} />,
@@ -590,12 +483,7 @@ export default function OmDeck({ deal }) {
     <GoogleLocationMap deal={deal} />,
     <CountyOverview deal={deal} />,
     <RegionalMap />,
-    <Divider eyebrow="04" title="The Process" sec="process" />,
-    <SellingProcess />,
-    <MarketingTimeline />,
-    <MarketingStrategy />,
-    <NationalVisibility />,
-    <Divider eyebrow="05" title="The Team" sec="team" />,
+    <Divider eyebrow="04" title="The Team" sec="team" />,
     <TeamPage />,
     <LocationsPage />,
   ]

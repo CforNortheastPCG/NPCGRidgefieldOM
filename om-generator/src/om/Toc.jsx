@@ -17,14 +17,9 @@ const TOC = [
   { n: 12, label: 'Location & Amenities', sub: true },
   { n: 13, label: 'County Overview', sub: true },
   { n: 14, label: 'Regional Positioning', sub: true },
-  { n: 15, label: 'The Process', section: true },
-  { n: 16, label: 'Selling Process', sub: true },
-  { n: 17, label: 'Marketing Timeline', sub: true },
-  { n: 18, label: 'Marketing Strategy', sub: true },
-  { n: 19, label: 'National Visibility', sub: true },
-  { n: 20, label: 'The Team', section: true },
-  { n: 21, label: 'Team', sub: true },
-  { n: 22, label: 'Our Locations', sub: true },
+  { n: 15, label: 'The Team', section: true },
+  { n: 16, label: 'Team', sub: true },
+  { n: 17, label: 'Our Locations', sub: true },
 ]
 
 export default function Toc({ pageNum }) {

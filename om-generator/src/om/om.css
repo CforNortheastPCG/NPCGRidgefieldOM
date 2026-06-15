@@ -536,6 +536,7 @@ body {
 .dc-contacts--1 .dc-card { padding: 20px 0; gap: 4px; }
 .dc-avatar { width: 64px; height: 64px; border-radius: 50%; border: 2.5px solid var(--golden); object-fit: cover; margin-bottom: 6px; background: var(--linen); }
 .dc-contacts--1 .dc-avatar { width: 72px; height: 72px; margin-bottom: 10px; }
+.dc-avatar--ph { display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; color: var(--carbon); }
 .dc-name { font-size: 13px; font-weight: 700; color: var(--carbon); }
 .dc-contacts--1 .dc-name { font-size: 15px; }
 .dc-title { font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--golden); margin-bottom: 3px; }

@@ -15,13 +15,16 @@ Structured facts (cover/property/rent roll/expenses/loc) ─▶ /api/fill (Claud
 Inputs are split into labeled sections (Cover & Narrative, Property & Pricing,
 Building Information, Rent Roll, Expenses, Location) and composed into the fill
 prompt. You can upload a **cover photo** that overrides the Street View cover, a photo
-for each of the **five section dividers** (The Property, Financial Analysis,
-Location & Market, The Process, The Team) that renders full-bleed on that divider
-page, and drop **one `.xlsx`** for the rent roll + expenses — every sheet is read in-browser
+for each of the **four section dividers** (The Property, Financial Analysis,
+Location & Market, The Team) that renders full-bleed on that divider page, and
+drop **one `.xlsx`** for the rent roll + expenses — every sheet is read in-browser
 (`read-excel-file`) into text the AI extracts the rent roll and operating expenses
-from, so you don't have to retype them. The **AI update chat runs on Opus** — once
-the deck exists, edits are small and benefit from the strongest model with full
-deal context.
+from, so you don't have to retype them. The whole firm roster is hard-coded
+(`src/om/firm.js`); pick the **deal team** that appears on the Deal Contacts
+"Exclusively Listed By" page. The deck is buyer-facing: the seller-pitch "Process"
+pages (selling process, marketing timeline/strategy, national visibility) are
+intentionally omitted. The **AI update chat runs on Opus** — once the deck exists,
+edits are small and benefit from the strongest model with full deal context.
 
 **Page-scoped edits.** The update chat requires you to pick a page first; the
 edit only touches that page's slice of the deal model. The backend builds a

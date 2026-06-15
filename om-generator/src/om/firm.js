@@ -65,3 +65,7 @@ export const SUPPORT_STAFF = [
   { name: 'Kaylee Bollman', title: 'Junior Graphic Designer', phone: '857.396.0774', email: 'kbollmann@northeastpcg.com' },
   { name: 'Ravi Patel', title: 'CRE Analyst', phone: '203.307.1575', email: 'rpatel@northeastpcg.com' },
 ]
+
+// Flat roster (the whole firm) for the deal-team picker. Order = seniority.
+export const ROSTER = [...LEADERSHIP, ...SENIOR_INVESTMENT_SALES, ...INVESTMENT_SALES, ...SUPPORT_STAFF]
+export const findMember = (name) => ROSTER.find((m) => m.name === name) || null

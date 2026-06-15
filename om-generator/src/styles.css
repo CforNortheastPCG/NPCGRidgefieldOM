@@ -59,6 +59,13 @@ input[type=file] { padding:8px 10px; font-size:12px; cursor:pointer; }
 .grp-count { margin-left:auto; font-size:10px; font-weight:600; text-transform:none; letter-spacing:0; color:var(--golden); }
 .grp label:first-of-type { margin-top:6px; }
 
+/* deal-team checklist rows (override the uppercase global label styling) */
+.team-pick { display:flex; align-items:center; gap:9px; margin:0; padding:5px 2px; text-transform:none; letter-spacing:0; cursor:pointer; border-bottom:1px solid var(--border); }
+.team-pick:last-child { border-bottom:none; }
+.team-pick input { width:auto; flex:0 0 auto; margin:0; accent-color:var(--golden); cursor:pointer; }
+.team-pick-name { font-size:12px; font-weight:700; color:var(--carbon); }
+.team-pick-title { font-size:10px; color:var(--stone); margin-left:auto; text-align:right; }
+
 .actions { display:flex; gap:10px; align-items:center; margin:18px 0 8px; flex-wrap:wrap; }
 button { cursor:pointer; font-weight:700; border:none; border-radius:7px; padding:11px 16px; background:var(--golden); color:#fff; transition:opacity .15s; }
 button:hover { opacity:.9; }
