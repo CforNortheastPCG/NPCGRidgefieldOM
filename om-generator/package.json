@@ -14,6 +14,7 @@
     "marked": "latest",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "read-excel-file": "^9.2.0",
     "topojson-client": "^3.1.0",
     "us-atlas": "^3.0.1"
   },

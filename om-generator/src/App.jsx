@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import readXlsxFile from 'read-excel-file/browser'
 import OmDeck from './om/OmDeck.jsx'
 
 /* NPCG OM Generator — full stack.
@@ -26,6 +27,7 @@ const PAGES = [
   { id: 'cover', label: 'Cover', keys: ['name', 'type', 'askingPrice'] },
   { id: 'exec', label: 'Executive Summary', keys: ['summary', 'highlights', 'askingPrice', 'units'] },
   { id: 'property', label: 'Property Overview', keys: ['siteSummary', 'utilities'] },
+  { id: 'building', label: 'Building Information', keys: ['buildingInfo'] },
   { id: 'rentroll', label: 'Rent Roll', keys: ['rentRoll', 'units'] },
   { id: 'income', label: 'Income & Expense', keys: ['expenses'] },
   { id: 'location', label: 'Location Overview', keys: ['locationOverview'] },
@@ -37,6 +39,8 @@ const SECTIONS = [
     ph: 'Marketing name (e.g. "Main Street Apartments"), property type/headline, and the positioning/story you want on the cover & executive summary.' },
   { key: 'property', label: 'Property & Pricing', rows: 5,
     ph: 'Asking price, # units, # buildings, year built / renovated, lot size, building SF, zoning, parking, and utilities (heat / electric / water-sewer — who pays).' },
+  { key: 'building', label: 'Building Information', rows: 4,
+    ph: 'Construction type, foundation, roof, exterior/siding, windows, mechanicals (heating/cooling), electrical, and fire protection/sprinklers.' },
   { key: 'rentRoll', label: 'Rent Roll', rows: 6,
     ph: 'One unit per line: Unit / Type / SF / Designation / In-Place rent / Market rent / Pro Forma rent. e.g. "1 · 2BR/1BA · 850 · Market · 1,650 · 2,100 · 2,100".' },
   { key: 'expenses', label: 'Expenses (T-12)', rows: 4,
@@ -50,13 +54,31 @@ const ss = {
   set: (k, v) => { try { localStorage.setItem(k, v) } catch { /* */ } },
 }
 
-// Compose the structured sections into the single labeled facts string /api/fill expects.
-function composeFacts(inputs) {
-  return SECTIONS
+// Compose the structured sections (+ any imported spreadsheet) into the single
+// labeled facts string /api/fill expects.
+function composeFacts(inputs, sheetText) {
+  const parts = SECTIONS
     .map(s => ({ s, v: (inputs[s.key] || '').trim() }))
     .filter(x => x.v)
     .map(({ s, v }) => `${s.label.toUpperCase()}:\n${v}`)
-    .join('\n\n')
+  if (sheetText && sheetText.trim()) {
+    parts.push(`RENT ROLL & EXPENSES (imported spreadsheet — extract the unit-by-unit rent roll and the operating expenses from this; read column headers for in-place vs market/pro-forma rents):\n${sheetText.trim()}`)
+  }
+  return parts.join('\n\n')
+}
+
+// Read every sheet of an .xlsx workbook into plain text the AI can parse.
+async function workbookToText(file) {
+  const sheets = await readXlsxFile(file, { getSheets: true })
+  const blocks = []
+  let rows = 0
+  for (const sh of sheets) {
+    const data = await readXlsxFile(file, { sheet: sh.name })
+    if (!data.length) continue
+    rows += data.length
+    blocks.push(`Sheet "${sh.name}":\n` + data.map(r => r.map(c => (c == null ? '' : String(c))).join(' | ')).join('\n'))
+  }
+  return { text: blocks.join('\n\n'), rows }
 }
 
 async function post(url, payload) {
@@ -105,6 +127,7 @@ export default function App() {
   })
   const [model, setModel] = useState(ss.get('om_model') || 'claude-opus-4-8')
   const [coverUpload, setCoverUpload] = useState('') // user-supplied cover photo (data URL)
+  const [sheet, setSheet] = useState(() => ({ name: ss.get('om_sheet_name'), text: ss.get('om_sheet') })) // imported rent roll / expenses
   const [deal, setDeal] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null') } catch { return null } })
   const [busy, setBusy] = useState('')
   const [status, setStatus] = useState('')
@@ -137,8 +160,20 @@ export default function App() {
     } catch { setStatus('Could not read that image.') }
   }
 
+  async function pickSheet(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setStatus('Reading spreadsheet…')
+    try {
+      const { text, rows } = await workbookToText(file)
+      setSheet({ name: file.name, text }); ss.set('om_sheet_name', file.name); ss.set('om_sheet', text)
+      setStatus(`Loaded ${rows} rows from ${file.name}. Build to extract the rent roll & expenses.`)
+    } catch { setStatus('Could not read that spreadsheet — export it as .xlsx and try again.') }
+  }
+  function clearSheet() { setSheet({ name: '', text: '' }); ss.set('om_sheet_name', ''); ss.set('om_sheet', '') }
+
   async function build() {
-    const facts = composeFacts(inputs)
+    const facts = composeFacts(inputs, sheet.text)
     if (!address.trim() && !facts.trim()) { setStatus('Enter an address and/or deal facts.'); return }
     setBusy('build'); setStatus('Pulling Google data…')
     let enriched = {}
@@ -195,6 +230,12 @@ export default function App() {
               <button className="ghost" type="button" onClick={() => { setCoverUpload(''); }}>Remove</button>
             </div>
           )}
+
+          <label>Rent Roll &amp; Expenses — Excel <span style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 500, color: 'var(--graphite)' }}>(optional — auto-extracted)</span></label>
+          <input type="file" accept=".xlsx,.xlsm" onChange={pickSheet} />
+          {sheet.text
+            ? <div className="cover-prev"><span className="hint" style={{ margin: 0 }}>📄 {sheet.name}</span><button className="ghost" type="button" onClick={clearSheet}>Remove</button></div>
+            : <div className="hint">Drop one .xlsx with the rent roll and expenses — the AI reads it into the deck. Or type them below.</div>}
 
           {SECTIONS.map(s => (
             <div key={s.key}>

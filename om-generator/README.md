@@ -13,10 +13,13 @@ Structured facts (cover/property/rent roll/expenses/loc) ─▶ /api/fill (Claud
 ```
 
 Inputs are split into labeled sections (Cover & Narrative, Property & Pricing,
-Rent Roll, Expenses, Location) and composed into the fill prompt. You can upload
-a **cover photo** that overrides the Street View cover. The **AI update chat runs
-on Opus** — once the deck exists, edits are small and benefit from the strongest
-model with full deal context.
+Building Information, Rent Roll, Expenses, Location) and composed into the fill
+prompt. You can upload a **cover photo** that overrides the Street View cover, and
+drop **one `.xlsx`** for the rent roll + expenses — every sheet is read in-browser
+(`read-excel-file`) into text the AI extracts the rent roll and operating expenses
+from, so you don't have to retype them. The **AI update chat runs on Opus** — once
+the deck exists, edits are small and benefit from the strongest model with full
+deal context.
 
 **Page-scoped edits.** The update chat requires you to pick a page first; the
 edit only touches that page's slice of the deal model. The backend builds a
@@ -29,6 +32,7 @@ the whole model every time, and it can't accidentally change another page.
 | Cover | `name`, `type`, `askingPrice` |
 | Executive Summary | `summary`, `highlights`, `askingPrice`, `units` |
 | Property Overview | `siteSummary`, `utilities` |
+| Building Information | `buildingInfo` |
 | Rent Roll | `rentRoll`, `units` |
 | Income & Expense | `expenses` |
 | Location Overview | `locationOverview` |

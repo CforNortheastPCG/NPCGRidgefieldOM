@@ -120,7 +120,7 @@ function financials(deal) {
 
 /* ═══════════════════ PROPERTY OVERVIEW ═══════════════════ */
 function PropertyOverview({ deal, pageNum }) {
-  const s = deal.siteSummary || {}, ut = deal.utilities || {}
+  const s = deal.siteSummary || {}, ut = deal.utilities || {}, bi = deal.buildingInfo || {}
   const f = financials(deal)
   const row = (l, v) => <div className="bldg-row"><span className="bldg-label">{l}</span><span className="bldg-val"><T v={v} /></span></div>
   return (
@@ -156,6 +156,19 @@ function PropertyOverview({ deal, pageNum }) {
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
+            <div className="bldg-card" style={{ padding: '12px 14px', flex: 2, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+              <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Building Information</h3>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                {row('Construction', bi.construction)}
+                {row('Foundation', bi.foundation)}
+                {row('Roof', bi.roof)}
+                {row('Exterior', bi.exterior)}
+                {row('Windows', bi.windows)}
+                {row('Mechanicals', bi.mechanicals)}
+                {row('Electrical', bi.electrical)}
+                {row('Fire Protection', bi.fireProtection)}
+              </div>
+            </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Investment Profile</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>

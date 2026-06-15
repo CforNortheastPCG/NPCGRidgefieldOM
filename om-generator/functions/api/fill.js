@@ -8,7 +8,7 @@ import Anthropic from '@anthropic-ai/sdk'
    normalizes the rent roll. Income/expense math is done by script downstream. */
 
 const ALLOWED_MODELS = ['claude-opus-4-8', 'claude-fable-5', 'claude-sonnet-4-6', 'claude-haiku-4-5']
-const MAX_FACTS = 8000
+const MAX_FACTS = 24000 // room for an imported rent-roll / expense spreadsheet
 
 // JSON Schema for structured outputs (no minLength/maximum etc — not supported).
 const SCHEMA = {
@@ -43,6 +43,15 @@ const SCHEMA = {
       properties: { heat: { type: 'string' }, electric: { type: 'string' }, water: { type: 'string' } },
       required: ['heat', 'electric', 'water'],
     },
+    buildingInfo: {
+      type: 'object', additionalProperties: false,
+      properties: {
+        construction: { type: 'string' }, foundation: { type: 'string' }, roof: { type: 'string' },
+        exterior: { type: 'string' }, windows: { type: 'string' }, mechanicals: { type: 'string' },
+        electrical: { type: 'string' }, fireProtection: { type: 'string' },
+      },
+      required: ['construction', 'foundation', 'roof', 'exterior', 'windows', 'mechanicals', 'electrical', 'fireProtection'],
+    },
     rentRoll: {
       type: 'array',
       items: {
@@ -64,7 +73,7 @@ const SCHEMA = {
     },
     locationOverview: { type: 'array', items: { type: 'string' }, description: '1-2 paragraphs on the city/market' },
   },
-  required: ['name', 'type', 'askingPrice', 'units', 'summary', 'highlights', 'siteSummary', 'utilities', 'rentRoll', 'expenses', 'locationOverview'],
+  required: ['name', 'type', 'askingPrice', 'units', 'summary', 'highlights', 'siteSummary', 'utilities', 'buildingInfo', 'rentRoll', 'expenses', 'locationOverview'],
 }
 
 const SYSTEM = `You structure the content for a Northeast Private Client Group (NPCG) multifamily Offering Memorandum. Return ONLY the structured object matching the schema. Base every number on the facts provided; where a fact is missing put "TODO" (never invent prices, rents, addresses, or unit counts). Write tight, professional NPCG-style prose. The property's address, city, and state are already known — use them but don't restate the whole address in every sentence.`

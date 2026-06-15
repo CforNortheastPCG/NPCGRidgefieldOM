@@ -16,11 +16,12 @@ const SCHEMA = {
     highlights: { type: 'array', items: { type: 'object', additionalProperties: false, properties: { title: { type: 'string' }, body: { type: 'string' } }, required: ['title', 'body'] } },
     siteSummary: { type: 'object', additionalProperties: false, properties: { propertyType: { type: 'string' }, totalUnits: { type: 'string' }, buildings: { type: 'string' }, lotSize: { type: 'string' }, buildingSF: { type: 'string' }, yearBuilt: { type: 'string' }, zoning: { type: 'string' }, parking: { type: 'string' } }, required: ['propertyType', 'totalUnits', 'buildings', 'lotSize', 'buildingSF', 'yearBuilt', 'zoning', 'parking'] },
     utilities: { type: 'object', additionalProperties: false, properties: { heat: { type: 'string' }, electric: { type: 'string' }, water: { type: 'string' } }, required: ['heat', 'electric', 'water'] },
+    buildingInfo: { type: 'object', additionalProperties: false, properties: { construction: { type: 'string' }, foundation: { type: 'string' }, roof: { type: 'string' }, exterior: { type: 'string' }, windows: { type: 'string' }, mechanicals: { type: 'string' }, electrical: { type: 'string' }, fireProtection: { type: 'string' } }, required: ['construction', 'foundation', 'roof', 'exterior', 'windows', 'mechanicals', 'electrical', 'fireProtection'] },
     rentRoll: { type: 'array', items: { type: 'object', additionalProperties: false, properties: { unit: { type: 'string' }, type: { type: 'string' }, sf: { type: 'string' }, designation: { type: 'string' }, inPlace: { type: 'string' }, market: { type: 'string' }, proforma: { type: 'string' } }, required: ['unit', 'type', 'sf', 'designation', 'inPlace', 'market', 'proforma'] } },
     expenses: { type: 'array', items: { type: 'object', additionalProperties: false, properties: { label: { type: 'string' }, amount: { type: 'string' } }, required: ['label', 'amount'] } },
     locationOverview: { type: 'array', items: { type: 'string' } },
   },
-  required: ['name', 'type', 'askingPrice', 'units', 'summary', 'highlights', 'siteSummary', 'utilities', 'rentRoll', 'expenses', 'locationOverview'],
+  required: ['name', 'type', 'askingPrice', 'units', 'summary', 'highlights', 'siteSummary', 'utilities', 'buildingInfo', 'rentRoll', 'expenses', 'locationOverview'],
 }
 const CONTENT_KEYS = Object.keys(SCHEMA.properties)
 
