@@ -10,12 +10,15 @@
    with `images` render as a balanced photo grid (PhotoPage handles 3–6 tiles).
    Page numbers are assigned by App in render order. */
 export const PHOTO_PAGES = [
-  /* ── Property Exterior — full complex (RISE Media) ── */
+  /* ── Building A — Exterior (RISE Media) ── */
   {
-    section: 'Property Exterior', title: 'Property', accent: 'Exterior',
-    subtitle: '613-615 Main Street · Victorian main house & townhouse buildings on a landscaped half-acre',
+    section: 'Building A — Exterior', title: 'Building A —', accent: 'Exterior',
+    subtitle: 'Victorian Main House · Frontage, porch & grounds',
     images: [
-      { src: '/photos/buildings/a-76.jpg', caption: 'Complex — Main House & Townhouses' },
+      { src: '/photos/buildings/a-77.jpg', caption: 'Front Elevation & Wrap-Around Porch' },
+      { src: '/photos/buildings/a-113.jpg', caption: 'Main House — Side Elevation & Porch' },
+      { src: '/photos/buildings/a-115.jpg', caption: 'Patio & Grounds' },
+      { src: '/photos/buildings/a-122.jpg', caption: 'Front Porch & Entry' },
     ],
   },
 
@@ -52,32 +55,20 @@ export const PHOTO_PAGES = [
     ],
   },
   {
-    section: 'Building A — Common & Exterior', title: 'Building A —', accent: 'Common Areas & Exterior',
-    subtitle: 'Victorian Main House · Shared stairwell, grounds & frontage',
-    images: [
-      { src: '/photos/buildings/a-69.jpg', caption: 'Common Stairwell' },
-      { src: '/photos/buildings/a-71.jpg', caption: 'Common Stairwell' },
-      { src: '/photos/buildings/a-77.jpg', caption: 'Exterior' },
-      { src: '/photos/buildings/a-73.jpg', caption: 'Patio & Grounds' },
-      { src: '/photos/buildings/a-74.jpg', caption: 'Parking & Mail' },
-    ],
-  },
-  {
     section: 'Building A — Floor Plan', title: 'Building A —', accent: 'Floor Plan',
-    subtitle: 'Unit A1 · 911 SF · Representative unit',
     plan: '/photos/floorplans/unit-a1.jpg',
   },
 
-  /* ── Building B — Townhouses w/ Garage ──
-        NOTE: placeholder exterior imagery — dedicated Building B exterior
-        photography is pending from RISE; swap in when delivered. */
+  /* ── Building B — Townhouses w/ Garage ── */
   {
     section: 'Building B — Exterior', title: 'Building B —', accent: 'Exterior',
     subtitle: 'Townhouses w/ Garage · 3 Units (2BR/1.5BA)',
     images: [
-      { src: '/photos/Exterior Edit 4.png', caption: 'Front Elevation' },
+      { src: '/photos/buildings/b-80.jpg', caption: 'Front Elevation', pos: 'center bottom' },
+      { src: '/photos/buildings/b-133.jpg', caption: 'Front & Side Elevation' },
+      { src: '/photos/buildings/b-83.jpg', caption: 'Aerial — Parking Court' },
+      { src: '/photos/buildings/b-106.jpg', caption: 'Aerial — Complex & Downtown' },
     ],
-    note: 'Representative exterior imagery — final professional photography of Building B to follow.',
   },
   {
     section: 'Building B — Interior', title: 'Building B —', accent: 'Kitchen & Living',
@@ -85,8 +76,8 @@ export const PHOTO_PAGES = [
     images: [
       { src: '/photos/buildings/b-21.jpg', caption: 'Kitchen' },
       { src: '/photos/buildings/b-25.jpg', caption: 'Living Area' },
-      { src: '/photos/buildings/b-27.jpg', caption: 'Living & Stairs' },
-      { src: '/photos/buildings/b-29.jpg', caption: 'Living Area' },
+      { src: '/photos/buildings/b-27.jpg', caption: 'Living Area' },
+      { src: '/photos/buildings/b-29.jpg', caption: 'Half Bath' },
     ],
   },
   {
@@ -103,7 +94,6 @@ export const PHOTO_PAGES = [
   },
   {
     section: 'Building B — Floor Plan', title: 'Building B —', accent: 'Floor Plan',
-    subtitle: 'Unit B3 · 984 SF + Garage & Utility · Representative unit',
     plan: '/photos/floorplans/unit-b3.jpg',
   },
 
@@ -140,7 +130,6 @@ export const PHOTO_PAGES = [
   },
   {
     section: 'Building C — Floor Plan', title: 'Building C —', accent: 'Floor Plan',
-    subtitle: 'Unit C2 · Representative unit',
     plan: '/photos/floorplans/unit-c2.jpg',
   },
 ]

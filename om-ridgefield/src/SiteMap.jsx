@@ -7,9 +7,9 @@ import { PageHeader, PageFooter } from './Shell.jsx'
 
 /* Pin positions are percentages of the aerial image (left, top). */
 const BUILDINGS = [
-  { label: 'A', name: 'Victorian Main House', detail: '3 Apartments (2BR) · c. 1900', swatch: '#F8971D', pin: { x: 55.5, y: 56.8 } },
-  { label: 'B', name: 'Townhouses w/ Garage', detail: '3 Units (2BR/1.5BA) · 2012', swatch: '#2C3E50', pin: { x: 34.8, y: 52.9 } },
-  { label: 'C', name: 'Townhouses w/ Basement', detail: '3 Units (2BR/1.5BA) · 2012', swatch: '#6B7A8F', pin: { x: 20.5, y: 58.0 } },
+  { label: 'A', name: 'Victorian Main House', detail: '3 Apartments (2BR) · c. 1900 · Renovated 2012', swatch: '#F8971D', pin: { x: 78, y: 50 } },
+  { label: 'B', name: 'Townhouses w/ Garage', detail: '3 Units (2BR/1.5BA) · 2012', swatch: '#2C3E50', pin: { x: 36, y: 46 } },
+  { label: 'C', name: 'Townhouses w/ Basement', detail: '3 Units (2BR/1.5BA) · 2012', swatch: '#6B7A8F', pin: { x: 8, y: 53.1 } },
 ]
 
 export default function SiteMap({ pageNum }) {

@@ -7,7 +7,6 @@ import { PhotoPage, FloorPlanPage } from './PhotoPages.jsx'
 import { PHOTO_PAGES } from './photos.js'
 import Divider from './Divider.jsx'
 import RegionalMap from './RegionalMap.jsx'
-import BrokerProfile from './BrokerProfile.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
 import { DEAL, ADDR, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
@@ -98,10 +97,10 @@ function ExecutiveSummary({ pageNum }) {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minHeight: 0 }}>
             <div style={{ flex: 1, borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
-              <img src="/photos/Exterior Edit 3.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src="/photos/exec-aerial-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div style={{ flex: 1, borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
-              <img src="/photos/Exterior Edit 1.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src="/photos/exec-aerial-2.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
           </div>
         </div>
@@ -375,12 +374,12 @@ function RentRoll({ pageNum }) {
   const units = [
     { unit: 'A-1', type: '2/1.5', sqft: 850, designation: 'Market', inPlace: 2995, market: 2995, proforma: 3200 },
     { unit: 'A-2', type: '2/1.0', sqft: 950, designation: 'Market', inPlace: 2875, market: 2875, proforma: 3100 },
-    { unit: 'A-3', type: '2/1.0 (60%)', sqft: 650, designation: 'Affordable', inPlace: 1534, market: 1534, proforma: 1548 },
+    { unit: 'A-3', type: '2/1.0', sqft: 650, designation: 'Affordable 60% AMI', inPlace: 1534, market: 1534, proforma: 1548 },
     { unit: 'B-1', type: '2/1.5 Townhouse w/ Garage', sqft: 1052, designation: 'Market', inPlace: 2895, market: 3350, proforma: 3350 },
     { unit: 'B-2', type: '2/1.5 Townhouse w/ Garage', sqft: 1052, designation: 'Market', inPlace: 2895, market: 3350, proforma: 3350 },
     { unit: 'B-3', type: '2/1.5 Townhouse w/ Garage', sqft: 1052, designation: 'Market', inPlace: 3350, market: 3350, proforma: 3350 },
-    { unit: 'C-1', type: '2/1.5 Townhouse w/ Basement (80%)', sqft: 1052, designation: 'Affordable', inPlace: 2039, market: 2039, proforma: 2131 },
-    { unit: 'C-2', type: '2/1.5 Townhouse w/ Basement (60%)', sqft: 1052, designation: 'Affordable', inPlace: 1478, market: 1478, proforma: 1548 },
+    { unit: 'C-1', type: '2/1.5 Townhouse w/ Basement', sqft: 1052, designation: 'Affordable 80% AMI', inPlace: 2039, market: 2039, proforma: 2131 },
+    { unit: 'C-2', type: '2/1.5 Townhouse w/ Basement', sqft: 1052, designation: 'Affordable 60% AMI', inPlace: 1478, market: 1478, proforma: 1548 },
     { unit: 'C-3', type: '2/1.5 Townhouse w/ Basement', sqft: 1052, designation: 'Market', inPlace: 2825, market: 2825, proforma: 3250 },
   ]
   const totalSqft = units.reduce((s, u) => s + u.sqft, 0)
@@ -472,7 +471,7 @@ function IncomeExpense({ pageNum }) {
   const Cols = () => (
     <colgroup>
       <col style={{ width: '28%' }} />
-      {Array.from({ length: 6 }).map((_, i) => <col key={i} style={{ width: '12%' }} />)}
+      {Array.from({ length: 4 }).map((_, i) => <col key={i} style={{ width: '18%' }} />)}
     </colgroup>
   )
 
@@ -506,8 +505,8 @@ function IncomeExpense({ pageNum }) {
           <thead>
             <tr style={{ background: 'var(--carbon)' }}>
               <th style={{ ...thl, color: '#fff' }}>Income</th>
-              <th style={{ ...thr, color: '#fff' }}>Year 1</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th><th style={{ ...thr, color: '#fff' }}>%</th>
-              <th style={{ ...thr, color: '#fff' }}>Pro Forma</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th><th style={{ ...thr, color: '#fff' }}>%</th>
+              <th style={{ ...thr, color: '#fff' }}>Year 1</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
+              <th style={{ ...thr, color: '#fff' }}>Pro Forma</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
             </tr>
           </thead>
           <tbody>
@@ -515,13 +514,13 @@ function IncomeExpense({ pageNum }) {
                 and which cells carry $/Unit and % values. Blank workbook cells
                 render as em-dashes; nothing is computed for display. */}
             {[
-              ['Gross Potential Rent', '$297,924', '—', '—', '$297,924', '—', '—', false],
-              ['Below Market Rent', '-$23,292', '—', '-8.48%', '$0', '—', '0.00%', false],
-              ['Gross Scheduled Rent', '$274,632', '—', '—', '$297,924', '—', '—', true],
-              ['Vacancy & Collections Loss', '-$5,493', '—', '2.00%', '-$5,958', '—', '2.00%', false],
-              ['Effective Rental Income', '$269,139', '—', '—', '$291,966', '—', '—', true],
-              ['Utility Bill Back', '$9,180', '$1,020', '—', '$9,180', '$1,020', '—', false],
-              ['Total Additional Income', '$9,180', '$1,020', '—', '$9,180', '$1,020', '—', true],
+              ['Gross Potential Rent', '$297,924', '—', '$297,924', '—', false],
+              ['Below Market Rent', '-$23,292', '—', '$0', '—', false],
+              ['Gross Scheduled Rent', '$274,632', '—', '$297,924', '—', true],
+              ['Vacancy & Collections Loss', '-$5,493', '—', '-$5,958', '—', false],
+              ['Effective Rental Income', '$269,139', '—', '$291,966', '—', true],
+              ['Utility Bill Back', '$9,180', '$1,020', '$9,180', '$1,020', false],
+              ['Total Additional Income', '$9,180', '$1,020', '$9,180', '$1,020', true],
             ].map(([label, ...cells], i) => {
               const bold = cells.pop()
               return (
@@ -531,7 +530,7 @@ function IncomeExpense({ pageNum }) {
                 </tr>
               )
             })}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$278,319</td><td style={totBg}>&mdash;</td><td style={totBg}>&mdash;</td><td style={totBg}>$301,146</td><td style={totBg}>&mdash;</td><td style={totBg}>&mdash;</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$278,319</td><td style={totBg}>&mdash;</td><td style={totBg}>$301,146</td><td style={totBg}>&mdash;</td></tr>
           </tbody>
         </table>
 
@@ -541,28 +540,28 @@ function IncomeExpense({ pageNum }) {
           <thead>
             <tr style={{ background: 'var(--carbon)' }}>
               <th style={{ ...thl, color: '#fff' }}>Expense</th>
-              <th style={{ ...thr, color: '#fff' }}>Year 1</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th><th style={{ ...thr, color: '#fff' }}>%</th>
-              <th style={{ ...thr, color: '#fff' }}>Pro Forma</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th><th style={{ ...thr, color: '#fff' }}>%</th>
+              <th style={{ ...thr, color: '#fff' }}>Year 1</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
+              <th style={{ ...thr, color: '#fff' }}>Pro Forma</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
             </tr>
           </thead>
           <tbody>
             {[
-              ['Real Estate Tax', '$27,743', '$3,083', '—', '$27,743', '$3,083', '—'],
-              ['Property Insurance', '$4,320', '$480', '—', '$4,320', '$480', '—'],
-              ['Sewer', '$4,320', '$480', '—', '$4,320', '$480', '—'],
-              ['Water', '$696', '$77', '—', '$696', '$77', '—'],
-              ['Trash Removal', '$4,380', '$487', '—', '$4,380', '$487', '—'],
-              ['Alarm Monitoring', '$2,376', '$264', '—', '$2,376', '$264', '—'],
-              ['Landscaping', '$5,200', '$578', '—', '$5,200', '$578', '—'],
-              ['Snow Removal', '$12,140', '$1,349', '—', '$12,140', '$1,349', '—'],
+              ['Real Estate Tax', '$27,743', '$3,083', '$27,743', '$3,083'],
+              ['Property Insurance', '$4,320', '$480', '$4,320', '$480'],
+              ['Sewer', '$4,320', '$480', '$4,320', '$480'],
+              ['Water', '$696', '$77', '$696', '$77'],
+              ['Trash Removal', '$4,380', '$487', '$4,380', '$487'],
+              ['Alarm Monitoring', '$2,376', '$264', '$2,376', '$264'],
+              ['Landscaping', '$5,200', '$578', '$5,200', '$578'],
+              ['Snow Removal', '$12,140', '$1,349', '$12,140', '$1,349'],
             ].map(([label, ...cells], i) => (
               <tr key={label} style={i % 2 === 1 ? { background: 'var(--linen)' } : undefined}>
                 <td style={tdl}>{label}</td>
                 {cells.map((c, j) => <td key={j} style={tds}>{c}</td>)}
               </tr>
             ))}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$61,175</td><td style={totBg}>$6,797</td><td style={totBg}>21.98%</td><td style={totBg}>$61,175</td><td style={totBg}>$6,797</td><td style={totBg}>20.31%</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$217,144</td><td style={noiBg}>&mdash;</td><td style={noiBg}>&mdash;</td><td style={noiBg}>$239,970</td><td style={noiBg}>&mdash;</td><td style={noiBg}>&mdash;</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$61,175</td><td style={totBg}>$6,797</td><td style={totBg}>$61,175</td><td style={totBg}>$6,797</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$217,144</td><td style={noiBg}>&mdash;</td><td style={noiBg}>$239,970</td><td style={noiBg}>&mdash;</td></tr>
           </tbody>
         </table>
       </div>
@@ -770,10 +769,10 @@ function RidgefieldCombined({ pageNum }) {
 
         <div style={{ flex: '0 0 44%', display: 'flex', flexDirection: 'column', gap: 4 }}>
           <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-            <img src="/photos/Exterior Edit 2.png" alt="Ridgefield, CT" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/aerial/drone-86.jpg" alt="Aerial view of the property and downtown Ridgefield, CT" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-            <img src="/photos/613 Complex.webp" alt="Main Street Apartments" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/aerial/drone-116.jpg" alt="Victorian main house at 613 Main Street, Ridgefield" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
         </div>
       </div>
@@ -825,6 +824,58 @@ function FairfieldCounty({ pageNum }) {
   )
 }
 
+/* ═══════════════════ AERIAL CONTEXT (full-bleed drone + labeled points) ═══════════════════
+   Edge-to-edge downtown Ridgefield drone shots with the NPCG mark and any number of
+   labeled map points. Each point is { x, y, label, primary? } where x/y are % of the
+   page box (object-fit: cover) — tune them with aerial-pin-tuner.html. The `primary`
+   point (the subject property) renders larger in golden; others are white POI markers.
+   logo defaults to the NPCG white mark (placeholder). */
+function AerialPoint({ x, y, label, title, primary }) {
+  const chipBg = primary ? 'rgba(20,24,30,0.86)' : 'rgba(20,24,30,0.74)'
+  // A title, or a multi-line label, renders as a left-aligned callout box (title
+  // header on top, items below); a plain single-line label stays compact + centered.
+  const box = !!title || (typeof label === 'string' && label.includes('\n'))
+  return (
+    <div style={{ position: 'absolute', left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+      <div style={{ background: chipBg, color: '#fff', padding: primary ? '5px 12px' : '5px 10px', borderRadius: 4, textAlign: box ? 'left' : 'center', whiteSpace: box ? 'pre-line' : 'nowrap', maxWidth: box ? 240 : 'none', lineHeight: box ? 1.5 : 1.2, boxShadow: '0 2px 10px rgba(0,0,0,0.55)' }}>
+        {primary && <span style={{ display: 'block', color: '#F8971D', textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: 8.5, fontWeight: 700 }}>Subject Property</span>}
+        {title && <span style={{ display: 'block', fontSize: 11.5, fontWeight: 800, color: '#F8971D', borderBottom: '1px solid rgba(255,255,255,0.28)', paddingBottom: 3, marginBottom: 4 }}>{title}</span>}
+        <span style={{ fontSize: primary ? 12 : title ? 10 : 10.5, fontWeight: title ? 600 : 700 }}>{label}</span>
+      </div>
+      {/* leader line down to a small precise dot at the exact point */}
+      <div style={{ width: 2, height: 16, background: '#F8971D', boxShadow: '0 1px 3px rgba(0,0,0,0.55)' }} />
+      <div style={{ width: primary ? 10 : 7, height: primary ? 10 : 7, borderRadius: '50%', background: '#F8971D', border: '2px solid #fff', boxShadow: '0 1px 4px rgba(0,0,0,0.6)' }} />
+    </div>
+  )
+}
+
+/* Street/road marker: a translucent ribbon rotated to run along the road. No dot —
+   it labels a street rather than pinning a point. angle is degrees (clockwise). */
+function AerialStreet({ x, y, label, angle = 0 }) {
+  return (
+    <div style={{ position: 'absolute', left: `${x}%`, top: `${y}%`, transform: `translate(-50%, -50%) rotate(${angle}deg)`, pointerEvents: 'none' }}>
+      <div style={{ background: 'rgba(20,24,30,0.66)', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.16em', fontSize: 10, fontWeight: 700, padding: '3px 12px', borderRadius: 3, whiteSpace: 'nowrap', border: '1px solid rgba(255,255,255,0.3)', boxShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>{label}</div>
+    </div>
+  )
+}
+
+function AerialContext({ pageNum, src, points = [], logo = '/logos/npcg-white-hires.png' }) {
+  return (
+    <div className="page">
+      <div className="cover-hero">
+        <img className="cover-hero-img" src={src} alt="Aerial view of downtown Ridgefield" />
+        {/* top scrim so the logo reads over bright sky */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '24%', background: 'linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0))', pointerEvents: 'none' }} />
+        {/* logo */}
+        <div style={{ position: 'absolute', top: 24, left: 36 }}>
+          <img src={logo} alt="" style={{ maxHeight: 42, maxWidth: 220, objectFit: 'contain' }} />
+        </div>
+        {points.map((p, i) => p.kind === 'street' ? <AerialStreet key={i} {...p} /> : <AerialPoint key={i} {...p} />)}
+      </div>
+    </div>
+  )
+}
+
 /* ═══════════════════ MAIN APP ═══════════════════ */
 function App() {
   // Page order is the single source of truth — pageNum is auto-assigned by
@@ -845,11 +896,27 @@ function App() {
     <IncomeExpense />,
     <Divider eyebrow="03" title="Location & Market" />,
     <RidgefieldCombined />,
+    <AerialContext src="/photos/ridgefield-context-1.jpg" points={[
+      { x: 72.3, y: 80.4, label: '613-615 Main Street', primary: true },
+      { x: 41.1, y: 40.7, title: 'Downtown Ridgefield', label: 'Tequila Escape\nBrasserie Saint Germain\nTablao Wine Bar\nBailey\'s Backyard\nR House\nThe Lantern\nTazza Cafe\nQueen B Coffee Co.\nCorner Cafe' },
+      { x: 7.8, y: 39.2, label: 'Branchville Station' },
+      { x: 16.3, y: 59.2, label: 'Casagmo Condo Association' },
+      { x: 52.2, y: 90.4, kind: 'street', angle: 70, label: 'Main Street' },
+      { x: 28.9, y: 92.4, kind: 'street', angle: -13, label: 'Danbury Road' },
+    ]} />,
+    <AerialContext src="/photos/ridgefield-context-2.jpg" points={[
+      { x: 45.8, y: 80.6, label: '613-615 Main Street', primary: true },
+      { x: 40.8, y: 35.2, title: 'Copps Hill Commons', label: 'Ridgefield Organics & Specialty\nJersey Mike\'s\nStop & Shop\nMichaels\nMarshalls' },
+      { x: 66, y: 48, label: 'Walgreens' },
+      { x: 70.3, y: 37.2, title: '86 Danbury Road', label: 'Starbucks\nChase\nRidgefield Bicycle Company\nPosa Ristorante & Vineria\nFairfield County Bank Operations Center' },
+      { x: 49.7, y: 52.2, label: 'Girolmetti Court Shopping Center' },
+      { x: 68, y: 71.7, kind: 'street', angle: 15, label: 'Danbury Road' },
+      { x: 36.9, y: 62.5, kind: 'street', angle: 9, label: 'Main Street' },
+    ]} />,
     <LocationMap />,
     <FairfieldCounty />,
     <RegionalMap />,
     <Divider eyebrow="04" title="The Team" />,
-    <BrokerProfile />,
     <TeamPage />,
     <LocationsPage />,
   ]

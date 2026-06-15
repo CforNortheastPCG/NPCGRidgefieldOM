@@ -5,10 +5,10 @@ import { PageHeader, PageFooter } from './Shell.jsx'
    PhotoPage renders a 2×2 grid of captioned photos; FloorPlanPage renders a
    single full-page unit plan. Data lives in photos.js (PHOTO_PAGES). */
 
-function PhotoTile({ src, caption }) {
+function PhotoTile({ src, caption, pos }) {
   return (
     <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', minHeight: 0, height: '100%' }}>
-      <img src={src} alt={caption} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      <img src={src} alt={caption} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: pos || 'center', display: 'block' }} />
       <div style={{
         position: 'absolute', left: 0, bottom: 0, background: 'rgba(63,71,83,0.82)', color: '#fff',
         fontSize: 8, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase',

@@ -98,9 +98,12 @@ function buildStaticMapUrl() {
   const industryPins = `markers=${encodeURIComponent(`size:mid|color:${TEAL}|label:I|${INDUSTRY.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
   const subjectPin = `markers=${encodeURIComponent(`size:mid|color:${GOLDEN}|label:R|${SUBJECT.lat},${SUBJECT.lng}`)}`
   // Real road-network drive-time isochrones (encoded polylines) — server-drawn,
-  // so they stay correctly placed/scaled in the auto-fit frame.
+  // so they stay correctly placed/scaled in the auto-fit frame. Outline-only
+  // (no fill): translucent fills stacked across the four nested bands washed out
+  // the basemap labels, city dots, and rail beneath them. Drawn first in the
+  // params list so they sit as a quiet behind-layer under the rail + pins.
   const ringPaths = ISOCHRONES.map(r =>
-    `path=${encodeURIComponent(`color:${r.color}ff|fillcolor:${r.color}14|weight:4|enc:${r.enc}`)}`
+    `path=${encodeURIComponent(`color:${r.color}cc|weight:3|enc:${r.enc}`)}`
   )
   const railPath = `path=${encodeURIComponent(`color:0xB55D37|weight:5|${RAIL.map(p => `${p[0]},${p[1]}`).join('|')}`)}`
   const params = [

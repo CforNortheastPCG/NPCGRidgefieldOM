@@ -13,7 +13,7 @@ export const DEAL = {
   cityLong: 'Ridgefield, Connecticut',       // long form for the cover subtitle
   status: 'For Sale',                        // listing status chip
   type: '9-Unit Multifamily Property',       // asset descriptor (cover)
-  coverImage: '/photos/Exterior Edit 2.png', // full-bleed cover photo
+  coverImage: '/photos/cover-aerial.jpg', // full-bleed cover photo
   pdfName: '613-Main-Street-OM.pdf',         // output filename for the exporter
 }
 
