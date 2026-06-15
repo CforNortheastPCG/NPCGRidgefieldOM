@@ -34,9 +34,10 @@ and tighten security before sharing the link. Check items off as you go.
 - [ ] Confirm identity/media (address, cover, map, amenities, team) never get
       clobbered by an edit.
 
-## 4. Cost — lock the ~$20/OM number
-- [ ] Run ~3 full builds + a few edits, then read **Anthropic usage** for actual
-      token spend per OM. Record it here: ______
+## 4. Cost — lock the real $/OM number (tracking ~$5–10, not $20)
+- [ ] Early data point: the biggest call (`fill` draft) ran **~$0.60**. Run ~3 full
+      builds + a few edits and read **Anthropic usage** for actual spend per OM.
+      Record it here: ______
 - [ ] Set a **spend limit on the Anthropic key** and on the **Google key**.
 - [ ] Decide if `fill` should cap lower than 8K tokens for cost, or stay for quality.
 
@@ -57,5 +58,5 @@ and tighten security before sharing the link. Check items off as you go.
 
 ---
 _Workflow recap: Address + facts (+ optional .xlsx / photos) → Build → review the
-deck → page-scoped Opus edits → Download PDF. Hard lift is the first build; edits
-are cheap. Target ~$20/OM._
+deck → page-scoped Opus edits → Download PDF. Hard lift is the first build (~$0.60
+for the fill); edits are cheap. Tracking ~$5–10/OM._

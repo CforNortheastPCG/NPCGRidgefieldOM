@@ -156,11 +156,13 @@ vacancy assumption) — not from the AI.
 
 ## Cost (rough)
 
-Ballpark **~$20 per OM** end-to-end. Drivers: the `fill` draft (Opus, structured
-output, ~8K-token cap), Google calls (geocode + Street View + Static Map + one
-Places searchNearby — all cheap/free-tier), and a handful of page-scoped `update`
-edits (Opus, but only one page's slice per call, so each is small). Lock the real
-number with **spend limits on both keys** — see the security section.
+Ballpark **~$5–10 per OM** end-to-end. Early data point: the first/biggest call —
+the `fill` draft (Opus, structured output, ~8K-token cap) — ran **~$0.60**. Add
+the Google calls (geocode + Street View + Static Map + one Places searchNearby —
+all cheap/free-tier) and a handful of page-scoped `update` edits (Opus, but only
+one page's slice per call, so each is small) and a full OM with edits lands in the
+single-digit dollars. Lock the real number by reading Anthropic usage after a few
+real builds, and set **spend limits on both keys** — see the security section.
 
 ## Notes / not-yet
 
