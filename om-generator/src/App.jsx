@@ -49,6 +49,15 @@ const SECTIONS = [
     ph: 'Neighborhood, employers, schools, transit/highway access, demographics, comps. Google Places auto-pulls nearby amenities — add anything it would miss.' },
 ]
 
+// The 5 section divider pages — each can take its own full-bleed cover photo.
+const DIVIDERS = [
+  { id: 'property', label: 'The Property' },
+  { id: 'financial', label: 'Financial Analysis' },
+  { id: 'location', label: 'Location & Market' },
+  { id: 'process', label: 'The Process' },
+  { id: 'team', label: 'The Team' },
+]
+
 const ss = {
   get: (k, d = '') => { try { return localStorage.getItem(k) ?? d } catch { return d } },
   set: (k, v) => { try { localStorage.setItem(k, v) } catch { /* */ } },
@@ -129,6 +138,7 @@ export default function App() {
   const [coverUpload, setCoverUpload] = useState('') // user-supplied cover photo (data URL)
   const [sheet, setSheet] = useState(() => ({ name: ss.get('om_sheet_name'), text: ss.get('om_sheet') })) // imported rent roll / expenses
   const [deal, setDeal] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null') } catch { return null } })
+  const [sectionPhotos, setSectionPhotos] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null')?.sectionPhotos || {} } catch { return {} } }) // per-divider cover photos
   const [busy, setBusy] = useState('')
   const [status, setStatus] = useState('')
   const [chat, setChat] = useState([])
@@ -160,6 +170,26 @@ export default function App() {
     } catch { setStatus('Could not read that image.') }
   }
 
+  async function pickSection(id, e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    try {
+      const url = await fileToDataUrl(file)
+      setSectionPhotos(prev => {
+        const next = { ...prev, [id]: url }
+        if (deal) saveDeal({ ...deal, sectionPhotos: next })
+        return next
+      })
+    } catch { setStatus('Could not read that image.') }
+  }
+  function clearSection(id) {
+    setSectionPhotos(prev => {
+      const next = { ...prev }; delete next[id]
+      if (deal) saveDeal({ ...deal, sectionPhotos: next })
+      return next
+    })
+  }
+
   async function pickSheet(e) {
     const file = e.target.files?.[0]
     if (!file) return
@@ -188,6 +218,7 @@ export default function App() {
     // user-uploaded cover wins over the Street View cover
     const merged = { ...enriched, ...fl.deal }
     if (coverUpload) merged.cover = coverUpload
+    if (Object.keys(sectionPhotos).length) merged.sectionPhotos = sectionPhotos
     saveDeal(merged)
     setStatus(`Done.${enriched.amenities?.length ? ` ${enriched.amenities.length} nearby places.` : ''}`); setBusy('')
   }
@@ -220,22 +251,29 @@ export default function App() {
         <section className="panel controls">
           <label>Property Address</label>
           <input value={address} onChange={e => setAddress(e.target.value)} placeholder="613 Main Street, Ridgefield, CT" />
-          <div className="hint">Geocoded → identity, Street View cover, location map, nearby amenities (Google Places).</div>
+          <div className="hint">Auto-pulls cover, location map & nearby amenities (Google).</div>
 
-          <label>Cover Photo <span style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 500, color: 'var(--graphite)' }}>(optional — overrides Street View)</span></label>
-          <input type="file" accept="image/*" onChange={pickCover} />
-          {coverUpload && (
-            <div className="cover-prev">
-              <img src={coverUpload} alt="cover" />
-              <button className="ghost" type="button" onClick={() => { setCoverUpload(''); }}>Remove</button>
-            </div>
-          )}
+          <details className="grp">
+            <summary>Photos &amp; spreadsheet{(coverUpload || sheet.text || Object.keys(sectionPhotos).length) ? <span className="grp-count">{[coverUpload && 'cover', sheet.text && 'xlsx', Object.keys(sectionPhotos).length && `${Object.keys(sectionPhotos).length} section`].filter(Boolean).join(' · ')}</span> : null}</summary>
 
-          <label>Rent Roll &amp; Expenses — Excel <span style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 500, color: 'var(--graphite)' }}>(optional — auto-extracted)</span></label>
-          <input type="file" accept=".xlsx,.xlsm" onChange={pickSheet} />
-          {sheet.text
-            ? <div className="cover-prev"><span className="hint" style={{ margin: 0 }}>📄 {sheet.name}</span><button className="ghost" type="button" onClick={clearSheet}>Remove</button></div>
-            : <div className="hint">Drop one .xlsx with the rent roll and expenses — the AI reads it into the deck. Or type them below.</div>}
+            <label>Cover Photo <span className="opt">overrides Street View</span></label>
+            <input type="file" accept="image/*" onChange={pickCover} />
+            {coverUpload && <div className="cover-prev"><img src={coverUpload} alt="cover" /><button className="ghost" type="button" onClick={() => setCoverUpload('')}>Remove</button></div>}
+
+            <label>Rent Roll &amp; Expenses — Excel <span className="opt">auto-extracted</span></label>
+            <input type="file" accept=".xlsx,.xlsm" onChange={pickSheet} />
+            {sheet.text && <div className="cover-prev"><span className="hint" style={{ margin: 0 }}>📄 {sheet.name}</span><button className="ghost" type="button" onClick={clearSheet}>Remove</button></div>}
+
+            <label>Section Cover Photos <span className="opt">one per divider</span></label>
+            {DIVIDERS.map(d => (
+              <div key={d.id} className="sec-photo">
+                <span className="sec-photo-label">{d.label}</span>
+                {sectionPhotos[d.id] && <img src={sectionPhotos[d.id]} alt="" />}
+                <input type="file" accept="image/*" onChange={e => pickSection(d.id, e)} />
+                {sectionPhotos[d.id] && <button className="ghost" type="button" onClick={() => clearSection(d.id)}>✕</button>}
+              </div>
+            ))}
+          </details>
 
           {SECTIONS.map(s => (
             <div key={s.key}>
@@ -245,7 +283,7 @@ export default function App() {
             </div>
           ))}
 
-          <label>Model <span style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 500, color: 'var(--graphite)' }}>(initial draft)</span></label>
+          <label>Model <span className="opt">initial draft</span></label>
           <select value={model} onChange={e => setModel(e.target.value)}>
             {MODELS.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
           </select>
@@ -259,7 +297,7 @@ export default function App() {
           {/* ── AI update chat (Opus) ── */}
           {deal && (
             <div className="chat">
-              <label style={{ marginTop: 22 }}>Update with AI <span style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 500, color: 'var(--graphite)' }}>· Opus</span></label>
+              <label style={{ marginTop: 22 }}>Update with AI <span className="opt">· Opus</span></label>
               <div className="chat-log">
                 {chat.length === 0 && <div className="chat-empty">Ask for edits — e.g. "bump the asking price to $3.7M", "tighten the summary", "add a value-add highlight about below-market rents".</div>}
                 {chat.map((m, i) => <div key={i} className={'cm cm-' + m.role}>{m.text}</div>)}

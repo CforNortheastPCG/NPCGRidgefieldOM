@@ -5,18 +5,21 @@ import { useDeal } from './Shell.jsx'
    address). Reuses the cover-hero treatment so dividers match the cover.
    Uses the deal's location map / cover photo (faded over carbon) since no
    property-specific drone shots are available at generation time. */
-export default function Divider({ eyebrow, title, pageNum }) {
+export default function Divider({ eyebrow, title, sec, pageNum }) {
   const deal = useDeal()
-  const image = deal.map || deal.cover
+  // A section-specific uploaded photo takes over the divider full-bleed; otherwise
+  // fall back to the faded location map / cover over carbon.
+  const sectionPhoto = sec && deal.sectionPhotos ? deal.sectionPhotos[sec] : null
+  const image = sectionPhoto || deal.map || deal.cover
   const street = deal.street || deal.address || ''
   const city = deal.cityState || deal.cityLong || ''
   const fullAddr = [street, city].filter(Boolean).join(', ')
   return (
     <div className="page">
       <div className="cover-hero" style={{ background: 'var(--carbon)' }}>
-        {/* Faded photo over a carbon base, with a dark scrim for contrast */}
-        {image && <img className="cover-hero-img" src={image} alt="" style={{ opacity: 0.3 }} />}
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(24,28,34,0.45)' }} />
+        {/* Section photo shows full-strength; the fallback map/cover stays faded */}
+        {image && <img className="cover-hero-img" src={image} alt="" style={{ opacity: sectionPhoto ? 1 : 0.3 }} />}
+        <div style={{ position: 'absolute', inset: 0, background: sectionPhoto ? 'linear-gradient(rgba(18,22,28,0.30), rgba(18,22,28,0.62))' : 'rgba(24,28,34,0.45)' }} />
         <div className="cover-hero-header">
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 40, maxWidth: 200, objectFit: 'contain' }} />
         </div>

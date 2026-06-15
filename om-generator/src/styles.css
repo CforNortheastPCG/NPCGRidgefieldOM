@@ -40,6 +40,24 @@ input[type=file] { padding:8px 10px; font-size:12px; cursor:pointer; }
 .cover-prev { display:flex; align-items:center; gap:10px; margin-top:8px; }
 .cover-prev img { width:88px; height:58px; object-fit:cover; border-radius:5px; border:1px solid var(--border); }
 .cover-prev button { padding:7px 11px; font-size:12px; }
+.sec-photo { display:flex; align-items:center; gap:8px; margin-top:6px; }
+.sec-photo-label { flex:0 0 96px; font-size:11px; font-weight:700; color:var(--graphite); }
+.sec-photo img { flex:0 0 auto; width:46px; height:30px; object-fit:cover; border-radius:4px; border:1px solid var(--border); }
+.sec-photo input[type=file] { flex:1; min-width:0; padding:6px 8px; }
+.sec-photo button { padding:5px 9px; font-size:12px; line-height:1; }
+
+/* inline "(optional …)" label hint — deduped into one class */
+.opt { text-transform:none; letter-spacing:0; font-weight:500; font-size:10px; color:var(--graphite); }
+
+/* collapsible group for the file uploads, so they don't crowd the panel */
+.grp { margin-top:18px; border:1px solid var(--border); border-radius:8px; background:var(--linen); padding:0 12px; }
+.grp summary { cursor:pointer; list-style:none; padding:11px 2px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--carbon); display:flex; align-items:center; gap:8px; }
+.grp summary::-webkit-details-marker { display:none; }
+.grp summary::before { content:'▸'; color:var(--golden); font-size:10px; }
+.grp[open] summary::before { content:'▾'; }
+.grp[open] { padding-bottom:14px; }
+.grp-count { margin-left:auto; font-size:10px; font-weight:600; text-transform:none; letter-spacing:0; color:var(--golden); }
+.grp label:first-of-type { margin-top:6px; }
 
 .actions { display:flex; gap:10px; align-items:center; margin:18px 0 8px; flex-wrap:wrap; }
 button { cursor:pointer; font-weight:700; border:none; border-radius:7px; padding:11px 16px; background:var(--golden); color:#fff; transition:opacity .15s; }
