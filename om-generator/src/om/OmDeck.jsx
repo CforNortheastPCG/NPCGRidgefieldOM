@@ -394,7 +394,9 @@ function GoogleLocationMap({ deal, pageNum }) {
                     <span style={{ flexShrink: 0, fontSize: 11, fontWeight: 700, color: 'var(--golden)', width: 15, textAlign: 'right' }}>{i + 1}</span>
                     <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.35, flex: 1 }}>
                       {a.name}{a.rating ? <span style={{ color: 'var(--stone)', fontWeight: 600 }}> · {a.rating}★</span> : ''}
-                      {a.vicinity ? <span style={{ display: 'block', fontSize: 9, fontWeight: 500, color: 'var(--stone)' }}>{a.vicinity}</span> : null}
+                      <span style={{ display: 'block', fontSize: 9, fontWeight: 500, color: 'var(--stone)' }}>
+                        {[a.category, a.distance].filter(Boolean).join(' · ')}{a.category || a.distance ? (a.vicinity ? ' — ' : '') : ''}{a.vicinity}
+                      </span>
                     </span>
                   </div>
                 ))}

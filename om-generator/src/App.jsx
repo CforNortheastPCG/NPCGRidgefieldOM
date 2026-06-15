@@ -2,9 +2,11 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import OmDeck from './om/OmDeck.jsx'
 
 /* NPCG OM Generator — full stack.
-   Address → /api/enrich (Google, scripted) + facts → /api/fill (AI, structured)
-   → one deal model → renders the branded OM deck. AI update chat edits the model
-   via /api/update. The working OM auto-saves to localStorage. */
+   Address → /api/enrich (Google: identity, Street View cover, Static Map,
+   Places-API nearby amenities) + structured facts → /api/fill (AI, structured)
+   → one deal model → renders the branded OM deck. The AI update chat edits the
+   model via /api/update (always Opus — the "heavy lift" is done, edits just need
+   context). The working OM auto-saves to localStorage. */
 
 const MODELS = [
   { id: 'claude-opus-4-8', label: 'Opus 4.8 — recommended' },
@@ -13,9 +15,48 @@ const MODELS = [
   { id: 'claude-haiku-4-5', label: 'Haiku 4.5 — cheapest' },
 ]
 
+// The update chat always runs on Opus — once the deck exists, edits are small
+// and Opus's code/prose with full deal context is reliable.
+const UPDATE_MODEL = 'claude-opus-4-8'
+
+// Edits are scoped to ONE page so the agent only works on that page's slice of
+// the deal model — it isn't combing the whole thing every time. Each page maps
+// to the deal-model keys it owns.
+const PAGES = [
+  { id: 'cover', label: 'Cover', keys: ['name', 'type', 'askingPrice'] },
+  { id: 'exec', label: 'Executive Summary', keys: ['summary', 'highlights', 'askingPrice', 'units'] },
+  { id: 'property', label: 'Property Overview', keys: ['siteSummary', 'utilities'] },
+  { id: 'rentroll', label: 'Rent Roll', keys: ['rentRoll', 'units'] },
+  { id: 'income', label: 'Income & Expense', keys: ['expenses'] },
+  { id: 'location', label: 'Location Overview', keys: ['locationOverview'] },
+]
+
+// Structured inputs — each becomes a labeled block in the composed facts.
+const SECTIONS = [
+  { key: 'cover', label: 'Cover & Narrative', rows: 4,
+    ph: 'Marketing name (e.g. "Main Street Apartments"), property type/headline, and the positioning/story you want on the cover & executive summary.' },
+  { key: 'property', label: 'Property & Pricing', rows: 5,
+    ph: 'Asking price, # units, # buildings, year built / renovated, lot size, building SF, zoning, parking, and utilities (heat / electric / water-sewer — who pays).' },
+  { key: 'rentRoll', label: 'Rent Roll', rows: 6,
+    ph: 'One unit per line: Unit / Type / SF / Designation / In-Place rent / Market rent / Pro Forma rent. e.g. "1 · 2BR/1BA · 850 · Market · 1,650 · 2,100 · 2,100".' },
+  { key: 'expenses', label: 'Expenses (T-12)', rows: 4,
+    ph: 'Annual operating expenses: taxes, insurance, water/sewer, common electric, R&M, management, trash, landscaping/snow, reserves.' },
+  { key: 'location', label: 'Location & Market', rows: 4,
+    ph: 'Neighborhood, employers, schools, transit/highway access, demographics, comps. Google Places auto-pulls nearby amenities — add anything it would miss.' },
+]
+
 const ss = {
   get: (k, d = '') => { try { return localStorage.getItem(k) ?? d } catch { return d } },
   set: (k, v) => { try { localStorage.setItem(k, v) } catch { /* */ } },
+}
+
+// Compose the structured sections into the single labeled facts string /api/fill expects.
+function composeFacts(inputs) {
+  return SECTIONS
+    .map(s => ({ s, v: (inputs[s.key] || '').trim() }))
+    .filter(x => x.v)
+    .map(({ s, v }) => `${s.label.toUpperCase()}:\n${v}`)
+    .join('\n\n')
 }
 
 async function post(url, payload) {
@@ -24,6 +65,15 @@ async function post(url, payload) {
   try { data = await res.json() } catch { /* */ }
   if (!res.ok) return { error: (data && data.error) || `Request failed (${res.status}).` }
   return data
+}
+
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader()
+    r.onload = () => resolve(r.result)
+    r.onerror = reject
+    r.readAsDataURL(file)
+  })
 }
 
 function Gate({ onUnlock }) {
@@ -44,20 +94,31 @@ export default function App() {
   const [password, setPassword] = useState('')
   const [authed, setAuthed] = useState(false)
   const [address, setAddress] = useState(ss.get('om_addr'))
-  const [facts, setFacts] = useState(ss.get('om_facts'))
+  const [inputs, setInputs] = useState(() => {
+    try {
+      const saved = JSON.parse(ss.get('om_inputs') || 'null')
+      if (saved) return saved
+    } catch { /* */ }
+    // migrate the old single facts textarea into the Property section
+    const legacy = ss.get('om_facts')
+    return legacy ? { property: legacy } : {}
+  })
   const [model, setModel] = useState(ss.get('om_model') || 'claude-opus-4-8')
+  const [coverUpload, setCoverUpload] = useState('') // user-supplied cover photo (data URL)
   const [deal, setDeal] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null') } catch { return null } })
   const [busy, setBusy] = useState('')
   const [status, setStatus] = useState('')
   const [chat, setChat] = useState([])
   const [chatInput, setChatInput] = useState('')
+  const [updatePage, setUpdatePage] = useState('')
   const [zoom, setZoom] = useState(0.6)
   const previewRef = useRef(null)
 
   useEffect(() => { ss.set('om_addr', address) }, [address])
-  useEffect(() => { ss.set('om_facts', facts) }, [facts])
+  useEffect(() => { ss.set('om_inputs', JSON.stringify(inputs)) }, [inputs])
   useEffect(() => { ss.set('om_model', model) }, [model])
   const saveDeal = (d) => { setDeal(d); ss.set('om_deal', JSON.stringify(d)) }
+  const setSection = (k, v) => setInputs(p => ({ ...p, [k]: v }))
 
   // scale the 960px deck to fit the preview column
   const fit = useCallback(() => {
@@ -65,7 +126,19 @@ export default function App() {
   }, [])
   useEffect(() => { fit(); window.addEventListener('resize', fit); return () => window.removeEventListener('resize', fit) }, [fit])
 
+  async function pickCover(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    try {
+      const url = await fileToDataUrl(file)
+      setCoverUpload(url)
+      // if a deck already exists, apply the new cover immediately
+      if (deal) saveDeal({ ...deal, cover: url })
+    } catch { setStatus('Could not read that image.') }
+  }
+
   async function build() {
+    const facts = composeFacts(inputs)
     if (!address.trim() && !facts.trim()) { setStatus('Enter an address and/or deal facts.'); return }
     setBusy('build'); setStatus('Pulling Google data…')
     let enriched = {}
@@ -77,15 +150,20 @@ export default function App() {
     setStatus(`Drafting with ${model}…`)
     const fl = await post('/api/fill', { password, model, facts, enriched })
     if (fl.error) { setStatus(fl.error); setBusy(''); return }
-    saveDeal({ ...enriched, ...fl.deal })
-    setStatus('Done.'); setBusy('')
+    // user-uploaded cover wins over the Street View cover
+    const merged = { ...enriched, ...fl.deal }
+    if (coverUpload) merged.cover = coverUpload
+    saveDeal(merged)
+    setStatus(`Done.${enriched.amenities?.length ? ` ${enriched.amenities.length} nearby places.` : ''}`); setBusy('')
   }
 
   async function sendUpdate() {
     const instruction = chatInput.trim()
     if (!instruction || !deal) return
-    setChat(c => [...c, { role: 'user', text: instruction }]); setChatInput(''); setBusy('update')
-    const res = await post('/api/update', { password, model, deal, instruction })
+    const page = PAGES.find(p => p.id === updatePage)
+    if (!page) { setChat(c => [...c, { role: 'err', text: 'Pick a page to edit first.' }]); return }
+    setChat(c => [...c, { role: 'user', text: `[${page.label}] ${instruction}` }]); setChatInput(''); setBusy('update')
+    const res = await post('/api/update', { password, model: UPDATE_MODEL, deal, instruction, scope: page.keys, page: page.label })
     if (res.error) { setChat(c => [...c, { role: 'err', text: res.error }]); setBusy(''); return }
     saveDeal(res.deal)
     setChat(c => [...c, { role: 'ai', text: res.note || 'Updated.' }]); setBusy('')
@@ -107,13 +185,26 @@ export default function App() {
         <section className="panel controls">
           <label>Property Address</label>
           <input value={address} onChange={e => setAddress(e.target.value)} placeholder="613 Main Street, Ridgefield, CT" />
-          <div className="hint">Geocoded → identity, Street View cover, location map (auto).</div>
+          <div className="hint">Geocoded → identity, Street View cover, location map, nearby amenities (Google Places).</div>
 
-          <label>Deal Facts</label>
-          <textarea value={facts} onChange={e => setFacts(e.target.value)} style={{ minHeight: 170 }}
-            placeholder={'Units & mix, year built, lot/SF, asking price, in-place & market rents (or a rent roll), utilities, expenses/T-12, parking, narrative facts. The agent drafts the prose; you supply the numbers.'} />
+          <label>Cover Photo <span style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 500, color: 'var(--graphite)' }}>(optional — overrides Street View)</span></label>
+          <input type="file" accept="image/*" onChange={pickCover} />
+          {coverUpload && (
+            <div className="cover-prev">
+              <img src={coverUpload} alt="cover" />
+              <button className="ghost" type="button" onClick={() => { setCoverUpload(''); }}>Remove</button>
+            </div>
+          )}
 
-          <label>Model</label>
+          {SECTIONS.map(s => (
+            <div key={s.key}>
+              <label>{s.label}</label>
+              <textarea value={inputs[s.key] || ''} onChange={e => setSection(s.key, e.target.value)}
+                style={{ minHeight: 22 * s.rows }} placeholder={s.ph} />
+            </div>
+          ))}
+
+          <label>Model <span style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 500, color: 'var(--graphite)' }}>(initial draft)</span></label>
           <select value={model} onChange={e => setModel(e.target.value)}>
             {MODELS.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
           </select>
@@ -124,18 +215,23 @@ export default function App() {
           </div>
           <div className={'status' + (/error|wrong|could not|fail/i.test(status) ? ' err' : '')}>{status}</div>
 
-          {/* ── AI update chat ── */}
+          {/* ── AI update chat (Opus) ── */}
           {deal && (
             <div className="chat">
-              <label style={{ marginTop: 22 }}>Update with AI</label>
+              <label style={{ marginTop: 22 }}>Update with AI <span style={{ textTransform: 'none', letterSpacing: 0, fontWeight: 500, color: 'var(--graphite)' }}>· Opus</span></label>
               <div className="chat-log">
                 {chat.length === 0 && <div className="chat-empty">Ask for edits — e.g. "bump the asking price to $3.7M", "tighten the summary", "add a value-add highlight about below-market rents".</div>}
                 {chat.map((m, i) => <div key={i} className={'cm cm-' + m.role}>{m.text}</div>)}
               </div>
+              <select className="chat-page" value={updatePage} onChange={e => setUpdatePage(e.target.value)} disabled={working}>
+                <option value="">Which page? (required)</option>
+                {PAGES.map(p => <option key={p.id} value={p.id}>{p.label}</option>)}
+              </select>
               <div className="chat-in">
-                <input value={chatInput} onChange={e => setChatInput(e.target.value)} placeholder="Tell the agent what to change…"
-                  onKeyDown={e => e.key === 'Enter' && sendUpdate()} disabled={working} />
-                <button onClick={sendUpdate} disabled={working || !chatInput.trim()}>{busy === 'update' ? '…' : 'Send'}</button>
+                <input value={chatInput} onChange={e => setChatInput(e.target.value)}
+                  placeholder={updatePage ? 'Tell the agent what to change…' : 'Select a page above first…'}
+                  onKeyDown={e => e.key === 'Enter' && sendUpdate()} disabled={working || !updatePage} />
+                <button onClick={sendUpdate} disabled={working || !updatePage || !chatInput.trim()}>{busy === 'update' ? '…' : 'Send'}</button>
               </div>
             </div>
           )}

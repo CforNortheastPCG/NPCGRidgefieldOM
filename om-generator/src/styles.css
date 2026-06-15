@@ -36,6 +36,10 @@ input, select, textarea { width:100%; padding:10px 12px; border:1px solid var(--
 textarea { resize:vertical; line-height:1.55; }
 input:focus, select:focus, textarea:focus { outline:2px solid var(--golden); outline-offset:-1px; border-color:var(--golden); }
 .hint { font-size:11px; color:var(--stone); margin-top:5px; }
+input[type=file] { padding:8px 10px; font-size:12px; cursor:pointer; }
+.cover-prev { display:flex; align-items:center; gap:10px; margin-top:8px; }
+.cover-prev img { width:88px; height:58px; object-fit:cover; border-radius:5px; border:1px solid var(--border); }
+.cover-prev button { padding:7px 11px; font-size:12px; }
 
 .actions { display:flex; gap:10px; align-items:center; margin:18px 0 8px; flex-wrap:wrap; }
 button { cursor:pointer; font-weight:700; border:none; border-radius:7px; padding:11px 16px; background:var(--golden); color:#fff; transition:opacity .15s; }
@@ -53,6 +57,7 @@ button.ghost { background:transparent; color:var(--carbon); border:1px solid var
 .cm-user { background:var(--carbon); color:#fff; align-self:flex-end; max-width:88%; }
 .cm-ai { background:var(--linen); color:var(--ink); align-self:flex-start; max-width:88%; }
 .cm-err { background:#fdecea; color:#c0392b; font-weight:600; }
+.chat-page { margin-bottom:8px; }
 .chat-in { display:flex; gap:8px; }
 .chat-in input { flex:1; }
 .chat-in button { padding:10px 14px; }

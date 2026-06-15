@@ -24,7 +24,15 @@ const SCHEMA = {
 }
 const CONTENT_KEYS = Object.keys(SCHEMA.properties)
 
-const SYSTEM = `You edit the content of a Northeast Private Client Group multifamily Offering Memorandum. You are given the current content as JSON and an instruction. Apply ONLY what the instruction asks; leave everything else exactly as-is. Return the full updated content object matching the schema. Never invent specific numbers (prices, rents, units) the user didn't provide — if asked to add a fact that isn't given, use "TODO". Keep NPCG-style professional prose.`
+const SYSTEM = `You edit ONE page of a Northeast Private Client Group multifamily Offering Memorandum. You are given only that page's slice of the deal model as JSON, plus an instruction. Apply ONLY what the instruction asks; leave every other field exactly as-is. Return the full object matching the schema you were given. Never invent specific numbers (prices, rents, units) the user didn't provide — if asked to add a fact that isn't given, use "TODO". Keep NPCG-style professional prose.`
+
+// Build a reduced schema containing only the page's keys (all required) so the
+// model returns just that page's slice — it isn't asked to regenerate the rest.
+function subSchema(keys) {
+  const properties = {}, required = []
+  for (const k of keys) { properties[k] = SCHEMA.properties[k]; required.push(k) }
+  return { type: 'object', additionalProperties: false, properties, required }
+}
 
 function json(obj, status = 200) {
   return new Response(JSON.stringify(obj), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' } })
@@ -48,22 +56,29 @@ export async function onRequestPost(context) {
   if (!apiKey) return json({ error: 'Server is missing the ANTHROPIC_API_KEY secret.' }, 500)
   const model = ALLOWED_MODELS.includes(body.model) ? body.model : 'claude-opus-4-8'
 
-  // Pass only the AI-owned content fields to the model.
+  // Scope the edit to one page: only the requested keys are sent to and merged
+  // from the model. Falls back to all content keys if no valid scope is given.
+  const requested = Array.isArray(body.scope) ? body.scope.filter(k => CONTENT_KEYS.includes(k)) : []
+  const scope = requested.length ? requested : CONTENT_KEYS
+  const pageName = typeof body.page === 'string' && body.page ? body.page : 'the selected page'
+
   const content = {}
-  for (const k of CONTENT_KEYS) if (k in body.deal) content[k] = body.deal[k]
+  for (const k of scope) if (k in body.deal) content[k] = body.deal[k]
 
   const client = new Anthropic({ apiKey })
   try {
     const res = await client.messages.create({
       model, max_tokens: 8000, system: SYSTEM,
-      output_config: { format: { type: 'json_schema', schema: SCHEMA } },
-      messages: [{ role: 'user', content: `Current content:\n${JSON.stringify(content)}\n\nInstruction: ${instruction}` }],
+      output_config: { format: { type: 'json_schema', schema: subSchema(scope) } },
+      messages: [{ role: 'user', content: `Page being edited: ${pageName}\nThis page's current content:\n${JSON.stringify(content)}\n\nInstruction: ${instruction}` }],
     })
     const text = res.content.find(b => b.type === 'text')?.text || '{}'
     let updated
     try { updated = JSON.parse(text) } catch { return json({ error: 'Model returned malformed JSON.' }, 502) }
-    // Merge: keep scripted identity/media (street, cover, map, amenities, …); overwrite content.
-    return json({ deal: { ...body.deal, ...updated }, note: 'Updated.' })
+    // Merge only the scoped keys back; everything else (identity, media, other pages) is untouched.
+    const patch = {}
+    for (const k of scope) if (k in updated) patch[k] = updated[k]
+    return json({ deal: { ...body.deal, ...patch }, note: `Updated ${pageName}.` })
   } catch (err) {
     const status = err?.status ? ` (HTTP ${err.status})` : ''
     return json({ error: `Update failed${status}: ${err?.message || String(err)}` }, 502)

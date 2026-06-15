@@ -90,11 +90,18 @@ export async function onRequestPost(context) {
   if (!apiKey) return json({ error: 'Server is missing the ANTHROPIC_API_KEY secret.' }, 500)
   const model = ALLOWED_MODELS.includes(body.model) ? body.model : 'claude-opus-4-8'
 
-  const enriched = body.enriched && typeof body.enriched === 'object'
-    ? `Known (from the address — use verbatim): ${JSON.stringify({
-        name: body.enriched.street, street: body.enriched.street, cityState: body.enriched.cityState, cityLong: body.enriched.cityLong,
-      })}`
-    : ''
+  let enriched = ''
+  if (body.enriched && typeof body.enriched === 'object') {
+    const e = body.enriched
+    enriched = `Known (from the address — use verbatim): ${JSON.stringify({
+      name: e.street, street: e.street, cityState: e.cityState, cityLong: e.cityLong,
+    })}`
+    const am = Array.isArray(e.amenities) ? e.amenities : []
+    if (am.length) {
+      const list = am.map(a => `${a.name}${a.category ? ` (${a.category})` : ''}${a.distance ? `, ${a.distance}` : ''}`).join('; ')
+      enriched += `\n\nReal nearby points of interest (Google Places, nearest first — reference the relevant ones in the location overview; do not invent others): ${list}`
+    }
+  }
 
   const client = new Anthropic({ apiKey })
   try {

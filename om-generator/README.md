@@ -6,11 +6,35 @@ actual **branded OM deck** live — then exports a PDF. An AI chat makes edits t
 the OM in place.
 
 ```
-Address ──▶ /api/enrich (Google, scripted)   ┐
-                                              ├─▶ one deal model ──▶ rendered OM deck ──▶ PDF
-Deal facts ─▶ /api/fill  (Claude, structured) ┘                          ▲
-"bump the price to $3.7M" ─▶ /api/update (Claude edits the model) ───────┘
+Address + cover photo ──▶ /api/enrich (Google, scripted)   ┐
+                                                           ├─▶ deal model ──▶ OM deck ──▶ PDF
+Structured facts (cover/property/rent roll/expenses/loc) ─▶ /api/fill (Claude) ┘     ▲
+[Rent Roll] "make unit 3 market rate" ─▶ /api/update (Opus edits ONE page) ──────────┘
 ```
+
+Inputs are split into labeled sections (Cover & Narrative, Property & Pricing,
+Rent Roll, Expenses, Location) and composed into the fill prompt. You can upload
+a **cover photo** that overrides the Street View cover. The **AI update chat runs
+on Opus** — once the deck exists, edits are small and benefit from the strongest
+model with full deal context.
+
+**Page-scoped edits.** The update chat requires you to pick a page first; the
+edit only touches that page's slice of the deal model. The backend builds a
+reduced JSON schema from just that page's keys, hands Opus only that page's
+current content, and merges only those keys back — so the agent isn't combing
+the whole model every time, and it can't accidentally change another page.
+
+| Page | Keys in scope |
+| --- | --- |
+| Cover | `name`, `type`, `askingPrice` |
+| Executive Summary | `summary`, `highlights`, `askingPrice`, `units` |
+| Property Overview | `siteSummary`, `utilities` |
+| Rent Roll | `rentRoll`, `units` |
+| Income & Expense | `expenses` |
+| Location Overview | `locationOverview` |
+
+Identity and media (address, cover, map, amenities) are never in any page's
+scope, so they're always preserved.
 
 - **Scripted (deterministic):** geocode → identity (city/state/zip/coords),
   Street View → cover photo, Static Map → location map, rent roll → income/expense
@@ -18,9 +42,9 @@ Deal facts ─▶ /api/fill  (Claude, structured) ┘                          �
 - **AI:** executive-summary prose, investment highlights, location narrative, and
   normalizing the rent roll — as a **structured deal model** (JSON, via Claude
   structured outputs), not free text.
-- **AI update chat:** natural-language edits ("tighten the summary", "add a
-  transit highlight") that change the model and re-render; the Google media is
-  preserved.
+- **AI update chat:** page-scoped natural-language edits ("tighten the summary",
+  "add a transit highlight") on Opus that change one page's slice of the model
+  and re-render; the Google media is preserved.
 - The working OM auto-saves to `localStorage`.
 
 ## Run / deploy
@@ -58,10 +82,12 @@ npx wrangler pages secret put OM_PASSWORD         --project-name npcg-om-generat
 **KV binding** (activates rate limiting — see Security): Settings → Functions →
 KV namespace bindings → variable `RL` → the `RL` namespace.
 
-**Google APIs to enable on the key:** Geocoding, Street View Static, Maps Static
-(working today); **Places API** (nearby amenities) and **Distance Matrix +
-Directions** (to validate the AI's distance/location claims) — enable these for
-the full enrichment.
+**Google APIs to enable on the key:** Geocoding, Street View Static, Maps Static,
+and **Places API (New)** — all working today; `enrich.js` calls
+`places:searchNearby` (the New endpoint, not the disabled legacy one) and returns
+the nearest ~12 amenities ranked by distance, each tagged with a category and a
+human distance ("0.3 mi"). **Distance Matrix + Directions** (to validate the AI's
+travel-time claims) are still optional follow-ons.
 
 ## Security model
 

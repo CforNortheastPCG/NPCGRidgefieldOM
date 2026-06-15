@@ -96,22 +96,80 @@ export async function onRequestPost(context) {
     `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=16&size=600x380&scale=2&maptype=hybrid&markers=color:0xF8971D%7C${lat},${lng}&key=${key}`,
   )
 
-  // ── Nearby amenities (needs Places API enabled) ──
-  out.amenities = []
-  try {
-    const pl = await (await fetch(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1200&key=${key}`,
-    )).json()
-    if (pl.status === 'OK') {
-      out.amenities = (pl.results || []).slice(0, 10).map(p => ({
-        name: p.name, vicinity: p.vicinity || '', rating: p.rating || null, types: p.types || [],
-      }))
-    } else {
-      out.amenitiesNote = `Places API: ${pl.status} (enable "Places API" on the key for nearby amenities).`
-    }
-  } catch (e) {
-    out.amenitiesNote = 'Places lookup failed.'
-  }
+  // ── Nearby amenities — Places API (New) searchNearby ──
+  // Ranked by distance from the subject; each result gets a human distance
+  // ("0.3 mi") so the location page can "size" how close things are.
+  out.amenities = await nearbyAmenities(lat, lng, key)
 
   return json(out)
+}
+
+// Curated categories that matter for a multifamily location story.
+const PLACE_TYPES = [
+  'supermarket', 'grocery_store', 'restaurant', 'cafe', 'school', 'primary_school',
+  'park', 'transit_station', 'train_station', 'shopping_mall', 'gym', 'hospital', 'pharmacy', 'bank',
+]
+// Friendlier labels for the raw Google type strings.
+const TYPE_LABEL = {
+  supermarket: 'Grocery', grocery_store: 'Grocery', restaurant: 'Dining', cafe: 'Café',
+  school: 'School', primary_school: 'School', secondary_school: 'School', university: 'University',
+  park: 'Park', transit_station: 'Transit', train_station: 'Rail', subway_station: 'Transit',
+  bus_station: 'Bus', shopping_mall: 'Shopping', gym: 'Fitness', hospital: 'Hospital',
+  pharmacy: 'Pharmacy', bank: 'Bank',
+}
+
+function metersToMiles(m) {
+  const mi = m / 1609.344
+  return mi < 0.1 ? `${Math.round(m / 0.3048 / 50) * 50} ft` : `${mi.toFixed(1)} mi`
+}
+function haversine(lat1, lng1, lat2, lng2) {
+  const R = 6371000, toRad = (d) => (d * Math.PI) / 180
+  const dLat = toRad(lat2 - lat1), dLng = toRad(lng2 - lng1)
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2
+  return 2 * R * Math.asin(Math.sqrt(a))
+}
+function labelFor(types = []) {
+  for (const t of types) if (TYPE_LABEL[t]) return TYPE_LABEL[t]
+  return ''
+}
+
+async function nearbyAmenities(lat, lng, key) {
+  try {
+    const res = await fetch('https://places.googleapis.com/v1/places:searchNearby', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'X-Goog-Api-Key': key,
+        'X-Goog-FieldMask': 'places.displayName,places.types,places.rating,places.userRatingCount,places.location,places.shortFormattedAddress',
+      },
+      body: JSON.stringify({
+        includedTypes: PLACE_TYPES,
+        maxResultCount: 20,
+        rankPreference: 'DISTANCE',
+        locationRestriction: { circle: { center: { latitude: lat, longitude: lng }, radius: 2500 } },
+      }),
+    })
+    const data = await res.json()
+    if (!res.ok || !Array.isArray(data.places)) return []
+    const seen = new Set()
+    return data.places
+      .map(p => {
+        const ploc = p.location || {}
+        const dist = ploc.latitude != null ? haversine(lat, lng, ploc.latitude, ploc.longitude) : null
+        return {
+          name: p.displayName?.text || '',
+          category: labelFor(p.types),
+          rating: p.rating || null,
+          reviews: p.userRatingCount || null,
+          vicinity: p.shortFormattedAddress || '',
+          distanceMeters: dist,
+          distance: dist != null ? metersToMiles(dist) : '',
+        }
+      })
+      .filter(a => a.name && !seen.has(a.name) && seen.add(a.name))
+      .sort((a, b) => (a.distanceMeters ?? 1e9) - (b.distanceMeters ?? 1e9))
+      .slice(0, 12)
+  } catch {
+    return []
+  }
 }
