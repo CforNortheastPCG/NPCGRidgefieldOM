@@ -127,35 +127,47 @@ key. Cross-cutting guards live in `functions/api/_middleware.js` so every
 om-generator/
   index.html                     # Vite entry (+ Inter/Montserrat fonts)
   src/
-    App.jsx                      # gate, pipeline (enrich→fill), preview, PDF, AI update chat
+    App.jsx                      # gate, inputs, uploads, deal-team picker, preview, PDF, update chat
     styles.css                   # app shell + scaled-deck + print (PDF) CSS
     om/OmDeck.jsx                # the deck renderer (pages from the deal model; I&E math)
+    om/Divider.jsx               # section dividers (full-bleed section cover photos)
+    om/Toc.jsx                   # table of contents (page numbers mirror OmDeck)
+    om/TeamPage.jsx · firm.js    # Our Team page + the hard-coded firm roster
+    om/LocationsPage.jsx · *Map  # Our Locations + regional map
     om/om.css                    # OM page styling (960×742 boards)
   functions/api/
     _middleware.js               # POST-only · origin · rate limit (all /api/*)
-    enrich.js                    # Google: geocode + Street View + Static Map + Places
+    enrich.js                    # Google: geocode + Street View + Static Map + Places (New)
     fill.js                      # Claude → structured deal model
-    update.js                    # Claude edits the deal model (preserves media)
+    update.js                    # Claude edits ONE page of the deal model (preserves media)
   public/logos/                  # NPCG brand
   wrangler.toml                  # nodejs_compat, output dir, RL KV binding
 ```
 
 ## How the deck renders
 
-`OmDeck` takes the deal model and draws the branded pages (cover, dividers,
-executive summary, property overview, rent roll, income & expense, location,
-disclaimer) at full 960×742 — the same proportions as the print OM. The preview
-scales the deck to fit; **Download PDF** uses the browser print path (`@page`
-landscape) to output one board per sheet. Income/expense figures are **computed
-in JS** from the rent roll + expenses (3% vacancy assumption) — not from the AI.
+`OmDeck` takes the deal model and draws the branded pages (cover, TOC, deal
+contacts, executive summary, dividers, property overview, rent roll, income &
+expense, location/amenities, team, locations) at full 960×742 — the same
+proportions as the print OM. The preview scales the deck to fit; **Download PDF**
+uses the browser print path (`@page` landscape) to output one board per sheet.
+Income/expense figures are **computed in JS** from the rent roll + expenses (5%
+vacancy assumption) — not from the AI.
+
+## Cost (rough)
+
+Ballpark **~$20 per OM** end-to-end. Drivers: the `fill` draft (Opus, structured
+output, ~8K-token cap), Google calls (geocode + Street View + Static Map + one
+Places searchNearby — all cheap/free-tier), and a handful of page-scoped `update`
+edits (Opus, but only one page's slice per call, so each is small). Lock the real
+number with **spend limits on both keys** — see the security section.
 
 ## Notes / not-yet
 
 - The model never invents financials — missing facts come back as `TODO`. Review
   numbers before any OM goes out.
 - **Highlight validation** (grounding the AI's distance/location claims against
-  Google Distance Matrix / Directions / Places) is designed but not wired yet —
-  enable those APIs first.
-- The deck renders the **core dynamic pages**; the remaining static pages (TOC,
-  team, marketing, locations) are a quick follow-on.
+  Google Distance Matrix / Directions) is designed but not wired yet — enable
+  those APIs first. Places (New) nearby amenities are live.
 - Persistence is `localStorage` today; shared/named saving (KV) is a follow-on.
+- See `TODO.md` for the testing + finalize-the-workflow checklist.
