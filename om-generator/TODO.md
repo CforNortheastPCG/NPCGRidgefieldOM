@@ -34,12 +34,16 @@ and tighten security before sharing the link. Check items off as you go.
 - [ ] Confirm identity/media (address, cover, map, amenities, team) never get
       clobbered by an edit.
 
-## 4. Cost — lock the real $/OM number (tracking ~$5–10, not $20)
-- [ ] Early data point: the biggest call (`fill` draft) ran **~$0.60**. Run ~3 full
-      builds + a few edits and read **Anthropic usage** for actual spend per OM.
-      Record it here: ______
+## 4. Cost — basically solved (~$1/OM, not $20)
+- [x] Initial build (`fill` draft) ≈ **$0.60**. Edits vary by deal but most are
+      just **resizing / fit-to-page** tweaks → small calls, so total ~$1ish.
+- [ ] Confirm over ~3 more real builds + edits; record a typical all-in here: ___
 - [ ] Set a **spend limit on the Anthropic key** and on the **Google key**.
-- [ ] Decide if `fill` should cap lower than 8K tokens for cost, or stay for quality.
+- [ ] (Optional) decide if `fill` should cap lower than 8K tokens — probably not
+      worth it at ~$1/OM; quality wins.
+
+> **Resizing is the main edit type** — worth making fit-to-page easy/cheap (a
+> quick layout nudge rather than a full AI regen where possible).
 
 ## 5. Security / lock-down (dashboard — not in code)
 - [ ] Set a strong **`OM_PASSWORD`** secret (defaults to `NPCGOM2026!` until set).

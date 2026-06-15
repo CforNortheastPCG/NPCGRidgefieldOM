@@ -156,13 +156,13 @@ vacancy assumption) — not from the AI.
 
 ## Cost (rough)
 
-Ballpark **~$5–10 per OM** end-to-end. Early data point: the first/biggest call —
-the `fill` draft (Opus, structured output, ~8K-token cap) — ran **~$0.60**. Add
-the Google calls (geocode + Street View + Static Map + one Places searchNearby —
-all cheap/free-tier) and a handful of page-scoped `update` edits (Opus, but only
-one page's slice per call, so each is small) and a full OM with edits lands in the
-single-digit dollars. Lock the real number by reading Anthropic usage after a few
-real builds, and set **spend limits on both keys** — see the security section.
+**~$1 per OM, give or take.** The initial build (the `fill` draft on Opus 4.8) is
+**~$0.60**. After that it's page-scoped `update` edits, which vary by deal — and
+most of them are just **resizing / fit-to-page** tweaks, which are small calls.
+Google (geocode + Street View + Static Map + one Places searchNearby) is
+cheap/free-tier. So a typical OM lands around a dollar, even a heavily-edited one
+stays in low single dollars — well under the ~$20 originally quoted. Still set
+**spend limits on both keys** as the backstop — see the security section.
 
 ## Notes / not-yet
 
