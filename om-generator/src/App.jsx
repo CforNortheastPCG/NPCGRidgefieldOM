@@ -59,6 +59,25 @@ const DIVIDERS = [
   { id: 'team', label: 'The Team' },
 ]
 
+// Broker quips that cycle while the OM generates.
+const QUIPS = [
+  'What are you gonna spend the money on?',
+  'Is this really a 6 cap?',
+  'Adjusting the pro forma to taste…',
+  'Finding comps that agree with us…',
+  'Assuming below-market rents (aggressively)…',
+  'Calling deferred maintenance “upside”…',
+  'Telling the seller it’s worth more…',
+  'Telling the buyer it’s worth less…',
+  'Stabilizing the NOI with optimism…',
+  'Rounding the cap rate in your favor…',
+  'Adding “transit-oriented” to the highlights…',
+  'Spinning the vacancy as a “lease-up opportunity”…',
+  'Pre-writing the “priced to sell” email…',
+  'Booking the closing dinner…',
+  'Counting the parking spaces twice…',
+]
+
 const ss = {
   get: (k, d = '') => { try { return localStorage.getItem(k) ?? d } catch { return d } },
   set: (k, v) => { try { localStorage.setItem(k, v) } catch { /* */ } },
@@ -150,7 +169,17 @@ export default function App() {
   const [chatInput, setChatInput] = useState('')
   const [updatePage, setUpdatePage] = useState('')
   const [zoom, setZoom] = useState(0.6)
+  const [quip, setQuip] = useState('')
   const previewRef = useRef(null)
+
+  // Cycle the broker quips while building.
+  useEffect(() => {
+    if (busy !== 'build') { setQuip(''); return }
+    let i = Math.floor(Math.random() * QUIPS.length)
+    setQuip(QUIPS[i])
+    const id = setInterval(() => { i = (i + 1) % QUIPS.length; setQuip(QUIPS[i]) }, 2400)
+    return () => clearInterval(id)
+  }, [busy])
 
   useEffect(() => { ss.set('om_addr', address) }, [address])
   useEffect(() => { ss.set('om_inputs', JSON.stringify(inputs)) }, [inputs])
@@ -344,6 +373,7 @@ export default function App() {
         {/* ── Rendered deck ── */}
         <section className="panel preview-wrap">
           <div className="preview-head"><span>OM Preview {working && <em className="live">● working</em>}</span></div>
+          {busy === 'build' && quip && <div className="quip" key={quip}>{quip}</div>}
           <div className="preview deck-scroll" ref={previewRef}>
             {!deal && <div className="placeholder">Enter an address + deal facts, then <b>Build OM</b> — the offering memorandum renders here.</div>}
             {deal && (

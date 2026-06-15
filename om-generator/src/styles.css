@@ -95,6 +95,10 @@ button.ghost { background:transparent; color:var(--carbon); border:1px solid var
 .placeholder { color:var(--stone); font-size:13.5px; padding:60px 24px; text-align:center; line-height:1.6; }
 .deck-scale { transform-origin:top center; }
 
+/* rotating broker quips while the OM generates */
+.quip { flex:0 0 auto; text-align:center; padding:11px 24px; font-size:14px; font-weight:700; font-style:italic; color:var(--carbon); background:linear-gradient(90deg, rgba(248,151,29,.10), rgba(248,151,29,.18), rgba(248,151,29,.10)); border-bottom:1px solid var(--border); animation:quipfade .5s ease; }
+@keyframes quipfade { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+
 /* ── print → PDF ── */
 @media print {
   @page { size:11in 8.5in; margin:0; }
