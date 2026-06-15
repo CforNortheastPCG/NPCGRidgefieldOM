@@ -1,0 +1,77 @@
+:root {
+  --carbon:#3f4753; --golden:#f8971d; --stone:#a99f96; --linen:#f6f2ee;
+  --border:#e3ded8; --ink:#2b2118; --graphite:#55606e; --white:#fff; --paper-bg:#ece7e1;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Inter','Segoe UI',system-ui,sans-serif; background:var(--linen); color:var(--carbon); line-height:1.5; -webkit-font-smoothing:antialiased; }
+/* app UI = Inter; the rendered deck = Montserrat (real OM font) — scoped so the
+   imported OM stylesheet's global rules don't bleed into the control panel. */
+.app, .gate { font-family:'Inter','Segoe UI',system-ui,sans-serif; line-height:1.5; }
+.omdeck-wrap, .omdeck-wrap .page { font-family:'Montserrat','Segoe UI',sans-serif; }
+input, select, textarea, button { font-family:'Inter','Segoe UI',system-ui,sans-serif; font-size:14px; }
+
+/* gate */
+.gate { position:fixed; inset:0; background:var(--carbon); display:flex; align-items:center; justify-content:center; z-index:20; }
+.gate-box { background:var(--white); border-radius:12px; padding:32px 30px; width:350px; box-shadow:0 18px 50px rgba(0,0,0,.45); }
+.gate-box h2 { font-size:19px; font-weight:800; margin-bottom:4px; }
+.gate-box h2 span { color:var(--golden); }
+.gate-box p { font-size:12px; color:var(--graphite); margin-bottom:18px; }
+.gate-box input { width:100%; padding:11px 13px; border:1px solid var(--border); border-radius:7px; margin-bottom:10px; }
+.gate-box button { width:100%; cursor:pointer; font-weight:700; border:none; border-radius:7px; padding:12px; background:var(--golden); color:#fff; }
+.gate-note { font-size:11px; color:var(--stone); margin-top:12px; line-height:1.45; }
+
+/* shell */
+.app { height:100vh; display:flex; flex-direction:column; overflow:hidden; }
+.topbar { flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; min-height:58px; padding:0 24px; border-bottom:3px solid var(--golden); background:var(--white); }
+.topbar h1 { font-size:20px; font-weight:800; letter-spacing:-.01em; line-height:1; }
+.topbar h1 span { color:var(--golden); }
+.brandsub { font-size:11px; color:var(--stone); text-transform:uppercase; letter-spacing:.16em; font-weight:700; white-space:nowrap; }
+
+.layout { flex:1; min-height:0; display:grid; grid-template-columns:minmax(340px, 400px) 1fr; }
+.panel { min-height:0; overflow:auto; }
+.controls { padding:20px 22px 40px; border-right:1px solid var(--border); background:var(--white); }
+
+label { display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--stone); margin:16px 0 6px; }
+input, select, textarea { width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:7px; background:var(--white); color:var(--carbon); }
+textarea { resize:vertical; line-height:1.55; }
+input:focus, select:focus, textarea:focus { outline:2px solid var(--golden); outline-offset:-1px; border-color:var(--golden); }
+.hint { font-size:11px; color:var(--stone); margin-top:5px; }
+
+.actions { display:flex; gap:10px; align-items:center; margin:18px 0 8px; flex-wrap:wrap; }
+button { cursor:pointer; font-weight:700; border:none; border-radius:7px; padding:11px 16px; background:var(--golden); color:#fff; transition:opacity .15s; }
+button:hover { opacity:.9; }
+button:disabled { opacity:.5; cursor:not-allowed; }
+button.ghost { background:transparent; color:var(--carbon); border:1px solid var(--border); }
+.status { font-size:12px; color:var(--stone); min-height:16px; }
+.status.err { color:#c0392b; font-weight:600; }
+
+/* AI update chat */
+.chat { border-top:1px solid var(--border); margin-top:14px; }
+.chat-log { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; max-height:230px; overflow:auto; }
+.chat-empty { font-size:11.5px; color:var(--stone); line-height:1.5; }
+.cm { font-size:12px; line-height:1.45; padding:8px 11px; border-radius:8px; }
+.cm-user { background:var(--carbon); color:#fff; align-self:flex-end; max-width:88%; }
+.cm-ai { background:var(--linen); color:var(--ink); align-self:flex-start; max-width:88%; }
+.cm-err { background:#fdecea; color:#c0392b; font-weight:600; }
+.chat-in { display:flex; gap:8px; }
+.chat-in input { flex:1; }
+.chat-in button { padding:10px 14px; }
+
+/* preview */
+.preview-wrap { display:flex; flex-direction:column; min-height:0; background:var(--paper-bg); }
+.preview-head { flex:0 0 auto; padding:11px 24px; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:var(--carbon); border-bottom:1px solid var(--border); background:var(--white); }
+.preview-head .live { color:var(--golden); font-style:normal; font-size:11px; margin-left:8px; }
+.preview { flex:1; min-height:0; overflow:auto; padding:24px; }
+.placeholder { color:var(--stone); font-size:13.5px; padding:60px 24px; text-align:center; line-height:1.6; }
+.deck-scale { transform-origin:top center; }
+
+/* ── print → PDF ── */
+@media print {
+  @page { size:11in 8.5in; margin:0; }
+  body * { visibility:hidden; }
+  .deck-scale, .deck-scale * { visibility:visible; }
+  .deck-scale { position:absolute; left:0; top:0; zoom:1 !important; transform:none !important; }
+  .omdeck { gap:0; }
+  .ompage { box-shadow:none !important; page-break-after:always; break-after:page; }
+  .ompage:last-child { page-break-after:auto; break-after:auto; }
+}

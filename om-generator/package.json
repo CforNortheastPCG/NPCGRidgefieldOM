@@ -1,0 +1,24 @@
+{
+  "name": "npcg-om-generator",
+  "private": true,
+  "type": "module",
+  "description": "React tool that uses the Claude API to draft NPCG offering-memorandum content, rendered live as it streams.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest",
+    "d3-geo": "^3.1.1",
+    "marked": "latest",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "topojson-client": "^3.1.0",
+    "us-atlas": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.12"
+  }
+}
