@@ -1,4 +1,6 @@
 import { zipSync, strToU8 } from 'fflate'
+import printCjs from './export-assets/print.cjs.txt?raw'
+import exportCjs from './export-assets/export.cjs.txt?raw'
 
 /* ═══════════════════ EXPORT AS STANDALONE PROJECT ═══════════════════
    Bundles the current deal + the real OM components into a downloadable Vite/
@@ -12,20 +14,24 @@ import { zipSync, strToU8 } from 'fflate'
 // All OM component/source files, as raw text (keys like './om/OmDeck.jsx').
 const OM_SOURCES = import.meta.glob('./om/**/*.{jsx,js,css}', { query: '?raw', import: 'default', eager: true })
 
-const PKG = {
-  name: 'om-export',
-  private: true,
-  version: '1.0.0',
-  type: 'module',
-  scripts: { dev: 'vite', build: 'vite build', preview: 'vite preview' },
-  dependencies: {
-    react: '^19.2.6',
-    'react-dom': '^19.2.6',
-    'd3-geo': '^3.1.1',
-    'topojson-client': '^3.1.0',
-    'us-atlas': '^3.0.1',
-  },
-  devDependencies: { '@vitejs/plugin-react': '^6.0.1', vite: '^8.0.12' },
+function pkg(name) {
+  return {
+    name,
+    private: true,
+    version: '1.0.0',
+    type: 'module',
+    // `pdf` spins up the app and screenshots every page into a rasterized,
+    // image-only PDF (anti-scrape) — print.cjs / export.cjs (Puppeteer).
+    scripts: { dev: 'vite', build: 'vite build', preview: 'vite preview', print: 'node print.cjs', pdf: 'node export.cjs' },
+    dependencies: {
+      react: '^19.2.6',
+      'react-dom': '^19.2.6',
+      'd3-geo': '^3.1.1',
+      'topojson-client': '^3.1.0',
+      'us-atlas': '^3.0.1',
+    },
+    devDependencies: { '@vitejs/plugin-react': '^6.0.1', vite: '^8.0.12', puppeteer: '^23.0.0' },
+  }
 }
 
 const VITE_CONFIG = `import { defineConfig } from 'vite'
@@ -90,6 +96,7 @@ A standalone copy of one offering memorandum for hand-tuning ("fine motor contro
 \`\`\`bash
 npm install
 npm run dev      # preview at the printed URL
+npm run pdf      # build + screenshot every page → rasterized, image-only PDF
 \`\`\`
 
 - **Data** lives in \`src/deal.js\` — edit any field there.
@@ -97,15 +104,19 @@ npm run dev      # preview at the printed URL
   page order; each page is a component in that folder.
 - Images (cover, map, amenities, uploaded photos) are embedded as data URLs, so
   this project is self-contained.
-- **Export a PDF:** open the dev preview, then Print → landscape, margins None,
-  background graphics on. \`print.css\` already sets one board per sheet.
+- **PDF:** \`npm run pdf\` spins the app up and screenshots each \`.page\` into a
+  print-ready, **rasterized (image-only) PDF** — anti-scrape, on purpose. Tunables:
+  \`QUALITY=55 npm run pdf\` (smaller file), \`COVER=1.28 npm run pdf\` (lift a dark
+  cover), \`DSF=2.5 npm run pdf\` (DPI). Quick vector preview via the browser's own
+  Print works too, but the shipped PDF should be the rasterized one.
 `
 
 const GITIGNORE = `node_modules\ndist\n`
 
-// Pretty-print the deal so it's editable by hand in deal.js.
-function dealModule(deal) {
-  return `/* The deal model for this OM. Edit any value and the deck re-renders.\n   Images are data URLs so the project is self-contained. */\nexport const deal = ${JSON.stringify(deal, null, 2)}\n`
+// Pretty-print the deal so it's editable by hand in deal.js. `pdfName` is read
+// by print.cjs to name the rendered PDF.
+function dealModule(deal, pdfName) {
+  return `/* The deal model for this OM. Edit any value and the deck re-renders.\n   Images are data URLs so the project is self-contained.\n   pdfName: '${pdfName}' — output filename for \`npm run pdf\`. */\nexport const deal = ${JSON.stringify(deal, null, 2)}\n`
 }
 
 async function fetchBinary(path) {
@@ -119,17 +130,21 @@ async function fetchBinary(path) {
 // Build the zip and trigger a download. Returns the filename.
 export async function exportProject(deal, baseName = 'om-export') {
   const files = {}
+  const pdfName = `${baseName}.pdf`
   // Scaffold
-  files[`${baseName}/package.json`] = strToU8(JSON.stringify(PKG, null, 2) + '\n')
+  files[`${baseName}/package.json`] = strToU8(JSON.stringify(pkg(baseName), null, 2) + '\n')
   files[`${baseName}/vite.config.js`] = strToU8(VITE_CONFIG)
   files[`${baseName}/index.html`] = strToU8(INDEX_HTML)
   files[`${baseName}/README.md`] = strToU8(README)
   files[`${baseName}/.gitignore`] = strToU8(GITIGNORE)
+  // Rasterized-PDF pipeline (spin up the app + screenshot each page)
+  files[`${baseName}/print.cjs`] = strToU8(String(printCjs))
+  files[`${baseName}/export.cjs`] = strToU8(String(exportCjs))
   // App glue
   files[`${baseName}/src/main.jsx`] = strToU8(MAIN_JSX)
   files[`${baseName}/src/App.jsx`] = strToU8(APP_JSX)
   files[`${baseName}/src/print.css`] = strToU8(PRINT_CSS)
-  files[`${baseName}/src/deal.js`] = strToU8(dealModule(deal))
+  files[`${baseName}/src/deal.js`] = strToU8(dealModule(deal, pdfName))
   // The real OM components (keys are like './om/OmDeck.jsx')
   for (const [path, src] of Object.entries(OM_SOURCES)) {
     files[`${baseName}/src/${path.replace(/^\.\//, '')}`] = strToU8(String(src))
