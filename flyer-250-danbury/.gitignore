@@ -1,0 +1,8 @@
+node_modules
+dist
+out
+*.local
+.DS_Store
+
+# Raw source photos (large originals — not needed in repo)
+250 Danbury Rd (1)/
