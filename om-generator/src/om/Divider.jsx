@@ -7,19 +7,22 @@ import { useDeal } from './Shell.jsx'
    property-specific drone shots are available at generation time. */
 export default function Divider({ eyebrow, title, sec, pageNum }) {
   const deal = useDeal()
-  // A section-specific uploaded photo takes over the divider full-bleed; otherwise
-  // fall back to the faded location map / cover over carbon.
+  // Every divider is photo-driven: a per-section uploaded photo wins, else the
+  // cover photo fills it full-bleed. Only if there's no photo at all do we fall
+  // back to the faded location map over carbon.
   const sectionPhoto = sec && deal.sectionPhotos ? deal.sectionPhotos[sec] : null
-  const image = sectionPhoto || deal.map || deal.cover
+  const photo = sectionPhoto || deal.cover
+  const image = photo || deal.map
   const street = deal.street || deal.address || ''
   const city = deal.cityState || deal.cityLong || ''
   const fullAddr = [street, city].filter(Boolean).join(', ')
   return (
     <div className="page">
       <div className="cover-hero" style={{ background: 'var(--carbon)' }}>
-        {/* Section photo shows full-strength; the fallback map/cover stays faded */}
-        {image && <img className="cover-hero-img" src={image} alt="" style={{ opacity: sectionPhoto ? 1 : 0.3 }} />}
-        <div style={{ position: 'absolute', inset: 0, background: sectionPhoto ? 'linear-gradient(rgba(18,22,28,0.30), rgba(18,22,28,0.62))' : 'rgba(24,28,34,0.45)' }} />
+        {/* A real photo shows full-strength with a legibility scrim; the map-only
+            fallback stays faded over carbon */}
+        {image && <img className="cover-hero-img" src={image} alt="" style={{ opacity: photo ? 1 : 0.3 }} />}
+        <div style={{ position: 'absolute', inset: 0, background: photo ? 'linear-gradient(rgba(18,22,28,0.30), rgba(18,22,28,0.62))' : 'rgba(24,28,34,0.45)' }} />
         <div className="cover-hero-header">
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 40, maxWidth: 200, objectFit: 'contain' }} />
         </div>
