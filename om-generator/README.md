@@ -149,10 +149,22 @@ om-generator/
 `OmDeck` takes the deal model and draws the branded pages (cover, TOC, deal
 contacts, executive summary, dividers, property overview, rent roll, income &
 expense, location/amenities, team, locations) at full 960×742 — the same
-proportions as the print OM. The preview scales the deck to fit; **Download PDF**
-uses the browser print path (`@page` landscape) to output one board per sheet.
+proportions as the print OM. The preview scales the deck to fit.
 Income/expense figures are **computed in JS** from the rent roll + expenses (5%
 vacancy assumption) — not from the AI.
+
+### PDF & Export
+
+- **Download PDF** (in-app) is a quick **vector** print via the browser (`@page`
+  landscape), handy for proofs.
+- **Export Project** downloads a self-contained Vite/React copy of the OM
+  (`deal.js` + the real `src/om/` components + the brand assets, images inlined as
+  data URLs) so any page can be hand-tuned. It includes the **rasterized PDF
+  pipeline** (`npm run pdf` → Puppeteer screenshots every `.page` into an
+  **image-only** PDF — anti-scrape, the canonical OM output), with
+  `DSF`/`QUALITY`/`BRIGHTEN`/`COVER` knobs. Cloudflare Pages can't run a headless
+  browser, so the shipped rasterized PDF is produced from the exported project,
+  not in the hosted app.
 
 ## Cost (rough)
 
