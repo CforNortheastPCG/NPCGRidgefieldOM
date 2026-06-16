@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import readXlsxFile from 'read-excel-file/browser'
 import OmDeck from './om/OmDeck.jsx'
 import { ROSTER } from './om/firm.js'
+import { exportProject } from './exportProject.js'
 
 /* NPCG OM Generator — full stack.
    Address → /api/enrich (Google: identity, Street View cover, Static Map,
@@ -308,6 +309,17 @@ export default function App() {
   async function sendRr() { if (await runUpdate({ label: 'Rent Roll', scope: ['rentRoll', 'units'], instruction: rrInput.trim(), refKinds: ['rentroll'], busyKey: 'rr' })) setRrInput('') }
   async function sendIe() { if (await runUpdate({ label: 'Income & Expense', scope: ['expenses'], instruction: ieInput.trim(), refKinds: ['ie', 'rentroll'], busyKey: 'ie' })) setIeInput('') }
 
+  async function doExport() {
+    if (!deal) return
+    setBusy('export'); setStatus('Bundling React project…')
+    try {
+      const slug = (deal.street || deal.name || 'om').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'om'
+      const file = await exportProject(deal, `om-${slug}`)
+      setStatus(`Exported ${file} — unzip, npm install, npm run dev.`)
+    } catch (e) { setStatus(`Export failed: ${e?.message || e}`) }
+    setBusy('')
+  }
+
   if (!authed) return <Gate onUnlock={pw => { setPassword(pw); setAuthed(true) }} />
 
   const working = busy !== ''
@@ -379,6 +391,7 @@ export default function App() {
           <div className="actions">
             <button onClick={build} disabled={working}>{busy === 'build' ? 'Building…' : (deal ? 'Rebuild OM' : 'Build OM')}</button>
             {deal && <button className="ghost" onClick={() => window.print()} disabled={working}>Download PDF</button>}
+            {deal && <button className="ghost" onClick={doExport} disabled={working}>{busy === 'export' ? 'Exporting…' : 'Export Project'}</button>}
           </div>
           <div className={'status' + (/error|wrong|could not|fail/i.test(status) ? ' err' : '')}>{status}</div>
 
