@@ -53,7 +53,21 @@ and tighten security before sharing the link. Check items off as you go.
       redeploy (secrets apply on next deploy).
 - [ ] Rotate the Anthropic key that was pasted in chat earlier if not already done.
 
-## 6. Polish / nice-to-haves (after it works)
+## 6. Location pages — match the Campbell OM (next build pass)
+Reference: `om-westhaven-campbell/src` (`App.jsx` WestHavenCombined + NewHavenCounty,
+`LocationMap.jsx`, `amenities.js`, `RegionalMap.jsx`).
+- [ ] **Location Overview** — add `locationSubtitle` + `aboutCity` (bullet list) to
+      the schema; render subtitle + "About {City}" highlights + two photos (like
+      WestHavenCombined), not just paragraphs.
+- [ ] **Location & Amenities** — category-color-coded map with numbered pins + a
+      two-column categorized directory (like LocationMap.jsx). Needs enrich.js to
+      bucket Places results into categories, return lat/lng, and build a colored
+      numbered static map server-side.
+- [ ] **County / demographics** — add a `demographics` field (metric / city /
+      county) and render the comparison table instead of "TODO: demographics".
+- [ ] **Regional Positioning** — RegionalMap already ported; confirm title/labels.
+
+## 7. Polish / nice-to-haves (after it works)
 - [ ] PDF export sanity check — every board one landscape sheet, images not dark.
 - [ ] Highlight validation via Distance Matrix / Directions (grounds travel-time
       claims) — enable those Google APIs first.
