@@ -66,6 +66,15 @@ input[type=file] { padding:8px 10px; font-size:12px; cursor:pointer; }
 .team-pick-name { font-size:12px; font-weight:700; color:var(--carbon); }
 .team-pick-title { font-size:10px; color:var(--stone); margin-left:auto; text-align:right; }
 
+/* attached-document rows */
+.doc-row { display:flex; align-items:center; gap:8px; margin-top:7px; font-size:12px; }
+.doc-row .doc-name { flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:600; color:var(--carbon); }
+.doc-row select { width:auto; flex:0 0 auto; padding:6px 8px; font-size:11px; }
+.doc-row button { padding:5px 9px; font-size:12px; line-height:1; }
+.doc-parsing { color:var(--graphite); font-weight:600; }
+.spin { display:inline-block; width:13px; height:13px; border:2px solid var(--border); border-top-color:var(--golden); border-radius:50%; animation:spin .7s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
 .actions { display:flex; gap:10px; align-items:center; margin:18px 0 8px; flex-wrap:wrap; }
 button { cursor:pointer; font-weight:700; border:none; border-radius:7px; padding:11px 16px; background:var(--golden); color:#fff; transition:opacity .15s; }
 button:hover { opacity:.9; }

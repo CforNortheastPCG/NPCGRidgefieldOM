@@ -29,8 +29,8 @@ const PAGES = [
   { id: 'exec', label: 'Executive Summary', keys: ['summary', 'highlights', 'askingPrice', 'units'] },
   { id: 'property', label: 'Property Overview', keys: ['siteSummary', 'utilities'] },
   { id: 'building', label: 'Building Information', keys: ['buildingInfo'] },
-  { id: 'rentroll', label: 'Rent Roll', keys: ['rentRoll', 'units'] },
-  { id: 'income', label: 'Income & Expense', keys: ['expenses'] },
+  { id: 'rentroll', label: 'Rent Roll', keys: ['rentRoll', 'units'], refKinds: ['rentroll'] },
+  { id: 'income', label: 'Income & Expense', keys: ['expenses'], refKinds: ['ie', 'rentroll'] },
   { id: 'location', label: 'Location Overview', keys: ['locationOverview'] },
 ]
 
@@ -69,21 +69,44 @@ const QUIPS = [
   'Counting the parking spaces twice…',
 ]
 
+// Attached-document kinds. Rent roll + I&E docs are extracted into the deal AND
+// kept as reference material the AI update chat can cite.
+const DOC_KINDS = [
+  { id: 'rentroll', label: 'Rent Roll' },
+  { id: 'ie', label: 'Income & Expense' },
+  { id: 'other', label: 'Other' },
+]
+const kindLabel = (k) => (DOC_KINDS.find(d => d.id === k) || DOC_KINDS[2]).label
+// Guess a doc's kind from its filename.
+function guessKind(name) {
+  if (/rent|\brr\b|roll/i.test(name)) return 'rentroll'
+  if (/i&e|income|expense|t-?12|operating|noi|oper/i.test(name)) return 'ie'
+  return 'other'
+}
+
 const ss = {
   get: (k, d = '') => { try { return localStorage.getItem(k) ?? d } catch { return d } },
   set: (k, v) => { try { localStorage.setItem(k, v) } catch { /* */ } },
 }
 
-// Compose the structured sections (+ any imported spreadsheet) into the single
-// labeled facts string /api/fill expects.
-function composeFacts(inputs, sheetText) {
+// Concatenate the text of all attached docs of one kind.
+function docsText(docs, kind) {
+  return docs.filter(d => d.kind === kind).map(d => `[${d.name}]\n${d.text}`).join('\n\n')
+}
+
+// Compose the structured sections (+ any attached docs) into the single labeled
+// facts string /api/fill expects.
+function composeFacts(inputs, docs) {
   const parts = SECTIONS
     .map(s => ({ s, v: (inputs[s.key] || '').trim() }))
     .filter(x => x.v)
     .map(({ s, v }) => `${s.label.toUpperCase()}:\n${v}`)
-  if (sheetText && sheetText.trim()) {
-    parts.push(`RENT ROLL & EXPENSES (imported spreadsheet — extract the unit-by-unit rent roll and the operating expenses from this; read column headers for in-place vs market/pro-forma rents):\n${sheetText.trim()}`)
-  }
+  const rr = docsText(docs, 'rentroll')
+  if (rr) parts.push(`RENT ROLL (imported — extract the unit-by-unit rent roll; read headers for in-place vs market/pro-forma rents):\n${rr}`)
+  const ie = docsText(docs, 'ie')
+  if (ie) parts.push(`INCOME & EXPENSE / T-12 (imported — extract the operating expenses, and reconcile income against the rent roll):\n${ie}`)
+  const other = docsText(docs, 'other')
+  if (other) parts.push(`ADDITIONAL DOCUMENTS:\n${other}`)
   return parts.join('\n\n')
 }
 
@@ -147,7 +170,8 @@ export default function App() {
   })
   const [model, setModel] = useState(ss.get('om_model') || 'claude-opus-4-8')
   const [coverUpload, setCoverUpload] = useState('') // user-supplied cover photo (data URL)
-  const [sheet, setSheet] = useState(() => ({ name: ss.get('om_sheet_name'), text: ss.get('om_sheet') })) // imported rent roll / expenses
+  const [docs, setDocs] = useState(() => { try { return JSON.parse(ss.get('om_docs') || '[]') } catch { return [] } }) // attached rent roll / I&E / other docs
+  const [parsing, setParsing] = useState('') // filename currently being read
   const [deal, setDeal] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null') } catch { return null } })
   const [sectionPhoto, setSectionPhoto] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null')?.sectionPhoto || '' } catch { return '' } }) // one photo for all section dividers
   const [team, setTeam] = useState(() => { // names of the deal team on the Deal Contacts page
@@ -175,6 +199,7 @@ export default function App() {
   useEffect(() => { ss.set('om_addr', address) }, [address])
   useEffect(() => { ss.set('om_inputs', JSON.stringify(inputs)) }, [inputs])
   useEffect(() => { ss.set('om_model', model) }, [model])
+  useEffect(() => { ss.set('om_docs', JSON.stringify(docs)) }, [docs])
   const saveDeal = (d) => { setDeal(d); ss.set('om_deal', JSON.stringify(d)) }
   const setSection = (k, v) => setInputs(p => ({ ...p, [k]: v }))
 
@@ -217,20 +242,26 @@ export default function App() {
     if (deal) saveDeal({ ...deal, sectionPhoto: '' })
   }
 
-  async function pickSheet(e) {
-    const file = e.target.files?.[0]
-    if (!file) return
-    setStatus('Reading spreadsheet…')
-    try {
-      const { text, rows } = await workbookToText(file)
-      setSheet({ name: file.name, text }); ss.set('om_sheet_name', file.name); ss.set('om_sheet', text)
-      setStatus(`Loaded ${rows} rows from ${file.name}. Build to extract the rent roll & expenses.`)
-    } catch { setStatus('Could not read that spreadsheet — export it as .xlsx and try again.') }
+  // Attach one or more .xlsx docs; each is read into text and tagged by kind.
+  async function addDocs(e) {
+    const files = [...(e.target.files || [])]
+    e.target.value = ''
+    for (const file of files) {
+      setParsing(file.name)
+      try {
+        const { text, rows } = await workbookToText(file)
+        const doc = { id: `${file.name}-${Math.floor(Math.random() * 1e9)}`, name: file.name, kind: guessKind(file.name), text, rows }
+        setDocs(prev => [...prev, doc])
+        setStatus(`Attached ${file.name} (${rows} rows) as ${kindLabel(doc.kind)}.`)
+      } catch { setStatus(`Could not read ${file.name} — export it as .xlsx and try again.`) }
+    }
+    setParsing('')
   }
-  function clearSheet() { setSheet({ name: '', text: '' }); ss.set('om_sheet_name', ''); ss.set('om_sheet', '') }
+  const setDocKind = (id, kind) => setDocs(prev => prev.map(d => d.id === id ? { ...d, kind } : d))
+  const removeDoc = (id) => setDocs(prev => prev.filter(d => d.id !== id))
 
   async function build() {
-    const facts = composeFacts(inputs, sheet.text)
+    const facts = composeFacts(inputs, docs)
     if (!address.trim() && !facts.trim()) { setStatus('Enter an address and/or deal facts.'); return }
     setBusy('build'); setStatus('Pulling Google data…')
     let enriched = {}
@@ -251,17 +282,31 @@ export default function App() {
     setStatus(`Done.${enriched.amenities?.length ? ` ${enriched.amenities.length} nearby places.` : ''}`); setBusy('')
   }
 
+  // One code path for every AI edit: page scope + instruction (+ reference docs).
+  async function runUpdate({ label, scope, instruction, refKinds = [], busyKey = 'update' }) {
+    if (!instruction || !deal) return
+    const refs = refKinds.flatMap(k => docs.filter(d => d.kind === k).map(d => ({ name: d.name, text: d.text })))
+    setChat(c => [...c, { role: 'user', text: `[${label}] ${instruction}${refs.length ? ` · ${refs.length} ref` : ''}` }]); setBusy(busyKey)
+    const res = await post('/api/update', { password, model: UPDATE_MODEL, deal, instruction, scope, page: label, refs })
+    if (res.error) { setChat(c => [...c, { role: 'err', text: res.error }]); setBusy(''); return false }
+    saveDeal(res.deal)
+    setChat(c => [...c, { role: 'ai', text: res.note || 'Updated.' }]); setBusy('')
+    return true
+  }
+
   async function sendUpdate() {
     const instruction = chatInput.trim()
     if (!instruction || !deal) return
     const page = PAGES.find(p => p.id === updatePage)
     if (!page) { setChat(c => [...c, { role: 'err', text: 'Pick a page to edit first.' }]); return }
-    setChat(c => [...c, { role: 'user', text: `[${page.label}] ${instruction}` }]); setChatInput(''); setBusy('update')
-    const res = await post('/api/update', { password, model: UPDATE_MODEL, deal, instruction, scope: page.keys, page: page.label })
-    if (res.error) { setChat(c => [...c, { role: 'err', text: res.error }]); setBusy(''); return }
-    saveDeal(res.deal)
-    setChat(c => [...c, { role: 'ai', text: res.note || 'Updated.' }]); setBusy('')
+    if (await runUpdate({ label: page.label, scope: page.keys, instruction, refKinds: page.refKinds })) setChatInput('')
   }
+
+  // Dedicated quick editors for the two data-heavy pages — each cites its attached docs.
+  const [rrInput, setRrInput] = useState('')
+  const [ieInput, setIeInput] = useState('')
+  async function sendRr() { if (await runUpdate({ label: 'Rent Roll', scope: ['rentRoll', 'units'], instruction: rrInput.trim(), refKinds: ['rentroll'], busyKey: 'rr' })) setRrInput('') }
+  async function sendIe() { if (await runUpdate({ label: 'Income & Expense', scope: ['expenses'], instruction: ieInput.trim(), refKinds: ['ie', 'rentroll'], busyKey: 'ie' })) setIeInput('') }
 
   if (!authed) return <Gate onUnlock={pw => { setPassword(pw); setAuthed(true) }} />
 
@@ -282,15 +327,25 @@ export default function App() {
           <div className="hint">Auto-pulls cover, location map & nearby amenities (Google).</div>
 
           <details className="grp">
-            <summary>Photos &amp; spreadsheet{(coverUpload || sheet.text || sectionPhoto) ? <span className="grp-count">{[coverUpload && 'cover', sheet.text && 'xlsx', sectionPhoto && 'section'].filter(Boolean).join(' · ')}</span> : null}</summary>
+            <summary>Photos &amp; documents{(coverUpload || docs.length || sectionPhoto) ? <span className="grp-count">{[coverUpload && 'cover', docs.length && `${docs.length} doc${docs.length > 1 ? 's' : ''}`, sectionPhoto && 'section'].filter(Boolean).join(' · ')}</span> : null}</summary>
 
             <label>Cover Photo <span className="opt">overrides Street View</span></label>
             <input type="file" accept="image/*" onChange={pickCover} />
             {coverUpload && <div className="cover-prev"><img src={coverUpload} alt="cover" /><button className="ghost" type="button" onClick={() => setCoverUpload('')}>Remove</button></div>}
 
-            <label>Rent Roll &amp; Expenses — Excel <span className="opt">auto-extracted</span></label>
-            <input type="file" accept=".xlsx,.xlsm" onChange={pickSheet} />
-            {sheet.text && <div className="cover-prev"><span className="hint" style={{ margin: 0 }}>📄 {sheet.name}</span><button className="ghost" type="button" onClick={clearSheet}>Remove</button></div>}
+            <label>Rent Roll &amp; I&amp;E Documents <span className="opt">.xlsx · attach multiple</span></label>
+            <input type="file" accept=".xlsx,.xlsm" multiple onChange={addDocs} disabled={!!parsing} />
+            {parsing && <div className="doc-row doc-parsing"><span className="spin" /> Reading {parsing}…</div>}
+            {docs.map(d => (
+              <div key={d.id} className="doc-row">
+                <span className="doc-name" title={d.name}>📄 {d.name} <span className="opt">{d.rows}r</span></span>
+                <select value={d.kind} onChange={e => setDocKind(d.id, e.target.value)}>
+                  {DOC_KINDS.map(k => <option key={k.id} value={k.id}>{k.label}</option>)}
+                </select>
+                <button className="ghost" type="button" onClick={() => removeDoc(d.id)}>✕</button>
+              </div>
+            ))}
+            {!docs.length && !parsing && <div className="hint">Attach rent roll + I&amp;E workbooks — they're extracted into the deck and kept as reference for AI edits.</div>}
 
             <label>Section Cover Photo <span className="opt">used on all dividers</span></label>
             <input type="file" accept="image/*" onChange={pickSectionPhoto} />
@@ -344,6 +399,20 @@ export default function App() {
                   placeholder={updatePage ? 'Tell the agent what to change…' : 'Select a page above first…'}
                   onKeyDown={e => e.key === 'Enter' && sendUpdate()} disabled={working || !updatePage} />
                 <button onClick={sendUpdate} disabled={working || !updatePage || !chatInput.trim()}>{busy === 'update' ? '…' : 'Send'}</button>
+              </div>
+
+              {/* Dedicated editors for the two data-heavy pages — cite attached docs */}
+              <label style={{ marginTop: 16 }}>Edit Rent Roll <span className="opt">{docs.filter(d => d.kind === 'rentroll').length} ref doc(s)</span></label>
+              <div className="chat-in">
+                <input value={rrInput} onChange={e => setRrInput(e.target.value)} placeholder='e.g. "re-pull unit 4 from the attached rent roll"'
+                  onKeyDown={e => e.key === 'Enter' && rrInput.trim() && sendRr()} disabled={working} />
+                <button onClick={sendRr} disabled={working || !rrInput.trim()}>{busy === 'rr' ? '…' : 'Edit'}</button>
+              </div>
+              <label style={{ marginTop: 12 }}>Edit Income &amp; Expense <span className="opt">{docs.filter(d => d.kind === 'ie').length} ref doc(s)</span></label>
+              <div className="chat-in">
+                <input value={ieInput} onChange={e => setIeInput(e.target.value)} placeholder='e.g. "use the T-12 taxes & insurance, not pro forma"'
+                  onKeyDown={e => e.key === 'Enter' && ieInput.trim() && sendIe()} disabled={working} />
+                <button onClick={sendIe} disabled={working || !ieInput.trim()}>{busy === 'ie' ? '…' : 'Edit'}</button>
               </div>
             </div>
           )}

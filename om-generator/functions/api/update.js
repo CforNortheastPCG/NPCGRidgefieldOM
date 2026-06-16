@@ -66,12 +66,23 @@ export async function onRequestPost(context) {
   const content = {}
   for (const k of scope) if (k in body.deal) content[k] = body.deal[k]
 
+  // Reference documents (e.g. the attached rent roll / I&E) the edit can cite.
+  let refBlock = ''
+  if (Array.isArray(body.refs) && body.refs.length) {
+    const joined = body.refs
+      .filter(r => r && typeof r.text === 'string')
+      .map(r => `[${typeof r.name === 'string' ? r.name : 'document'}]\n${r.text}`)
+      .join('\n\n')
+      .slice(0, 60000) // hard cap so a big workbook can't blow the prompt
+    if (joined) refBlock = `\n\nReference documents (source of truth — pull exact figures from these where the instruction asks):\n${joined}`
+  }
+
   const client = new Anthropic({ apiKey })
   try {
     const res = await client.messages.create({
       model, max_tokens: 8000, system: SYSTEM,
       output_config: { format: { type: 'json_schema', schema: subSchema(scope) } },
-      messages: [{ role: 'user', content: `Page being edited: ${pageName}\nThis page's current content:\n${JSON.stringify(content)}\n\nInstruction: ${instruction}` }],
+      messages: [{ role: 'user', content: `Page being edited: ${pageName}\nThis page's current content:\n${JSON.stringify(content)}${refBlock}\n\nInstruction: ${instruction}` }],
     })
     const text = res.content.find(b => b.type === 'text')?.text || '{}'
     let updated
