@@ -5,13 +5,12 @@ import { useDeal } from './Shell.jsx'
    address). Reuses the cover-hero treatment so dividers match the cover.
    Uses the deal's location map / cover photo (faded over carbon) since no
    property-specific drone shots are available at generation time. */
-export default function Divider({ eyebrow, title, sec, pageNum }) {
+export default function Divider({ eyebrow, title, pageNum }) {
   const deal = useDeal()
-  // Every divider is photo-driven: a per-section uploaded photo wins, else the
-  // cover photo fills it full-bleed. Only if there's no photo at all do we fall
-  // back to the faded location map over carbon.
-  const sectionPhoto = sec && deal.sectionPhotos ? deal.sectionPhotos[sec] : null
-  const photo = sectionPhoto || deal.cover
+  // Every divider is photo-driven: one uploaded section photo (used on all
+  // dividers) wins, else the cover photo fills it full-bleed. Only if there's no
+  // photo at all do we fall back to the faded location map over carbon.
+  const photo = deal.sectionPhoto || deal.cover
   const image = photo || deal.map
   const street = deal.street || deal.address || ''
   const city = deal.cityState || deal.cityLong || ''

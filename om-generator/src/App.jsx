@@ -50,15 +50,6 @@ const SECTIONS = [
 // group), so they aren't typed sections — but typed notes are still honored if a
 // user adds them under "Notes" inside the relevant inputs.
 
-// The 5 section divider pages — each can take its own full-bleed cover photo.
-const DIVIDERS = [
-  { id: 'property', label: 'The Property' },
-  { id: 'financial', label: 'Financial Analysis' },
-  { id: 'location', label: 'Location & Market' },
-  { id: 'process', label: 'The Process' },
-  { id: 'team', label: 'The Team' },
-]
-
 // Broker quips that cycle while the OM generates.
 const QUIPS = [
   'What are you gonna spend the money on?',
@@ -158,7 +149,7 @@ export default function App() {
   const [coverUpload, setCoverUpload] = useState('') // user-supplied cover photo (data URL)
   const [sheet, setSheet] = useState(() => ({ name: ss.get('om_sheet_name'), text: ss.get('om_sheet') })) // imported rent roll / expenses
   const [deal, setDeal] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null') } catch { return null } })
-  const [sectionPhotos, setSectionPhotos] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null')?.sectionPhotos || {} } catch { return {} } }) // per-divider cover photos
+  const [sectionPhoto, setSectionPhoto] = useState(() => { try { return JSON.parse(ss.get('om_deal') || 'null')?.sectionPhoto || '' } catch { return '' } }) // one photo for all section dividers
   const [team, setTeam] = useState(() => { // names of the deal team on the Deal Contacts page
     try { const t = JSON.parse(ss.get('om_deal') || 'null')?.dealTeam; if (t?.length) return t.map(m => m.name) } catch { /* */ }
     return ['Brad Balletto', 'Jeff Wright']
@@ -212,24 +203,18 @@ export default function App() {
     })
   }
 
-  async function pickSection(id, e) {
+  async function pickSectionPhoto(e) {
     const file = e.target.files?.[0]
     if (!file) return
     try {
       const url = await fileToDataUrl(file)
-      setSectionPhotos(prev => {
-        const next = { ...prev, [id]: url }
-        if (deal) saveDeal({ ...deal, sectionPhotos: next })
-        return next
-      })
+      setSectionPhoto(url)
+      if (deal) saveDeal({ ...deal, sectionPhoto: url })
     } catch { setStatus('Could not read that image.') }
   }
-  function clearSection(id) {
-    setSectionPhotos(prev => {
-      const next = { ...prev }; delete next[id]
-      if (deal) saveDeal({ ...deal, sectionPhotos: next })
-      return next
-    })
+  function clearSectionPhoto() {
+    setSectionPhoto('')
+    if (deal) saveDeal({ ...deal, sectionPhoto: '' })
   }
 
   async function pickSheet(e) {
@@ -260,7 +245,7 @@ export default function App() {
     // user-uploaded cover wins over the Street View cover
     const merged = { ...enriched, ...fl.deal }
     if (coverUpload) merged.cover = coverUpload
-    if (Object.keys(sectionPhotos).length) merged.sectionPhotos = sectionPhotos
+    if (sectionPhoto) merged.sectionPhoto = sectionPhoto
     merged.dealTeam = ROSTER.filter(m => team.includes(m.name))
     saveDeal(merged)
     setStatus(`Done.${enriched.amenities?.length ? ` ${enriched.amenities.length} nearby places.` : ''}`); setBusy('')
@@ -297,7 +282,7 @@ export default function App() {
           <div className="hint">Auto-pulls cover, location map & nearby amenities (Google).</div>
 
           <details className="grp">
-            <summary>Photos &amp; spreadsheet{(coverUpload || sheet.text || Object.keys(sectionPhotos).length) ? <span className="grp-count">{[coverUpload && 'cover', sheet.text && 'xlsx', Object.keys(sectionPhotos).length && `${Object.keys(sectionPhotos).length} section`].filter(Boolean).join(' · ')}</span> : null}</summary>
+            <summary>Photos &amp; spreadsheet{(coverUpload || sheet.text || sectionPhoto) ? <span className="grp-count">{[coverUpload && 'cover', sheet.text && 'xlsx', sectionPhoto && 'section'].filter(Boolean).join(' · ')}</span> : null}</summary>
 
             <label>Cover Photo <span className="opt">overrides Street View</span></label>
             <input type="file" accept="image/*" onChange={pickCover} />
@@ -307,15 +292,9 @@ export default function App() {
             <input type="file" accept=".xlsx,.xlsm" onChange={pickSheet} />
             {sheet.text && <div className="cover-prev"><span className="hint" style={{ margin: 0 }}>📄 {sheet.name}</span><button className="ghost" type="button" onClick={clearSheet}>Remove</button></div>}
 
-            <label>Section Cover Photos <span className="opt">one per divider</span></label>
-            {DIVIDERS.map(d => (
-              <div key={d.id} className="sec-photo">
-                <span className="sec-photo-label">{d.label}</span>
-                {sectionPhotos[d.id] && <img src={sectionPhotos[d.id]} alt="" />}
-                <input type="file" accept="image/*" onChange={e => pickSection(d.id, e)} />
-                {sectionPhotos[d.id] && <button className="ghost" type="button" onClick={() => clearSection(d.id)}>✕</button>}
-              </div>
-            ))}
+            <label>Section Cover Photo <span className="opt">used on all dividers</span></label>
+            <input type="file" accept="image/*" onChange={pickSectionPhoto} />
+            {sectionPhoto && <div className="cover-prev"><img src={sectionPhoto} alt="section" /><button className="ghost" type="button" onClick={clearSectionPhoto}>Remove</button></div>}
           </details>
 
           <details className="grp">
