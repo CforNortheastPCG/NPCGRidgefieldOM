@@ -40,12 +40,16 @@ async function renderPdf({
   const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'ompdf-'));
   const browser = await puppeteer.launch({
     headless: true,
+    protocolTimeout: 300000,
     // force-color-profile=srgb keeps screenshot colors true to the browser so
     // photos don't print dark; allow-file-access lets the compose step load
     // the file:// page screenshots.
     args: ['--allow-file-access-from-files', '--force-color-profile=srgb'],
   });
   const page = await browser.newPage();
+  // A real browser UA so bot-gated hosts (e.g. northeastpcg.com headshots) serve
+  // the actual image instead of a challenge page.
+  await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36')
   await page.setViewport({ width: 1100, height: 900, deviceScaleFactor: dsf });
 
   await page.goto(`http://localhost:${port}`, { waitUntil: 'networkidle0', timeout: 60000 });
@@ -54,9 +58,13 @@ async function renderPdf({
   // enough — the big cover photo can still be undecoded and screenshot blank).
   await page.evaluate(async () => {
     const imgs = Array.from(document.images);
+    // Cap each image so a hung/blocked remote image can't stall the whole render.
+    const cap = (p, ms) => Promise.race([p, new Promise(res => setTimeout(res, ms))]);
     await Promise.all(imgs.map(img => {
-      if (img.complete && img.naturalWidth > 0) return img.decode().catch(() => {});
-      return new Promise(res => { img.onload = img.onerror = res; }).then(() => img.decode().catch(() => {}));
+      const done = (img.complete && img.naturalWidth > 0)
+        ? img.decode().catch(() => {})
+        : new Promise(res => { img.onload = img.onerror = res; }).then(() => img.decode().catch(() => {}));
+      return cap(done, 12000);
     }));
   });
   // Print-only brightness lift (paper prints darker than screen). Injected into
