@@ -13,9 +13,8 @@ export const FIRM_BIO =
 
 const U = 'https://northeastpcg.com/wp-content/uploads'
 export const BROKERS = [
-  { name: 'Brad Balletto', title: 'Managing Director, Investments', phone: '(203) 307-1574', email: 'bballetto@northeastpcg.com', photo: `${U}/2021/11/Brad-B-2-430x488.jpg` },
-  { name: 'Taylor Perun', title: 'Senior Vice President, Investments', phone: '(203) 307-1576', email: 'tperun@northeastpcg.com', photo: `${U}/2021/11/Taylor-Perun-430x488.png` },
-  { name: 'Tim McGeary', title: 'Vice President, Investments', phone: '(857) 990-6804', email: 'tmcgeary@northeastpcg.com', photo: `${U}/2021/11/Tim-McGeary-430x488.png` },
+  { name: 'Brad Balletto', title: 'Managing Director, Investments', phone: '(203) 307-1574', email: 'bballetto@northeastpcg.com', photo: '/photos/team/Brad-B-2-430x488.jpg' },
+  { name: 'Taylor Perun', title: 'Senior Vice President, Investments', phone: '(203) 307-1576', email: 'tperun@northeastpcg.com', photo: '/photos/team/Taylor-Perun.jpg' },
 ]
 
 export { FLYERS } from './flyers.generated.js'
