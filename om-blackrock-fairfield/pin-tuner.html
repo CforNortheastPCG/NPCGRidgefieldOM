@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Site Map Pin Tuner</title>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; background: #1b1b1b; color: #eee; display: flex; gap: 20px; padding: 20px; }
+  /* Replicate the REAL OM site-map container exactly: measured box is 486x517
+     (aspect 0.9401) with object-fit:cover, so the 1600x1200 image is cropped
+     ~15% off each side. Pins are positioned as % of THIS box — same as the code. */
+  #stage { position: relative; width: 540px; height: 574px; flex-shrink: 0; border: 1px solid #444; border-radius: 4px; overflow: hidden; }
+  #stage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pin {
+    position: absolute; transform: translate(-50%, -50%); width: 30px; height: 30px;
+    border-radius: 50%; color: #fff; font-size: 15px; font-weight: 800; cursor: grab;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid #fff; box-shadow: 0 1px 6px rgba(0,0,0,0.65); user-select: none;
+  }
+  .pin:active { cursor: grabbing; }
+  #readout { font-size: 14px; line-height: 1.7; }
+  #readout code { background: #000; padding: 2px 6px; border-radius: 3px; color: #6cf; }
+  button { margin-top: 12px; padding: 8px 14px; font-size: 14px; cursor: pointer; }
+  .hint { color: #999; font-size: 12px; max-width: 320px; }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <img src="/photos/maps/site-aerial.jpeg" alt="aerial" />
+    <div class="pin" data-label="A" style="background:#F8971D">A</div>
+    <div class="pin" data-label="B" style="background:#2C3E50">B</div>
+    <div class="pin" data-label="C" style="background:#6B7A8F">C</div>
+  </div>
+  <div>
+    <h3 style="margin-top:0">Drag the pins</h3>
+    <div id="readout"></div>
+    <button id="copy">Copy coords to clipboard</button>
+    <p class="hint">Drag each pin onto its building, then copy the coordinates and paste them back to me — or read them off and tell me. x = % from left, y = % from top.</p>
+  </div>
+
+<script>
+  // Starting positions = current SiteMap.jsx values.
+  // Box-frame starting guesses (converted from the cropped view). Just drag from here.
+  const start = { A: { x: 78, y: 50 }, B: { x: 36, y: 46 }, C: { x: 3, y: 52 } };
+  const stage = document.getElementById('stage');
+  const readout = document.getElementById('readout');
+  const pins = {};
+  let dragging = null;
+
+  document.querySelectorAll('.pin').forEach(el => {
+    const L = el.dataset.label;
+    pins[L] = el;
+    place(el, start[L].x, start[L].y);
+    el.addEventListener('mousedown', e => { dragging = el; e.preventDefault(); });
+  });
+
+  function place(el, x, y) { el.style.left = x + '%'; el.style.top = y + '%'; }
+
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const r = stage.getBoundingClientRect();
+    let x = ((e.clientX - r.left) / r.width) * 100;
+    let y = ((e.clientY - r.top) / r.height) * 100;
+    x = Math.max(0, Math.min(100, x));
+    y = Math.max(0, Math.min(100, y));
+    place(dragging, x, y);
+    update();
+  });
+  window.addEventListener('mouseup', () => { dragging = null; });
+
+  function coords() {
+    return ['A', 'B', 'C'].map(L => {
+      const x = parseFloat(pins[L].style.left);
+      const y = parseFloat(pins[L].style.top);
+      return { L, x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+    });
+  }
+
+  function update() {
+    readout.innerHTML = coords().map(c =>
+      `Pin ${c.L}: <code>{ x: ${c.x}, y: ${c.y} }</code>`).join('<br>');
+  }
+
+  document.getElementById('copy').addEventListener('click', () => {
+    const txt = coords().map(c => `${c.L}: { x: ${c.x}, y: ${c.y} }`).join('\n');
+    navigator.clipboard.writeText(txt);
+  });
+
+  update();
+</script>
+</body>
+</html>

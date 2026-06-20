@@ -10,7 +10,16 @@
       "WebSearch",
       "Bash(pkill -f vite are invesment asisctes niote)",
       "WebFetch(domain:www.connecticut-demographics.com)",
-      "Skill(claude-api)"
+      "Skill(claude-api)",
+      "Bash(python3 -c ' *)",
+      "Bash(cp -R om-westhaven-campbell om-ware-portfolio)",
+      "Bash(rm -rf om-ware-portfolio/node_modules om-ware-portfolio/dist)",
+      "Bash(rm -rf om-ware-portfolio/public/photos/campbell)",
+      "Bash(mkdir -p om-ware-portfolio/public/photos/ware)",
+      "Bash(mkdir -p om-ware-portfolio/scripts)",
+      "Bash(node scripts/gen-isochrones.mjs)",
+      "Bash(cp /tmp/preview.mjs _preview.mjs)",
+      "Bash(node _preview.mjs)"
     ]
   }
 }

@@ -11,8 +11,8 @@ export const DEAL = {
   cityState: 'Naugatuck, CT 06770',                                  // city, state ZIP
   cityLong: 'Naugatuck, Connecticut',                                // long form for the cover subtitle
   status: 'For Sale',                                                // listing status chip
-  type: 'Entitled 51-Unit Development Site · In-Place Retail Income', // asset descriptor (cover)
-  coverImage: '/photos/cover.jpg',                                   // full-bleed cover photo  TODO: drop OM Photos #44
+  type: 'Value-Add Mixed-Use Property + Entitled 51-Unit Development Parcel', // asset descriptor (cover)
+  coverImage: '/photos/cover.jpg',                                   // full-bleed cover photo (OM Photos #28)
   pdfName: 'Salem-Square-Naugatuck-OM.pdf',                          // output filename for the exporter
 }
 

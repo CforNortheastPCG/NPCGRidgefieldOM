@@ -6,6 +6,7 @@ import { PhotoGallery, PhotoComingSoon } from './PhotoPages.jsx'
 import { PHOTO_PAGES } from './photos.js'
 import Divider from './Divider.jsx'
 import RegionalMap from './RegionalMap.jsx'
+import DriveTimeMap from './DriveTimeMap.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
 import { DEAL, ADDR, CITY_STATE, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
@@ -16,18 +17,21 @@ function CoverHero({ pageNum }) {
     <div className="page">
       <div className="cover-hero">
         <img className="cover-hero-img" src={DEAL.coverImage} alt="" />
-        {/* Top scrim so the overlay text reads clearly (replaces the default bottom-weighted shade) */}
-        <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '60%', background: 'linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.85) 100%)', pointerEvents: 'none' }} />
+        {/* Scrim — light top shade so the white logo reads, strong bottom shade for the title */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 38%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.88) 100%)', pointerEvents: 'none' }} />
         {/* NPCG logo — top right */}
         <div className="cover-hero-header" style={{ justifyContent: 'flex-end' }}>
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
-        {/* Title block — top left, top-aligned with the logo */}
-        <div className="cover-hero-overlay" style={{ top: 28, bottom: 'auto', left: 40 }}>
+        {/* Name & address — top left */}
+        <div className="cover-hero-overlay" style={{ top: 40, bottom: 'auto', left: 48, right: 'auto', textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}>
           <div style={{ color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 14 }}>{DEAL.status}</div>
           <div className="cover-hero-name">{DEAL.name}</div>
           <div className="cover-hero-title" style={{ fontSize: 40 }}>{ADDR}</div>
-          <div className="cover-hero-sub">{DEAL.cityLong}</div>
+          <div className="cover-hero-sub" style={{ marginBottom: 0 }}>{DEAL.cityLong}</div>
+        </div>
+        {/* Rule & descriptor — bottom left */}
+        <div className="cover-hero-overlay" style={{ left: 48, right: 'auto', textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}>
           <div className="cover-hero-rule" />
           <div className="cover-hero-prep">{DEAL.type}</div>
         </div>
@@ -72,33 +76,32 @@ function ExecutiveSummary({ pageNum }) {
                 </div>
               </div>
             </div>
-            <p style={{ fontSize: 9.6, lineHeight: 1.48, margin: 0 }}>
-              Northeast Private Client Group is pleased to present <strong>Salem Square</strong>, a fully-entitled
-              51-unit multifamily development opportunity at {ADDR} in Naugatuck, Connecticut, offered at
-              $3,800,000. The 2.69-acre site includes approximately 1.69 acres of excess land approved for a
-              51-unit building, with updated site plans approved by the Naugatuck Zoning Commission in September
-              2025. Ownership has carried the entitlements through three rounds of municipal approvals since 2017,
-              leaving building permits as the remaining step &mdash; a shovel-ready position, not a speculative rezoning.
+            <p style={{ fontSize: 9, lineHeight: 1.46, margin: '0 0 10px' }}>
+              Northeast Private Client Group is pleased to present <strong>Salem Square</strong>, a value-add
+              commercial mixed-use opportunity at {ADDR} in Naugatuck, Connecticut. The 2.69-acre parcel includes an
+              approved 51-unit multifamily development site, so a buyer acquires an income-producing center and a
+              shovel-ready residential project together.
             </p>
-            <p style={{ fontSize: 9.6, lineHeight: 1.48, margin: 0 }}>
-              The entitled land arrives with a built-in income stream. The development parcel shares a single lot
-              with Salem Square, a 13-unit mixed-use retail center: a two-story, &plusmn;19,266 SF building (18,770
-              rentable) built in 1960, with ten ground-floor commercial suites, two apartments, and about 26,000 SF
-              of parking, fronting New Haven Road (Route 63) with direct Route 8 access. The center is 84.6% occupied,
-              and its income covers taxes, insurance, and debt service through the entitlement-to-construction period
-              &mdash; positive carry rather than the negative carry typical of raw development land.
+            <p style={{ fontSize: 9, lineHeight: 1.46, margin: '0 0 10px' }}>
+              Built in 1960, the two-story building holds about 19,266 square feet, 18,770 of it rentable, with ten
+              ground-floor commercial suites and two rear apartments. The property fronts New Haven Road, which is
+              Route 63, with direct access to Route 8. The center sits in the heart of the Naugatuck Valley, with
+              Waterbury and its Metro-North Waterbury Branch terminus about ten minutes north, where the state is
+              building a new $33.2 million station scheduled to open in summer 2027. The commercial tenants are
+              convenience and service businesses, several of them in place for fifteen years or more, including Great
+              China, Rose Spa &amp; Nails, Salem Wine &amp; Spirits, and Mexican Deli.
             </p>
-            <p style={{ fontSize: 9.6, lineHeight: 1.48, margin: 0 }}>
-              On a trailing-twelve basis the center produced $259,227 of effective gross income and $203,218 of NOI.
-              Normalizing escrowed real estate taxes (~$40,337) and insurance (~$16,975), in-place NOI is about
-              $167,602, rising toward $245,217 as the vacant suites lease up and rents reach market. That income
-              supports the basis and offsets carry &mdash; it is not the basis for pricing. The value here is the
-              entitled 51 units, in a borough on Metro-North&rsquo;s Waterbury Branch where a new $33.2 million
-              station opens in summer 2027.
-            </p>
-            <p style={{ fontSize: 9.6, lineHeight: 1.48, margin: 0, color: 'var(--stone)' }}>
-              Qualified parties are invited to request the full offering package and arrange a tour. A detailed
-              breakdown of the opportunity follows on the next page.
+            <p style={{ fontSize: 9, lineHeight: 1.46, margin: '0 0 10px' }}>
+              The opportunity is a commercial center with several clear paths to grow income, paired with a residential
+              development site that adds a second phase. Inside the existing center, a buyer leases up the vacant
+              ground-floor commercial space, marks the occupied suites from about $13.38 per square foot toward the $15
+              to $22 the building achieves on renewal, implements CAM recovery, and converts the vacant rear commercial
+              suite into two apartments. That conversion is proven rather than theoretical, since the two apartments
+              already in the building were created from similar space. On the same parcel, about 1.69 acres of excess
+              land is entitled for a 51-unit multifamily building, with updated site plans approved by the Naugatuck
+              Zoning Commission in September 2025. A buyer can run and improve the center while permitting the
+              residential project, then build into Naugatuck&rsquo;s push for transit-oriented housing around the new
+              station.
             </p>
           </div>
 
@@ -138,7 +141,7 @@ function BuildingDescriptions({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Year Built</span><span className="bldg-val">1960</span></div>
                 <div className="bldg-row"><span className="bldg-label">Zoning</span><span className="bldg-val">R8</span></div>
                 <div className="bldg-row"><span className="bldg-label">Traffic Count</span><span className="bldg-val">16,200 VPD (New Haven Rd / Rte 63)</span></div>
-                <div className="bldg-row"><span className="bldg-label">Parcel ID</span><span className="bldg-val">048-3303 (VisionPID 7366)</span></div>
+                <div className="bldg-row"><span className="bldg-label">Parcel ID</span><span className="bldg-val">048-3303 (MBL N-5E211 · VisionPID 7366)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Occupancy</span><span className="bldg-val">84.6%</span></div>
               </div>
             </div>
@@ -147,7 +150,7 @@ function BuildingDescriptions({ pageNum }) {
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Heat / Hot Water</span><span className="bldg-val">Forced hot air, natural gas / [TO CONFIRM]</span></div>
                 <div className="bldg-row"><span className="bldg-label">Electric</span><span className="bldg-val">Individually metered (16-meter modular, 2020); common areas LL</span></div>
-                <div className="bldg-row"><span className="bldg-label">Water / Sewer / Trash</span><span className="bldg-val">[TO CONFIRM]</span></div>
+                <div className="bldg-row"><span className="bldg-label">Water / Sewer / Trash</span><span className="bldg-val">Landlord paid</span></div>
               </div>
             </div>
           </div>
@@ -332,8 +335,10 @@ function RentRoll({ pageNum }) {
    shown are those carried in the underwriting; real estate taxes and insurance
    were escrowed in the T12 and normalized in the Current/Pro Forma columns. The
    full line-item schedule (electric, water/sewer, trash, etc., held at recent
-   actuals) lives in the BOV / data room. Income here supports the development
-   basis and offsets carry — it is not the basis for pricing. */
+   actuals) lives in the BOV / data room. The pro forma reflects the center's
+   value-add path: commercial lease-up, mark-to-market, CAM recovery, and the
+   Suite 12 residential conversion. NOTE: financials are pending an updated set
+   of numbers from the deal team — table values left as-is until those land. */
 function IncomeExpense({ pageNum }) {
   const tdl = { fontSize: 9, padding: '3px 8px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
   const tds = { fontSize: 9, padding: '3px 8px', textAlign: 'right' }
@@ -432,10 +437,10 @@ function IncomeExpense({ pageNum }) {
         {/* Underwriting notes — full width, two columns */}
         <div className="eyebrow" style={{ marginBottom: 6, fontSize: 9 }}>Underwriting Notes</div>
         <div style={{ columns: 2, columnGap: 26, fontSize: 9.2, lineHeight: 1.5, color: 'var(--graphite)', flex: 1, minHeight: 0 }}>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Holding income, not pricing basis.</strong> The T12 reflects actual reported operations. This income is underwritten to support the development basis and offset carry through the entitlement-to-construction period — not as a stabilized yield. The value is the entitled 51 units.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Rental income.</strong> T12 effective rental income of $256,767 reflects in-place rents with two vacant commercial suites. Current underwriting stabilizes collections to $267,408. Pro forma marks commercial rents to $15&ndash;$22/SF, leases the vacant space, and converts Suite 12 to apartments, lifting effective rental income to $344,242 and EGI to $365,968.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Commercial lease-up &amp; mark-to-market.</strong> Suite 7 (~1,000 SF) is underwritten at $15/SF and Suite 12 (~1,600 SF) converts to two apartments (~$43,200). Occupied suites mark from ~$13.38 toward $15&ndash;$22 on 2026 rollover, raising gross scheduled commercial rent from $229,788 to $319,160.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Taxes, insurance &amp; R&amp;M.</strong> Taxes ($40,337) and insurance ($16,975) were escrowed in the T12 and normalized in the Current/Pro Forma columns. R&amp;M is normalized to $9,633 ($0.50/SF) for a stabilized, locally managed building. Management is 5% of EGI in all periods.</p>
+          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Value-add commercial center.</strong> Current effective rental income of $267,408 reflects in-place rents with the ground-floor commercial vacancy. Pro forma marks commercial rents to $15&ndash;$22/SF, leases the vacant space, converts Suite 12 to apartments, and implements CAM recovery — lifting effective rental income to $344,242 and EGI to $365,968.</p>
+          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Commercial lease-up &amp; mark-to-market.</strong> Suite 7 (~1,000 SF) is underwritten at $15/SF, and occupied suites mark from ~$13.38 toward $15&ndash;$22 on 2026 rollover, raising gross scheduled commercial rent from $229,788 to $319,160.</p>
+          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Residential conversion &amp; CAM recovery.</strong> Suite 12 (~1,600 SF of vacant rear retail) converts to two apartments (~$43,200/yr) — proven, since the two existing units were built from similar space in 2019&ndash;2020 and mark from $1,650 toward $1,800/mo. Pro forma also introduces CAM reimbursement of $19,266 (~$1.00/SF of GBA), recovering costs the landlord currently absorbs.</p>
+          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Other income, taxes, insurance &amp; R&amp;M.</strong> Current other income includes interim lot-storage income from a tenant parking on the development parcel, which burns off at pro forma when the residential project is built. Taxes ($40,337; mill 39.79) and insurance ($16,975) are carried at full market levels; R&amp;M is normalized to $9,633 ($0.50/SF) and management to 5% of EGI in both columns.</p>
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -596,14 +601,14 @@ function CountyOverview({ pageNum }) {
 /* ═══════════════════ INVESTMENT HIGHLIGHTS ═══════════════════ */
 function InvestmentHighlights({ pageNum }) {
   const items = [
-    { head: 'Fully-Entitled 51-Unit Development | Shovel-Ready Upside', body: 'A ±1.69-acre parcel on the same lot is approved for a 51-unit multifamily building, with updated site plans approved by the Naugatuck Zoning Commission in September 2025 and the entitlements carried forward by ownership through three rounds of approvals since 2017. Building permits are the remaining step. This is the core of the opportunity — a substantial, de-risked development position in a town actively encouraging downtown and transit-oriented housing.' },
-    { head: 'Income-Supported Development Basis | Positive Carry', body: 'This is a development opportunity, not a yield play. Salem Square’s in-place retail and apartment income — about $167,602 of normalized NOI today, growing toward $245,217 — covers taxes, insurance, and debt service through the entitlement-to-construction period, so a buyer holds the entitled land on positive cash flow rather than the negative carry typical of raw development sites.' },
-    { head: 'Growing Holding Income | Commercial Lease-Up & Mark-to-Market', body: 'Two vacant ground-floor suites (Suite 7 at about 1,000 SF and Suite 12 at about 1,600 SF) lease up immediately, and the occupied suites — now averaging about $13.38 per SF — mark toward the $15 to $22 achieved on renewal. These steps move gross scheduled commercial rent from $229,788 to $319,160, with several leases expiring in 2026, deepening the income that carries the hold.' },
-    { head: 'Proven Residential Conversion + Rent Growth', body: 'Two apartments built within the building in 2019–2020 lease at $1,650 a month with headroom to $1,800, and the vacant Suite 12 is slated to become two additional units. The in-building residential program both lifts holding income and demonstrates the demand that underwrites the larger 51-unit development.' },
-    { head: 'Strategic Location | Route 8 & New 2027 Transit Station', body: 'The property sits on New Haven Road (Route 63) with direct Route 8 access; Waterbury and its Metro-North Waterbury Branch terminus are about ten minutes north, with Bridgeport and the shoreline beyond. A new $33.2 million station on the branch, opening summer 2027, is being built to anchor transit-oriented development in Naugatuck — a direct demand driver for the entitled units.' },
+    { head: 'Value-Add Commercial | Lease-Up, Mark-to-Market & CAM Recovery', body: 'A buyer leases up the vacant ground-floor suite at about $15 per SF, marks the occupied suites from roughly $13.38 toward the $15 to $22 the building achieves on renewal, and implements CAM recovery — moving gross scheduled commercial rent from $229,788 to $319,160, with several leases rolling in 2026.' },
+    { head: 'Proven Residential Conversion | Vacant Suite to Two Apartments', body: 'The vacant rear suite (about 1,600 SF) converts into two apartments underwriting to roughly $43,200 a year — a proven step, since the two existing apartments were created from similar space in 2019 and 2020 and lease at $1,650 with headroom to $1,800 a month.' },
+    { head: 'Entitled 51-Unit Development Parcel | Shovel-Ready Second Phase', body: 'About 1.69 acres of the lot is entitled for a 51-unit multifamily building, with updated site plans approved by the Naugatuck Zoning Commission in September 2025. Building permits are the next step, so a buyer can build the residential project while running the center — a de-risked second phase, not a speculative rezoning.' },
+    { head: 'Mixed-Use Income | Retail Plus Residential', body: 'Ten commercial suites and two apartments spread the rent roll across complementary demand on 2.69 acres, blending service-retail cash flow with residential stability.' },
     { head: 'Long-Tenured, Service-Oriented Tenancy', body: 'The commercial tenants are convenience and service businesses — restaurants, a package store, a nail salon, and personal-service operators — several in place fifteen-plus years, a mix that diversifies the rent roll and holds up well against online competition.' },
+    { head: 'Strategic Location | Route 8 & New 2027 Transit Station', body: 'The property sits on New Haven Road (Route 63) with direct Route 8 access and Waterbury about ten minutes north, with Bridgeport and the shoreline beyond. A new $33.2 million Metro-North station on the Waterbury Branch, opening summer 2027, anchors transit-oriented development in Naugatuck — a direct demand driver for the entitled units.' },
   ]
-  const thumbs = ['/photos/parcel-1.jpg', '/photos/ext-1.jpg', '/photos/comm-1.jpg', '/photos/ext-4.jpg', '/photos/aerial-1.jpg', '/photos/ext-5.jpg']
+  const thumbs = ['/photos/comm-1.jpg', '/photos/apt-1.jpg', '/photos/parcel-1.jpg', '/photos/ext-1.jpg', '/photos/comm-5.jpg', '/photos/aerial-1.jpg']
   return (
     <div className="page">
       <PageHeader section="Investment Highlights" />
@@ -648,6 +653,7 @@ function App() {
     <Divider eyebrow="03" title="Location & Market" image="/photos/aerial-1.jpg" />,
     <CityOverview />,
     <LocationMap />,
+    <DriveTimeMap />,
     <CountyOverview />,
     <RegionalMap />,
     <Divider eyebrow="04" title="The Team" image="/photos/parcel-1.jpg" />,

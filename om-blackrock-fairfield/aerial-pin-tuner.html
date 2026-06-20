@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Aerial Point Tuner</title>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; background: #1b1b1b; color: #eee; padding: 20px; }
+  h2 { margin: 0 0 4px; } .hint { color: #999; font-size: 12px; margin: 0 0 16px; max-width: 880px; }
+  .block { margin-bottom: 34px; }
+  .row { display: flex; gap: 20px; align-items: flex-start; }
+  /* Full-page box aspect = 960:742 = 1.2938, object-fit:cover (same crop as the OM page). */
+  .stage { position: relative; width: 660px; height: 510px; flex-shrink: 0; border: 1px solid #444; border-radius: 4px; overflow: hidden; }
+  .stage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* point pins */
+  .pin { position: absolute; transform: translate(-50%, -100%); cursor: grab; user-select: none; display: flex; flex-direction: column; align-items: center; }
+  .pin:active, .street:active { cursor: grabbing; }
+  .pin.sel .chip, .street.sel .lbl { outline: 2px solid #6cf; outline-offset: 1px; }
+  .pin .chip { background: rgba(20,24,30,0.85); color: #fff; padding: 4px 9px; border-radius: 4px; font-size: 11px; font-weight: 700; white-space: nowrap; text-align: center; }
+  .pin.ml .chip { white-space: pre-line; text-align: left; max-width: 240px; line-height: 1.5; }
+  .pin.primary .chip { padding: 5px 12px; }
+  .pin .eyebrow { display: block; color: #F8971D; text-transform: uppercase; letter-spacing: 0.1em; font-size: 8px; }
+  .pin .title { display: block; color: #F8971D; font-weight: 800; font-size: 11.5px; border-bottom: 1px solid rgba(255,255,255,0.28); padding-bottom: 3px; margin-bottom: 4px; }
+  .pin .leader { width: 2px; height: 16px; background: #F8971D; box-shadow: 0 1px 3px rgba(0,0,0,0.55); }
+  .pin .dot { width: 7px; height: 7px; border-radius: 50%; background: #F8971D; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+  .pin.primary .dot { width: 10px; height: 10px; }
+  /* street ribbons */
+  .street { position: absolute; transform: translate(-50%, -50%); cursor: grab; user-select: none; }
+  .street .lbl { background: rgba(20,24,30,0.66); color: #fff; text-transform: uppercase; letter-spacing: 0.16em; font-size: 10px; font-weight: 700; padding: 3px 12px; border-radius: 3px; white-space: nowrap; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+  /* panel */
+  .panel { flex: 1; min-width: 380px; }
+  .prow { display: flex; gap: 7px; align-items: flex-start; margin-bottom: 8px; padding: 4px; border-radius: 4px; }
+  .prow.selrow { background: #243; }
+  .prow.streetrow { background: #2a2a33; }
+  .mid { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .mid input[type=text] { padding: 4px 8px; font-size: 12px; }
+  .mid textarea { padding: 5px 8px; font-size: 13px; font-family: Arial; resize: vertical; min-height: 24px; }
+  .ang { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #bb9; }
+  .ang input[type=range] { flex: 1; }
+  .ang input[type=number] { width: 52px; }
+  .prow .xy { color: #888; font-size: 11px; width: 90px; flex-shrink: 0; padding-top: 4px; }
+  .prow .ctl { display: flex; flex-direction: column; gap: 3px; align-items: flex-start; flex-shrink: 0; }
+  label.cb { font-size: 10.5px; color: #ccc; display: flex; align-items: center; gap: 2px; white-space: nowrap; }
+  .prow button.del { padding: 3px 8px; cursor: pointer; }
+  .bar { margin: 6px 0 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .bar button { padding: 7px 12px; cursor: pointer; }
+  pre { background: #000; color: #6cf; padding: 10px; border-radius: 4px; font-size: 12px; white-space: pre-wrap; word-break: break-word; }
+</style>
+</head>
+<body>
+  <h2>Tune points &amp; street labels</h2>
+  <p class="hint">Pre-loaded with current data. <b>Drag</b> any pin/street to move it. <b>Streets</b> (St) are road ribbons with an <b>angle</b> slider — rotate to run along the road, no dot. <b>Group:</b> tick the ◻ on several rows then <b>Merge → 1 pin</b> to fold them into one callout (set its title + items). <b>P</b> = golden Subject Property. <b>+ Add street</b> for a new road label. Then <b>Copy points</b> and paste back to me.</p>
+
+  <div class="block" data-img="1">
+    <h3>Aerial 1 — page 27</h3>
+    <div class="row">
+      <div class="stage"><img src="/photos/ridgefield-context-1.jpg" alt="aerial 1" /></div>
+      <div class="panel">
+        <div class="list"></div>
+        <div class="bar"><button class="add">+ Add point</button><button class="addst">+ Add street</button><button class="merge">Merge → 1 pin</button><button class="selall">Select all</button><button class="selnone">Clear sel</button></div>
+        <pre class="out"></pre>
+        <button class="copy">Copy points</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" data-img="2">
+    <h3>Aerial 2 — page 28</h3>
+    <div class="row">
+      <div class="stage"><img src="/photos/ridgefield-context-2.jpg" alt="aerial 2" /></div>
+      <div class="panel">
+        <div class="list"></div>
+        <div class="bar"><button class="add">+ Add point</button><button class="addst">+ Add street</button><button class="merge">Merge → 1 pin</button><button class="selall">Select all</button><button class="selnone">Clear sel</button></div>
+        <pre class="out"></pre>
+        <button class="copy">Copy points</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Pre-loaded with the points currently in App.jsx.
+  const data = {
+    '1': [
+      { x: 72.3, y: 80.4, label: '613-615 Main Street', primary: true },
+      { x: 41.1, y: 40.7, title: 'Downtown Ridgefield', label: "Tequila Escape\nBrasserie Saint Germain\nTablao Wine Bar\nBailey's Backyard\nR House\nThe Lantern\nTazza Cafe\nQueen B Coffee Co.\nCorner Cafe" },
+      { x: 7.8, y: 39.2, label: 'Branchville Station' },
+      { x: 16.3, y: 59.2, label: 'Casagmo Condo Association' },
+      { x: 52.2, y: 90.4, kind: 'street', angle: 70, label: 'Main Street' },
+      { x: 28.9, y: 92.4, kind: 'street', angle: -13, label: 'Danbury Road' },
+    ],
+    '2': [
+      { x: 45.8, y: 80.6, label: '613-615 Main Street', primary: true },
+      { x: 40.8, y: 35.2, title: 'Copps Hill Commons', label: "Ridgefield Organics & Specialty\nJersey Mike's\nStop & Shop\nMichaels\nMarshalls" },
+      { x: 66, y: 48, label: 'Walgreens' },
+      { x: 70.3, y: 37.2, title: '86 Danbury Road', label: "Starbucks\nChase\nRidgefield Bicycle Company\nPosa Ristorante & Vineria\nFairfield County Bank Operations Center" },
+      { x: 49.7, y: 52.2, label: 'Girolmetti Court Shopping Center' },
+      { x: 68, y: 71.7, kind: 'street', angle: 15, label: 'Danbury Road' },
+      { x: 36.9, y: 62.5, kind: 'street', angle: 9, label: 'Main Street' },
+    ],
+  };
+  let drag = null;
+
+  const blocks = {};
+  document.querySelectorAll('.block').forEach(b => {
+    const img = b.dataset.img;
+    blocks[img] = { stage: b.querySelector('.stage'), list: b.querySelector('.list'), out: b.querySelector('.out') };
+    b.querySelector('.add').addEventListener('click', () => { data[img].push({ x: 50, y: 50, label: 'New point' }); render(img); });
+    b.querySelector('.addst').addEventListener('click', () => { data[img].push({ x: 50, y: 60, kind: 'street', angle: 0, label: 'Street Name' }); render(img); });
+    b.querySelector('.merge').addEventListener('click', () => mergeSelected(img));
+    b.querySelector('.selall').addEventListener('click', () => { data[img].forEach(p => p._sel = true); render(img); });
+    b.querySelector('.selnone').addEventListener('click', () => { data[img].forEach(p => p._sel = false); render(img); });
+    b.querySelector('.copy').addEventListener('click', () => navigator.clipboard.writeText(jsFor(img)));
+  });
+
+  function mergeSelected(img) {
+    const sel = data[img].filter(p => p._sel && p.kind !== 'street');
+    if (sel.length < 2) { alert('Tick at least 2 non-street points to merge.'); return; }
+    const title = (prompt('Group title? (e.g. "Downtown Dining") — blank for none', '') || '').trim();
+    const x = round(sel.reduce((a, p) => a + p.x, 0) / sel.length);
+    const y = round(sel.reduce((a, p) => a + p.y, 0) / sel.length);
+    const merged = { x, y, label: sel.map(p => p.label).join('\n'), primary: sel.some(p => p.primary) };
+    if (title) merged.title = title;
+    const firstIdx = data[img].findIndex(p => p._sel && p.kind !== 'street');
+    data[img] = data[img].filter(p => !(p._sel && p.kind !== 'street'));
+    data[img].splice(firstIdx, 0, merged);
+    render(img);
+  }
+
+  function render(img) { renderPins(img); renderList(img); blocks[img].out.textContent = jsFor(img); }
+
+  function renderPins(img) {
+    const { stage, out } = blocks[img];
+    stage.querySelectorAll('.pin,.street').forEach(el => el.remove());
+    data[img].forEach((p) => {
+      let el;
+      if (p.kind === 'street') {
+        el = document.createElement('div');
+        el.className = 'street' + (p._sel ? ' sel' : '');
+        el.style.left = p.x + '%'; el.style.top = p.y + '%';
+        el.style.transform = 'translate(-50%, -50%) rotate(' + (p.angle || 0) + 'deg)';
+        el.innerHTML = '<div class="lbl">' + escapeHtml(p.label) + '</div>';
+      } else {
+        const box = !!p.title || p.label.includes('\n');
+        el = document.createElement('div');
+        el.className = 'pin' + (p.primary ? ' primary' : '') + (box ? ' ml' : '') + (p._sel ? ' sel' : '');
+        el.style.left = p.x + '%'; el.style.top = p.y + '%';
+        el.innerHTML = '<div class="chip">' + (p.primary ? '<span class="eyebrow">Subject Property</span>' : '') +
+          (p.title ? '<span class="title">' + escapeHtml(p.title) + '</span>' : '') +
+          escapeHtml(p.label) + '</div><div class="leader"></div><div class="dot"></div>';
+      }
+      el.addEventListener('mousedown', e => startDrag(img, p, e));
+      stage.appendChild(el);
+    });
+    out.textContent = jsFor(img);
+  }
+
+  function renderList(img) {
+    const { list } = blocks[img];
+    list.innerHTML = '';
+    data[img].forEach((p, idx) => {
+      const street = p.kind === 'street';
+      const row = document.createElement('div');
+      row.className = 'prow' + (p._sel ? ' selrow' : '') + (street ? ' streetrow' : '');
+      const rows = Math.min(7, p.label.split('\n').length);
+      const titleInput = street ? '' : '<input type="text" class="ttl" placeholder="title (optional)" value="' + escapeAttr(p.title || '') + '" />';
+      const angleCtl = street ? '<div class="ang">∠<input type="range" class="angr" min="-90" max="90" value="' + (p.angle || 0) + '" /><input type="number" class="angn" min="-90" max="90" value="' + (p.angle || 0) + '" />°</div>' : '';
+      row.innerHTML =
+        '<label class="cb"><input type="checkbox" class="grp" ' + (p._sel ? 'checked' : '') + ' /></label>' +
+        '<div class="mid">' + titleInput + '<textarea rows="' + rows + '">' + escapeHtml(p.label) + '</textarea>' + angleCtl + '</div>' +
+        '<span class="xy">x:' + round(p.x) + ' y:' + round(p.y) + '</span>' +
+        '<div class="ctl">' +
+          '<label class="cb"><input type="checkbox" class="pri" ' + (p.primary ? 'checked' : '') + (street ? ' disabled' : '') + ' />P</label>' +
+          '<label class="cb"><input type="checkbox" class="st" ' + (street ? 'checked' : '') + ' />St</label>' +
+          '<button class="del">✕</button>' +
+        '</div>';
+      row._xy = row.querySelector('.xy'); row._point = p;
+      row.querySelector('.grp').addEventListener('change', e => { p._sel = e.target.checked; render(img); });
+      row.querySelector('textarea').addEventListener('input', e => { p.label = e.target.value; renderPins(img); });
+      if (!street) row.querySelector('.ttl').addEventListener('input', e => { p.title = e.target.value || undefined; renderPins(img); });
+      if (street) {
+        const r = row.querySelector('.angr'), n = row.querySelector('.angn');
+        const setA = v => { p.angle = Number(v); r.value = v; n.value = v; renderPins(img); };
+        r.addEventListener('input', e => setA(e.target.value));
+        n.addEventListener('input', e => setA(e.target.value));
+      }
+      row.querySelector('.pri').addEventListener('change', e => {
+        if (e.target.checked) data[img].forEach((q, j) => q.primary = (j === idx)); else p.primary = false;
+        render(img);
+      });
+      row.querySelector('.st').addEventListener('change', e => {
+        if (e.target.checked) { p.kind = 'street'; if (p.angle == null) p.angle = 0; p.primary = false; p.title = undefined; }
+        else { delete p.kind; delete p.angle; }
+        render(img);
+      });
+      row.querySelector('.del').addEventListener('click', () => { data[img].splice(idx, 1); render(img); });
+      list.appendChild(row);
+    });
+  }
+
+  function updateXY(img) {
+    blocks[img].list.querySelectorAll('.prow').forEach(row => {
+      if (row._xy && row._point) row._xy.textContent = 'x:' + round(row._point.x) + ' y:' + round(row._point.y);
+    });
+  }
+
+  function startDrag(img, p, e) {
+    e.preventDefault();
+    const moving = p._sel ? data[img].filter(q => q._sel) : [p];
+    drag = { img, sx: e.clientX, sy: e.clientY, moving: moving.map(q => ({ p: q, ox: q.x, oy: q.y })) };
+  }
+  window.addEventListener('mousemove', e => {
+    if (!drag) return;
+    const r = blocks[drag.img].stage.getBoundingClientRect();
+    const dx = ((e.clientX - drag.sx) / r.width) * 100;
+    const dy = ((e.clientY - drag.sy) / r.height) * 100;
+    drag.moving.forEach(m => { m.p.x = Math.max(0, Math.min(100, m.ox + dx)); m.p.y = Math.max(0, Math.min(100, m.oy + dy)); });
+    renderPins(drag.img); updateXY(drag.img);
+  });
+  window.addEventListener('mouseup', () => { drag = null; });
+
+  function jsFor(img) {
+    const lines = data[img].map(p => {
+      const lbl = esc(p.label);
+      if (p.kind === 'street') return "  { x: " + round(p.x) + ", y: " + round(p.y) + ", kind: 'street', angle: " + (p.angle || 0) + ", label: '" + lbl + "' },";
+      const t = p.title ? "title: '" + esc(p.title) + "', " : '';
+      return "  { x: " + round(p.x) + ", y: " + round(p.y) + ", " + t + "label: '" + lbl + "'" + (p.primary ? ', primary: true }' : ' }') + ',';
+    });
+    return 'points={[\n' + lines.join('\n') + '\n]}';
+  }
+
+  function esc(s) { return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n'); }
+  function round(n) { return Math.round(n * 10) / 10; }
+  function escapeHtml(s) { return s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])); }
+  function escapeAttr(s) { return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+  render('1'); render('2');
+</script>
+</body>
+</html>

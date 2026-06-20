@@ -1,0 +1,102 @@
+import { PageHeader, PageFooter } from './Shell.jsx'
+import { PARCEL } from './parcel.js'
+
+/* ═══════════════════ SITE MAP ═══════════════════
+   Google Static (hybrid satellite) map of the parcel at 2836 Fairfield Avenue,
+   with the real parcel outline — traced from the Connecticut State Parcel Layer
+   2023 (Bridgeport BEGIS) — drawn as a golden polygon over the aerial. Falls
+   back to a notice if no Maps key is set. Requires VITE_GOOGLE_MAPS_API_KEY
+   (enable Maps Static API). */
+
+const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+
+function buildStaticMapUrl() {
+  // Parcel outline: golden stroke + translucent golden fill.
+  const ring = PARCEL.ring.map(([lat, lng]) => `${lat},${lng}`).join('|')
+  const path = `path=${encodeURIComponent(`color:0xF8971Dff|weight:4|fillcolor:0xF8971D33|${ring}`)}`
+  const params = [
+    `center=${PARCEL.center.lat},${PARCEL.center.lng}`,
+    'zoom=19',
+    'size=620x540',
+    'scale=2',
+    'maptype=hybrid',
+    'format=png',
+    path,
+    `key=${API_KEY}`,
+  ]
+  return `https://maps.googleapis.com/maps/api/staticmap?${params.join('&')}`
+}
+
+const FACTS = [
+  { k: 'Parcel ID', v: '08070-100-55 (Bridgeport)' },
+  { k: 'Parcel', v: '0.61 Acres (~26,572 SF) on Fairfield Avenue' },
+  { k: 'Building', v: '21,048 SF gross · 3 stories + basement · elevator' },
+  { k: 'Units', v: '16 total — 15 apartments over 1 ground-floor retail' },
+  { k: 'Frontage', v: 'Fairfield Avenue retail corridor, Black Rock' },
+  { k: 'Parking', v: 'On-site surface parking' },
+]
+
+export default function SiteMap({ pageNum }) {
+  const mapUrl = API_KEY ? buildStaticMapUrl() : null
+  return (
+    <div className="page">
+      <PageHeader section="Site Map" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2 }}>
+          Site <span style={{ color: '#F8971D' }}>Map</span>
+        </div>
+        <div className="title-rule" />
+        <div style={{ fontSize: 11, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 12 }}>
+          A single mixed-use building on a 0.61-acre parcel fronting Fairfield Avenue in the heart of Black Rock,
+          with on-site surface parking and direct exposure to the neighborhood&rsquo;s dining and retail corridor.
+          The boundary below is the recorded parcel outline from Bridgeport&rsquo;s GIS.
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 16, flex: 1, minHeight: 0 }}>
+          {/* AERIAL MAP WITH PARCEL OUTLINE */}
+          <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', minHeight: 0, background: 'var(--linen)' }}>
+            {mapUrl ? (
+              <img
+                src={mapUrl}
+                alt="Aerial site map of 2836 Fairfield Avenue with the Bridgeport GIS parcel outline"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            ) : (
+              <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--linen)', color: 'var(--stone)', fontSize: 10, textAlign: 'center', padding: 24 }}>
+                Set VITE_GOOGLE_MAPS_API_KEY in .env.local and enable Maps Static API to render the parcel map.
+              </div>
+            )}
+            {/* Subject label pinned over the parcel */}
+            {mapUrl && (
+              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+                <div style={{ background: 'rgba(20,24,30,0.86)', color: '#fff', padding: '4px 11px', borderRadius: 4, whiteSpace: 'nowrap', boxShadow: '0 2px 10px rgba(0,0,0,0.6)' }}>
+                  <span style={{ display: 'block', color: '#F8971D', textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: 8, fontWeight: 700 }}>Subject Property</span>
+                  <span style={{ fontSize: 11.5, fontWeight: 700 }}>2836 Fairfield Avenue</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* SITE FACTS */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 13, minHeight: 0, overflow: 'hidden', justifyContent: 'center' }}>
+            {FACTS.map(f => (
+              <div key={f.k} style={{ paddingBottom: 11, borderBottom: '1px solid var(--border)' }}>
+                <div style={{ fontSize: 9.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--golden)' }}>{f.k}</div>
+                <div style={{ fontSize: 12, color: 'var(--carbon)', marginTop: 2, lineHeight: 1.4 }}>{f.v}</div>
+              </div>
+            ))}
+            <div style={{ fontSize: 11, lineHeight: 1.55, color: 'var(--graphite)' }}>
+              The elevator-served building places all 15 apartments above a high-visibility retail unit, capturing
+              both residential demand and Fairfield Avenue foot traffic on a single, walkable parcel.
+            </div>
+            <div style={{ fontSize: 7.8, color: 'var(--stone)', lineHeight: 1.4 }}>
+              Parcel boundary: Connecticut State Parcel Layer 2023 (Bridgeport BEGIS). Aerial: Google. Outline
+              approximate — verify against survey.
+            </div>
+          </div>
+        </div>
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}

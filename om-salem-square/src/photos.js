@@ -4,7 +4,7 @@
    top with a row of `tiles` beneath, or (no hero) `tiles` lay out as a 2×2 grid.
 
    Every photo selected in the OM outline is shown across these pages:
-     Cover #44 (deal.js) · Aerial #1 · Location/Area #7,#6 · Parcel #11,#20,#21
+     Cover #28 (deal.js) · Aerial #1 · Location/Area #7,#6 · Parcel #11,#20,#21
      Exterior #27,#37,#29,#38,#56,#57,#58,#63,#53,#65
      Commercial Interiors #70,#72,#59,#60,#67,#68 · Apartments #51
    NOTE: outline also lists apartments #46–#50, which were not in the supplied

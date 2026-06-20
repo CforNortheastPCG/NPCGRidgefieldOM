@@ -6,6 +6,7 @@ import { PhotoGallery, PhotoComingSoon } from './PhotoPages.jsx'
 import { PHOTO_PAGES } from './photos.js'
 import Divider from './Divider.jsx'
 import RegionalMap from './RegionalMap.jsx'
+import DriveTimeMap from './DriveTimeMap.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
 import { DEAL, ADDR, CITY_STATE, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
@@ -72,15 +73,15 @@ function ExecutiveSummary({ pageNum }) {
               2011 and 2013.
             </p>
             <p style={{ fontSize: 11.4, lineHeight: 1.5, marginBottom: 8 }}>
-              On a trailing-twelve basis the property produced $271,484 of effective gross income and $184,718 of NOI.
-              Adding back escrowed real estate taxes (~$40,959) and insurance (~$14,375) puts normalized in-place NOI
-              near $148,160 &mdash; a 6.05% going-in cap at the offering price. As the vacant suites lease up and rents
-              reach achievable levels, pro forma NOI rises to roughly $181,203, about 7.40%. Route 8 puts Waterbury and
-              its Metro-North terminus 10 to 15 minutes south.
+              The property presents a compelling value-add mixed-use opportunity with multiple paths to grow revenue.
+              A new buyer can lease the two vacant commercial suites, bring residential and commercial rents to levels
+              established by the market, and recover more of the water and sewer cost through CAM &mdash; moving
+              normalized in-place NOI of about $158,400 (a 6.47% going-in cap) toward roughly $191,443, about 7.81%.
             </p>
             <p style={{ fontSize: 11.4, lineHeight: 1.5, color: 'var(--stone)' }}>
-              Qualified parties are invited to request the full offering package and arrange a tour. The detailed
-              investment highlights follow on the next page.
+              The tax basis is stable. Thomaston completed its town-wide revaluation in 2025, which fixes the
+              property&rsquo;s assessed value through the next revaluation in 2030, and Connecticut does not reassess on
+              sale, so the assessment will not step up at closing.
             </p>
           </div>
 
@@ -158,8 +159,8 @@ function BuildingDescriptions({ pageNum }) {
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$2,450,000</span></div>
                 <div className="bldg-row"><span className="bldg-label">Price / Unit · / SF</span><span className="bldg-val">$144,100 · $168 / SF</span></div>
-                <div className="bldg-row"><span className="bldg-label">In-Place NOI (Norm.)</span><span className="bldg-val">$148,160 · 6.05% cap</span></div>
-                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$181,203 · 7.40% cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">In-Place NOI (Norm.)</span><span className="bldg-val">$158,400 · 6.47% cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$191,443 · 7.81% cap</span></div>
               </div>
             </div>
           </div>
@@ -246,16 +247,16 @@ function BarChartCard({ title, data, note }) {
    in-place vs pro forma. Per-suite/per-unit detail lives in the BOV / data room. */
 function RentRoll({ pageNum }) {
   const rows = [
+    { comp: 'Apartments', count: '10 units', inPlace: '$175,800', pf: '$196,800', note: 'Avg $1,465/mo → $1,640 pro forma · private rear access' },
     { comp: 'Commercial Retail', count: '7 suites', inPlace: '$84,900', pf: '$106,300', note: 'Suites 4 & 6 vacant (~500 SF ea.) · mark to $17.50–$20/SF' },
-    { comp: 'Apartments', count: '10 units', inPlace: '$1,300–$1,600/mo', pf: 'High-achieved', note: 'Private rear ground-level access' },
   ]
   const useMix = [
     { label: 'Apartments', value: 10, color: '#3F4753' },
     { label: 'Commercial Suites', value: 7, color: '#F8971D' },
   ]
-  const commercialUpside = [
-    { label: 'In-Place', value: 84900, color: '#3F4753' },
-    { label: 'Pro Forma', value: 106300, color: '#F8971D' },
+  const grossRent = [
+    { label: 'In-Place', value: 260700, color: '#3F4753' },
+    { label: 'Pro Forma', value: 303100, color: '#F8971D' },
   ]
   return (
     <div className="page">
@@ -278,22 +279,23 @@ function RentRoll({ pageNum }) {
             <tr className="total-row">
               <td><strong>Total</strong></td>
               <td style={{ textAlign: 'center' }}><strong>17 units</strong></td>
-              <td style={{ textAlign: 'right' }}><strong>88.2% occ.</strong></td>
-              <td style={{ textAlign: 'right' }}></td>
-              <td style={{ fontSize: 9.5, color: 'var(--stone)' }}>Per April 30, 2026 rent roll</td>
+              <td style={{ textAlign: 'right' }}><strong>$260,700</strong></td>
+              <td style={{ textAlign: 'right' }}><strong>$303,100</strong></td>
+              <td style={{ fontSize: 9.5, color: 'var(--stone)' }}>Gross scheduled rent · 88.2% occ. (Apr 30, 2026)</td>
             </tr>
           </tbody>
         </table>
         <div style={{ fontSize: 8.5, color: 'var(--stone)', marginTop: 6, lineHeight: 1.45 }}>
-          Commercial figures are gross scheduled rent (annual). Tenants include Thomaston Smoke &amp; Vape, KC&rsquo;s
-          Package Store, Elegant Nail &amp; Spa, S &amp; S Laundry, and a Suite 9 service tenant; two leases date to
-          2011 and 2013. Effective and normalized figures appear on the Income &amp; Expense page; per-suite and
-          per-unit detail is in the data room.
+          Figures are gross scheduled rent (annual); the ten apartments average $1,465/mo in place. Tenants include
+          Thomaston Smoke &amp; Vape, KC&rsquo;s Package Store, Elegant Nail &amp; Spa, S &amp; S Laundry, and a Suite 9
+          service tenant; two leases date to 2011 and 2013. Water and sewer is landlord-paid and partly recovered
+          through CAM, with room to raise recovery. Effective and normalized figures appear on the Income &amp;
+          Expense page; per-suite and per-unit detail is in the data room.
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 40, marginTop: 40, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
           <ChartCard title="Units by Use" data={useMix} centerLabel="17" centerSub="UNITS" size={170} />
-          <BarChartCard title="Commercial GSR — In-Place vs Pro Forma" data={commercialUpside} note="+$21,400 · +25% lease-up & mark-to-market" />
+          <BarChartCard title="Gross Scheduled Rent — In-Place vs Pro Forma" data={grossRent} note="+$42,400 · +16% residential & commercial upside" />
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -318,16 +320,16 @@ function IncomeExpense({ pageNum }) {
 
   const noi = [
     { label: 'T12 NOI', val: '$184,718' },
-    { label: 'In-Place (Normalized) NOI', val: '$148,160' },
-    { label: 'Pro Forma NOI', val: '$181,203' },
+    { label: 'In-Place (Normalized) NOI', val: '$158,400' },
+    { label: 'Pro Forma NOI', val: '$191,443' },
   ]
 
   const income = [
-    ['Effective Rental Income', '$255,705', 'stabilized¹', '$282,610'],
-    ['Other Income', '$15,779', 'held¹', '$15,779'],
+    ['Effective Rental Income', '$255,705', '$251,910', '$282,610'],
+    ['Other Income', '$15,779', '$15,779', '$15,779'],
   ]
   const expenses = [
-    ['Real Estate Taxes', 'escrowed³', '$40,959', '$40,959'],
+    ['Real Estate Taxes', 'escrowed³', '$30,719', '$30,719'],
     ['Property Insurance', 'escrowed³', '$14,375', '$14,375'],
     ['Repairs & Maintenance', '$21,357', '$7,307', '$7,307'],
     ['All Other Operating', 'actuals⁴', 'actuals⁴', 'actuals⁴'],
@@ -380,7 +382,7 @@ function IncomeExpense({ pageNum }) {
           <Cols /><Head first="Income" />
           <tbody>
             {income.map(Row)}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$271,484</td><td style={totBg}>&mdash;&sup1;</td><td style={totBg}>$298,389&sup2;</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$271,484</td><td style={totBg}>$267,689&sup1;</td><td style={totBg}>$298,389&sup2;</td></tr>
           </tbody>
         </table>
         {/* Operating expenses — full width */}
@@ -389,14 +391,14 @@ function IncomeExpense({ pageNum }) {
           <Cols /><Head first="Expense" />
           <tbody>
             {expenses.map(Row)}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Operating Expense</td><td style={totBg}>$86,766</td><td style={totBg}>&mdash;&sup1;</td><td style={totBg}>$117,186</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$184,718</td><td style={noiBg}>$148,160</td><td style={noiBg}>$181,203</td></tr>
-            <tr><td style={{ ...capBg, textAlign: 'left' }}>Cap Rate on $2,450,000</td><td style={capBg}>&mdash;</td><td style={capBg}>6.05%</td><td style={capBg}>7.40%</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Operating Expense</td><td style={totBg}>$86,766</td><td style={totBg}>$109,289</td><td style={totBg}>$106,946</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$184,718</td><td style={noiBg}>$158,400</td><td style={noiBg}>$191,443</td></tr>
+            <tr><td style={{ ...capBg, textAlign: 'left' }}>Cap Rate on $2,450,000</td><td style={capBg}>&mdash;</td><td style={capBg}>6.47%</td><td style={capBg}>7.81%</td></tr>
           </tbody>
         </table>
         <div style={{ fontSize: 7, color: 'var(--stone)', marginBottom: 8, lineHeight: 1.4 }}>
-          <sup>1</sup> Current (normalized in-place) reflects stabilized collections with escrowed taxes and
-          insurance added back; EGI and total expense are reconciled in the BOV. <sup>2</sup> Pro Forma EGI = pro
+          <sup>1</sup> Current (normalized in-place) holds the two vacant commercial suites and applies a 5%
+          residential vacancy and collection loss, with the now-set taxes and insurance loaded in. <sup>2</sup> Pro Forma EGI = pro
           forma effective rental income + other income held at T12 actuals. <sup>3</sup> RE taxes and insurance
           were escrowed in the T12 and normalized thereafter. <sup>4</sup> Electric, water &amp; sewer, trash, and
           landscaping &amp; snow removal held at 2025 actuals across all periods; management underwritten at 5% of
@@ -406,10 +408,10 @@ function IncomeExpense({ pageNum }) {
         {/* Underwriting notes — full width, two columns */}
         <div className="eyebrow" style={{ marginBottom: 6, fontSize: 9 }}>Underwriting Notes</div>
         <div style={{ columns: 2, columnGap: 26, fontSize: 9.2, lineHeight: 1.5, color: 'var(--graphite)', flex: 1, minHeight: 0 }}>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Going-in basis.</strong> At $2,450,000 the offering prices to $144,100 per unit and $168/SF — a 6.05% going-in cap on normalized in-place NOI and a 7.40% pro forma cap, with room to grow rents across both the residential and commercial income streams.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Rental income.</strong> T12 effective rental income of $255,705 reflects in-place rents with two vacant commercial suites and one newly signed apartment still ramping. The current underwriting leases the vacant suites and stabilizes collections. Pro forma marks commercial rents to $17.50&ndash;$20/SF and residential rents to high-achieved levels, raising effective rental income to $282,610.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Commercial lease-up &amp; mark-to-market.</strong> Suites 4 and 6 (~500 SF each) are underwritten at $15/SF. Occupied suites mark from ~$14.20 toward $17.50&ndash;$20 on 2026 rollover, raising gross scheduled commercial rent from ~$84,900 to ~$106,300.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Taxes, insurance &amp; R&amp;M.</strong> Taxes ($40,959) and insurance ($14,375) were escrowed in the T12 and normalized in the Current/Pro Forma columns. R&amp;M ran high in the T12 ($21,357) and is normalized to $7,307 ($0.53/SF) for a stabilized, locally managed building. Management is underwritten at 5% of EGI.</p>
+          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Going-in basis.</strong> At $2,450,000 the offering prices to $144,100 per unit and $168/SF — a 6.47% going-in cap on normalized in-place NOI and a 7.81% pro forma cap, with room to grow rents across both the residential and commercial income streams.</p>
+          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Rental income.</strong> Current normalized rental income of $251,910 applies a 5% residential vacancy and holds the two vacant commercial suites. Pro forma marks commercial rents to $17.50&ndash;$20/SF and lifts the ten apartments from an average $1,465 toward $1,640, raising effective rental income to $282,610 (residential $175,800 &rarr; $196,800; commercial $84,900 &rarr; $106,300).</p>
+          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Commercial lease-up &amp; mark-to-market.</strong> Suites 4 and 6 (~500 SF each) are underwritten at $15/SF. Occupied suites mark from ~$14.20 toward $17.50&ndash;$20 on 2026 rollover, raising gross scheduled commercial rent from ~$84,900 to ~$106,300, with added upside from raising CAM water recovery.</p>
+          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Taxes, insurance &amp; R&amp;M.</strong> Taxes ($30,719) and insurance ($14,375) were escrowed in the T12 and normalized in the Current/Pro Forma columns. Taxes reflect the 2025 town-wide revaluation at the now-set Grand List mill rate of 27.21; Connecticut does not reassess on sale, so the assessment is fixed through the 2030 revaluation and will not step up at closing. R&amp;M ran high in the T12 ($21,357) and is normalized to $7,307 ($0.50/SF). Management is underwritten at 5% of EGI.</p>
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -477,7 +479,7 @@ function CityOverview({ pageNum }) {
               construction, Seth Thomas Park renovations, and a stated focus on housing and economic development.
               Thomaston is not itself a Metro-North stop; the nearest station is the Waterbury Branch terminus about
               nine miles south, connecting to the New Haven Line toward New York. A Litchfield County town of about
-              7,600 with median household income near $103,000 — above the Connecticut median — and a stable
+              7,500 with median household income near $92,000 — in line with the Connecticut median — and a stable
               owner-occupied base, its affordability, highway access, and limited new multifamily supply support
               steady rental demand for well-run product.
             </p>
@@ -485,9 +487,9 @@ function CityOverview({ pageNum }) {
 
           <div className="eyebrow" style={{ marginTop: 'auto', paddingTop: 16, marginBottom: 8 }}>About Thomaston</div>
           <ul className="highlights ridge-highlights" style={{ fontSize: 10.6, lineHeight: 1.7 }}>
-            <li>Population ~7,600 · ~3,150 households</li>
-            <li>Median HH income ~$103,200 — above the CT median</li>
-            <li>Average HH income ~$135,400</li>
+            <li>Population ~7,500 · ~3,100 households</li>
+            <li>Median HH income ~$92,000 — in line with the CT median</li>
+            <li>Average HH income ~$111,200</li>
             <li>Less than 1 mile from Route 8 (Exits 38 &amp; 39)</li>
             <li>U.S. Route 6 runs through downtown</li>
             <li>Working manufacturing base (metalworking, defense, packaging)</li>
@@ -512,8 +514,8 @@ function CityOverview({ pageNum }) {
 /* ═══════════════════ COUNTY OVERVIEW ═══════════════════ */
 function CountyOverview({ pageNum }) {
   const employers = [
-    { label: 'Thomaston', items: 'Thomaston Savings Bank (headquartered in town), Stewart EFI (precision components), and Ward Leonard / Fairbanks Morse Defense.' },
-    { label: 'Greater Waterbury (~10 min south)', items: "Waterbury Hospital, Saint Mary’s Hospital (Trinity Health), Post University, and UConn Waterbury." },
+    { label: 'Thomaston', items: 'Thomaston Savings Bank (headquartered in town), Stewart EFI (precision components), Ward Leonard / Fairbanks Morse Defense, ECI Screenprint, and Plymouth Glass & Mirror.' },
+    { label: 'Greater Waterbury (~10 min south)', items: "Waterbury Hospital, Saint Mary’s Hospital (Trinity Health), Webster Bank, MacDermid, Post University, UConn Waterbury, and the City of Waterbury." },
   ]
   return (
     <div className="page">
@@ -536,10 +538,10 @@ function CountyOverview({ pageNum }) {
               </tr>
             </thead>
             <tbody>
-              <tr><td>Population (2024 est.)</td><td style={{ textAlign: 'right' }}>7,600</td><td style={{ textAlign: 'right' }}>186,992</td></tr>
-              <tr><td>Households</td><td style={{ textAlign: 'right' }}>3,150</td><td style={{ textAlign: 'right' }}>77,719</td></tr>
-              <tr><td>Median HH Income</td><td style={{ textAlign: 'right' }}>$103,200</td><td style={{ textAlign: 'right' }}>$106,288</td></tr>
-              <tr><td>Avg HH Income</td><td style={{ textAlign: 'right' }}>$135,400</td><td style={{ textAlign: 'right' }}>$149,638</td></tr>
+              <tr><td>Population (2024 est.)</td><td style={{ textAlign: 'right' }}>7,492</td><td style={{ textAlign: 'right' }}>186,992</td></tr>
+              <tr><td>Households</td><td style={{ textAlign: 'right' }}>3,097</td><td style={{ textAlign: 'right' }}>77,719</td></tr>
+              <tr><td>Median HH Income</td><td style={{ textAlign: 'right' }}>$91,967</td><td style={{ textAlign: 'right' }}>$106,288</td></tr>
+              <tr><td>Avg HH Income</td><td style={{ textAlign: 'right' }}>$111,200</td><td style={{ textAlign: 'right' }}>$149,638</td></tr>
               <tr><td>Homeownership (est.)</td><td style={{ textAlign: 'right' }}>~76%</td><td style={{ textAlign: 'right' }}>~76%</td></tr>
             </tbody>
           </table>
@@ -564,14 +566,15 @@ function CountyOverview({ pageNum }) {
 /* ═══════════════════ INVESTMENT HIGHLIGHTS ═══════════════════ */
 function InvestmentHighlights({ pageNum }) {
   const items = [
-    { head: 'Value-Add Through Commercial Lease-Up & Mark-to-Market', body: 'Two vacant ground-floor suites (about 1,000 square feet combined) lease up immediately at an underwritten $15 per square foot. The occupied suites, now averaging about $14.20, mark toward the $17.50 to $20 achieved on renewal. Together these steps move gross scheduled commercial rent from about $84,900 to about $106,300, and several leases expire in 2026 to speed the reset.' },
-    { head: 'Stabilized Mixed-Use Income | Residential + Retail', body: 'Ten apartments leased at $1,300 to $1,600 and seven commercial suites spread the rent roll across complementary demand within a single 17-unit building on 0.77 acres. The property is 88.2% occupied per the April 2026 rent roll.' },
-    { head: 'Long-Tenured, Service-Oriented Tenancy', body: 'The commercial tenants are convenience and service businesses: a smoke and vape shop, a package store, a nail salon, and a laundromat. Two of the leases date to 2011 and 2013, and the mix holds up well against online competition.' },
-    { head: 'Strategic Location | Route 8 & Naugatuck Valley Corridor', body: 'The property sits less than a mile from Route 8 (Exits 38 and 39), the main route through the Naugatuck Valley. Waterbury and its Metro-North Waterbury Branch terminus are 10 to 15 minutes south, with Torrington to the north. U.S. Route 6 runs through downtown Thomaston. South Main Street carries about 12,800 vehicles per day at the property’s frontage, giving the retail suites steady visibility.' },
-    { head: 'Attractive Basis | $144,100 per Unit, $168/SF', body: 'At $2,450,000, the offering prices to a 6.05% going-in cap and a 7.40% pro forma cap, with room to grow rents across both income streams.' },
-    { head: 'Residential Rent Upside | Private-Access Apartments', body: 'The ten second-floor apartments (7,750 SF) each have private rear ground-level access and lease at $1,300 to $1,600 a month. As units turn, in-place rents mark toward achievable levels, lifting normalized NOI from about $148,160 today toward roughly $181,203 — a path to the 7.40% pro forma cap alongside the commercial lease-up.' },
+    { head: 'Residential Rents Below Achievable Levels', body: 'The ten apartments average $1,465 a month against $1,540 already achieved and $1,640 pro forma, lifting residential rent from $175,800 to $196,800 as units turn — each with private rear ground-level access.' },
+    { head: 'Commercial Lease-Up & Mark-to-Market', body: 'Leasing the two vacant suites and marking occupied rents from about $14.20 toward $17.50 to $20 per square foot moves commercial rent from about $84,900 to about $106,300, with added upside from raising CAM water recovery.' },
+    { head: 'Diversified Residential & Commercial Income', body: 'Ten apartments and seven commercial suites split the rent roll between residential and retail demand — both below market — in a single 17-unit building on 0.77 acres.' },
+    { head: 'Established, Service-Oriented Commercial Tenancy', body: 'A smoke and vape shop, package store, nail salon, and laundromat anchor the retail, with two leases dating to 2011 and 2013 and limited online competition.' },
+    { head: 'Route 8 & Naugatuck Valley Location', body: 'Less than a mile from Route 8 at Exits 38 and 39, with about 12,800 vehicles per day at the frontage and Waterbury — and its Metro-North terminus — 10 to 15 minutes south.' },
+    { head: 'Basis of $168 per Square Foot', body: 'At $168 per square foot against $300-plus all-in construction cost, the building trades at about 56% of replacement cost — $144,100 per unit at the offering price.' },
+    { head: 'Assessment Set Through the 2025 Revaluation', body: 'Thomaston’s 2025 revaluation fixes the assessment through 2030, and Connecticut does not reassess on sale, so taxes will not step up at closing.' },
   ]
-  const thumbs = ['/photos/comm-1.jpg', '/photos/ext-1.jpg', '/photos/comm-2.jpg', '/photos/aerial-1.jpg', '/photos/ext-2.jpg', '/photos/apt-1.jpg']
+  const thumbs = ['/photos/apt-1.jpg', '/photos/comm-1.jpg', '/photos/ext-1.jpg', '/photos/comm-2.jpg', '/photos/aerial-1.jpg', '/photos/ext-2.jpg', '/photos/aerial-2.jpg']
   return (
     <div className="page">
       <PageHeader section="Investment Highlights" />
@@ -580,10 +583,10 @@ function InvestmentHighlights({ pageNum }) {
         <div className="title-rule" />
 
         {/* Highlight cards — each paired with a property photo, stretched to fill the page */}
-        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridAutoRows: '1fr', columnGap: 20, rowGap: 14, minHeight: 0, paddingTop: 4 }}>
+        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridAutoRows: '1fr', columnGap: 20, rowGap: 12, minHeight: 0, paddingTop: 4 }}>
           {items.map((it, i) => (
-            <div key={i} style={{ display: 'flex', gap: 13, minHeight: 0, alignItems: 'center' }}>
-              <img src={thumbs[i]} alt="" style={{ flex: '0 0 150px', width: 150, height: 150, objectFit: 'cover', borderRadius: 5, display: 'block' }} />
+            <div key={i} style={{ display: 'flex', gap: 13, minHeight: 0, alignItems: 'center', gridColumn: i === 6 ? '1 / -1' : 'auto' }}>
+              <img src={thumbs[i]} alt="" style={{ flex: '0 0 118px', width: 118, height: 118, objectFit: 'cover', borderRadius: 5, display: 'block' }} />
               <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <div style={{ fontSize: 9.6, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3, lineHeight: 1.2 }}>{it.head}</div>
                 <p style={{ fontSize: 8.4, lineHeight: 1.4, color: 'var(--graphite)' }}>{it.body}</p>
@@ -616,6 +619,7 @@ function App() {
     <Divider eyebrow="03" title="Location & Market" image="/photos/aerial-1.jpg" />,
     <CityOverview />,
     <LocationMap />,
+    <DriveTimeMap />,
     <CountyOverview />,
     <RegionalMap />,
     <Divider eyebrow="04" title="The Team" image="/photos/aerial-2.jpg" />,

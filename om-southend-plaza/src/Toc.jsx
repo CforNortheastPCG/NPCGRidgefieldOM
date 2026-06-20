@@ -17,11 +17,12 @@ const TOC = [
   { n: 16, label: 'Location & Market', section: true },
   { n: 17, label: 'City Overview', sub: true },
   { n: 18, label: 'Location & Amenities', sub: true },
-  { n: 19, label: 'County Overview & Employment', sub: true },
-  { n: 20, label: 'Regional Positioning', sub: true },
-  { n: 21, label: 'The Team', section: true },
-  { n: 22, label: 'Team', sub: true },
-  { n: 23, label: 'Our Locations', sub: true },
+  { n: 19, label: 'Drive Times', sub: true },
+  { n: 20, label: 'County Overview & Employment', sub: true },
+  { n: 21, label: 'Regional Positioning', sub: true },
+  { n: 22, label: 'The Team', section: true },
+  { n: 23, label: 'Team', sub: true },
+  { n: 24, label: 'Our Locations', sub: true },
 ]
 
 export default function Toc({ pageNum }) {
