@@ -16,7 +16,7 @@ function buildStaticMapUrl() {
   const path = `path=${encodeURIComponent(`color:0xF8971Dff|weight:4|fillcolor:0xF8971D33|${ring}`)}`
   const params = [
     `center=${PARCEL.center.lat},${PARCEL.center.lng}`,
-    'zoom=19',
+    'zoom=17',
     'size=620x540',
     'scale=2',
     'maptype=hybrid',
@@ -64,15 +64,6 @@ export default function SiteMap({ pageNum }) {
             ) : (
               <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--linen)', color: 'var(--stone)', fontSize: 10, textAlign: 'center', padding: 24 }}>
                 Set VITE_GOOGLE_MAPS_API_KEY in .env.local and enable Maps Static API to render the parcel map.
-              </div>
-            )}
-            {/* Subject label pinned over the parcel */}
-            {mapUrl && (
-              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
-                <div style={{ background: 'rgba(20,24,30,0.86)', color: '#fff', padding: '4px 11px', borderRadius: 4, whiteSpace: 'nowrap', boxShadow: '0 2px 10px rgba(0,0,0,0.6)' }}>
-                  <span style={{ display: 'block', color: '#F8971D', textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: 8, fontWeight: 700 }}>Subject Property</span>
-                  <span style={{ fontSize: 11.5, fontWeight: 700 }}>2836 Fairfield Avenue</span>
-                </div>
               </div>
             )}
           </div>

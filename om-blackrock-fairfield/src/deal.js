@@ -22,3 +22,7 @@ export const DEAL = {
 export const ADDR = DEAL.address
 export const CITY_STATE = DEAL.cityState
 export const FULL_ADDR = `${ADDR}, ${CITY_STATE}`
+
+// Toggle the diagonal DRAFT watermark on every page. Set to true to mark the
+// deck as a draft before final, distribution-ready export.
+export const DRAFT = false

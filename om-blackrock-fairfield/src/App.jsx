@@ -10,6 +10,7 @@ import RegionalMap from './RegionalMap.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
 import { DEAL, ADDR, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
+import { DRAFT } from './deal.js'
 
 /* ═══════════════════ 1 — COVER HERO ═══════════════════ */
 function CoverHero({ pageNum }) {
@@ -176,32 +177,73 @@ function PropertyOverview({ pageNum }) {
   )
 }
 
-/* ═══════════════════ INVESTMENT HIGHLIGHTS ═══════════════════ */
-function InvestmentHighlights({ pageNum }) {
-  const cards = [
-    { t: 'Mark-to-Market Rent Upside', b: 'In-place residential rents run roughly $57,300/yr below market. Marking the 15 apartments to prevailing Black Rock rents grows pro-forma NOI ~21% — from $259,985 to $313,322 — and lifts the going-in yield from 6.05% to 7.29% with no renovation or repositioning required.' },
-    { t: 'Diversified Mixed-Use Income', b: 'A ground-floor retail unit (Casa Buena Team, LLC) leased through December 2027 at $2,600/mo contributes ~$31,200/yr of commercial income that diversifies the rent roll and steps to $2,750/mo on its contractual schedule.' },
-    { t: 'Stabilized, 100% Occupied', b: 'All 16 units are currently leased. The asset was renovated in 2015, is elevator-served, and operates at an efficient ~34% expense ratio — a true turnkey acquisition with day-one cash flow.' },
-    { t: 'Premier Black Rock Location', b: "On the Fairfield town line in Bridgeport's most walkable, sought-after neighborhood — steps from the Fairfield Avenue dining and retail corridor, St. Mary's-By-The-Sea, Black Rock Harbor, and Metro-North access to Manhattan." },
-    { t: 'Deep, Rentable Unit Mix', b: 'A practical spread of seven 1-bedrooms, seven 2-bedrooms, and a 3-bedroom appeals to the broadest pool of Black Rock renters, supporting consistent occupancy and pricing power across cycles.' },
-    { t: 'Operational Upside', b: 'Owner currently carries water, sewer, and trash; sub-metering and expense recapture present a clear path to further margin expansion beyond the in-place pro forma.' },
+/* ═══════════════════ THE BLACK ROCK TRUST BUILDING (history) ═══════════════════ */
+function BuildingHistory({ pageNum }) {
+  const timeline = [
+    { y: '1644', t: 'Black Rock settled', b: 'One of the oldest villages on the Connecticut coast grows up around Black Rock Harbor — a deep-water port that made the neighborhood a center of trade for two centuries.' },
+    { y: '1933', t: 'The Black Rock Bank & Trust Co.', b: 'The bank opens its headquarters at the corner of Fairfield Avenue and Brewster Street — a solid masonry landmark anchoring Black Rock’s commercial spine.' },
+    { y: 'Mid-1900s', t: 'A neighborhood institution', b: 'For decades the building serves as Black Rock’s bank, a fixture of daily life along the Fairfield Avenue corridor.' },
+    { y: 'c. 2015', t: 'Adaptive reuse', b: 'The historic bank is gut-renovated and converted to 15 modern apartments above ground-floor retail — preserving the landmark while bringing it back to life.' },
+    { y: 'Today', t: '“Black Rock Commons”', b: 'A fully leased, elevator-served mixed-use building that still carries the neighborhood’s name — and its history.' },
   ]
   return (
     <div className="page">
-      <PageHeader section="Investment Highlights" />
+      <PageHeader section="Building History" />
       <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-        <div className="section-title" style={{ marginBottom: 2 }}>Investment <span style={{ color: '#F8971D' }}>Highlights</span></div>
+        <div className="eyebrow">A Landmark with Provenance</div>
+        <div className="section-title" style={{ marginBottom: 2 }}>The Black Rock <span style={{ color: '#F8971D' }}>Trust Building</span></div>
+        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--carbon)', marginBottom: 6 }}>Built 1933 · Corner of Fairfield Avenue &amp; Brewster Street</div>
         <div className="title-rule" />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridAutoRows: '1fr', gap: 12, flex: 1, minHeight: 0 }}>
-          {cards.map((c, i) => (
-            <div key={c.t} className="bldg-card" style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span style={{ flexShrink: 0, width: 24, height: 24, borderRadius: '50%', background: 'var(--golden)', color: '#fff', fontSize: 12, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i + 1}</span>
-                <h3 style={{ fontSize: 12, fontWeight: 800, color: 'var(--carbon)', margin: 0 }}>{c.t}</h3>
-              </div>
-              <p style={{ fontSize: 9.5, lineHeight: 1.5, color: 'var(--graphite)', margin: 0 }}>{c.b}</p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1.25fr 1fr', gap: 22, flex: 1, minHeight: 0 }}>
+          {/* Narrative + timeline */}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <p style={{ fontSize: 10, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 12 }}>
+              2836 Fairfield Avenue isn&rsquo;t just another apartment building &mdash; it&rsquo;s the former{' '}
+              <strong>Black Rock Bank &amp; Trust Company</strong>, a 1933 landmark that has anchored the corner of
+              Fairfield Avenue and Brewster Street for nearly a century. Its conversion to residential kept the
+              building&rsquo;s civic presence intact while giving it a second life as the aptly named{' '}
+              <strong>Black Rock Commons</strong>. For a buyer, that provenance is a marketing asset: a named,
+              recognizable building on the neighborhood&rsquo;s main street that tenants are proud to call home.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
+              {timeline.map((e, i) => (
+                <div key={e.y} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                  <div style={{ flexShrink: 0, width: 64, textAlign: 'right' }}>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--golden)', lineHeight: 1 }}>{e.y}</div>
+                  </div>
+                  <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', alignSelf: 'stretch' }}>
+                    <span style={{ width: 9, height: 9, borderRadius: '50%', background: 'var(--golden)', marginTop: 3 }} />
+                    {i < timeline.length - 1 && <span style={{ flex: 1, width: 2, background: 'var(--border)', marginTop: 2 }} />}
+                  </div>
+                  <div style={{ paddingBottom: 8 }}>
+                    <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--carbon)' }}>{e.t}</div>
+                    <div style={{ fontSize: 9, lineHeight: 1.4, color: 'var(--graphite)', marginTop: 1 }}>{e.b}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Photo + character callout */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 0 }}>
+            <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', borderRadius: 3 }}>
+              <img src="/photos/exterior-1.jpg" alt="The Black Rock Trust Building, 2836 Fairfield Avenue" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            </div>
+            <div className="bldg-card" style={{ padding: '12px 14px' }}>
+              <h3 style={{ fontSize: 10.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 6 }}>Why the History Matters</h3>
+              <ul style={{ margin: 0, paddingLeft: 16, fontSize: 9, lineHeight: 1.5, color: 'var(--graphite)' }}>
+                <li>A <strong>named, recognizable</strong> corner landmark on Fairfield Avenue — built-in brand and curb appeal</li>
+                <li>Solid <strong>1933 masonry</strong> construction, modernized in the 2010s gut renovation</li>
+                <li>Within Black Rock&rsquo;s historic Fairfield Avenue corridor &mdash; the heart of the rental demand story</li>
+                <li>Adaptive-reuse character that today&rsquo;s renters specifically seek out</li>
+              </ul>
+            </div>
+            <div style={{ fontSize: 7.4, color: 'var(--stone)', lineHeight: 1.4 }}>
+              History compiled from public records and neighborhood sources; renovation year per owner records.
+              Verify independently.
+            </div>
+          </div>
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -209,19 +251,8 @@ function InvestmentHighlights({ pageNum }) {
   )
 }
 
-/* ═══════════════════ FULL BLEED PHOTO ═══════════════════ */
-function PhotoFullBleed() {
-  return (
-    <div className="page">
-      <div className="photo-full-bleed">
-        <img src="/photos/full-1.jpg" alt="Building Overview" />
-      </div>
-    </div>
-  )
-}
-
 /* ═══════════════════ RENT ROLL ═══════════════════ */
-function DonutChart({ data, size = 104, thickness = 19, centerLabel, centerSub }) {
+function DonutChart({ data, size = 88, thickness = 16, centerLabel, centerSub }) {
   const r = (size - thickness) / 2
   const C = 2 * Math.PI * r
   const total = data.reduce((s, d) => s + d.value, 0)
@@ -315,7 +346,7 @@ function RentRoll({ pageNum }) {
   return (
     <div className="page">
       <PageHeader section="Rent Roll" />
-      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
         <div className="section-title" style={{ marginBottom: 2 }}>Unit Mix &amp; <span style={{ color: '#F8971D' }}>Rent Roll</span></div>
         <div className="title-rule" />
         <table className="data-table" style={{ fontSize: 8.3 }}>
@@ -357,7 +388,7 @@ function RentRoll({ pageNum }) {
           Pro Forma = stabilized mark-to-market target. Residential In-Place $410,100/yr incl. retail; Pro Forma $469,200/yr.
         </div>
 
-        <div style={{ display: 'flex', gap: 14, marginTop: 12, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
+        <div style={{ display: 'flex', gap: 14, marginTop: 8, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
           <ChartCard title="Unit Mix" data={unitMix} centerLabel="16" centerSub="UNITS" />
           <ChartCard title="Use" data={useMix} centerLabel="16" centerSub="UNITS" />
           <div style={{ padding: '2px 6px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
@@ -497,63 +528,79 @@ function IncomeExpense({ pageNum }) {
   )
 }
 
-/* ═══════════════════ TRAILING 12-MONTH CASH FLOW ═══════════════════ */
-function TrailingCashFlow({ pageNum }) {
-  const tds = { fontSize: 9, padding: '4px 9px', textAlign: 'right' }
-  const tdl = { fontSize: 9, padding: '4px 9px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
-  const expenses = [
-    ['Repairs, Maintenance & Turnover', '$32,545'],
-    ['Management, Asset & Leasing Fees', '$28,888'],
-    ['Utilities — Electric, Water, Sewer, Trash', '$20,829'],
-    ['Administrative & Professional', '$7,591'],
-    ['Interest & Miscellaneous', '$136'],
+/* ═══════════════════ MANAGEMENT TRANSITION & T-12 ═══════════════════ */
+function ManagementTransition({ pageNum }) {
+  // Real monthly NOI (cash) from the T-12 statement. All-Star ran Jul'25–Mar'26;
+  // LYP assumed management Apr'26. The chart shows income held up across the handoff.
+  const months = [
+    { m: 'Jul', noi: 12241, mgr: 'A' }, { m: 'Aug', noi: 28601, mgr: 'A' },
+    { m: 'Sep', noi: 29666, mgr: 'A' }, { m: 'Oct', noi: 21499, mgr: 'A' },
+    { m: 'Nov', noi: 24566, mgr: 'A' }, { m: 'Dec', noi: 25206, mgr: 'A' },
+    { m: 'Jan', noi: 19364, mgr: 'A' }, { m: 'Feb', noi: 22851, mgr: 'A' },
+    { m: 'Mar', noi: 26843, mgr: 'A' }, { m: 'Apr', noi: 34857, mgr: 'L' },
+    { m: 'May', noi: 23321, mgr: 'L' }, { m: 'Jun', noi: 18098, mgr: 'L' },
   ]
+  const maxNoi = Math.max(...months.map(x => x.noi))
   return (
     <div className="page">
-      <PageHeader section="Trailing 12-Month" />
+      <PageHeader section="Management Transition" />
       <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-        <div className="section-title" style={{ marginBottom: 2, fontSize: 22 }}>Trailing 12-Month <span style={{ color: '#F8971D' }}>Operating Statement</span></div>
+        <div className="section-title" style={{ marginBottom: 2, fontSize: 22 }}>Management Transition <span style={{ color: '#F8971D' }}>& Trailing 12-Month</span></div>
         <div className="title-rule" />
-        <div style={{ fontSize: 9.5, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 12 }}>
-          Actual owner-reported cash flow for the twelve months ending June 2026 (cash basis). Sourced from
-          All-Star Property Management (Jul 2025 – Mar 2026) and LYP Management (Apr 2026 – Jun 2026), reflecting
-          the spring 2026 management transition.
+        <div style={{ fontSize: 9.5, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
+          Ownership transitioned property management mid-year &mdash; from <strong>All-Star Property Management</strong>{' '}
+          (Jul 2025 – Mar 2026) to <strong>LYP Management</strong> (Apr 2026 – present). The trailing-twelve cash
+          statement below stitches both managers&rsquo; reporting together. The takeaway: income and NOI held steady
+          through the handoff, and a new, hands-on manager is now in place &mdash; a clean operating baseline for a
+          buyer.
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.25fr 1fr', gap: 20, flex: 1, minHeight: 0 }}>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <table className="data-table" style={{ fontSize: 9 }}>
-              <thead><tr><th>T-12 Actual (Jul &rsquo;25 – Jun &rsquo;26)</th><th style={{ textAlign: 'right' }}>Amount</th></tr></thead>
-              <tbody>
-                <tr><td style={{ ...tdl, fontWeight: 700 }}>Total Income</td><td style={{ ...tds, fontWeight: 700 }}>$377,102</td></tr>
-                {expenses.map((e, i) => (
-                  <tr key={e[0]} style={i % 2 === 0 ? { background: 'var(--linen)' } : undefined}>
-                    <td style={tdl}>{e[0]}</td><td style={tds}>{e[1]}</td>
-                  </tr>
-                ))}
-                <tr><td style={{ background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 9, padding: '4px 9px' }}>Total Operating Expenses</td><td style={{ background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 9, padding: '4px 9px', textAlign: 'right' }}>$89,989</td></tr>
-                <tr><td style={{ background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9.5, padding: '5px 9px' }}>Net Operating Income (Cash)</td><td style={{ background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9.5, padding: '5px 9px', textAlign: 'right' }}>$287,113</td></tr>
-              </tbody>
-            </table>
-            <div style={{ fontSize: 7.6, color: 'var(--stone)', marginTop: 6, lineHeight: 1.4 }}>
-              T-12 actuals exclude real estate taxes and property insurance, which the stabilized underwriting on the
-              prior page adds back &mdash; the reason the conservative Year-1 underwritten NOI ($259,985) sits below
-              the trailing cash NOI ($287,113).
+        {/* T-12 totals */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 12 }}>
+          {[
+            { v: '$377,102', l: 'T-12 Total Income' },
+            { v: '$89,989', l: 'T-12 Operating Expenses' },
+            { v: '$287,113', l: 'T-12 NOI (Cash)' },
+            { v: '100%', l: 'Occupancy (16 / 16)' },
+          ].map(s => (
+            <div key={s.l} style={{ textAlign: 'center', borderTop: '3px solid var(--golden)', padding: '6px 2px' }}>
+              <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>{s.l}</div>
             </div>
-          </div>
+          ))}
+        </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, justifyContent: 'center' }}>
-            {[
-              { v: '$377,102', l: 'T-12 Total Income' },
-              { v: '$89,989', l: 'T-12 Operating Expenses' },
-              { v: '$287,113', l: 'T-12 Net Operating Income (cash)' },
-              { v: '100%', l: 'Occupancy (16 of 16 units)' },
-            ].map(s => (
-              <div key={s.l} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 12 }}>
-                <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
-                <div style={{ fontSize: 9, fontWeight: 600, color: 'var(--stone)', marginTop: 3 }}>{s.l}</div>
-              </div>
-            ))}
+        {/* Monthly NOI bar chart across the transition */}
+        <div className="eyebrow" style={{ marginBottom: 6, fontSize: 9 }}>Monthly Net Operating Income (Cash) — Jul 2025 → Jun 2026</div>
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 7, height: 230, padding: '0 2px 0', borderBottom: '2px solid var(--carbon)', position: 'relative' }}>
+          {months.map((x, i) => (
+            <div key={x.m} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%', position: 'relative' }}>
+              <div style={{ fontSize: 8.5, fontWeight: 700, color: 'var(--carbon)', marginBottom: 3 }}>${Math.round(x.noi / 1000)}k</div>
+              <div style={{ width: '76%', height: `${(x.noi / maxNoi) * 88}%`, background: x.mgr === 'A' ? '#3F4753' : '#F8971D', borderRadius: '2px 2px 0 0' }} />
+              {/* handoff marker before Apr */}
+              {i === 9 && <div style={{ position: 'absolute', left: -3.5, top: 0, bottom: 0, borderLeft: '1.5px dashed var(--golden)' }} />}
+            </div>
+          ))}
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4 }}>
+          {months.map(x => <div key={x.m} style={{ flex: 1, textAlign: 'center', fontSize: 8.5, color: 'var(--stone)', fontWeight: 600 }}>{x.m}</div>)}
+        </div>
+        <div style={{ display: 'flex', gap: 18, marginTop: 10, fontSize: 8.5 }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 12, height: 12, background: '#3F4753', borderRadius: 2 }} /> All-Star Property Mgmt (Jul ’25 – Mar ’26)</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 12, height: 12, background: '#F8971D', borderRadius: 2 }} /> LYP Management (Apr ’26 – present)</span>
+        </div>
+
+        <div style={{ marginTop: 'auto', paddingTop: 12, display: 'flex', flexDirection: 'column', gap: 5 }}>
+          <div style={{ fontSize: 9.3, lineHeight: 1.5, color: 'var(--graphite)' }}>
+            <strong style={{ color: 'var(--carbon)' }}>Read:</strong> figures are cash-basis actuals and exclude real
+            estate taxes &amp; property insurance, which the stabilized underwriting on the prior page adds back —
+            the reason the conservative Year-1 underwritten NOI ($259,985) sits below the trailing cash NOI of
+            $287,113. A full year under single (LYP) management is the clean go-forward baseline.
+          </div>
+          <div style={{ fontSize: 7.4, color: 'var(--stone)', lineHeight: 1.4 }}>
+            Source: combined cash-flow statement — All-Star Property Management (Jul 2025 – Mar 2026) &amp; LYP
+            Management (Apr 2026 – Jun 2026), cash basis, prepared 06/09/2026. Detailed monthly P&amp;L to be layered
+            in. Verify against manager statements.
           </div>
         </div>
       </div>
@@ -570,25 +617,18 @@ function DealContacts({ pageNum }) {
         <aside className="dc-contacts">
           <h3 className="dc-disclaimer-title">Exclusively Listed By</h3>
           <div className="dc-card" style={{ border: 'none', padding: 0 }}>
-            <img className="dc-avatar" src="https://northeastpcg.com/wp-content/uploads/2021/11/Taylor-Perun-430x488.png" alt="Taylor Perun" style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
-            <div className="dc-name">Taylor Perun</div>
-            <div className="dc-title">Senior Vice President, Investments</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (203) 307-1576</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>tperun@northeastpcg.com</div>
-          </div>
-          <div className="dc-card" style={{ border: 'none', padding: 0 }}>
-            <img className="dc-avatar" src="https://northeastpcg.com/wp-content/uploads/2021/11/Brad-B-2-430x488.jpg" alt="Brad Balletto" style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
+            <img className="dc-avatar" src="/photos/team/brad-balletto.jpg" alt="Brad Balletto" style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
             <div className="dc-name">Brad Balletto</div>
             <div className="dc-title">Managing Director, Investments</div>
             <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (203) 307-1574</div>
             <div className="dc-meta" style={{ fontWeight: 700 }}>bballetto@northeastpcg.com</div>
           </div>
           <div className="dc-card" style={{ border: 'none', padding: 0 }}>
-            <img className="dc-avatar" src="https://northeastpcg.com/wp-content/uploads/2021/11/Jeff-Wright-430x488.png" alt="Jeff Wright" style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
-            <div className="dc-name">Jeff Wright</div>
+            <img className="dc-avatar" src="/photos/team/rich-edwards.png" alt="Rich Edwards Jr." style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
+            <div className="dc-name">Rich Edwards Jr.</div>
             <div className="dc-title">Vice President, Investments</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (203) 307-1581</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>jwright@northeastpcg.com</div>
+            <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (203) 307-1577</div>
+            <div className="dc-meta" style={{ fontWeight: 700 }}>redwards@northeastpcg.com</div>
           </div>
         </aside>
         <section className="dc-disclaimer">
@@ -612,35 +652,34 @@ function BlackRockOverview({ pageNum }) {
       <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
         <div style={{ flex: '0 0 56%', padding: '28px 32px 24px 40px', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
           <div className="section-title" style={{ marginBottom: 2 }}>Black Rock, <span style={{ color: '#F8971D' }}>Bridgeport</span></div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--carbon)', letterSpacing: '0.02em', marginBottom: 8 }}>Live Where You Invest</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--carbon)', letterSpacing: '0.02em', marginBottom: 8 }}>Bridgeport&rsquo;s Standout Coastal Pocket</div>
           <div className="title-rule" />
 
           <div style={{ fontSize: 10.3, lineHeight: 1.5, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 9 }}>
             <p>
-              Black Rock is Bridgeport&rsquo;s most coveted neighborhood &mdash; a historic, harbor-front enclave on
-              the city&rsquo;s far west side that runs right up to the Fairfield town line. Built around sea-captains&rsquo;
-              homes and a genuine walkable Main Street, its spine is <strong>Fairfield Avenue</strong>: a dense,
-              lively corridor of independent restaurants, bars, coffee shops, galleries, and music venues anchored by
-              neighborhood institutions like Taco Loco, The Sitting Room, and Park City Music Hall. Residents stroll
-              to dinner, walk the half-mile waterfront promenade at <strong>St. Mary&rsquo;s-By-The-Sea</strong>, and
-              keep boats at Captain&rsquo;s Cove Seaport on Black Rock Harbor.
+              Black Rock is the standout neighborhood within Bridgeport &mdash; a historic, harbor-front pocket on
+              the city&rsquo;s far west side that runs right up to the Fairfield town line. Built around
+              sea-captains&rsquo; homes and a genuinely walkable main street, its spine is <strong>Fairfield
+              Avenue</strong>: a lively corridor of independent restaurants, bars, coffee shops, galleries, and music
+              venues anchored by neighborhood staples like Taco Loco, The Sitting Room, and Park City Music Hall.
+              Residents walk to dinner, take in the half-mile waterfront promenade at <strong>St. Mary&rsquo;s-By-The-Sea</strong>,
+              and keep boats at Captain&rsquo;s Cove Seaport on Black Rock Harbor.
             </p>
             <p>
-              For an investor, that lifestyle converts directly into rent-roll durability. Black Rock offers the
-              walkability and waterfront of neighboring Fairfield and Westport at a meaningful discount, drawing a
-              deep, year-round pool of young professionals, commuters, and downsizers. Demand is consistent,
-              turnover re-prices quickly to market, and quality multifamily on Fairfield Avenue rarely trades. The
-              thesis is simple: people want to live in Black Rock &mdash; and there are very few well-located doors
-              available to them.
+              For an investor, the appeal is value, not prestige &mdash; and that&rsquo;s the point. Black Rock
+              isn&rsquo;t Fairfield or Westport, but it offers a genuinely walkable, waterfront lifestyle at a
+              fraction of Gold Coast prices, which keeps a steady, year-round pool of renters: young professionals,
+              local-university grads, commuters, and downsizers chasing the coast on a budget. Demand is consistent,
+              turnover re-prices quickly to market, and well-located multifamily on Fairfield Avenue rarely trades.
             </p>
           </div>
 
           <div className="eyebrow" style={{ marginTop: 10, marginBottom: 6 }}>About Black Rock</div>
           <ul className="highlights ridge-highlights">
-            <li>Bridgeport&rsquo;s most desirable neighborhood — historic waterfront enclave directly on the Fairfield town line</li>
+            <li>Bridgeport&rsquo;s most sought-after neighborhood — a historic waterfront pocket on the Fairfield town line</li>
             <li>Fairfield Avenue corridor — walkable dining, nightlife, coffee, galleries, and live music</li>
             <li>St. Mary&rsquo;s-By-The-Sea waterfront promenade, Black Rock Harbor &amp; Captain&rsquo;s Cove Seaport</li>
-            <li>Strong renter demand — walkability and waterfront at a discount to neighboring Fairfield &amp; Westport</li>
+            <li>Value-driven renter demand — coastal, walkable living at a steep discount to neighboring Fairfield &amp; Westport</li>
             <li>Metro-North New Haven Line (Fairfield Metro &amp; Bridgeport stations) — direct service to Grand Central</li>
             <li>Quick access to I-95 (Exits 24/25) and Route 1; minutes to downtown Fairfield and Sacred Heart University</li>
           </ul>
@@ -660,90 +699,66 @@ function BlackRockOverview({ pageNum }) {
   )
 }
 
-/* ═══════════════════ WHY BLACK ROCK (lifestyle / the scene) ═══════════════════ */
+/* ═══════════════════ WHY BLACK ROCK — VIBE + THE FAIRFIELD TAX (merged) ═══════════════════ */
 function WhyBlackRock({ pageNum }) {
   const themes = [
-    { t: 'The Scene', b: 'Fairfield Avenue is the spine — a dense, independent strip of restaurants, cocktail bars, coffee roasters, galleries, and live music. Taco Loco, The Sitting Room, Harborview Market, and Park City Music Hall draw a crowd from across the region. It feels like a real neighborhood, not a strip mall.' },
-    { t: 'The Waterfront', b: "Black Rock is a peninsula. Residents walk or bike the half-mile shoreline promenade at St. Mary's-By-The-Sea at sunset, keep boats at Captain's Cove Seaport, and live minutes from Long Island Sound. Water is the whole point — and it never gets old." },
-    { t: 'The Walk', b: 'Sea-captain Victorians, tree-lined side streets, and a genuinely walkable core. You can get coffee, dinner, drinks, and groceries on foot — the kind of car-optional lifestyle that renters now pay a premium for and rarely find in coastal Connecticut.' },
+    ['The Scene', 'Fairfield Avenue’s independent restaurants, bars, coffee, galleries & live music — Taco Loco, The Sitting Room, Park City Music Hall.'],
+    ['The Waterfront', 'A half-mile promenade at St. Mary’s-By-The-Sea, Captain’s Cove Seaport, and Long Island Sound minutes from the door.'],
+    ['The Walk', 'Sea-captain Victorians and a genuinely car-optional core — coffee, dinner, drinks & groceries all on foot.'],
+  ]
+  const personas = [
+    ['New grads & young professionals', '~17,000 Sacred Heart + Fairfield U students next door who want to stay on the coast.'],
+    ['Priced-out-of-Fairfield renters', 'Same beaches, dining & Metro-North commute — for materially less rent.'],
+    ['Downsizers & remote workers', 'Lock-and-leave living steps from the water and the avenue.'],
   ]
   const stats = [
-    { v: '~17,000', l: 'University students within ~10 min (SHU + Fairfield U)' },
-    { v: '½ mile', l: 'Shoreline promenade at St. Mary’s-By-The-Sea' },
-    { v: '30+', l: 'Independent eateries & bars on Fairfield Ave' },
+    { v: '~17,000', l: 'Students within ~10 min (SHU + Fairfield U)' },
+    { v: '½ mile', l: 'Shoreline promenade at St. Mary’s' },
+    { v: '30+', l: 'Eateries & bars on Fairfield Ave' },
     { v: '~80 min', l: 'Metro-North to Grand Central' },
   ]
+  const td = { fontSize: 9.5, padding: '4.5px 9px' }
   return (
     <div className="page">
       <PageHeader section="The Neighborhood" />
       <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-        <div className="eyebrow">The Neighborhood</div>
+        <div className="eyebrow">The Neighborhood · Renter Demand</div>
         <div className="section-title" style={{ marginBottom: 2 }}>Why <span style={{ color: '#F8971D' }}>Black Rock</span></div>
+        <div style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--carbon)', marginBottom: 6 }}>Fairfield Living, Without the Fairfield Tax</div>
         <div className="title-rule" />
-        <div style={{ fontSize: 13.5, lineHeight: 1.45, color: 'var(--carbon)', fontWeight: 600, marginBottom: 14, borderLeft: '4px solid var(--golden)', paddingLeft: 14 }}>
-          The coolest neighborhood on Connecticut&rsquo;s Gold Coast — a walkable, harbor-front village with the
-          food, the water, and the vibe of Fairfield, at a fraction of the cost. People don&rsquo;t settle for Black
-          Rock. They choose it.
+        <div style={{ fontSize: 10.5, lineHeight: 1.45, color: 'var(--carbon)', fontWeight: 600, marginBottom: 12, borderLeft: '4px solid var(--golden)', paddingLeft: 13 }}>
+          Black Rock offers a Fairfield County coastal lifestyle &mdash; the water, the walkability, the
+          restaurants, the train to Manhattan &mdash; without the Fairfield County price tag. It&rsquo;s a value
+          play renters genuinely seek out, and that gap is the engine of durable demand.
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 18, flex: 1, minHeight: 0 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minHeight: 0 }}>
-            {themes.map(t => (
-              <div key={t.t} className="bldg-card" style={{ padding: '12px 15px', display: 'flex', flexDirection: 'column', gap: 5 }}>
-                <h3 style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', margin: 0 }}>{t.t}</h3>
-                <p style={{ fontSize: 10, lineHeight: 1.5, color: 'var(--graphite)', margin: 0 }}>{t.b}</p>
-              </div>
-            ))}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 'auto' }}>
-              {stats.map(s => (
-                <div key={s.l} style={{ borderTop: '3px solid var(--golden)', padding: '5px 2px' }}>
-                  <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
-                  <div style={{ fontSize: 8.2, fontWeight: 600, color: 'var(--stone)', marginTop: 3, lineHeight: 1.3 }}>{s.l}</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 22, flex: 1, minHeight: 0 }}>
+          {/* LEFT — the vibe + who rents */}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <h3 style={{ fontSize: 10, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 7 }}>The Vibe</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+              {themes.map(([t, b]) => (
+                <div key={t}>
+                  <span style={{ fontSize: 10.5, fontWeight: 800, color: 'var(--carbon)' }}>{t} &mdash; </span>
+                  <span style={{ fontSize: 9.5, lineHeight: 1.4, color: 'var(--graphite)' }}>{b}</span>
+                </div>
+              ))}
+            </div>
+            <h3 style={{ fontSize: 10, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '14px 0 7px' }}>Who Rents Black Rock</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {personas.map(([t, b]) => (
+                <div key={t} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
+                  <div style={{ fontSize: 10.5, fontWeight: 800, color: 'var(--carbon)' }}>{t}</div>
+                  <div style={{ fontSize: 9.3, lineHeight: 1.4, color: 'var(--graphite)' }}>{b}</div>
                 </div>
               ))}
             </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minHeight: 0 }}>
-            <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', borderRadius: 3 }}>
-              <img src="/photos/area-2.jpg" alt="Black Rock waterfront" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            </div>
-            <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', borderRadius: 3 }}>
-              <img src="/photos/area-3.jpg" alt="Fairfield Avenue corridor" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            </div>
-          </div>
-        </div>
-      </div>
-      <PageFooter pageNum={pageNum} />
-    </div>
-  )
-}
 
-/* ═══════════════════ FAIRFIELD LIVING, WITHOUT THE FAIRFIELD TAX ═══════════════════ */
-function FairfieldTax({ pageNum }) {
-  const personas = [
-    { t: 'New Grads & Young Professionals', b: 'Sacred Heart and Fairfield University turn out ~17,000 students next door; many want to stay on the coast after graduation but can’t — and don’t want to — buy in Fairfield. Black Rock is where they land.' },
-    { t: 'Priced-Out-of-Fairfield Renters', b: 'Households that want beaches, walkable dining, and a Metro-North commute, but balk at Fairfield/Westport rents and home prices. Black Rock delivers the same coastal lifestyle for materially less.' },
-    { t: 'Downsizers & Right-Sizers', b: 'Empty-nesters and remote workers trading a big-house mortgage for a lock-and-leave apartment steps from the water and the avenue.' },
-  ]
-  const td = { fontSize: 10.5, padding: '6px 10px' }
-  return (
-    <div className="page">
-      <PageHeader section="Renter Demand" />
-      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-        <div className="eyebrow">Renter Demand</div>
-        <div className="section-title" style={{ marginBottom: 2, fontSize: 25 }}>Fairfield Living, <span style={{ color: '#F8971D' }}>Without the Fairfield Tax</span></div>
-        <div className="title-rule" />
-        <div style={{ fontSize: 10.5, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 14 }}>
-          Black Rock&rsquo;s entire investment story is captured in one idea: it offers the Fairfield County coastal
-          lifestyle &mdash; the water, the walkability, the restaurants, the train to Manhattan &mdash; without the
-          Fairfield County price tag. That gap is the engine of durable renter demand. Tenants get the life they
-          want; owners get a deep, motivated pool of renters and rents that re-price upward as units turn.
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, flex: 1, minHeight: 0 }}>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <h3 style={{ fontSize: 10, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8 }}>The &ldquo;Fairfield Tax&rdquo; &mdash; Same Coast, Different Price</h3>
-            <table className="data-table" style={{ fontSize: 10.5 }}>
+          {/* RIGHT — the Fairfield tax */}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <h3 style={{ fontSize: 10, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 7 }}>The &ldquo;Fairfield Tax&rdquo; &mdash; Same Coast, Different Price</h3>
+            <table className="data-table" style={{ fontSize: 9.5 }}>
               <thead><tr><th>Metric</th><th style={{ textAlign: 'right' }}>Town of Fairfield</th><th style={{ textAlign: 'right' }}>Black Rock</th></tr></thead>
               <tbody>
                 <tr><td style={td}>Median Home Price</td><td style={{ ...td, textAlign: 'right' }}>$865,000</td><td style={{ ...td, textAlign: 'right' }}>$335,000</td></tr>
@@ -752,39 +767,36 @@ function FairfieldTax({ pageNum }) {
                 <tr><td style={td}>Metro-North to NYC</td><td style={{ ...td, textAlign: 'right' }}>Yes</td><td style={{ ...td, textAlign: 'right' }}>Yes</td></tr>
               </tbody>
             </table>
-            <div style={{ marginTop: 12, background: 'var(--carbon)', color: '#fff', borderRadius: 4, padding: '12px 14px' }}>
+            <div style={{ marginTop: 11, background: 'var(--carbon)', color: '#fff', borderRadius: 4, padding: '11px 14px' }}>
               <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--golden)' }}>The Fairfield Tax</div>
-              <div style={{ fontSize: 19, fontWeight: 800, lineHeight: 1.15, marginTop: 4 }}>~$1,000 / mo less to rent</div>
-              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.82)', marginTop: 3, lineHeight: 1.4 }}>
+              <div style={{ fontSize: 18, fontWeight: 800, lineHeight: 1.15, marginTop: 4 }}>~$1,000 / mo less to rent</div>
+              <div style={{ fontSize: 9.5, color: 'rgba(255,255,255,0.82)', marginTop: 3, lineHeight: 1.4 }}>
                 &mdash; and ~$530,000 less to own &mdash; for the same Gold Coast lifestyle, one town over.
               </div>
             </div>
-            <div style={{ fontSize: 7.6, color: 'var(--stone)', marginTop: 'auto', paddingTop: 8, lineHeight: 1.4 }}>
-              Sources: Fairfield median home price (Raveis, 2026); Bridgeport median home price; Fairfield average
-              apartment rent (RentCafe, 2025); Black Rock figure reflects in-place rents at the subject. Illustrative
-              and approximate &mdash; verify independently.
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-            <h3 style={{ fontSize: 10, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8 }}>Who Rents Black Rock</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
-              {personas.map(p => (
-                <div key={p.t} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 11 }}>
-                  <div style={{ fontSize: 11.5, fontWeight: 800, color: 'var(--carbon)' }}>{p.t}</div>
-                  <div style={{ fontSize: 9.5, lineHeight: 1.45, color: 'var(--graphite)', marginTop: 2 }}>{p.b}</div>
-                </div>
-              ))}
-              <div className="bldg-card" style={{ padding: '11px 13px', marginTop: 'auto' }}>
-                <div style={{ fontSize: 9.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 4 }}>Why it matters to ownership</div>
-                <div style={{ fontSize: 9.3, lineHeight: 1.45, color: 'var(--graphite)' }}>
-                  A wide, value-driven renter base keeps Black Rock occupancy tight and turnover fast to re-lease &mdash;
-                  exactly the conditions that let in-place rents at 2836 Fairfield Avenue march toward the
-                  $57,300/yr mark-to-market upside underwritten in the pro forma.
-                </div>
+            <div className="bldg-card" style={{ padding: '10px 13px', marginTop: 11 }}>
+              <div style={{ fontSize: 9.3, lineHeight: 1.45, color: 'var(--graphite)' }}>
+                <strong style={{ color: 'var(--carbon)' }}>Why it matters to ownership:</strong> a wide, value-driven
+                renter base keeps occupancy tight and turnover fast to re-lease &mdash; the conditions that carry
+                in-place rents toward the $57,300/yr mark-to-market upside in the pro forma.
               </div>
             </div>
           </div>
+        </div>
+
+        {/* stat strip */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginTop: 12 }}>
+          {stats.map(s => (
+            <div key={s.l} style={{ borderTop: '3px solid var(--golden)', padding: '5px 2px' }}>
+              <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: 8, fontWeight: 600, color: 'var(--stone)', marginTop: 3, lineHeight: 1.3 }}>{s.l}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ fontSize: 7.4, color: 'var(--stone)', marginTop: 7, lineHeight: 1.4 }}>
+          Sources: Fairfield median home price (Raveis, 2026); Bridgeport median home price; Fairfield average
+          apartment rent (RentCafe, 2025); Black Rock figure reflects in-place rents at the subject; SHU/Fairfield U
+          enrollment. Illustrative and approximate &mdash; verify independently.
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -894,18 +906,16 @@ function App() {
     <ExecutiveSummary />,
     <Divider eyebrow="01" title="The Property" image="/photos/ext-1.jpg" />,
     <PropertyOverview />,
+    <BuildingHistory />,
     <SiteMap />,
-    <InvestmentHighlights />,
     ...PHOTO_PAGES.map(p => <PhotoPage {...p} />),
-    <PhotoFullBleed />,
     <Divider eyebrow="02" title="Financial Analysis" image="/photos/ext-2.jpg" />,
     <RentRoll />,
     <IncomeExpense />,
-    <TrailingCashFlow />,
+    <ManagementTransition />,
     <Divider eyebrow="03" title="Location & Market" image="/photos/aerial-1.jpg" />,
     <BlackRockOverview />,
     <WhyBlackRock />,
-    <FairfieldTax />,
     <AerialContext src="/photos/aerial-2.jpg" points={[
       { x: 50, y: 78, label: '2836 Fairfield Avenue', primary: true },
       { x: 38, y: 34, title: 'Fairfield Avenue Corridor', label: 'Taco Loco\nThe Sitting Room\nPark City Music Hall\nBlackrock Social\nHarborview Market' },
@@ -926,7 +936,7 @@ function App() {
     <LocationsPage />,
   ]
   return (
-    <div className="om-container">
+    <div className={`om-container${DRAFT ? ' draft' : ''}`}>
       {pages.map((el, i) => cloneElement(el, { key: i, pageNum: i + 1 }))}
     </div>
   )

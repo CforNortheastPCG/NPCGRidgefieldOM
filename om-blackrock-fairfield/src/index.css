@@ -699,3 +699,23 @@ a.team__big:hover .team__avatar { border-color: var(--terracotta); }
   .om-container { padding: 0; }
   .page { box-shadow: none; margin: 0; page-break-after: always; }
 }
+
+/* ── DRAFT WATERMARK ── diagonal notice on every page; toggled by the `draft`
+   class on .om-container (see DRAFT in deal.js). mix-blend-mode keeps it
+   legible over both white content pages and dark photo/cover pages. */
+.om-container.draft .page { position: relative; }
+.om-container.draft .page::after {
+  content: 'DRAFT';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 165px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.5);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 90;
+  white-space: nowrap;
+}

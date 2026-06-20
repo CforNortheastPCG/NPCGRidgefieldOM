@@ -263,16 +263,34 @@ function PortfolioOverview({ pageNum }) {
   )
 }
 
-/* ═══════════════════ PORTFOLIO MAP / ANNOTATED AERIAL ═══════════════════
-   The three buildings on a downtown aerial, parcels outlined (no clouding) with
-   circular building callouts and a "Ware, MA" anchor placed low so it doesn't
-   cover the parcels (per Jake's "move the label lower" note). */
+/* ═══════════════════ PORTFOLIO MAP / SATELLITE OVERVIEW ═══════════════════
+   Google Static Maps (hybrid satellite) of downtown Ware with each parcel
+   outlined in golden via the `path=` param (baked by Google in the correct
+   projection), circular building photo callouts across the top, and a "Ware, MA"
+   anchor placed low. Falls back to the baked drone aerial if the key is absent.
+   Outlines are real MassGIS L3 assessor parcel polygons (see PARCELS below).
+   Requires VITE_GOOGLE_MAPS_API_KEY. */
 function PortfolioMap({ pageNum }) {
+  const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+  // x/y = parcel centroid as a % of the 640×460 map frame (pin tip anchors here).
   const pins = [
-    { label: '27 Parker Street', img: '/photos/ware/p27.jpg' },
-    { label: '28-30 & 28.5 North St', img: '/photos/ware/n2830.jpg' },
-    { label: '38 North Street', img: '/photos/ware/n38.jpg' },
+    { label: '27 Parker Street', img: '/photos/ware/p27.jpg', x: 38.3, y: 41.2 },
+    { label: '28-30 & 28.5 North St', img: '/photos/ware/n2830.jpg', x: 51.5, y: 56.8 },
+    { label: '38 North Street', img: '/photos/ware/n38.jpg', x: 58.4, y: 45.8 },
   ]
+  // Real MassGIS L3 standardized assessor parcel polygons (WGS84 [lat,lng]) for
+  // the three portfolio parcels (queried from MassGIS Property Tax Parcels by
+  // LOC_ID). 28.5 North St shares the 28-30 parcel, so there are three.
+  const PARCELS = [
+    // 27 Parker Street — LOC_ID M_138747_890409
+    [[42.261795, -72.242208], [42.261793, -72.242194], [42.261655, -72.242231], [42.261726, -72.242609], [42.261728, -72.242608], [42.261863, -72.242568], [42.261795, -72.242208]],
+    // 28-30 & 28.5 North Street — LOC_ID M_138794_890379
+    [[42.26176, -72.241989], [42.261664, -72.242019], [42.261571, -72.241409], [42.261308, -72.24147], [42.261348, -72.241881], [42.261351, -72.242129], [42.261323, -72.242136], [42.261324, -72.242137], [42.261335, -72.242219], [42.261772, -72.242081], [42.26176, -72.241989]],
+    // 38 North Street — LOC_ID M_138805_890398
+    [[42.261722, -72.241753], [42.261663, -72.241388], [42.261571, -72.241409], [42.261664, -72.242019], [42.26176, -72.241989], [42.261722, -72.241753]],
+  ]
+  const outline = ring => 'path=' + encodeURIComponent('color:0xF8971Dff|weight:3|' + ring.map(p => p.join(',')).join('|'))
+  const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=42.2616,-72.2420&zoom=18&size=640x460&scale=2&maptype=hybrid&${PARCELS.map(outline).join('&')}&key=${API_KEY}`
   return (
     <div className="page">
       <PageHeader section="Portfolio Map" />
@@ -280,23 +298,18 @@ function PortfolioMap({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Portfolio <span style={{ color: ORANGE }}>Map</span></div>
         <div className="title-rule" />
         <div style={{ position: 'relative', flex: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)' }}>
-          <img src="/photos/ware/cover-aerial.jpg" alt="Ware Portfolio — aerial with the three buildings outlined" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', objectPosition: 'center 42%' }} />
-          {/* Circular building callouts across the top */}
-          <div style={{ position: 'absolute', top: 16, left: 16, right: 16, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14 }}>
-            {pins.map(p => (
-              <div key={p.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                <div style={{ width: 96, height: 96, borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--golden)', boxShadow: '0 2px 8px rgba(0,0,0,0.45)' }}>
-                  <img src={p.img} alt={p.label} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                </div>
-                <div style={{ background: 'rgba(40,27,18,0.82)', color: '#fff', fontSize: 10, fontWeight: 700, letterSpacing: '0.04em', padding: '3px 9px', borderRadius: 3, whiteSpace: 'nowrap' }}>{p.label}</div>
+          <img src={API_KEY ? mapUrl : '/photos/ware/cover-aerial.jpg'} alt="Ware Portfolio — downtown Ware satellite with the parcels outlined" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', objectPosition: 'center 50%' }} />
+          {/* Building photo pins — anchored over each parcel (tip at the centroid) */}
+          {pins.map(p => (
+            <div key={p.label} style={{ position: 'absolute', left: `${p.x}%`, top: `${p.y}%`, transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+              <div style={{ background: 'rgba(40,27,18,0.85)', color: '#fff', fontSize: 8.5, fontWeight: 700, letterSpacing: '0.03em', padding: '2px 7px', borderRadius: 3, whiteSpace: 'nowrap', marginBottom: 4 }}>{p.label}</div>
+              <div style={{ width: 58, height: 58, borderRadius: '50%', overflow: 'hidden', border: `3px solid ${ORANGE}`, boxShadow: '0 2px 7px rgba(0,0,0,0.5)' }}>
+                <img src={p.img} alt={p.label} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
-            ))}
-          </div>
-          {/* Town anchor — placed low so it doesn't cover the parcels */}
-          <div style={{ position: 'absolute', left: 24, bottom: 22, background: 'rgba(255,255,255,0.92)', borderLeft: `4px solid ${ORANGE}`, padding: '7px 14px', borderRadius: 3 }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>Ware, MA</div>
-            <div style={{ fontSize: 9, fontWeight: 600, color: 'var(--stone)', letterSpacing: '0.06em', marginTop: 2 }}>Three contiguous parcels · Downtown</div>
-          </div>
+              {/* downward pointer to the parcel */}
+              <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: `9px solid ${ORANGE}`, marginTop: -1, filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.4))' }} />
+            </div>
+          ))}
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
