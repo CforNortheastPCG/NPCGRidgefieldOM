@@ -12,7 +12,7 @@ export const DEAL = {
   cityState: 'Bridgeport, CT 06605',         // city, state ZIP
   cityLong: 'Black Rock · Bridgeport, Connecticut', // long form for the cover subtitle
   status: 'For Sale',                        // listing status chip
-  type: '16-Unit Mixed-Use Multifamily',     // asset descriptor (cover)
+  type: '16-Unit Mixed-Use Adaptive-Reuse Property', // asset descriptor (cover)
   coverImage: '/photos/cover.jpg',           // full-bleed cover photo
   pdfName: '2836-Fairfield-Avenue-OM.pdf',   // output filename for the exporter
 }

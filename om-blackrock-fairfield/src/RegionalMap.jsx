@@ -102,7 +102,9 @@ function buildStaticMapUrl() {
   // (no fill): translucent fills stacked across the four nested bands washed out
   // the basemap labels, city dots, and rail beneath them. Drawn first in the
   // params list so they sit as a quiet behind-layer under the rail + pins.
-  const ringPaths = ISOCHRONES.map(r =>
+  // Only encoded-polyline bands (`enc`) are drawn here; the dedicated Drive Times
+  // page renders the full coord-array isochrones as an SVG overlay instead.
+  const ringPaths = ISOCHRONES.filter(r => r.enc).map(r =>
     `path=${encodeURIComponent(`color:${r.color}cc|weight:3|enc:${r.enc}`)}`
   )
   const railPath = `path=${encodeURIComponent(`color:0xB55D37|weight:5|${RAIL.map(p => `${p[0]},${p[1]}`).join('|')}`)}`

@@ -32,6 +32,7 @@ export const PHOTO_PAGES = [
   {
     section: 'Property Photos', title: 'Commercial', accent: 'Space',
     subtitle: 'Unit 102 · Casa Buena Team, LLC · 1,500 SF · leased through Dec 2027',
+    rows: [1, 2], // one wide photo on top, two below
     images: [
       { src: '/photos/comm-1.jpg', caption: 'Retail Storefront' },
       { src: '/photos/comm-2.jpg', caption: 'Interior Sales Floor' },
@@ -70,7 +71,7 @@ export const PHOTO_PAGES = [
   },
   {
     section: 'Property Photos', title: 'Basement, Storage', accent: '& Historic Vault',
-    subtitle: 'Building systems, tenant storage & the original bank vault',
+    subtitle: 'Building systems, tenant storage, extra usable space & the original bank vault',
     images: [
       { src: '/photos/vault-1.jpg', caption: 'Original Bank Vault' },
       { src: '/photos/basement-1.jpg', caption: 'Basement Mechanicals' },

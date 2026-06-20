@@ -31,9 +31,9 @@ const FACTS = [
   { k: 'Parcel ID', v: '08070-100-55 (Bridgeport)' },
   { k: 'Parcel', v: '0.61 Acres (~26,572 SF) on Fairfield Avenue' },
   { k: 'Building', v: '21,048 SF gross · 3 stories + basement · elevator' },
-  { k: 'Units', v: '16 total — 15 apartments over 1 ground-floor retail' },
+  { k: 'Units', v: '16 total — 8 units per floor (×2 floors); 15 apartments + 1 retail' },
   { k: 'Frontage', v: 'Fairfield Avenue retail corridor, Black Rock' },
-  { k: 'Parking', v: 'On-site surface parking' },
+  { k: 'Parking', v: 'Gated off-street lot' },
 ]
 
 export default function SiteMap({ pageNum }) {
@@ -48,7 +48,7 @@ export default function SiteMap({ pageNum }) {
         <div className="title-rule" />
         <div style={{ fontSize: 11, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 12 }}>
           A single mixed-use building on a 0.61-acre parcel fronting Fairfield Avenue in the heart of Black Rock,
-          with on-site surface parking and direct exposure to the neighborhood&rsquo;s dining and retail corridor.
+          with a gated off-street parking lot and direct exposure to the neighborhood&rsquo;s dining and retail corridor.
           The boundary below is the recorded parcel outline from Bridgeport&rsquo;s GIS.
         </div>
 
@@ -77,8 +77,10 @@ export default function SiteMap({ pageNum }) {
               </div>
             ))}
             <div style={{ fontSize: 11, lineHeight: 1.55, color: 'var(--graphite)' }}>
-              The elevator-served building places all 15 apartments above a high-visibility retail unit, capturing
-              both residential demand and Fairfield Avenue foot traffic on a single, walkable parcel.
+              The building runs eight units per floor across two floors. The retail tenant occupies one of the eight
+              first-floor units — about the footprint of one of the building&rsquo;s larger apartments (~1,500 SF),
+              fronting Fairfield Avenue — with the other seven first-floor units and all eight second-floor units
+              residential.
             </div>
             <div style={{ fontSize: 7.8, color: 'var(--stone)', lineHeight: 1.4 }}>
               Parcel boundary: Connecticut State Parcel Layer 2023 (Bridgeport BEGIS). Aerial: Google. Outline
