@@ -5,6 +5,7 @@ import { PhotoGallery } from './PhotoPages.jsx'
 import Divider from './Divider.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
+import DriveTimeMap from './DriveTimeMap.jsx'
 import { PageHeader, PageFooter, StaticShell } from './Shell.jsx'
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -34,13 +35,13 @@ const ORANGE = '#F8971D'
 function CoverHero({ pageNum }) {
   const thumbs = [
     { src: '/photos/ware/p27.jpg', label: '27 Parker Street' },
-    { src: '/photos/ware/n2830.jpg', label: '28-30 & 28.5 North Street' },
+    { src: '/photos/ware/n2830-ext4.jpg', label: '28-30 & 28.5 North Street' },
     { src: '/photos/ware/n38.jpg', label: '38 North Street' },
   ]
   return (
     <div className="page">
       <div className="cover-hero">
-        <img className="cover-hero-img" src="/photos/ware/cover-aerial.jpg" alt="" style={{ objectPosition: 'center 38%' }} />
+        <img className="cover-hero-img" src="/photos/ware/cover-hero.jpg" alt="" style={{ objectPosition: 'center 50%' }} />
         {/* Top scrim for the title; bottom scrim for the thumbnail strip */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.22) 26%, rgba(0,0,0,0) 46%, rgba(0,0,0,0.20) 66%, rgba(0,0,0,0.86) 100%)', pointerEvents: 'none' }} />
         {/* NPCG logo — top right */}
@@ -52,7 +53,7 @@ function CoverHero({ pageNum }) {
           <div style={{ color: '#fff', fontSize: 12.5, fontWeight: 700, letterSpacing: '0.30em', textTransform: 'uppercase', marginBottom: 14 }}>20-Unit Multifamily Portfolio · For Sale</div>
           <div className="cover-hero-title" style={{ fontSize: 70, lineHeight: 0.98 }}>Ware<br />Portfolio</div>
           <div className="cover-hero-rule" style={{ marginTop: 18 }} />
-          <div className="cover-hero-prep" style={{ marginTop: 14, fontSize: 12 }}>27 Parker St · 28-30 &amp; 28.5 North St · 38 North St &middot; Ware, MA 01082</div>
+          <div className="cover-hero-prep" style={{ marginTop: 14, fontSize: 12, opacity: 1, color: '#fff', textShadow: '0 1px 6px rgba(0,0,0,0.85)' }}>27 Parker St · 28-30 &amp; 28.5 North St · 38 North St &middot; Ware, MA 01082</div>
         </div>
         {/* Building thumbnails along the bottom */}
         <div style={{ position: 'absolute', left: 44, right: 44, bottom: 34, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14 }}>
@@ -124,56 +125,69 @@ function ExecutiveSummary({ pageNum }) {
         <div className="section-title">Executive <span style={{ color: ORANGE }}>Summary</span></div>
         <div className="title-rule" />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 28, flex: 1, minHeight: 0 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '0.96fr 1.04fr', gridTemplateRows: '1fr', gap: 30, flex: 1, minHeight: 0 }}>
           {/* Left — price, addresses, narrative */}
-          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 14 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0, justifyContent: 'space-between' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               <div style={{ textAlign: 'center', padding: '7px 4px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$2,550,000</div>
-                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>Listing Price</div>
+                <div style={{ fontSize: 27, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$2,550,000</div>
+                <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>Listing Price</div>
               </div>
               <div style={{ textAlign: 'center', padding: '7px 4px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>20</div>
-                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>Units · 3 Buildings</div>
+                <div style={{ fontSize: 27, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>20</div>
+                <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>Units · 3 Buildings</div>
               </div>
             </div>
 
-            <div className="eyebrow" style={{ marginBottom: 5 }}>Property Addresses</div>
-            <ul className="highlights" style={{ fontSize: 10.6, marginBottom: 12 }}>
-              <li>27 Parker Street</li>
-              <li>28-30 North Street, 28.5 North Street</li>
-              <li>38 North Street</li>
-            </ul>
+            <div>
+              <div className="eyebrow" style={{ marginBottom: 8, fontSize: 11 }}>Property Addresses</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {[
+                  ['1', '27 Parker Street'],
+                  ['2', '28-30 & 28.5 North Street'],
+                  ['3', '38 North Street'],
+                ].map(([n, addr]) => (
+                  <div key={n} style={{ display: 'flex', alignItems: 'baseline', gap: 12, paddingBottom: 9, borderBottom: '1px solid var(--border)' }}>
+                    <span style={{ flexShrink: 0, width: 16, fontSize: 19, fontWeight: 800, color: ORANGE, lineHeight: 1 }}>{n}</span>
+                    <div style={{ lineHeight: 1.2 }}>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--carbon)' }}>{addr}</div>
+                      <div style={{ fontSize: 8.5, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 2 }}>Ware, MA 01082 · Building {n}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-            <div className="eyebrow" style={{ marginBottom: 5 }}>Property Overview</div>
-            {/* TODO(Ravi): refreshed Executive Summary writing to drop in here. */}
-            <p style={{ fontSize: 10.4, lineHeight: 1.5, marginBottom: 9 }}>
-              Northeast Private Client Group is pleased to present the <strong>Ware Portfolio</strong>, a 20-unit,
-              multi-building apartment portfolio situated across four contiguous addresses in Ware, Massachusetts.
-              The portfolio spans 27 Parker Street, 28-30 North Street, 28.5 North Street, and 38 North Street, and
-              consists of a diverse unit mix including studio, one-, two-, and three-bedroom apartments.
-            </p>
-            <p style={{ fontSize: 10.4, lineHeight: 1.5 }}>
-              The offering presents a compelling value-add opportunity for investors seeking immediate
-              mark-to-market potential. A meaningful portion of the rent roll reflects below-market rents on leases
-              with near-term expirations, with several tenants paying meaningfully below proforma on units that will
-              roll within the holding period. With competitors and submarket asking rents well above current
-              in-place collections, the portfolio offers a clear path to improved cash flow through disciplined
-              lease-up and renewals at market rates.
-            </p>
+            <div>
+              <div className="eyebrow" style={{ marginBottom: 7, fontSize: 11 }}>Property Overview</div>
+              <p style={{ fontSize: 10.6, lineHeight: 1.46, marginBottom: 8 }}>
+                Northeast Private Client Group is pleased to present the <strong>Ware Portfolio</strong>, a 20-unit,
+                multi-building apartment portfolio situated across four contiguous addresses in Ware, Massachusetts.
+                The portfolio spans 27 Parker Street, 28-30 North Street, 28.5 North Street, and 38 North Street, and
+                consists of a diverse unit mix including studio, one-, two-, and three-bedroom apartments.
+              </p>
+              <p style={{ fontSize: 10.6, lineHeight: 1.46 }}>
+                The offering presents a compelling value-add opportunity for investors seeking immediate
+                mark-to-market potential. A meaningful portion of the rent roll reflects below-market rents on leases
+                with near-term expirations, with several tenants paying meaningfully below proforma on units that will
+                roll within the holding period. With competitors and submarket asking rents well above current
+                in-place collections, the portfolio offers a clear path to improved cash flow through disciplined
+                lease-up and renewals at market rates.
+              </p>
+            </div>
           </div>
 
           {/* Right — aerial + property summary table */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minHeight: 0 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, minHeight: 0 }}>
             <div style={{ flex: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden', border: '3px solid var(--golden)' }}>
               <img src="/photos/ware/aerial-outlined.jpg" alt="Ware Portfolio — downtown Ware aerial" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div>
-              <div className="eyebrow" style={{ marginBottom: 6 }}>Property Summary</div>
+              <div className="eyebrow" style={{ marginBottom: 8, fontSize: 11 }}>Property Summary</div>
               <div className="flat-cards">
-                <div className="bldg-card" style={{ padding: '10px 14px' }}>
+                <div className="bldg-card" style={{ padding: '9px 18px' }}>
                   {facts.map(([k, v]) => (
-                    <div className="bldg-row" key={k}><span className="bldg-label">{k}</span><span className="bldg-val">{v}</span></div>
+                    <div className="bldg-row" key={k} style={{ fontSize: 12, padding: '4px 0' }}><span className="bldg-label">{k}</span><span className="bldg-val">{v}</span></div>
                   ))}
                 </div>
               </div>
@@ -353,14 +367,16 @@ function BuildingInfo({ b, pageNum }) {
             </div>
             <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
               <div className="eyebrow" style={{ marginBottom: 5 }}>Unit Mix &amp; In-Place Rents</div>
-              <table className="data-table" style={{ fontSize: 9.5 }}>
-                <thead><tr><th>Unit</th><th>Type</th><th style={{ textAlign: 'right' }}>SF</th><th style={{ textAlign: 'right' }}>In-Place</th><th style={{ textAlign: 'right' }}>Pro Forma</th></tr></thead>
-                <tbody>
-                  {b.units.map((u, i) => (
-                    <tr key={i}><td>{u[0]}</td><td>{u[1]}</td><td style={{ textAlign: 'right' }}>{u[2]}</td><td style={{ textAlign: 'right' }}>{u[3]}</td><td style={{ textAlign: 'right' }}>{u[4]}</td></tr>
-                  ))}
-                </tbody>
-              </table>
+              <div style={{ flex: 1, minHeight: 0 }}>
+                <table className={b.units.length > 8 ? 'data-table compact' : 'data-table'} style={{ fontSize: b.units.length > 8 ? 9 : 11.5, height: b.units.length > 8 ? undefined : '100%' }}>
+                  <thead><tr><th>Unit</th><th>Type</th><th style={{ textAlign: 'right' }}>SF</th><th style={{ textAlign: 'right' }}>In-Place</th><th style={{ textAlign: 'right' }}>Pro Forma</th></tr></thead>
+                  <tbody>
+                    {b.units.map((u, i) => (
+                      <tr key={i}><td>{u[0]}</td><td>{u[1]}</td><td style={{ textAlign: 'right' }}>{u[2]}</td><td style={{ textAlign: 'right' }}>{u[3]}</td><td style={{ textAlign: 'right' }}>{u[4]}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               {/* TODO(Ravi): swap for the refreshed per-building unit-mix table when provided. */}
             </div>
           </div>
@@ -679,8 +695,7 @@ function LocationOverview({ pageNum }) {
           <div className="section-title" style={{ marginBottom: 2 }}>Ware, <span style={{ color: ORANGE }}>Massachusetts</span></div>
           <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--carbon)', letterSpacing: '0.02em', marginBottom: 8 }}>Pioneer Valley · Between Springfield &amp; Worcester</div>
           <div className="title-rule" />
-          {/* TODO(Ravi): refreshed Location Summary writing to drop in here. */}
-          <div style={{ fontSize: 10.6, lineHeight: 1.55, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ fontSize: 12.5, lineHeight: 1.8, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 16, flex: 1, marginTop: 8 }}>
             <p>
               Ware Portfolio is located in Ware, Massachusetts, a small town situated in the Amherst / East Hampshire
               County submarket of the Amherst Town&ndash;Northampton MSA. Ware sits at the eastern edge of Hampshire
@@ -716,58 +731,6 @@ function LocationOverview({ pageNum }) {
   )
 }
 
-/* ═══════════════════ EMPLOYMENT, EDUCATION & DEMOGRAPHICS ═══════════════════ */
-function EmploymentEducation({ pageNum }) {
-  const employers = ['Baystate Health', 'UMass Memorial Health', 'MassMutual', 'Ware Public Schools']
-  const colleges = ['University of Massachusetts Amherst', 'Amherst College', 'Smith College', 'Mount Holyoke College', 'Hampshire College', 'Holyoke Community College', 'Worcester Polytechnic Institute (WPI)']
-  const Stat = ({ label, value }) => (
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: '1px solid var(--border)', padding: '6px 0' }}>
-      <span style={{ fontSize: 10.5, fontWeight: 600, color: 'var(--carbon)' }}>{label}</span>
-      <span style={{ fontSize: 11.5, fontWeight: 800, color: 'var(--carbon)' }}>{value}</span>
-    </div>
-  )
-  return (
-    <div className="page">
-      <PageHeader section="Location Overview" />
-      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div className="section-title" style={{ marginBottom: 2 }}>Employment, Education &amp; <span style={{ color: ORANGE }}>Demographics</span></div>
-        <div className="title-rule" />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, flex: 1, minHeight: 0 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            <div>
-              <div className="eyebrow" style={{ marginBottom: 8 }}>Major Employers</div>
-              {employers.map(e => (
-                <div key={e} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 11, marginBottom: 7, fontSize: 11.5, fontWeight: 700, color: 'var(--carbon)' }}>{e}</div>
-              ))}
-            </div>
-            <div>
-              <div className="eyebrow" style={{ marginBottom: 8 }}>Higher Education</div>
-              <ul className="highlights" style={{ fontSize: 10.6 }}>
-                {colleges.map(c => <li key={c}>{c}</li>)}
-              </ul>
-            </div>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-            <div>
-              <div className="eyebrow" style={{ marginBottom: 4 }}>Population &amp; Business</div>
-              <Stat label="2022 Total Population" value="~9,900" />
-              <Stat label="2027 Projected Population" value="~10,149" />
-              <Stat label="2022 Est. Total Employees" value="~2,455" />
-            </div>
-            <div>
-              <div className="eyebrow" style={{ marginBottom: 4 }}>Households &amp; Income</div>
-              <Stat label="2022 Total Households" value="~2,700" />
-              <Stat label="Average Household Income" value="$69,616" />
-              <Stat label="Median Household Income" value="$67,475" />
-            </div>
-            {/* TODO(Ravi): demographic graphs to be provided. */}
-          </div>
-        </div>
-      </div>
-      <PageFooter pageNum={pageNum} />
-    </div>
-  )
-}
 
 /* ═══════════════════ BUILDING DATA ═══════════════════ */
 const BUILDINGS = {
@@ -833,7 +796,7 @@ function App() {
 
     <Divider eyebrow="03" title="Location & Market" image="/photos/ware/aerial-wide.jpg" />,
     <LocationOverview />,
-    <EmploymentEducation />,
+    <DriveTimeMap />,
 
     <Divider eyebrow="04" title="The Team" image="/photos/ware/p27.jpg" />,
     <TeamPage />,

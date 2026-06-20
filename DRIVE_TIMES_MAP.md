@@ -4,14 +4,22 @@ A reusable, full-page **Drive Times** map for the OM decks: road-network
 drive-time bands (15 / 30 / 45 / 60-min) around the subject property, on a bold
 styled basemap with town labels and highways composited cleanly on top.
 
-First built for **South End Plaza** (Thomaston — inland), then refined for
-**Black Rock / 2836 Fairfield Ave** (coastal). The Black Rock build is the
-canonical reference — **full code at the bottom of this doc.**
+First built for **South End Plaza** (Thomaston — inland), refined for
+**Black Rock / 2836 Fairfield Ave** (coastal), and standardized on
+**Ware Portfolio** (Ware MA — inland). The Black Rock build is the canonical
+reference — **full code at the bottom of this doc.**
+
+> **House style (going forward):** every deal renders as **filled shaded bands**
+> (translucent fill + stroke, nested toward the center), and the `CITIES` strip
+> shows **real Valhalla-routed times**, not estimates. The only thing that varies
+> by geography is the band *geometry* (inland → radial rings; coastal → raw
+> road-following polygon).
 
 > TL;DR for a new deal: copy the three files, change `SUBJECT` + the
-> `CENTER/ZOOM/W/H` frame + the `CITIES` strip & narrative, pick the method by
-> geography (**inland → radial rings; coastal → raw-polygon filled bands**), then
-> run `npm run isochrones` and `npm run map-labels`.
+> `CENTER/ZOOM/W/H` frame + the narrative, pick the **geometry** by location
+> (inland → radial rings; coastal → raw-polygon), render as **filled shaded
+> bands**, fill the `CITIES` strip with **real times** (see *Drive-time strip*),
+> then run `npm run isochrones` and `npm run map-labels`.
 
 ---
 
@@ -71,8 +79,9 @@ overlay re-registers.
 Per-deal frames on record:
 | Deal | Subject | CENTER | ZOOM | Method |
 |---|---|---|---|---|
-| South End Plaza (Thomaston, inland) | `41.6650, -73.0730` | `41.60, -72.95` | 8 | radial-envelope rings |
-| Black Rock — 2836 Fairfield (coastal) | `41.157532, -73.226828` | `41.15, -73.40` | 8 | raw-polygon filled bands |
+| South End Plaza (Thomaston, inland) | `41.6650, -73.0730` | `41.60, -72.95` | 8 | radial rings (outline — pre-house-style) |
+| Black Rock — 2836 Fairfield (coastal) | `41.157532, -73.226828` | `41.15, -73.40` | 8 | raw-polygon + filled shaded bands |
+| Ware Portfolio (Ware MA, inland) | `42.2616, -72.2420` | `42.18, -72.25` | 8 | radial rings + filled shaded bands |
 
 ---
 
@@ -126,18 +135,34 @@ pts.push(pts[0])
 
 ---
 
-## Rendering: outline vs filled bands
-- **Inland:** outlined rings read fine — `<polyline fill="none" stroke>`.
-- **Coastal (the look that landed):** draw each band twice — a translucent
-  **fill** then a thin **stroke**, largest contour first so they nest into a
-  shaded heat-map. The fill tints only reachable **land**; the water stays clear,
-  so the coastal corridor reads as intentional reach, not stray lines:
+## Rendering: filled shaded bands (the house style — every deal)
+Draw each band **twice** — a translucent **fill** then a thin **stroke** —
+largest contour first so they nest into a shaded heat-map that darkens toward the
+center. This is the standard now, **inland or coastal**; the outline-only
+`<polyline>` from the first South End build is **deprecated**. The fill tints only
+the reachable area (on coastal deals the water stays clear, so the corridor reads
+as intentional reach, not stray lines):
 ```jsx
 {RING_PATHS.map(r => <polygon key={`f-${r.min}`} points={r.points} fill={r.color} fillOpacity={0.16} stroke="none" />)}
 {RING_PATHS.map(r => <polygon key={`s-${r.min}`} points={r.points} fill="none" stroke={r.color} strokeWidth={2} strokeOpacity={0.95} vectorEffect="non-scaling-stroke" />)}
 ```
 The transparent labels overlay still composites on top, so town names / highway
-shields stay readable over the fills. Knob: `fillOpacity`.
+shields stay readable over the fills. Knob: `fillOpacity` (0.16). Note the legend
+swatches still use the ring icon — the fills are the band, the stroke is the edge.
+
+## Drive-time strip — real Valhalla-routed values (never estimate)
+The `CITIES` numbers must be **real**, computed the same way as the rings so the
+strip and the bands agree. Geocode each city, then one Valhalla **matrix** call
+(`sources_to_targets`, `costing: auto`):
+```js
+const body = { sources: [SUBJECT], targets, costing: 'auto' }   // targets = geocoded city {lat,lon}
+const r = await fetch('https://valhalla1.openstreetmap.de/sources_to_targets?json=' + encodeURIComponent(JSON.stringify(body)))
+const row = (await r.json()).sources_to_targets[0]
+// row[i].distance (km) → miles ×0.621371 ;  row[i].time (s) → minutes /60
+```
+Round to friendly figures (`~28 mi · 40 min`) and pick ~6 cities that bracket the
+bands (nearest hub → the ~60-min edge). Make the intro narrative match (don't say
+"inside ~60" if the routed time is 62 — say "about an hour").
 
 ---
 

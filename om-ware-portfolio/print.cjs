@@ -25,8 +25,8 @@ const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'ompdf-'));
 
   const files = [];
   for (let i = 0; i < pages.length; i++) {
-    const f = path.join(TMP, `page-${String(i).padStart(2, '0')}.png`);
-    await pages[i].screenshot({ path: f, type: 'png' });
+    const f = path.join(TMP, `page-${String(i).padStart(2, '0')}.jpg`);
+    await pages[i].screenshot({ path: f, type: 'jpeg', quality: Number(process.env.QUALITY || 60) });
     files.push(f);
     console.log(`Captured page ${i + 1}/${pages.length}`);
   }
@@ -38,7 +38,10 @@ const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'ompdf-'));
   const imgTags = files.map(f => `<div class="pdf-page"><img src="file://${f}" /></div>`).join('\n');
   const htmlPath = path.join(TMP, 'index.html');
   fs.writeFileSync(htmlPath, `
-    <html><style>
+    <html><head><meta charset="utf-8" />
+    <title>Ware Portfolio, 20-Unit Multifamily — Ware, MA · Offering Memorandum</title>
+    <meta name="author" content="Northeast Private Client Group" />
+    </head><style>
       * { margin: 0; padding: 0; }
       @page { size: 11in 8.5in; margin: 0; }
       html, body { margin: 0; padding: 0; }
