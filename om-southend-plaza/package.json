@@ -11,10 +11,13 @@
     "print": "node print.cjs",
     "pdf": "node export.cjs",
     "isochrones": "node scripts/gen-isochrones.mjs",
-    "map-labels": "node scripts/gen-map-labels.mjs"
+    "map-labels": "node scripts/gen-map-labels.mjs",
+    "nearby": "node scripts/gen-nearby-pois.mjs",
+    "logos": "node scripts/gen-marker-logos.mjs"
   },
   "dependencies": {
     "d3-geo": "^3.1.1",
+    "pdf-lib": "^1.17.1",
     "puppeteer": "^25.1.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",

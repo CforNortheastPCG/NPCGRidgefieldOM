@@ -105,10 +105,12 @@ export default function LocationMap({ pageNum = 9 }) {
         </div>
         <div className="title-rule" />
         <div style={{ fontSize: 11, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 12 }}>
-          South End Plaza fronts South Main Street (~12,800 VPD) in Thomaston, less than a mile from Route 8 (Exits
-          38 &amp; 39) and on the U.S. Route 6 corridor. Downtown Thomaston, the 1884 Opera House, and Seth Thomas
-          Park sit just to the north, while Greater Waterbury — its hospitals, Webster Bank, MacDermid, and the
-          Metro-North Waterbury Branch terminus — is 10 to 15 minutes south.
+          South End Plaza fronts South Main Street (~12,800 VPD) — U.S. Route 6, Thomaston&rsquo;s primary retail
+          corridor — less than a mile from Route 8 (Exits 38 &amp; 39). The surrounding blocks pair national and
+          local retail (Stop &amp; Shop, Walgreens, Dunkin&rsquo;) with the town&rsquo;s dining, banks, and civic
+          anchors, and the 1884 Opera House, Thomaston Public Library, and Naugatuck River corridor sit just to the
+          north. Greater Waterbury — its hospitals, Webster Bank, and the Metro-North Waterbury Branch terminus — is
+          10 to 15 minutes south.
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 1fr', gap: 16, flex: 1, minHeight: 0 }}>
@@ -134,17 +136,20 @@ export default function LocationMap({ pageNum = 9 }) {
               <span style={{ flexShrink: 0, width: 15, height: 15, borderRadius: '50%', background: '#F8971D', border: '2px solid #fff', boxShadow: '0 0 0 1px var(--golden)' }} />
               <span style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--carbon)' }}>Subject Property &mdash; {DEAL.address}</span>
             </div>
-            <div style={{ columns: 2, columnGap: 22, minHeight: 0, overflow: 'hidden' }}>
+            <div style={{ columns: 2, columnGap: 22, flex: 1, minHeight: 0, overflow: 'hidden' }}>
             {groups.map(g => (
               <div key={g.label} style={{ breakInside: 'avoid', marginBottom: 13 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 5 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 6 }}>
                   <span style={{ flexShrink: 0, width: 10, height: 10, borderRadius: '50%', background: g.swatch, border: '1px solid rgba(0,0,0,0.15)' }} />
-                  <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: g.swatch }}>{g.label}</span>
+                  <span style={{ fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: g.swatch }}>{g.label}</span>
                 </div>
                 {g.items.map(p => (
-                  <div key={p.n} style={{ display: 'flex', alignItems: 'baseline', gap: 8, padding: '2.5px 0' }}>
-                    <span style={{ flexShrink: 0, fontSize: 11, fontWeight: 700, color: g.swatch, width: 15, textAlign: 'right' }}>{p.n}</span>
-                    <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.35, flex: 1 }}>{p.name}</span>
+                  <div key={p.n} style={{ display: 'flex', alignItems: 'baseline', gap: 8, padding: '3px 0' }}>
+                    <span style={{ flexShrink: 0, fontSize: 10.5, fontWeight: 700, color: g.swatch, width: 14, textAlign: 'right' }}>{p.n}</span>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.25 }}>{p.name}</div>
+                      {p.note && <div style={{ fontSize: 8.6, color: 'var(--stone)', lineHeight: 1.3, marginTop: 1 }}>{p.note}</div>}
+                    </div>
                   </div>
                 ))}
               </div>

@@ -9,6 +9,9 @@ import RegionalMap from './RegionalMap.jsx'
 import DriveTimeMap from './DriveTimeMap.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
+import FullBleed from './FullBleed.jsx'
+import { NEARBY } from './nearbyPois.js'
+import { AERIAL_MARKERS } from './aerialMarkers.js'
 import { DEAL, ADDR, CITY_STATE, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
 
 /* ═══════════════════ 1 — COVER HERO ═══════════════════ */
@@ -516,20 +519,21 @@ function CountyOverview({ pageNum }) {
   const employers = [
     { label: 'Thomaston', items: 'Thomaston Savings Bank (headquartered in town), Stewart EFI (precision components), Ward Leonard / Fairbanks Morse Defense, ECI Screenprint, and Plymouth Glass & Mirror.' },
     { label: 'Greater Waterbury (~10 min south)', items: "Waterbury Hospital, Saint Mary’s Hospital (Trinity Health), Webster Bank, MacDermid, Post University, UConn Waterbury, and the City of Waterbury." },
+    { label: 'Torrington & Upper Valley (~15 min north)', items: 'Charlotte Hungerford Hospital (Hartford HealthCare), O&G Industries (headquartered in Torrington), Northwestern CT Community College, and the City of Torrington.' },
   ]
   return (
     <div className="page">
       <PageHeader section="Location Overview" />
       <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
-        <div style={{ flex: '0 0 55%', padding: '28px 32px 24px 40px', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div style={{ flex: '0 0 55%', padding: '24px 32px 18px 40px', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
           <div className="section-title" style={{ marginBottom: 2 }}>Litchfield County <span style={{ color: '#F8971D' }}>Overview</span></div>
           <div className="title-rule" />
-          <div style={{ fontSize: 10.5, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 12 }}>
-            <p style={{ marginBottom: 8 }}>Thomaston sits on the southeastern edge of Litchfield County, in the industrial Naugatuck Valley along the Route 8 corridor with Torrington to the north. The county occupies the northwest corner of Connecticut and is among the state&rsquo;s higher-income counties, with a median household income of about $106,300, above the Connecticut median; its northwest reaches are rural and recreation-oriented. The county economy spans precision manufacturing, healthcare, and tourism, and draws on the nearby Waterbury and Hartford job markets.</p>
+          <div style={{ fontSize: 10.4, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
+            <p>Thomaston sits on the southeastern edge of Litchfield County, in the industrial Naugatuck Valley along the Route 8 corridor with Torrington to the north. The county occupies the northwest corner of Connecticut and is among the state&rsquo;s higher-income counties, with a median household income of about $106,300, above the Connecticut median; its northwest reaches are rural and recreation-oriented. Along the Route 8 spine, Thomaston, Watertown, and Torrington form a contiguous manufacturing and commuter belt that feeds Greater Waterbury and, via I-84, the Hartford and Danbury markets, with limited new multifamily construction keeping well-maintained rentals in steady demand.</p>
           </div>
 
           <div className="eyebrow" style={{ marginBottom: 6 }}>Demographics — Thomaston vs. County</div>
-          <table className="data-table" style={{ fontSize: 10.5, marginBottom: 14 }}>
+          <table className="data-table" style={{ fontSize: 10.3, marginBottom: 11 }}>
             <thead>
               <tr>
                 <th>Metric</th>
@@ -546,12 +550,12 @@ function CountyOverview({ pageNum }) {
             </tbody>
           </table>
 
-          <div className="eyebrow" style={{ marginBottom: 8 }}>Major Area Employers</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div className="eyebrow" style={{ marginBottom: 6 }}>Major Area Employers</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 9, flex: 1, justifyContent: 'space-between' }}>
             {employers.map(g => (
               <div key={g.label} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 12 }}>
-                <div style={{ fontSize: 10.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3 }}>{g.label}</div>
-                <div style={{ fontSize: 9.6, lineHeight: 1.5, color: 'var(--graphite)' }}>{g.items}</div>
+                <div style={{ fontSize: 10.3, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3 }}>{g.label}</div>
+                <div style={{ fontSize: 9.6, lineHeight: 1.45, color: 'var(--graphite)' }}>{g.items}</div>
               </div>
             ))}
           </div>
@@ -565,16 +569,29 @@ function CountyOverview({ pageNum }) {
 
 /* ═══════════════════ INVESTMENT HIGHLIGHTS ═══════════════════ */
 function InvestmentHighlights({ pageNum }) {
-  const items = [
-    { head: 'Residential Rents Below Achievable Levels', body: 'The ten apartments average $1,465 a month against $1,540 already achieved and $1,640 pro forma, lifting residential rent from $175,800 to $196,800 as units turn — each with private rear ground-level access.' },
-    { head: 'Commercial Lease-Up & Mark-to-Market', body: 'Leasing the two vacant suites and marking occupied rents from about $14.20 toward $17.50 to $20 per square foot moves commercial rent from about $84,900 to about $106,300, with added upside from raising CAM water recovery.' },
-    { head: 'Diversified Residential & Commercial Income', body: 'Ten apartments and seven commercial suites split the rent roll between residential and retail demand — both below market — in a single 17-unit building on 0.77 acres.' },
-    { head: 'Established, Service-Oriented Commercial Tenancy', body: 'A smoke and vape shop, package store, nail salon, and laundromat anchor the retail, with two leases dating to 2011 and 2013 and limited online competition.' },
-    { head: 'Route 8 & Naugatuck Valley Location', body: 'Less than a mile from Route 8 at Exits 38 and 39, with about 12,800 vehicles per day at the frontage and Waterbury — and its Metro-North terminus — 10 to 15 minutes south.' },
-    { head: 'Basis of $168 per Square Foot', body: 'At $168 per square foot against $300-plus all-in construction cost, the building trades at about 56% of replacement cost — $144,100 per unit at the offering price.' },
-    { head: 'Assessment Set Through the 2025 Revaluation', body: 'Thomaston’s 2025 revaluation fixes the assessment through 2030, and Connecticut does not reassess on sale, so taxes will not step up at closing.' },
+  // Two text boxes (4 highlights each) placed diagonally, with two photos on the
+  // opposite diagonal → a 2×2 checkerboard: text · photo / photo · text.
+  const boxes = [
+    {
+      title: 'Income & Lease-Up Upside',
+      items: [
+        { head: 'Residential Rents Below Market', body: 'Ten apartments average $1,465/mo vs. $1,540 already achieved and $1,640 pro forma — lifting residential rent $175,800 → $196,800 as units turn.' },
+        { head: 'Commercial Lease-Up & Mark-to-Market', body: 'Lease the two vacant suites and mark occupied rents from ~$14.20 toward $17.50–$20/SF: commercial rent ~$84,900 → ~$106,300, plus CAM-recovery upside.' },
+        { head: 'Diversified Residential & Commercial Income', body: 'Ten apartments and seven retail suites split the rent roll across two demand sources — both below market — in one 17-unit building.' },
+        { head: 'Established, Service-Oriented Tenancy', body: 'Smoke/vape shop, package store, nail salon, and laundromat anchor the retail, with leases dating to 2011 and 2013 and limited online competition.' },
+      ],
+    },
+    {
+      title: 'Location, Basis & Tax',
+      items: [
+        { head: 'Route 8 & Naugatuck Valley Location', body: 'Under a mile from Route 8 (Exits 38 & 39), ~12,800 VPD at the frontage, with Waterbury and its Metro-North terminus 10–15 min south.' },
+        { head: 'Ample On-Site Parking', body: 'A ~10,000 SF on-site asphalt lot serves both the storefront retail and the upstairs apartments — a differentiator on the Route 6 corridor.' },
+        { head: 'Basis of $168 per Square Foot', body: '$168/SF against $300-plus all-in construction — about 56% of replacement cost, $144,100 per unit at the offering price.' },
+        { head: 'Assessment Set Through 2025 Revaluation', body: 'Thomaston’s 2025 revaluation fixes the assessment through 2030, and Connecticut doesn’t reassess on sale — taxes won’t step up at closing.' },
+      ],
+    },
   ]
-  const thumbs = ['/photos/apt-1.jpg', '/photos/comm-1.jpg', '/photos/ext-1.jpg', '/photos/comm-2.jpg', '/photos/aerial-1.jpg', '/photos/ext-2.jpg', '/photos/aerial-2.jpg']
+  const photos = ['/photos/comm-1.jpg', '/photos/aerial-1.jpg']
   return (
     <div className="page">
       <PageHeader section="Investment Highlights" />
@@ -582,17 +599,30 @@ function InvestmentHighlights({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Investment <span style={{ color: '#F8971D' }}>Highlights</span></div>
         <div className="title-rule" />
 
-        {/* Highlight cards — each paired with a property photo, stretched to fill the page */}
-        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridAutoRows: '1fr', columnGap: 20, rowGap: 12, minHeight: 0, paddingTop: 4 }}>
-          {items.map((it, i) => (
-            <div key={i} style={{ display: 'flex', gap: 13, minHeight: 0, alignItems: 'center', gridColumn: i === 6 ? '1 / -1' : 'auto' }}>
-              <img src={thumbs[i]} alt="" style={{ flex: '0 0 118px', width: 118, height: 118, objectFit: 'cover', borderRadius: 5, display: 'block' }} />
-              <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ fontSize: 9.6, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3, lineHeight: 1.2 }}>{it.head}</div>
-                <p style={{ fontSize: 8.4, lineHeight: 1.4, color: 'var(--graphite)' }}>{it.body}</p>
+        {/* 2×2 checkerboard — text box · photo (top), photo · text box (bottom).
+            Each text box holds 4 highlights; cells stretch to fill the page. */}
+        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 12, minHeight: 0, paddingTop: 6 }}>
+          {(() => {
+            const TextBox = (g, key) => (
+              <div key={key} style={{ display: 'flex', flexDirection: 'column', minHeight: 0, padding: '2px 6px' }}>
+                <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 9, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>{g.title}</div>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 9, justifyContent: 'space-between', minHeight: 0 }}>
+                  {g.items.map((it, ii) => (
+                    <div key={ii} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
+                      <div style={{ fontSize: 9.4, fontWeight: 800, color: 'var(--carbon)', marginBottom: 2, lineHeight: 1.18 }}>{it.head}</div>
+                      <p style={{ fontSize: 8.2, lineHeight: 1.38, color: 'var(--graphite)' }}>{it.body}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+            const PhotoBox = (src, key) => (
+              <div key={key} style={{ borderRadius: 8, overflow: 'hidden', minHeight: 0, background: 'var(--linen)', border: '1px solid var(--border)' }}>
+                <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+            )
+            return [TextBox(boxes[0], 'tl'), PhotoBox(photos[0], 'tr'), PhotoBox(photos[1], 'bl'), TextBox(boxes[1], 'br')]
+          })()}
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -619,6 +649,37 @@ function App() {
     <Divider eyebrow="03" title="Location & Market" image="/photos/aerial-1.jpg" />,
     <CityOverview />,
     <LocationMap />,
+    // Annotated drone aerials — placed right after the Location & Amenities map.
+    // bleed-1: drone looking NORTH up South Main St — downtown ahead.
+    <FullBleed
+      image="/photos/bleed-1.jpg"
+      pin={{ x: 31.8, y: 80, label: 'Subject Property' }}
+      streets={[{ x: 43.7, y: 52.7, label: 'South Main Street · US Route 6', arrow: 180 }]}
+      pois={[
+        { x: 50, y: 22, label: 'Downtown Thomaston', dir: '↓' },
+        ...NEARBY['bleed-1'],
+      ]}
+      shields={[{ x: 91.5, y: 30.3, route: '8' }]}
+      markers={[
+        { cat: 'Dining & Coffee', color: '#C0392B', n: 3, name: 'Clocktown Brewing Co.', note: 'Brewery + wood-fired pizza · Seth Thomas clock factory', x: 60.1, y: 43.3, arrow: 180 },
+        { cat: 'Banks, Retail & Employers', color: '#884EA0', n: 1, name: 'Thomaston Savings Bank (Main Office)', note: 'Local bank HQ · downtown', x: 51.4, y: 33.6, logo: '/logos/markers/thomastonsavingsbank-com.png', arrow: 180 },
+        { cat: 'Banks, Retail & Employers', color: '#884EA0', n: 2, name: 'Webster Bank', note: 'Regional bank branch · downtown', x: 47.3, y: 36.6, logo: '/logos/markers/websterbank-com.png', side: 'left', arrow: 135 },
+      ]}
+    />,
+    // bleed-2: drone over the property looking SOUTH down South Main St.
+    <FullBleed
+      image="/photos/bleed-2.jpg"
+      pin={{ x: 69.2, y: 75.6, label: 'Subject Property' }}
+      streets={[{ x: 41.3, y: 55.5, label: 'South Main Street · US Route 6', arrow: 180 }]}
+      pois={[...NEARBY['bleed-2']]}
+      shields={[{ x: 25.2, y: 27.2, route: '8' }]}
+      markers={[
+        { cat: 'Dining & Coffee', color: '#C0392B', n: 2, name: 'Hometown Pizza III', note: 'Pizzeria / Italian · near the site', x: 36.6, y: 80.3, side: 'top', arrow: 180 },
+        { cat: 'Dining & Coffee', color: '#C0392B', n: 5, name: "Dunkin'", note: 'Coffee · drive-thru · S Main corridor', x: 31.5, y: 34.4, arrow: 180 },
+        { cat: 'Grocery & Pharmacy', color: '#1E8449', n: 2, name: 'Walgreens', note: 'Drugstore / pharmacy · S Main', x: 25.3, y: 38, arrow: 180, side: 'left' },
+        { cat: 'Transit', color: '#E67E22', n: 1, name: 'Bus Stop — South Main St', note: 'CTtransit · NB & SB stops', x: 50.5, y: 63.9, arrow: 180 },
+      ]}
+    />,
     <DriveTimeMap />,
     <CountyOverview />,
     <RegionalMap />,

@@ -78,7 +78,7 @@ proof composite below).
 ### Reference builds
 | Deal | Subject | CENTER | ZOOM | Geometry |
 |---|---|---|---|---|
-| South End Plaza (Thomaston, inland) | `41.6650, -73.0730` | `41.60, -72.95` | 8 | radial rings *(outline — pre-house-style)* |
+| South End Plaza (Thomaston, inland) | `41.6650, -73.0730` | `41.60, -72.95` | 8 | radial rings + filled shaded bands |
 | Black Rock — 2836 Fairfield (coastal) | `41.157532, -73.226828` | `41.15, -73.40` | 8 | raw-polygon + filled shaded bands |
 | Ware Portfolio (Ware MA, inland) | `42.2616, -72.2420` | `42.18, -72.25` | 8 | radial rings + filled shaded bands |
 

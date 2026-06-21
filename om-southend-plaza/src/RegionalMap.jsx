@@ -87,12 +87,27 @@ export default function RegionalMap({ pageNum }) {
       <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
         <div className="section-title" style={{ marginBottom: 2 }}>Regional <span style={{ color: '#F8971D' }}>Positioning</span></div>
         <div className="title-rule" />
-        <div style={{ fontSize: 11.5, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 12 }}>
+        <div style={{ fontSize: 11.5, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 10 }}>
           <strong>On the US-6 corridor, less than a mile from Route 8 in the upper Naugatuck Valley.</strong>{' '}
           South End Plaza sits on South Main Street in Thomaston, under a mile from Route 8 (Exits 38 and 39) — the
           limited-access expressway running the length of the valley, with Waterbury and its Metro-North Waterbury
           Branch terminus 10 to 15 minutes south and Torrington to the north. U.S. Route 6 runs through downtown
           Thomaston, and South Main Street carries about 12,800 vehicles per day at the property&rsquo;s frontage.
+        </div>
+
+        {/* Regional stat strip — golden-top boxes matching the Exec Summary house style */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 12 }}>
+          {[
+            ['< 1 mi', 'To Route 8 · Exits 38 & 39'],
+            ['12,800', 'VPD at South Main frontage'],
+            ['~15 min', 'To Waterbury & Metro-North'],
+            ['~45 min', 'To Bradley Intl (BDL)'],
+          ].map(([v, l]) => (
+            <div key={l} style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
+              <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{v}</div>
+              <div style={{ fontSize: 7.6, fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>{l}</div>
+            </div>
+          ))}
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1.55fr 1fr', gap: 16, flex: 1, minHeight: 0 }}>
@@ -114,11 +129,14 @@ export default function RegionalMap({ pageNum }) {
           </div>
 
           {/* FACTS PANEL */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 11, minHeight: 0, overflow: 'hidden' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 9, minHeight: 0, overflow: 'hidden' }}>
             <div>
               <h3 style={{ fontSize: 11, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 6, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>Drive &amp; Commute Times</h3>
-              {COMMUTE.map(c => (
-                <div key={c.label} className="bldg-row" style={{ padding: '2px 0', fontSize: 10.5 }}><span className="bldg-label">{c.label}</span><span className="bldg-val">{c.value}</span></div>
+              {COMMUTE.map((c, i) => (
+                <div key={c.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '2.5px 6px', fontSize: 10.5, background: i % 2 === 1 ? 'var(--linen)' : 'transparent', borderRadius: 2 }}>
+                  <span style={{ color: 'var(--carbon)', fontWeight: 600 }}>{c.label}</span>
+                  <span style={{ color: 'var(--carbon)', fontWeight: 700, whiteSpace: 'nowrap' }}>{c.value}</span>
+                </div>
               ))}
             </div>
             <div>
