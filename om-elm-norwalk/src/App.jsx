@@ -45,56 +45,153 @@ function ExecutiveSummary({ pageNum }) {
         <div className="eyebrow">Overview</div>
         <div className="section-title">Executive Summary</div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, flex: 1, minHeight: 0 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 12 }}>
-              <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$3,275,000</div>
-                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>Asking Price</div>
-              </div>
-              <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>12</div>
-                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>Total Units</div>
-              </div>
+        {/* Stat tiles */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, margin: '8px 0 10px' }}>
+          {[
+            { v: '$3,275,000', l: 'Asking Price' },
+            { v: '12', l: 'Total Units' },
+            { v: '6.50%', l: 'Going-In Cap' },
+            { v: '$273K', l: 'Per Unit' },
+          ].map((t, i) => (
+            <div key={i} style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
+              <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{t.v}</div>
+              <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>{t.l}</div>
             </div>
-            <p style={{ fontSize: 9.4, lineHeight: 1.4, marginBottom: 6 }}>
-              Northeast Private Client Group is pleased to present {ADDR}, a 12-unit multifamily property in
-              Norwalk, Connecticut. This value-add complex consists of three buildings on a single parcel,
-              offering a compelling blend of stable cash flow and significant upside in one of
-              Fairfield County&rsquo;s most desirable rental markets.
-            </p>
-            <p style={{ fontSize: 9.4, lineHeight: 1.4, marginBottom: 6 }}>
-              The property features large apartment layouts &mdash; 10 of 12 units are 2BR, 3BR, or 4BR &mdash;
-              across three buildings with varying utility configurations. Five apartments have been fully
-              renovated, and two former commercial units have been converted to legal residential apartments.
-            </p>
-            <p style={{ fontSize: 9.4, lineHeight: 1.4, marginBottom: 6 }}>
-              Significant capital improvements have been completed including a new parking lot, storm drains,
-              siding, vinyl windows, new HVAC systems to the rear building, a new furnace and commercial
-              hot water heater to the middle building, brick pointing throughout, basement sump pumps,
-              and washer/dryer in all renovated units plus units 11 and 12.
-            </p>
-            <p style={{ fontSize: 9.4, lineHeight: 1.4, marginBottom: 8 }}>
-              All qualified parties are invited to request the full offering package and schedule a private
-              tour through Northeast Private Client Group.
-            </p>
-            <div className="eyebrow" style={{ marginBottom: 6 }}>Investment Highlights</div>
-            <ul className="highlights highlights--lg" style={{ flex: 1, justifyContent: 'space-between', fontSize: 9.4 }}>
-              <li><strong>Large Unit Layouts</strong> — 10/12 units are 2BR, 3BR, or 4BR, commanding premium rents</li>
-              <li><strong>Significant Capex Completed</strong> — 5 fully renovated units, new parking lot, HVAC, siding, windows</li>
-              <li><strong>Value-Add Opportunity</strong> — Remaining units to renovate at turnover for additional rent growth</li>
-              <li><strong>Desirable Market</strong> — Historically high occupancy in a strong Norwalk rental market with Metro-North access</li>
-            </ul>
-          </div>
+          ))}
+        </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minHeight: 0 }}>
-            <div style={{ flex: 1, borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
-              <img src="/photos/41-web-or-mls-6 Elm St, Norwalk, CT 06850 (40 OF 53).JPG" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            </div>
-            <div style={{ flex: 1, borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
-              <img src="/photos/42-web-or-mls-6 Elm St, Norwalk, CT 06850 (41 OF 53).JPG" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            </div>
+        {/* Narrative — two columns */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, flex: 1, minHeight: 0 }}>
+          <div>
+            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+              Northeast Private Client Group is pleased to exclusively present the opportunity to acquire
+              6 Elm Street, a 12-unit value-add multifamily investment located in Norwalk, Connecticut &mdash;
+              one of Fairfield County&rsquo;s most active and historically resilient rental markets. The offering
+              comprises three residential buildings totaling 12 apartments across 12,085 rentable square feet on
+              a 0.5-acre lot, now operating as an all-residential property following the recent conversion of two
+              former commercial-zoned units to legal residential apartments.
+            </p>
+            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+              Built in 1967 and extensively improved through a comprehensive capital program, 6 Elm Street has
+              been substantially de-risked for incoming ownership. Completed capital expenditures include five
+              fully renovated apartments; the conversion of two commercial-zoned units to legal residential
+              apartments; a new parking lot, storm drains, siding, flashing, and vinyl windows; new HVAC units,
+              ductwork, and piping along with a dedicated owner&rsquo;s electric meter in the rear building; a new
+              furnace and commercial hot water heater in the middle building; full brick repointing across the
+              property; new basement sump pumps; and partial gutter replacement. With the major capital systems
+              already addressed, a new owner can focus on lighter cosmetic and curb-appeal improvements &mdash; a
+              lower-cost, lower-risk path to driving rents and unlocking the property&rsquo;s remaining upside.
+            </p>
           </div>
+          <div>
+            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+              The property is defined by its large, family-oriented floor plans &mdash; 10 of the 12 units are
+              two-, three-, or four-bedroom layouts, a configuration that is increasingly scarce in the submarket
+              and commands premium rents and longer tenancies. In-unit washers and dryers are installed in all
+              renovated units plus the two rear-building apartments, and the rear building features central air
+              conditioning. Utility structures vary by building: the six front-building units are individually
+              metered with fully tenant-paid electric heat, hot water, and cooking; the four middle-building units
+              are tenant-paid electric with landlord-provided gas heat and hot water; and the two rear-building
+              units are fully tenant-paid.
+            </p>
+            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+              Located in Norwalk, a core Fairfield County rental market with a long track record of high occupancy,
+              the property benefits from strong, consistent tenant demand and the area&rsquo;s broader economic
+              momentum. Residents enjoy convenient access to Metro-North&rsquo;s New Haven Line, with direct service
+              to New York City&rsquo;s Grand Central Station, as well as I-95 and Route 7, connecting them to the
+              region&rsquo;s major employment centers and lifestyle amenities.
+            </p>
+            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+              6 Elm Street represents a rare opportunity to acquire a recently improved, large-unit asset in an
+              established Fairfield County market. Priced at $3,275,000 &mdash; or approximately $273,000 per unit
+              and $271 per square foot &mdash; the property delivers a 6.50% going-in cap rate on current income.
+            </p>
+            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+              A new owner stands to benefit from meaningful embedded upside. In-place rents currently sit roughly
+              $54,000 below market, and a disciplined mark-to-market and revenue-management strategy &mdash;
+              executed through natural lease turnover with minimal remaining capital expenditure &mdash; is
+              projected to grow net operating income from approximately $213,000 to $262,000, a gain of roughly
+              23%. That operational upside expands the cap rate from a 6.50% going-in yield to 8.00% pro forma, on
+              a stabilized, historically high-occupancy asset.
+            </p>
+          </div>
+        </div>
+
+        {/* Photo band */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, height: 122, marginTop: 10 }}>
+          {[
+            '/photos/3-web-or-mls-6 Elm St, Norwalk, CT 06850 (2 OF 53).JPG',
+            '/photos/4-web-or-mls-6 Elm St, Norwalk, CT 06850 (3 OF 53).JPG',
+            '/photos/39-web-or-mls-6 Elm St, Norwalk, CT 06850 (38 OF 53).JPG',
+          ].map((src, i) => (
+            <div key={i} style={{ borderRadius: 3, overflow: 'hidden' }}>
+              <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}
+
+/* ═══════════════════ 3 — INVESTMENT HIGHLIGHTS ═══════════════════ */
+function InvestmentHighlights({ pageNum }) {
+  // 2×2 checkerboard — text box · photo (top), photo · text box (bottom).
+  const boxes = [
+    {
+      title: 'Asset, Capital & Operations',
+      items: [
+        { head: 'Completed Capital Program', body: 'Five renovated apartments plus new parking lot, siding, vinyl windows, HVAC, furnace, commercial hot water heater, brick repointing, storm drains, and more — major capex already behind the asset.' },
+        { head: 'Two Units Added', body: 'Conversion of two commercial-zoned units to legal residential apartments expands the income base.' },
+        { head: 'Large Floor Plans', body: '10 of 12 units are 2BR, 3BR, or 4BR layouts — an increasingly scarce configuration that drives premium rents and tenant retention.' },
+        { head: 'In-Unit Laundry', body: 'Washer and dryer in all renovated units plus both rear-building apartments.' },
+        { head: 'Individually Metered Front Building', body: 'Six front-building units carry fully tenant-paid electric heat, hot water, and cooking, limiting owner expense exposure.' },
+      ],
+    },
+    {
+      title: 'Income, Yield & Market',
+      items: [
+        { head: 'Embedded Rent Upside', body: 'Approximately $54,000 in below-market rents (~15%); average in-place rent of $2,211 versus $2,588 pro forma.' },
+        { head: 'Operational Upside', body: '~23% NOI growth (from ~$213,000 to ~$262,000) achievable through lease turnover with minimal remaining capital expenditure.' },
+        { head: 'Strong Going-In Yield', body: '6.50% current cap rate / 7.99% pro forma on a stabilized, historically high-occupancy asset.' },
+        { head: 'Desirable Rental Market', body: 'Norwalk’s established, high-demand rental market with a history of strong occupancy and Metro-North access to Manhattan.' },
+      ],
+    },
+  ]
+  const photos = [
+    '/photos/36-web-or-mls-6 Elm St, Norwalk, CT 06850 (35 OF 53).JPG',
+    '/photos/7-web-or-mls-6 Elm St, Norwalk, CT 06850 (6 OF 53).JPG',
+  ]
+  return (
+    <div className="page">
+      <PageHeader section="Investment Highlights" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2 }}>Investment <span style={{ color: '#F8971D' }}>Highlights</span></div>
+        <div className="title-rule" />
+
+        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 12, minHeight: 0, paddingTop: 6 }}>
+          {(() => {
+            const TextBox = (g, key) => (
+              <div key={key} style={{ display: 'flex', flexDirection: 'column', minHeight: 0, padding: '2px 6px' }}>
+                <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>{g.title}</div>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 7, justifyContent: 'space-between', minHeight: 0 }}>
+                  {g.items.map((it, ii) => (
+                    <div key={ii} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
+                      <div style={{ fontSize: 9.2, fontWeight: 800, color: 'var(--carbon)', marginBottom: 2, lineHeight: 1.16 }}>{it.head}</div>
+                      <p style={{ fontSize: 8, lineHeight: 1.34, color: 'var(--graphite)' }}>{it.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+            const PhotoBox = (src, key) => (
+              <div key={key} style={{ borderRadius: 8, overflow: 'hidden', minHeight: 0, background: 'var(--linen)', border: '1px solid var(--border)' }}>
+                <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+            )
+            return [TextBox(boxes[0], 'tl'), PhotoBox(photos[0], 'tr'), PhotoBox(photos[1], 'bl'), TextBox(boxes[1], 'br')]
+          })()}
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -647,6 +744,7 @@ function App() {
     <Toc />,
     <DealContacts />,
     <ExecutiveSummary />,
+    <InvestmentHighlights />,
     <Divider eyebrow="01" title="The Property" />,
     <BuildingDescriptions />,
     <CapexSummary />,
