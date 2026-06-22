@@ -8,7 +8,7 @@ const TOC = [
   { n: 3, label: 'Deal Contacts' },
   { n: 4, label: 'Executive Summary' },
   { n: 5, label: 'Investment Highlights' },
-  { n: 6, label: 'The Property', section: true },
+  { n: 6, label: 'The Properties', section: true },
   { n: 7, label: 'Portfolio Overview', sub: true },
   { n: 8, label: 'Portfolio Map', sub: true },
   { n: 9, label: '27 Parker Street', sub: true },
@@ -60,7 +60,7 @@ export default function Toc({ pageNum }) {
 
           {/* Accent photo */}
           <div style={{ borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
-            <img src="/photos/ware/aerial-context.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/ware/cover-hero.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(63,71,83,0.55), rgba(63,71,83,0) 45%)' }} />
           </div>
         </div>

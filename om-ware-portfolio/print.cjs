@@ -2,6 +2,18 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const puppeteer = require('puppeteer');
+const { PDFDocument } = require('pdf-lib');
+
+// Document metadata stamped into the final PDF (Chrome only embeds <title>;
+// everything else — Author, Subject, Keywords, Creator/Producer — is set here).
+const META = {
+  title: 'Ware Portfolio, 20-Unit Multifamily — Ware, MA · Offering Memorandum',
+  author: 'Northeast Private Client Group',
+  subject: '20-unit, multi-building apartment portfolio across 27 Parker St, 28-30 & 28.5 North St, and 38 North St in downtown Ware, MA — a value-add offering from Northeast Private Client Group.',
+  keywords: ['Ware Portfolio', 'Ware MA multifamily', 'apartment portfolio for sale', 'value-add multifamily', '20-unit portfolio', 'Northeast Private Client Group', 'offering memorandum'],
+  creator: 'Northeast Private Client Group',
+  producer: 'Northeast Private Client Group — OM Engine',
+};
 
 // Usage: node print.cjs [port] [outfile]
 const PORT = process.argv[2] || process.env.PORT || '5173';
@@ -64,7 +76,21 @@ const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'ompdf-'));
     preferCSSPageSize: true,
   });
 
-  console.log(`PDF saved to ${OUT}`);
   await browser.close();
   fs.rmSync(TMP, { recursive: true, force: true });
+
+  // Stamp full document metadata into the PDF (Chrome only carries <title>).
+  const pdfDoc = await PDFDocument.load(fs.readFileSync(OUT), { updateMetadata: false });
+  const now = new Date();
+  pdfDoc.setTitle(META.title);
+  pdfDoc.setAuthor(META.author);
+  pdfDoc.setSubject(META.subject);
+  pdfDoc.setKeywords(META.keywords);
+  pdfDoc.setCreator(META.creator);
+  pdfDoc.setProducer(META.producer);
+  pdfDoc.setCreationDate(now);
+  pdfDoc.setModificationDate(now);
+  fs.writeFileSync(OUT, await pdfDoc.save());
+
+  console.log(`PDF saved to ${OUT}`);
 })();

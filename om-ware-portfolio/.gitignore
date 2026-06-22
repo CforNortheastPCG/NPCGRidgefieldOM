@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local photo sources (kept in Dropbox, not in git)
+PHOTOS FOR OM/
+
+# Generated deliverables & scratch (regenerable; kept on disk, out of git)
+*.pdf
+Ware-Portfolio-social-*.png
+_*

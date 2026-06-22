@@ -718,5 +718,5 @@ a.team__big:hover .team__avatar { border-color: var(--terracotta); }
   /* Reflective paper crushes shadow detail — lift the warm grade a touch more
      for paper (paper prints darker than a backlit screen). Tune against a real
      printout. */
-  img[src*="/photos/ware/"] { filter: saturate(1.12) brightness(1.12) contrast(0.99) sepia(0.10) hue-rotate(-8deg); }
+  img[src*="/photos/ware/"] { filter: saturate(1.12) brightness(1.24) contrast(0.94) sepia(0.10) hue-rotate(-8deg); }
 }

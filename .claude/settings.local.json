@@ -24,7 +24,10 @@
       "Bash(curl -s \"https://services3.arcgis.com/3FL1kr7L4LvwA2Kb/arcgis/rest/services/Connecticut_State_Parcel_Layer_2023/FeatureServer/0/query?where=Link%3D%2749950-MM-1484%27&outFields=*&returnGeometry=true&outSR=4326&f=json\")",
       "Bash(curl -s \"https://services3.arcgis.com/3FL1kr7L4LvwA2Kb/arcgis/rest/services/Connecticut_State_Parcel_Layer_2023/FeatureServer/0/query?where=Link%20IN%20\\(%2749950-030-7120%27,%2749950-061-1505%27,%2749950-050-4760%27,%2749950-MM-1484%27\\)&outFields=Link,Owner,Location,State_Use_Description,Living_Area,AYB,Shape__Area&returnGeometry=true&outSR=4326&f=json\")",
       "WebFetch(domain:services2.arcgis.com)",
-      "WebFetch(domain:www.arcgis.com)"
+      "WebFetch(domain:www.arcgis.com)",
+      "Bash(node -e \"try{require.resolve\\('pdfjs-dist'\\);console.log\\('pdfjs-dist present'\\)}catch\\(e\\){console.log\\('no pdfjs-dist'\\)}\")",
+      "Bash(node scripts/render-siteplans.cjs)",
+      "PowerShell(Get-Content *)"
     ]
   }
 }

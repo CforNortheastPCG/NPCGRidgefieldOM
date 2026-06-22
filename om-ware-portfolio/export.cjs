@@ -8,7 +8,7 @@ const { spawn, spawnSync } = require('child_process');
    needs to be running. Output: Ware-Portfolio-Ware-MA-OM.pdf */
 
 const PORT = Number(process.env.PORT || 4173);
-const vite = path.join(__dirname, 'node_modules', '.bin', 'vite');
+const vite = path.join(__dirname, 'node_modules', 'vite', 'bin', 'vite.js');
 
 function waitForServer(port, tries = 80) {
   return new Promise((resolve, reject) => {
@@ -25,11 +25,11 @@ function waitForServer(port, tries = 80) {
 
 (async () => {
   console.log('▸ Building production bundle…');
-  const build = spawnSync(vite, ['build'], { cwd: __dirname, stdio: 'inherit' });
+  const build = spawnSync(process.execPath, [vite, 'build'], { cwd: __dirname, stdio: 'inherit' });
   if (build.status !== 0) process.exit(build.status || 1);
 
   console.log(`▸ Serving on :${PORT}…`);
-  const server = spawn(vite, ['preview', '--port', String(PORT), '--strictPort'], { cwd: __dirname, stdio: 'ignore' });
+  const server = spawn(process.execPath, [vite, 'preview', '--port', String(PORT), '--strictPort'], { cwd: __dirname, stdio: 'ignore' });
   const cleanup = () => { try { server.kill('SIGTERM'); } catch { /* already gone */ } };
   process.on('exit', cleanup);
   process.on('SIGINT', () => { cleanup(); process.exit(1); });

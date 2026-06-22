@@ -1,5 +1,5 @@
 import './App.css'
-import { cloneElement } from 'react'
+import { cloneElement, useState, useRef } from 'react'
 import Toc from './Toc.jsx'
 import { PhotoGallery } from './PhotoPages.jsx'
 import Divider from './Divider.jsx'
@@ -35,25 +35,25 @@ const ORANGE = '#F8971D'
 function CoverHero({ pageNum }) {
   const thumbs = [
     { src: '/photos/ware/p27.jpg', label: '27 Parker Street' },
-    { src: '/photos/ware/n2830-ext4.jpg', label: '28-30 & 28.5 North Street' },
+    { src: '/photos/ware/n2830-collage.jpg', label: '28-30 & 28.5 North Street' },
     { src: '/photos/ware/n38.jpg', label: '38 North Street' },
   ]
   return (
     <div className="page">
       <div className="cover-hero">
-        <img className="cover-hero-img" src="/photos/ware/cover-hero.jpg" alt="" style={{ objectPosition: 'center 50%' }} />
+        <img className="cover-hero-img" src="/photos/ware/cover-hero.jpg" alt="" style={{ transform: 'translateY(-130px) scale(1.38)', transformOrigin: 'center' }} />
         {/* Top scrim for the title; bottom scrim for the thumbnail strip */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.22) 26%, rgba(0,0,0,0) 46%, rgba(0,0,0,0.20) 66%, rgba(0,0,0,0.86) 100%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 22%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.20) 68%, rgba(0,0,0,0.86) 100%)', pointerEvents: 'none' }} />
         {/* NPCG logo — top right */}
         <div className="cover-hero-header" style={{ justifyContent: 'flex-end' }}>
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
         {/* Title block — top left */}
         <div className="cover-hero-overlay" style={{ top: 30, bottom: 'auto', left: 44 }}>
-          <div style={{ color: '#fff', fontSize: 12.5, fontWeight: 700, letterSpacing: '0.30em', textTransform: 'uppercase', marginBottom: 14 }}>20-Unit Multifamily Portfolio · For Sale</div>
-          <div className="cover-hero-title" style={{ fontSize: 70, lineHeight: 0.98 }}>Ware<br />Portfolio</div>
+          <div style={{ color: '#fff', fontSize: 12.5, fontWeight: 700, letterSpacing: '0.30em', textTransform: 'uppercase', marginBottom: 14, textShadow: '0 1px 8px rgba(0,0,0,0.95)' }}>20-Unit Multifamily Portfolio · For Sale</div>
+          <div className="cover-hero-title" style={{ fontSize: 70, lineHeight: 0.98, textShadow: '0 2px 16px rgba(0,0,0,0.85)' }}>Ware<br />Portfolio</div>
           <div className="cover-hero-rule" style={{ marginTop: 18 }} />
-          <div className="cover-hero-prep" style={{ marginTop: 14, fontSize: 12, opacity: 1, color: '#fff', textShadow: '0 1px 6px rgba(0,0,0,0.85)' }}>27 Parker St · 28-30 &amp; 28.5 North St · 38 North St &middot; Ware, MA 01082</div>
+          <div className="cover-hero-prep" style={{ marginTop: 14, fontSize: 12, opacity: 1, color: '#fff', textShadow: '0 1px 8px rgba(0,0,0,0.95)' }}>27 Parker St · 28-30 &amp; 28.5 North St · 38 North St &middot; Ware, MA 01082</div>
         </div>
         {/* Building thumbnails along the bottom */}
         <div style={{ position: 'absolute', left: 44, right: 44, bottom: 34, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14 }}>
@@ -89,6 +89,7 @@ function DealContacts({ pageNum }) {
             <div className="dc-name">Tom Egbers</div>
             <div className="dc-title">Associate, Investments</div>
             <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (857) 990-2022</div>
+            <div className="dc-meta" style={{ fontWeight: 700 }}>Cell: (309) 825-1662</div>
             <div className="dc-meta" style={{ fontWeight: 700 }}>tegbers@northeastpcg.com</div>
           </div>
         </aside>
@@ -110,7 +111,7 @@ function ExecutiveSummary({ pageNum }) {
   const facts = [
     ['Portfolio SF', '13,875 SF'],
     ['Number of Units', '20'],
-    ['Number of Buildings', '3'],
+    ['Number of Buildings', '4'],
     ['Total Acres', '0.83'],
     ['Zoning', 'DTC'],
     ['Cap Rate (Current)', '8.01%'],
@@ -135,7 +136,7 @@ function ExecutiveSummary({ pageNum }) {
               </div>
               <div style={{ textAlign: 'center', padding: '7px 4px', borderTop: '3px solid var(--golden)' }}>
                 <div style={{ fontSize: 27, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>20</div>
-                <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>Units · 3 Buildings</div>
+                <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>Units · 4 Buildings</div>
               </div>
             </div>
 
@@ -162,17 +163,20 @@ function ExecutiveSummary({ pageNum }) {
               <div className="eyebrow" style={{ marginBottom: 7, fontSize: 11 }}>Property Overview</div>
               <p style={{ fontSize: 10.6, lineHeight: 1.46, marginBottom: 8 }}>
                 Northeast Private Client Group is pleased to present the <strong>Ware Portfolio</strong>, a 20-unit,
-                multi-building apartment portfolio situated across four contiguous addresses in Ware, Massachusetts.
+                multi-building apartment portfolio situated across three contiguous parcels in Ware, Massachusetts.
                 The portfolio spans 27 Parker Street, 28-30 North Street, 28.5 North Street, and 38 North Street, and
                 consists of a diverse unit mix including studio, one-, two-, and three-bedroom apartments.
               </p>
-              <p style={{ fontSize: 10.6, lineHeight: 1.46 }}>
+              <p style={{ fontSize: 10.6, lineHeight: 1.46, marginBottom: 8 }}>
                 The offering presents a compelling value-add opportunity for investors seeking immediate
                 mark-to-market potential. A meaningful portion of the rent roll reflects below-market rents on leases
                 with near-term expirations, with several tenants paying meaningfully below proforma on units that will
                 roll within the holding period. With competitors and submarket asking rents well above current
                 in-place collections, the portfolio offers a clear path to improved cash flow through disciplined
                 lease-up and renewals at market rates.
+              </p>
+              <p style={{ fontSize: 10.6, lineHeight: 1.46 }}>
+                Tenants are responsible for their own utility expense, which is a combination of gas, electric, and oil.
               </p>
             </div>
           </div>
@@ -207,7 +211,7 @@ function InvestmentHighlights({ pageNum }) {
   const items = [
     { head: 'Immediate Value-Add Upside Through Below-Market Rents', body: 'A meaningful share of the rent roll sits well below market on leases with near-term expirations. Marking units to proforma as they roll lifts gross scheduled rent from $310,260 to $401,040 — roughly 29% of embedded upside captured through disciplined lease-up and renewals, with no entitlement or repositioning risk.', img: '/photos/ware/p27-int2.jpg' },
     { head: 'Constrained Supply Environment Supporting Rent Growth', body: 'The Amherst / East Hampshire County submarket carries only ~77 units under construction and no proposed pipeline beyond that. Limited new supply against steady, renter-by-necessity demand supports durable rent fundamentals at the price point where this portfolio competes.', img: '/photos/ware/n2830.jpg' },
-    { head: 'Diverse Unit Mix Across a Contiguous Multi-Building Portfolio', body: 'Twenty units across three buildings on four contiguous parcels in downtown Ware — a studio, one-, two-, and three-bedroom apartments. The mix spreads risk across unit types and tenant profiles while keeping operations tight within a single walkable footprint.', img: '/photos/ware/n38-int1.jpg' },
+    { head: 'Diverse Unit Mix Across a Contiguous Multi-Building Portfolio', body: 'Twenty units across three buildings on three contiguous parcels in downtown Ware — a studio, one-, two-, and three-bedroom apartments. The mix spreads risk across unit types and tenant profiles while keeping operations tight within a single walkable footprint.', img: '/photos/ware/n38-int1.jpg' },
     { head: 'Strong Submarket Fundamentals with Low Competitive Vacancy', body: 'The 1- and 2-Star competitive tier shows healthy absorption with vacancy around 5.0%, and the broader submarket vacancy of ~3.9% is forecast to compress toward its five-year average by year-end 2026 as the near-term supply wave is absorbed.', img: '/photos/ware/p27.jpg' },
     { head: 'Strategic Location with Access to Two Major New England Markets', body: 'Ware sits at the eastern edge of Hampshire County, roughly equidistant between Springfield and Worcester, with access to the Pioneer Valley employment base, healthcare institutions, and UMass Amherst — the region’s largest employer and a persistent driver of rental demand.', img: '/photos/ware/aerial-context.jpg' },
   ]
@@ -240,17 +244,17 @@ function InvestmentHighlights({ pageNum }) {
 function PortfolioOverview({ pageNum }) {
   const cards = [
     { name: '27 Parker Street', img: '/photos/ware/p27.jpg', rows: [['Units', '4'], ['Year Built', '1890'], ['Living Area', '2,822 SF'], ['Type', 'Apartment (4-Unit)']] },
-    { name: '28-30 & 28.5 North Street', img: '/photos/ware/n2830.jpg', rows: [['Units', '14'], ['Year Built', '1932'], ['Living Area', '6,800 SF'], ['Type', 'Apartment Building']] },
+    { name: '28-30 & 28.5 North Street', img: '/photos/ware/n2830-collage-tall.jpg', rows: [['Units', '14'], ['Year Built', '1932'], ['Living Area', '6,800 SF'], ['Type', 'Apartment Building']] },
     { name: '38 North Street', img: '/photos/ware/n38.jpg', rows: [['Units', '2'], ['Year Built', '1880'], ['Living Area', '1,576 SF'], ['Type', 'Two-Family']] },
   ]
   return (
     <div className="page">
       <PageHeader section="Property Overview" />
-      <div className="section--tight flat-cards" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="section--tight flat-cards" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
         <div className="section-title" style={{ marginBottom: 2 }}>Portfolio <span style={{ color: ORANGE }}>Overview</span></div>
         <div className="title-rule" />
         <p style={{ fontSize: 10.4, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 14 }}>
-          The Ware Portfolio comprises three apartment buildings across four contiguous addresses in downtown Ware,
+          The Ware Portfolio comprises three apartment buildings across three contiguous parcels in downtown Ware,
           totaling 20 units and 13,875 rentable square feet on roughly 0.83 acres. The buildings sit within a single
           walkable block radius of the Ware town common, allowing centralized management while diversifying the rent
           roll across a studio, one-, two-, and three-bedroom apartments.
@@ -284,46 +288,54 @@ function PortfolioOverview({ pageNum }) {
    anchor placed low. Falls back to the baked drone aerial if the key is absent.
    Outlines are real MassGIS L3 assessor parcel polygons (see PARCELS below).
    Requires VITE_GOOGLE_MAPS_API_KEY. */
+/* x/y = pin tip as a % of the map frame. Drag-tunable in `npm run dev` (see the
+   EDIT readout); the production build / PDF render the static values below. */
+const MAP_PINS = [
+  { label: '27 Parker Street', img: '/photos/ware/p27.jpg', x: 34.6, y: 82.4 },
+  { label: '28-30 & 28.5 North St', img: '/photos/ware/n2830.jpg', x: 67.4, y: 57.1 },
+  { label: '38 North Street', img: '/photos/ware/n38.jpg', x: 55, y: 49 },
+]
 function PortfolioMap({ pageNum }) {
-  const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
-  // x/y = parcel centroid as a % of the 640×460 map frame (pin tip anchors here).
-  const pins = [
-    { label: '27 Parker Street', img: '/photos/ware/p27.jpg', x: 38.3, y: 41.2 },
-    { label: '28-30 & 28.5 North St', img: '/photos/ware/n2830.jpg', x: 51.5, y: 56.8 },
-    { label: '38 North Street', img: '/photos/ware/n38.jpg', x: 58.4, y: 45.8 },
-  ]
-  // Real MassGIS L3 standardized assessor parcel polygons (WGS84 [lat,lng]) for
-  // the three portfolio parcels (queried from MassGIS Property Tax Parcels by
-  // LOC_ID). 28.5 North St shares the 28-30 parcel, so there are three.
-  const PARCELS = [
-    // 27 Parker Street — LOC_ID M_138747_890409
-    [[42.261795, -72.242208], [42.261793, -72.242194], [42.261655, -72.242231], [42.261726, -72.242609], [42.261728, -72.242608], [42.261863, -72.242568], [42.261795, -72.242208]],
-    // 28-30 & 28.5 North Street — LOC_ID M_138794_890379
-    [[42.26176, -72.241989], [42.261664, -72.242019], [42.261571, -72.241409], [42.261308, -72.24147], [42.261348, -72.241881], [42.261351, -72.242129], [42.261323, -72.242136], [42.261324, -72.242137], [42.261335, -72.242219], [42.261772, -72.242081], [42.26176, -72.241989]],
-    // 38 North Street — LOC_ID M_138805_890398
-    [[42.261722, -72.241753], [42.261663, -72.241388], [42.261571, -72.241409], [42.261664, -72.242019], [42.26176, -72.241989], [42.261722, -72.241753]],
-  ]
-  const outline = ring => 'path=' + encodeURIComponent('color:0xF8971Dff|weight:3|' + ring.map(p => p.join(',')).join('|'))
-  const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=42.2616,-72.2420&zoom=18&size=640x460&scale=2&maptype=hybrid&${PARCELS.map(outline).join('&')}&key=${API_KEY}`
+  const EDIT = import.meta.env.DEV // drag controls only in dev; never in the PDF
+  const [pins, setPins] = useState(MAP_PINS)
+  const frameRef = useRef(null)
+  const dragIdx = useRef(-1)
+  const setFromEvent = (e) => {
+    const r = frameRef.current.getBoundingClientRect()
+    const x = Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100))
+    const y = Math.max(0, Math.min(100, ((e.clientY - r.top) / r.height) * 100))
+    setPins(ps => ps.map((p, i) => i === dragIdx.current ? { ...p, x: +x.toFixed(1), y: +y.toFixed(1) } : p))
+  }
+  const onMove = (e) => { if (dragIdx.current >= 0) { e.preventDefault(); setFromEvent(e) } }
+  const endDrag = () => { dragIdx.current = -1 }
+  const coordText = pins.map(p => `    { label: '${p.label}', img: '${p.img}', x: ${p.x}, y: ${p.y} },`).join('\n')
   return (
     <div className="page">
       <PageHeader section="Portfolio Map" />
       <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
         <div className="section-title" style={{ marginBottom: 2 }}>Portfolio <span style={{ color: ORANGE }}>Map</span></div>
         <div className="title-rule" />
-        <div style={{ position: 'relative', flex: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)' }}>
-          <img src={API_KEY ? mapUrl : '/photos/ware/cover-aerial.jpg'} alt="Ware Portfolio — downtown Ware satellite with the parcels outlined" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', objectPosition: 'center 50%' }} />
+        <div ref={frameRef} onMouseMove={onMove} onMouseUp={endDrag} onMouseLeave={endDrag}
+          style={{ position: 'relative', flex: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)' }}>
+          <img src="/photos/ware/cover-hero.jpg" alt="Ware Portfolio — downtown Ware aerial with the parcels outlined" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', objectPosition: 'center 50%' }} />
           {/* Building photo pins — anchored over each parcel (tip at the centroid) */}
-          {pins.map(p => (
-            <div key={p.label} style={{ position: 'absolute', left: `${p.x}%`, top: `${p.y}%`, transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+          {pins.map((p, i) => (
+            <div key={p.label}
+              onMouseDown={EDIT ? (e) => { e.preventDefault(); dragIdx.current = i } : undefined}
+              style={{ position: 'absolute', left: `${p.x}%`, top: `${p.y}%`, transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: EDIT ? 'auto' : 'none', cursor: EDIT ? 'grab' : 'default', userSelect: 'none' }}>
               <div style={{ background: 'rgba(40,27,18,0.85)', color: '#fff', fontSize: 8.5, fontWeight: 700, letterSpacing: '0.03em', padding: '2px 7px', borderRadius: 3, whiteSpace: 'nowrap', marginBottom: 4 }}>{p.label}</div>
               <div style={{ width: 58, height: 58, borderRadius: '50%', overflow: 'hidden', border: `3px solid ${ORANGE}`, boxShadow: '0 2px 7px rgba(0,0,0,0.5)' }}>
-                <img src={p.img} alt={p.label} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <img src={p.img} alt={p.label} draggable={false} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
               {/* downward pointer to the parcel */}
               <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: `9px solid ${ORANGE}`, marginTop: -1, filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.4))' }} />
             </div>
           ))}
+          {/* DEV-ONLY: drag pins onto their buildings, then copy these lines into MAP_PINS */}
+          {EDIT && (
+            <textarea readOnly value={coordText} onFocus={(e) => e.target.select()}
+              style={{ position: 'absolute', top: 6, left: 6, width: 360, height: 64, fontFamily: 'monospace', fontSize: 10, lineHeight: 1.3, padding: 6, border: `1px solid ${ORANGE}`, borderRadius: 4, background: 'rgba(255,255,255,0.92)', color: '#222', resize: 'both', zIndex: 10 }} />
+          )}
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -737,7 +749,7 @@ const BUILDINGS = {
   p27: {
     name: '27 Parker Street', titleMain: '27 Parker', titleAccent: 'Street',
     hero: '/photos/ware/p27.jpg',
-    info: [['Year Built', '1890'], ['Building Type', 'Apartment (4-Unit)'], ['Units', '4'], ['Living Area', '2,822 SF'], ['Stories', '3'], ['Exterior Wall', 'Vinyl'], ['Roof', 'Asphalt Shingle · Gable'], ['Heat', 'Forced Hot Water'], ['Heat Fuel', 'Propane'], ['A/C', 'None']],
+    info: [['Year Built', '1890'], ['Building Type', 'Apartment (4-Unit)'], ['Units', '4'], ['Living Area', '2,822 SF'], ['Stories', '3'], ['Exterior Wall', 'Vinyl'], ['Roof', 'Asphalt Shingle · Gable'], ['Heat', 'Forced Hot Water'], ['Heat Fuel', 'Propane'], ['A/C', 'Window Units']],
     utilities: [['Heat', 'Electric & Propane · Tenant Paid'], ['Hot Water', 'Electric & Propane · Tenant Paid'], ['Electric', 'Tenant Paid'], ['Water & Sewer', 'Landlord Paid'], ['Trash', 'Landlord Paid']],
     units: [['1', '1 Bed', '625', '$1,800', '$1,450'], ['2', '1 Bed', '625', '$1,375', '$1,450'], ['3', '2 Bed', '700', '$1,200', '$1,800'], ['4', '3 Bed', '800', '$1,375', '$1,950']],
   },
@@ -745,14 +757,14 @@ const BUILDINGS = {
     name: '28-30 & 28.5 North Street', titleMain: '28-30 & 28.5', titleAccent: 'North Street',
     hero: '/photos/ware/n2830.jpg',
     // "Asbestos" exterior-wall line dropped per Jake; raw assessor room/story codes omitted.
-    info: [['Year Built', '1932'], ['Building Type', 'Apartment Building'], ['Units', '14'], ['Living Area', '6,800 SF'], ['Roof', 'Asphalt Shingle · Gable'], ['Heat', 'Forced Hot Air'], ['Heat Fuel', 'Oil'], ['A/C', 'None']],
+    info: [['Year Built', '1932'], ['Building Type', 'Apartment Building'], ['Units', '14'], ['Living Area', '6,800 SF'], ['Roof', 'Asphalt Shingle · Gable'], ['Heat', 'Forced Hot Air'], ['Heat Fuel', 'Oil'], ['A/C', 'Window Units']],
     utilities: [['Heat', 'Electric & Propane · Tenant Paid'], ['Hot Water', 'Electric & Propane · Tenant Paid'], ['Electric', 'Tenant Paid'], ['Water & Sewer', 'Landlord Paid'], ['Trash', 'Landlord Paid']],
     units: [['28-1', '2 Bed', '700', '$950', '$1,800'], ['28-2', '2 Bed', '700', '$1,125', '$1,800'], ['28-3', '1 Bed - L', '650', '$1,200', '$1,500'], ['30-1', 'Studio', '500', '$1,670', '$1,670'], ['30-2', '2 Bed', '700', '$1,575', '$1,800'], ['30-3', '1 Bed', '625', '$1,475', '$1,450'], ['30-4', '1 Bed', '625', '$1,750', '$1,450'], ['30-5', '2 Bed', '700', '$1,200', '$1,800'], ['30-6', '3 Bed', '800', '$1,125', '$1,950'], ['30-7', '3 Bed', '800', '$950', '$1,950'], ['30-8', '3 Bed', '800', '$1,275', '$1,950'], ['28.5-1', '2 Bed', '700', '$1,225', '$1,800'], ['28.5-2', '1 Bed - L', '650', '$1,225', '$1,500'], ['28.5-3', '1 Bed', '625', '$1,150', '$1,450']],
   },
   n38: {
     name: '38 North Street', titleMain: '38 North', titleAccent: 'Street',
     hero: '/photos/ware/n38.jpg',
-    info: [['Year Built', '1880'], ['Building Type', 'Two-Family'], ['Units', '2'], ['Living Area', '1,576 SF'], ['Stories', '2'], ['Exterior Wall', 'Vinyl'], ['Roof', 'Asphalt Shingle · Gable'], ['Heat', 'Forced Hot Water'], ['Heat Fuel', 'Oil'], ['A/C', 'None']],
+    info: [['Year Built', '1880'], ['Building Type', 'Two-Family'], ['Units', '2'], ['Living Area', '1,576 SF'], ['Stories', '2'], ['Exterior Wall', 'Vinyl'], ['Roof', 'Asphalt Shingle · Gable'], ['Heat', 'Forced Hot Water'], ['Heat Fuel', 'Oil'], ['A/C', 'Window Units']],
     utilities: [['Heat', 'Oil & Electric · Tenant Paid'], ['Hot Water', 'Electric · Tenant Paid'], ['Electric', 'Tenant Paid'], ['Water & Sewer', 'Landlord Paid'], ['Trash', 'Landlord Paid']],
     units: [['1', '1 Bed', '775', '$1,160', '$1,450'], ['2', '1 Bed', '775', '$1,050', '$1,450']],
   },
@@ -767,7 +779,7 @@ function App() {
     <ExecutiveSummary />,
     <InvestmentHighlights />,
 
-    <Divider eyebrow="01" title="The Property" image="/photos/ware/aerial-context.jpg" />,
+    <Divider eyebrow="01" title="The Properties" image="/photos/ware/cover-hero.jpg" />,
     <PortfolioOverview />,
     <PortfolioMap />,
 
@@ -789,16 +801,16 @@ function App() {
     <PhotoGallery section="Property Photography" title="38 North Street" accent="Interiors"
       hero="/photos/ware/n38-int1.jpg" tiles={['/photos/ware/n38-int2.jpg', '/photos/ware/n38-int3.jpg', '/photos/ware/n38-int4.jpg']} />,
 
-    <Divider eyebrow="02" title="Financial Analysis" image="/photos/ware/n2830.jpg" />,
+    <Divider eyebrow="02" title="Financial Analysis" image="/photos/ware/cover-hero.jpg" />,
     <UnitMix />,
     <RentRoll />,
     <IncomeExpense />,
 
-    <Divider eyebrow="03" title="Location & Market" image="/photos/ware/aerial-wide.jpg" />,
+    <Divider eyebrow="03" title="Location & Market" image="/photos/ware/cover-hero.jpg" />,
     <LocationOverview />,
     <DriveTimeMap />,
 
-    <Divider eyebrow="04" title="The Team" image="/photos/ware/p27.jpg" />,
+    <Divider eyebrow="04" title="The Team" image="/photos/ware/cover-hero.jpg" />,
     <TeamPage />,
     <LocationsPage />,
   ]
