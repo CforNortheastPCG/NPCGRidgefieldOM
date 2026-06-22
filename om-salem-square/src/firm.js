@@ -40,7 +40,6 @@ export const LEADERSHIP = [
 ]
 
 export const SENIOR_INVESTMENT_SALES = [
-  { name: 'Tim McGeary', title: 'Vice President, Investments', phone: '857.990.6804', email: 'tmcgeary@northeastpcg.com', photo: `${U}/2021/11/Tim-McGeary-430x488.png`, url: `${P}/tim-mcgeary/` },
   { name: 'Francis Saenz', title: 'Vice President, Investments', phone: '857.990.6803', email: 'fsaenz@northeastpcg.com', photo: `${U}/2021/11/Francis-Saenz-430x488.png`, url: `${P}/francis-saenz/` },
   { name: 'Rich Edwards Jr.', title: 'Vice President, Investments', phone: '203.307.1577', email: 'redwards@northeastpcg.com', photo: `${U}/2021/11/Richard-Edwards-430x488.png`, url: `${P}/richard-edwards-jr/` },
   { name: 'Jeff Wright', title: 'Vice President, Investments', phone: '203.307.1581', email: 'jwright@northeastpcg.com', photo: `${U}/2021/11/Jeff-Wright-430x488.png`, url: `${P}/jeff-wright/` },

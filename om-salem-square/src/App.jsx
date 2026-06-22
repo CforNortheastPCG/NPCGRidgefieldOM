@@ -7,6 +7,7 @@ import { PHOTO_PAGES } from './photos.js'
 import Divider from './Divider.jsx'
 import RegionalMap from './RegionalMap.jsx'
 import DriveTimeMap from './DriveTimeMap.jsx'
+import SiteMap from './SiteMap.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
 import { DEAL, ADDR, CITY_STATE, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
@@ -600,15 +601,27 @@ function CountyOverview({ pageNum }) {
 
 /* ═══════════════════ INVESTMENT HIGHLIGHTS ═══════════════════ */
 function InvestmentHighlights({ pageNum }) {
-  const items = [
-    { head: 'Value-Add Commercial | Lease-Up, Mark-to-Market & CAM Recovery', body: 'A buyer leases up the vacant ground-floor suite at about $15 per SF, marks the occupied suites from roughly $13.38 toward the $15 to $22 the building achieves on renewal, and implements CAM recovery — moving gross scheduled commercial rent from $229,788 to $319,160, with several leases rolling in 2026.' },
-    { head: 'Proven Residential Conversion | Vacant Suite to Two Apartments', body: 'The vacant rear suite (about 1,600 SF) converts into two apartments underwriting to roughly $43,200 a year — a proven step, since the two existing apartments were created from similar space in 2019 and 2020 and lease at $1,650 with headroom to $1,800 a month.' },
-    { head: 'Entitled 51-Unit Development Parcel | Shovel-Ready Second Phase', body: 'About 1.69 acres of the lot is entitled for a 51-unit multifamily building, with updated site plans approved by the Naugatuck Zoning Commission in September 2025. Building permits are the next step, so a buyer can build the residential project while running the center — a de-risked second phase, not a speculative rezoning.' },
-    { head: 'Mixed-Use Income | Retail Plus Residential', body: 'Ten commercial suites and two apartments spread the rent roll across complementary demand on 2.69 acres, blending service-retail cash flow with residential stability.' },
-    { head: 'Long-Tenured, Service-Oriented Tenancy', body: 'The commercial tenants are convenience and service businesses — restaurants, a package store, a nail salon, and personal-service operators — several in place fifteen-plus years, a mix that diversifies the rent roll and holds up well against online competition.' },
-    { head: 'Strategic Location | Route 8 & New 2027 Transit Station', body: 'The property sits on New Haven Road (Route 63) with direct Route 8 access and Waterbury about ten minutes north, with Bridgeport and the shoreline beyond. A new $33.2 million Metro-North station on the Waterbury Branch, opening summer 2027, anchors transit-oriented development in Naugatuck — a direct demand driver for the entitled units.' },
+  // Two text boxes (3 highlights each) placed diagonally, with two photos on the
+  // opposite diagonal → a 2×2 checkerboard: text · photo / photo · text.
+  const boxes = [
+    {
+      title: 'Value-Add & Income Upside',
+      items: [
+        { head: 'Value-Add Commercial — Lease-Up, Mark-to-Market & CAM', body: 'Lease the vacant suite at ~$15/SF, mark occupied suites from ~$13.38 toward the $15–$22 achieved on renewal, and add CAM recovery — gross commercial rent $229,788 → $319,160, with leases rolling in 2026.' },
+        { head: 'Proven Residential Conversion', body: 'The vacant rear suite (~1,600 SF) converts to two apartments underwriting to ~$43,200/yr — proven, since the two existing apartments were created from similar space and lease at $1,650 toward $1,800/mo.' },
+        { head: 'Mixed-Use Income — Retail Plus Residential', body: 'Ten commercial suites and two apartments spread the rent roll across complementary demand on 2.69 acres, blending service-retail cash flow with residential stability.' },
+      ],
+    },
+    {
+      title: 'Development, Tenancy & Location',
+      items: [
+        { head: 'Entitled 51-Unit Development Parcel', body: '~1.69 acres is entitled for a 51-unit multifamily building, with site plans approved by the Naugatuck Zoning Commission in September 2025. Permits are the next step — a de-risked second phase, not a speculative rezoning.' },
+        { head: 'Long-Tenured, Service-Oriented Tenancy', body: 'Restaurants, a package store, a nail salon, and personal-service operators — several in place fifteen-plus years — diversify the rent roll and hold up well against online competition.' },
+        { head: 'Strategic Location — Route 8 & 2027 Transit', body: 'On New Haven Road (Route 63) with direct Route 8 access and Waterbury ~10 min north. A new $33.2M Metro-North station on the Waterbury Branch opens summer 2027 — a direct demand driver for the entitled units.' },
+      ],
+    },
   ]
-  const thumbs = ['/photos/comm-1.jpg', '/photos/apt-1.jpg', '/photos/parcel-1.jpg', '/photos/ext-1.jpg', '/photos/comm-5.jpg', '/photos/aerial-1.jpg']
+  const photos = ['/photos/comm-1.jpg', '/photos/parcel-1.jpg']
   return (
     <div className="page">
       <PageHeader section="Investment Highlights" />
@@ -616,17 +629,30 @@ function InvestmentHighlights({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Investment <span style={{ color: '#F8971D' }}>Highlights</span></div>
         <div className="title-rule" />
 
-        {/* Highlight cards — each paired with a property photo, stretched to fill the page */}
-        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridAutoRows: '1fr', columnGap: 20, rowGap: 14, minHeight: 0, paddingTop: 4 }}>
-          {items.map((it, i) => (
-            <div key={i} style={{ display: 'flex', gap: 13, minHeight: 0, alignItems: 'center' }}>
-              <img src={thumbs[i]} alt="" style={{ flex: '0 0 150px', width: 150, height: 150, objectFit: 'cover', borderRadius: 5, display: 'block' }} />
-              <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ fontSize: 9.6, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3, lineHeight: 1.2 }}>{it.head}</div>
-                <p style={{ fontSize: 8.4, lineHeight: 1.4, color: 'var(--graphite)' }}>{it.body}</p>
+        {/* 2×2 checkerboard — text box · photo (top), photo · text box (bottom).
+            Each text box holds the highlights; cells stretch to fill the page. */}
+        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 12, minHeight: 0, paddingTop: 6 }}>
+          {(() => {
+            const TextBox = (g, key) => (
+              <div key={key} style={{ display: 'flex', flexDirection: 'column', minHeight: 0, padding: '2px 6px' }}>
+                <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 9, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>{g.title}</div>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, justifyContent: 'space-between', minHeight: 0 }}>
+                  {g.items.map((it, ii) => (
+                    <div key={ii} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
+                      <div style={{ fontSize: 9.6, fontWeight: 800, color: 'var(--carbon)', marginBottom: 2, lineHeight: 1.18 }}>{it.head}</div>
+                      <p style={{ fontSize: 8.4, lineHeight: 1.4, color: 'var(--graphite)' }}>{it.body}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+            const PhotoBox = (src, key) => (
+              <div key={key} style={{ borderRadius: 8, overflow: 'hidden', minHeight: 0, background: 'var(--linen)', border: '1px solid var(--border)' }}>
+                <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+            )
+            return [TextBox(boxes[0], 'tl'), PhotoBox(photos[0], 'tr'), PhotoBox(photos[1], 'bl'), TextBox(boxes[1], 'br')]
+          })()}
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -646,6 +672,7 @@ function App() {
     <InvestmentHighlights />,
     <Divider eyebrow="01" title="The Property" image="/photos/ext-1.jpg" />,
     <BuildingDescriptions />,
+    <SiteMap />,
     ...PHOTO_PAGES.map(p => (p.kind === 'comingsoon' ? <PhotoComingSoon {...p} /> : <PhotoGallery {...p} />)),
     <Divider eyebrow="02" title="Financial Analysis" image="/photos/ext-2.jpg" />,
     <RentRoll />,

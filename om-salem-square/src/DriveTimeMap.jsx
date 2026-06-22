@@ -6,7 +6,8 @@ import { ISOCHRONES } from './isochrones.js'
    labels and highways (z-order, not a blend hack):
 
      1. base image  — bold styled basemap, NO labels (Google Static Maps)
-     2. rings       — raw wavy Valhalla isochrone polygons, SVG overlay
+     2. bands       — filled shaded Valhalla isochrone polygons (fill + stroke),
+                      SVG overlay, largest contour first so they nest darker inward
      3. labels image— white-background labels+highways layer, multiply-blended
                       so its background drops out and only town names / highway
                       shields / highway lines land on top of the rings
@@ -121,9 +122,14 @@ export default function DriveTimeMap({ pageNum }) {
             <>
               <img src={baseUrl} alt="Drive-time map centered on Salem Square, Naugatuck CT" style={{ ...fill, objectFit: 'fill', display: 'block' }} />
               <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" style={{ ...fill, pointerEvents: 'none' }}>
+                {/* filled shaded bands — translucent fill then thin stroke, largest
+                    contour first so they nest into a heat-map darkening inward */}
                 {RING_PATHS.map(r => (
-                  <polyline key={r.min} points={r.points} fill="none" stroke={r.color} strokeWidth={2.5}
-                    strokeOpacity={0.9} strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+                  <polygon key={`f-${r.min}`} points={r.points} fill={r.color} fillOpacity={0.16} stroke="none" />
+                ))}
+                {RING_PATHS.map(r => (
+                  <polygon key={`s-${r.min}`} points={r.points} fill="none" stroke={r.color} strokeWidth={2}
+                    strokeOpacity={0.95} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
                 ))}
               </svg>
               <img src={LABELS_OVERLAY} alt="" aria-hidden="true" style={{ ...fill, objectFit: 'fill', pointerEvents: 'none' }} />
