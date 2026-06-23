@@ -20,14 +20,16 @@ function CoverHero({ pageNum }) {
     <div className="page">
       <div className="cover-hero">
         <img className="cover-hero-img" src={DEAL.coverImage} alt="" />
-        <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '60%', background: 'linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.85) 100%)', pointerEvents: 'none' }} />
+        {/* Gradient anchored at the BOTTOM — keeps the top of the frame bright and
+            sunny, and darkens the lower third (parking lot) to seat the text. */}
+        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '62%', background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 42%, rgba(0,0,0,0) 100%)', pointerEvents: 'none' }} />
         <div className="cover-hero-header" style={{ justifyContent: 'flex-end' }}>
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
-        <div className="cover-hero-overlay" style={{ top: 28, bottom: 'auto', left: 40 }}>
+        <div className="cover-hero-overlay" style={{ left: 40, right: 40, bottom: 44, top: 'auto' }}>
           <div style={{ color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 14 }}>{DEAL.status}</div>
-          <div className="cover-hero-name">{DEAL.name}</div>
-          <div className="cover-hero-title" style={{ fontSize: 40 }}>{ADDR}</div>
+          <div className="cover-hero-name" style={{ fontSize: 52, fontWeight: 800, lineHeight: 1.02, marginBottom: 8 }}>{DEAL.name}</div>
+          <div className="cover-hero-title" style={{ fontSize: 24, fontWeight: 600 }}>{ADDR}</div>
           <div className="cover-hero-sub">{DEAL.cityLong}</div>
           <div className="cover-hero-rule" />
           <div className="cover-hero-prep">{DEAL.type}</div>
@@ -59,29 +61,26 @@ function ExecutiveSummary({ pageNum }) {
                 <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>Total Units</div>
               </div>
             </div>
-            <p style={{ fontSize: 11.4, lineHeight: 1.45, marginBottom: 8 }}>
+            <p style={{ fontSize: 11.9, lineHeight: 1.5, marginBottom: 10 }}>
               Northeast Private Client Group is pleased to present <strong>South End Plaza</strong>, a 17-unit
               mixed-use retail and apartment property at {ADDR} in Thomaston, Connecticut, offered at $2,450,000.
-              Built in 1971, the two-story building holds about 14,614 SF on a 0.77-acre parcel, with seven
-              ground-floor commercial suites (5,973 SF) below ten second-floor apartments (7,750 SF) that have
-              private rear ground-level access. An on-site asphalt lot of roughly 10,000 SF sits less than a mile
-              from Route 8 (Exits 38 and 39).
+              Built in 1971, the two-story building totals about 14,614 square feet on a 0.77-acre parcel, with seven
+              ground-floor commercial suites below ten second-floor apartments that have private rear ground-level
+              access. An on-site asphalt lot of roughly 10,000 square feet sits less than a mile from Route 8 at
+              Exits 38 and 39.
             </p>
-            <p style={{ fontSize: 11.4, lineHeight: 1.45, marginBottom: 8 }}>
-              The property is 88.2% occupied. Two small commercial suites are vacant (~1,000 SF combined) and
-              available for immediate lease-up. The April 30, 2026 rent roll shows apartments leased $1,300&ndash;$1,600
-              a month and occupied commercial suites averaging ~$14.20/SF against the $17.50&ndash;$20 underwritten on
-              renewal, with several commercial leases expiring in 2026. Tenants include Thomaston Smoke &amp; Vape,
-              KC&rsquo;s Package Store, Elegant Nail &amp; Spa, and S &amp; S Laundry, with two leases in place since
-              2011 and 2013.
+            <p style={{ fontSize: 11.9, lineHeight: 1.5, marginBottom: 10 }}>
+              The apartment rents currently run between $1,300 and $1,600 a month, and the occupied commercial suites
+              average about $14.20 per square foot. The commercial tenants are Thomaston Smoke &amp; Vape, KC&rsquo;s
+              Package Store, Elegant Nail &amp; Spa, and S &amp; S Laundry. Two of the commercial leases date to 2011
+              and 2013.
             </p>
-            <p style={{ fontSize: 11.4, lineHeight: 1.5, marginBottom: 8 }}>
+            <p style={{ fontSize: 11.9, lineHeight: 1.5, marginBottom: 10 }}>
               The property presents a compelling value-add mixed-use opportunity with multiple paths to grow revenue.
               A new buyer can lease the two vacant commercial suites, bring residential and commercial rents to levels
-              established by the market, and recover more of the water and sewer cost through CAM &mdash; moving
-              normalized in-place NOI of about $158,400 (a 6.47% going-in cap) toward roughly $191,443, about 7.81%.
+              established by the market, and recover more of the water and sewer cost through CAM.
             </p>
-            <p style={{ fontSize: 11.4, lineHeight: 1.5, color: 'var(--stone)' }}>
+            <p style={{ fontSize: 11.9, lineHeight: 1.5, color: 'var(--stone)' }}>
               The tax basis is stable. Thomaston completed its town-wide revaluation in 2025, which fixes the
               property&rsquo;s assessed value through the next revaluation in 2030, and Connecticut does not reassess on
               sale, so the assessment will not step up at closing.
@@ -125,15 +124,14 @@ function BuildingDescriptions({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Zoning</span><span className="bldg-val">GC – General Commercial</span></div>
                 <div className="bldg-row"><span className="bldg-label">Traffic Count</span><span className="bldg-val">12,800 VPD (South Main St)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Parcel ID</span><span className="bldg-val">M0186700 (Map-Block-Lot 48-02-20)</span></div>
-                <div className="bldg-row"><span className="bldg-label">Occupancy</span><span className="bldg-val">88.2%</span></div>
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Utilities</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Heat / Hot Water</span><span className="bldg-val">Forced hot air (unit) / [TO CONFIRM]</span></div>
-                <div className="bldg-row"><span className="bldg-label">Electric</span><span className="bldg-val">Common areas LL; individually metering</span></div>
-                <div className="bldg-row"><span className="bldg-label">Water / Sewer / Trash</span><span className="bldg-val">Landlord paid</span></div>
+                <div className="bldg-row"><span className="bldg-label">Heat / Hot Water</span><span className="bldg-val">Tenant-Paid · Electric (apts), Gas HW (retail)</span></div>
+                <div className="bldg-row"><span className="bldg-label">Electric</span><span className="bldg-val">Common Areas LL · Units Individually Metered</span></div>
+                <div className="bldg-row"><span className="bldg-label">Water / Sewer / Trash</span><span className="bldg-val">Landlord Paid</span></div>
               </div>
             </div>
           </div>
@@ -145,15 +143,15 @@ function BuildingDescriptions({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Exterior</span><span className="bldg-val">Brick &amp; block (retail) / frame (apartments)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Roof</span><span className="bldg-val">Pitched · asphalt shingle</span></div>
                 <div className="bldg-row"><span className="bldg-label">Parking</span><span className="bldg-val">On-site ±10,000 SF asphalt</span></div>
-                <div className="bldg-row"><span className="bldg-label">A/C / Laundry</span><span className="bldg-val">[TO CONFIRM] / On-site laundry</span></div>
+                <div className="bldg-row"><span className="bldg-label">Laundry</span><span className="bldg-val">On-site (landlord)</span></div>
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Unit Mix &amp; Rents</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Residential</span><span className="bldg-val">10 apartments · 7,750 SF</span></div>
+                <div className="bldg-row"><span className="bldg-label">Residential</span><span className="bldg-val">3× 1BR (600 SF) · 7× 2BR (850 SF)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Commercial</span><span className="bldg-val">7 suites · 5,973 SF</span></div>
-                <div className="bldg-row"><span className="bldg-label">Apartment Rents</span><span className="bldg-val">$1,300–$1,600 / mo</span></div>
+                <div className="bldg-row"><span className="bldg-label">Apartment Rents</span><span className="bldg-val">1BR ~$1,333 · 2BR ~$1,521 / mo</span></div>
                 <div className="bldg-row"><span className="bldg-label">Commercial (occ.)</span><span className="bldg-val">~$14.20/SF → $17.50–$20</span></div>
               </div>
             </div>
@@ -163,7 +161,7 @@ function BuildingDescriptions({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$2,450,000</span></div>
                 <div className="bldg-row"><span className="bldg-label">Price / Unit · / SF</span><span className="bldg-val">$144,100 · $168 / SF</span></div>
                 <div className="bldg-row"><span className="bldg-label">In-Place NOI (Norm.)</span><span className="bldg-val">$158,400 · 6.47% cap</span></div>
-                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$191,443 · 7.81% cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$196,491 · 8.02% cap</span></div>
               </div>
             </div>
           </div>
@@ -250,11 +248,13 @@ function BarChartCard({ title, data, note }) {
    in-place vs pro forma. Per-suite/per-unit detail lives in the BOV / data room. */
 function RentRoll({ pageNum }) {
   const rows = [
-    { comp: 'Apartments', count: '10 units', inPlace: '$175,800', pf: '$196,800', note: 'Avg $1,465/mo → $1,640 pro forma · private rear access' },
+    { comp: '1BR / 1BA Apartments', count: '3 units', inPlace: '$48,000', pf: '$54,000', note: '600 SF · avg $1,333/mo → $1,500 pro forma' },
+    { comp: '2BR / 1BA Apartments', count: '7 units', inPlace: '$127,800', pf: '$142,800', note: '850 SF · avg $1,521/mo → $1,700 pro forma' },
     { comp: 'Commercial Retail', count: '7 suites', inPlace: '$84,900', pf: '$106,300', note: 'Suites 4 & 6 vacant (~500 SF ea.) · mark to $17.50–$20/SF' },
   ]
   const useMix = [
-    { label: 'Apartments', value: 10, color: '#3F4753' },
+    { label: '1BR Apartments', value: 3, color: '#3F4753' },
+    { label: '2BR Apartments', value: 7, color: '#7C8896' },
     { label: 'Commercial Suites', value: 7, color: '#F8971D' },
   ]
   const grossRent = [
@@ -263,12 +263,12 @@ function RentRoll({ pageNum }) {
   ]
   return (
     <div className="page">
-      <PageHeader section="Rent Roll" />
+      <PageHeader section="Unit Mix" />
       <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div className="section-title" style={{ marginBottom: 2 }}>Rent Roll & <span style={{ color: '#F8971D' }}>Lease-Up</span></div>
+        <div className="section-title" style={{ marginBottom: 2 }}>Unit <span style={{ color: '#F8971D' }}>Mix</span></div>
         <div className="title-rule" />
         <table className="data-table" style={{ fontSize: 11 }}>
-          <thead><tr><th>Income Component</th><th style={{ textAlign: 'center' }}>Count</th><th style={{ textAlign: 'right' }}>In-Place</th><th style={{ textAlign: 'right' }}>Pro Forma</th><th>Notes</th></tr></thead>
+          <thead><tr><th>Income Component</th><th style={{ textAlign: 'center' }}>Count</th><th style={{ textAlign: 'right' }}>In-Place</th><th style={{ textAlign: 'right' }}>Pro Forma</th></tr></thead>
           <tbody>
             {rows.map((r, i) => (
               <tr key={i}>
@@ -276,7 +276,6 @@ function RentRoll({ pageNum }) {
                 <td style={{ textAlign: 'center' }}>{r.count}</td>
                 <td style={{ textAlign: 'right' }}>{r.inPlace}</td>
                 <td style={{ textAlign: 'right' }}>{r.pf}</td>
-                <td style={{ fontSize: 9.5, color: 'var(--stone)' }}>{r.note}</td>
               </tr>
             ))}
             <tr className="total-row">
@@ -284,7 +283,6 @@ function RentRoll({ pageNum }) {
               <td style={{ textAlign: 'center' }}><strong>17 units</strong></td>
               <td style={{ textAlign: 'right' }}><strong>$260,700</strong></td>
               <td style={{ textAlign: 'right' }}><strong>$303,100</strong></td>
-              <td style={{ fontSize: 9.5, color: 'var(--stone)' }}>Gross scheduled rent · 88.2% occ. (Apr 30, 2026)</td>
             </tr>
           </tbody>
         </table>
@@ -307,114 +305,219 @@ function RentRoll({ pageNum }) {
 }
 
 /* ═══════════════════ INCOME & EXPENSE ═══════════════════ */
-/* Summary income statement — T12 → Current (normalized in-place) → Pro Forma.
-   Real estate taxes and insurance were escrowed in the T12 and normalized in
-   the Current/Pro Forma columns; the full line-item schedule (electric,
-   water/sewer, trash, management, etc., held at recent actuals) lives in the
-   BOV / data room. NOI and cap figures are those carried in the underwriting. */
+/* Income statement — Current (in-place) vs Pro Forma, each with a $/Unit column
+   (17 units). Gross scheduled rent → vacancy → effective rental → EGI, then the
+   full itemized operating-expense schedule and the NOI / cap. */
 function IncomeExpense({ pageNum }) {
-  const tdl = { fontSize: 9, padding: '3px 8px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
-  const tds = { fontSize: 9, padding: '3px 8px', textAlign: 'right' }
-  const thl = { fontSize: 8, padding: '4px 8px', textAlign: 'left', color: '#fff' }
-  const thr = { fontSize: 8, padding: '4px 8px', textAlign: 'right', color: '#fff' }
-  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 9, padding: '3px 8px', textAlign: 'right' }
-  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9.5, padding: '4px 8px', textAlign: 'right' }
-  const capBg = { background: 'var(--linen)', color: 'var(--carbon)', fontWeight: 700, fontSize: 9, padding: '3px 8px', textAlign: 'right' }
-
-  const noi = [
-    { label: 'T12 NOI', val: '$184,718' },
-    { label: 'In-Place (Normalized) NOI', val: '$158,400' },
-    { label: 'Pro Forma NOI', val: '$191,443' },
-  ]
-
-  const income = [
-    ['Effective Rental Income', '$255,705', '$251,910', '$282,610'],
-    ['Other Income', '$15,779', '$15,779', '$15,779'],
-  ]
-  const expenses = [
-    ['Real Estate Taxes', 'escrowed³', '$30,719', '$30,719'],
-    ['Property Insurance', 'escrowed³', '$14,375', '$14,375'],
-    ['Repairs & Maintenance', '$21,357', '$7,307', '$7,307'],
-    ['All Other Operating', 'actuals⁴', 'actuals⁴', 'actuals⁴'],
-  ]
+  const tds = { fontSize: 8.5, padding: '3px 7px', textAlign: 'right' }
+  const tdl = { fontSize: 8.5, padding: '3px 7px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const thr = { fontSize: 7.5, padding: '3.5px 7px', textAlign: 'right' }
+  const thl = { fontSize: 7.5, padding: '3.5px 7px', textAlign: 'left' }
+  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 8.5, padding: '3px 7px', textAlign: 'right' }
+  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9, padding: '4px 7px', textAlign: 'right' }
 
   const Cols = () => (
     <colgroup>
       <col style={{ width: '34%' }} />
-      <col style={{ width: '22%' }} /><col style={{ width: '22%' }} /><col style={{ width: '22%' }} />
+      {Array.from({ length: 4 }).map((_, i) => <col key={i} style={{ width: '16.5%' }} />)}
     </colgroup>
   )
-  const Head = ({ first }) => (
-    <thead>
-      <tr style={{ background: 'var(--carbon)' }}>
-        <th style={thl}>{first}</th>
-        <th style={thr}>T12</th><th style={thr}>Current</th><th style={thr}>Pro Forma</th>
-      </tr>
-    </thead>
-  )
-  const Row = ([label, t12, cur, pf, bold], i) => {
-    const w = bold ? { fontWeight: 700 } : null
-    return (
-      <tr key={label} style={i % 2 === 1 ? { background: 'var(--linen)' } : undefined}>
-        <td style={{ ...tdl, ...w }}>{label}</td>
-        <td style={{ ...tds, ...w }}>{t12}</td><td style={{ ...tds, ...w }}>{cur}</td><td style={{ ...tds, ...w }}>{pf}</td>
-      </tr>
-    )
-  }
+
+  const noi = [
+    { label: 'NOI — Current (In-Place)', val: '$158,400' },
+    { label: 'NOI — Pro Forma', val: '$196,491' },
+  ]
 
   return (
     <div className="page">
       <PageHeader section="Income & Expense" />
       <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div className="section-title" style={{ marginBottom: 2, fontSize: 22 }}>Income & <span style={{ color: '#F8971D' }}>Expense Analysis</span></div>
-        <div className="title-rule" style={{ marginBottom: 6 }} />
+        <div className="section-title" style={{ marginBottom: 2, fontSize: 22 }}>Income &amp; <span style={{ color: '#F8971D' }}>Expense Analysis</span></div>
+        <div className="title-rule" style={{ marginBottom: 8 }} />
 
-        {/* NOI summary strip — T12 → Current → Pro Forma */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, paddingBottom: 7, marginBottom: 8, borderBottom: '1px solid var(--border)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24, paddingBottom: 9, marginBottom: 9, borderBottom: '1px solid var(--border)' }}>
           {noi.map(n => (
             <div key={n.label} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--golden)', lineHeight: 1, marginBottom: 3 }}>{n.val}</div>
-              <div style={{ fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', fontWeight: 600 }}>{n.label}</div>
+              <div style={{ fontSize: 21, fontWeight: 800, color: 'var(--golden)', lineHeight: 1, marginBottom: 3 }}>{n.val}</div>
+              <div style={{ fontSize: 8.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--stone)', fontWeight: 600 }}>{n.label}</div>
             </div>
           ))}
         </div>
 
-        {/* Operating income — full width */}
         <div className="eyebrow" style={{ marginBottom: 3, fontSize: 9 }}>Operating Income</div>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 9, tableLayout: 'fixed' }}>
-          <Cols /><Head first="Income" />
+        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 8, tableLayout: 'fixed' }}>
+          <Cols />
+          <thead>
+            <tr style={{ background: 'var(--carbon)' }}>
+              <th style={{ ...thl, color: '#fff' }}>Income</th>
+              <th style={{ ...thr, color: '#fff' }}>Current</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
+              <th style={{ ...thr, color: '#fff' }}>Pro Forma</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
+            </tr>
+          </thead>
           <tbody>
-            {income.map(Row)}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$271,484</td><td style={totBg}>$267,689&sup1;</td><td style={totBg}>$298,389&sup2;</td></tr>
+            {[
+              ['Residential Scheduled Rent', '$175,800', '$10,341', '$196,800', '$11,576', false],
+              ['Commercial Scheduled Rent', '$84,900', '$4,994', '$106,278', '$6,252', false],
+              ['Gross Scheduled Rent', '$260,700', '$15,335', '$303,078', '$17,828', true],
+              ['Vacancy & Collections Loss', '-$8,790', '-$517', '-$15,154', '-$891', false],
+              ['Effective Rental Income', '$251,910', '$14,818', '$287,924', '$16,937', true],
+              ['CAM Reimbursement (Water/Sewer)', '$12,822', '$754', '$16,905', '$994', false],
+              ['Other Income (fees, pet, etc.)', '$6,068', '$357', '$6,068', '$357', false],
+            ].map(([label, ...cells]) => {
+              const bold = cells.pop()
+              return (
+                <tr key={label} style={bold ? { background: 'var(--linen)' } : undefined}>
+                  <td style={bold ? { ...tdl, fontWeight: 700 } : tdl}>{label}</td>
+                  {cells.map((c, j) => <td key={j} style={bold ? { ...tds, fontWeight: 700 } : tds}>{c}</td>)}
+                </tr>
+              )
+            })}
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$270,800</td><td style={totBg}>$15,929</td><td style={totBg}>$310,897</td><td style={totBg}>$18,288</td></tr>
           </tbody>
         </table>
-        {/* Operating expenses — full width */}
-        <div className="eyebrow" style={{ marginBottom: 3, fontSize: 9 }}>Operating Expenses — Normalized</div>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 6, tableLayout: 'fixed' }}>
-          <Cols /><Head first="Expense" />
+
+        <div className="eyebrow" style={{ marginBottom: 4, fontSize: 9 }}>Operating Expenses</div>
+        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 4, tableLayout: 'fixed' }}>
+          <Cols />
+          <thead>
+            <tr style={{ background: 'var(--carbon)' }}>
+              <th style={{ ...thl, color: '#fff' }}>Expense</th>
+              <th style={{ ...thr, color: '#fff' }}>Current</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
+              <th style={{ ...thr, color: '#fff' }}>Pro Forma</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
+            </tr>
+          </thead>
           <tbody>
-            {expenses.map(Row)}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Operating Expense</td><td style={totBg}>$86,766</td><td style={totBg}>$109,289</td><td style={totBg}>$106,946</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$184,718</td><td style={noiBg}>$158,400</td><td style={noiBg}>$191,443</td></tr>
-            <tr><td style={{ ...capBg, textAlign: 'left' }}>Cap Rate on $2,450,000</td><td style={capBg}>&mdash;</td><td style={capBg}>6.47%</td><td style={capBg}>7.81%</td></tr>
+            {[
+              ['Real Estate Taxes', '$30,719', '$1,807', '$30,719', '$1,807'],
+              ['Property Management (5% of EGI)', '$13,540', '$796', '$15,545', '$914'],
+              ['Property Insurance', '$14,375', '$846', '$14,375', '$846'],
+              ['Water & Sewer', '$28,175', '$1,657', '$28,175', '$1,657'],
+              ['Electric (Common)', '$3,064', '$180', '$3,064', '$180'],
+              ['Trash Removal', '$7,060', '$415', '$7,060', '$415'],
+              ['Repairs & Maintenance', '$7,307', '$430', '$7,307', '$430'],
+              ['Landscaping / Snow', '$8,160', '$480', '$8,160', '$480'],
+            ].map(([label, ...cells], i) => (
+              <tr key={label} style={i % 2 === 1 ? { background: 'var(--linen)' } : undefined}>
+                <td style={tdl}>{label}</td>
+                {cells.map((c, j) => <td key={j} style={tds}>{c}</td>)}
+              </tr>
+            ))}
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expenses</td><td style={totBg}>$112,401</td><td style={totBg}>$6,612</td><td style={totBg}>$114,406</td><td style={totBg}>$6,730</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$158,400</td><td style={noiBg}>6.47% Cap</td><td style={noiBg}>$196,491</td><td style={noiBg}>8.02% Cap</td></tr>
           </tbody>
         </table>
-        <div style={{ fontSize: 7, color: 'var(--stone)', marginBottom: 8, lineHeight: 1.4 }}>
-          <sup>1</sup> Current (normalized in-place) holds the two vacant commercial suites and applies a 5%
-          residential vacancy and collection loss, with the now-set taxes and insurance loaded in. <sup>2</sup> Pro Forma EGI = pro
-          forma effective rental income + other income held at T12 actuals. <sup>3</sup> RE taxes and insurance
-          were escrowed in the T12 and normalized thereafter. <sup>4</sup> Electric, water &amp; sewer, trash, and
-          landscaping &amp; snow removal held at 2025 actuals across all periods; management underwritten at 5% of
-          EGI. See the BOV / data room for the full schedule.
+        <div style={{ fontSize: 7.6, color: 'var(--stone)', marginTop: 2, lineHeight: 1.4 }}>
+          Current reflects in-place rents with a 5% residential vacancy and holds the two vacant commercial suites;
+          Pro Forma marks commercial rents to $17.50&ndash;$20/SF and apartments to market (+$36,014/yr effective rental
+          income) and grows CAM water/sewer recovery. Expense ratio 41.5% (Current) / 36.8% (Pro Forma); $/Unit on 17
+          units. Caps on the $2,450,000 asking price. Real estate taxes reflect the 2025 revaluation (27.21 mill rate);
+          property management and the 5% vacancy are underwriting assumptions and may differ from current owner operations.
+        </div>
+        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: 8, paddingTop: 10 }}>
+          <span style={{ flex: 1, borderTop: '1px solid var(--border)' }} />
+          <span style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--golden)' }}>
+            Underwriting notes &amp; assumptions &mdash; see next page &rarr;
+          </span>
+          <span style={{ flex: 1, borderTop: '1px solid var(--border)' }} />
+        </div>
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}
+
+/* ═══════════════════ UNDERWRITING NOTES ═══════════════════ */
+/* Companion page to the Income & Expense schedule — the narrative behind the
+   numbers, in a left/right two-column layout, with a key-assumptions strip. */
+function UnderwritingNotes({ pageNum }) {
+  const assumptions = [
+    { v: '$2,450,000', l: 'Offering Price' },
+    { v: '$144,100', l: 'Price / Unit' },
+    { v: '$168 / SF', l: 'Price / SF' },
+    { v: '6.47% → 8.02%', l: 'Cap: In-Place → Pro Forma' },
+  ]
+  const notes = [
+    {
+      head: 'Going-In Basis',
+      body: 'At $2,450,000 the offering prices to $144,100 per unit and $168/SF — a 6.47% going-in cap on normalized in-place NOI of $158,400 and an 8.02% pro forma cap on $196,491. At $168/SF against $300-plus all-in construction, the building trades at roughly 56% of replacement cost.',
+    },
+    {
+      head: 'Rental Income',
+      body: 'Current effective rental income of $251,910 applies a 5% residential vacancy and holds the two vacant commercial suites. Pro forma marks commercial rents to $17.50–$20/SF and lifts the ten apartments from an average $1,465 toward $1,640, raising effective rental income to $287,924 (residential $175,800 → $196,800; commercial $84,900 → $106,300).',
+    },
+    {
+      head: 'Commercial Lease-Up & Mark-to-Market',
+      body: 'Suites 4 and 6 (~500 SF each) are underwritten at $15/SF. Occupied suites mark from ~$14.20 toward $17.50–$20/SF on 2026 rollover, raising gross scheduled commercial rent from ~$84,900 to ~$106,300 — with several commercial leases expiring in 2026.',
+    },
+    {
+      head: 'CAM & Expense Recovery',
+      body: 'Water and sewer is landlord-paid and partly recovered from commercial tenants through CAM. Recovery grows from ~$12,800 to ~$16,900 as the vacant suites lease and occupied suites roll, with further upside available by raising CAM recovery toward full pass-through.',
+    },
+    {
+      head: 'Taxes, Insurance & R&M',
+      body: 'Taxes ($30,719) and insurance ($14,375) were escrowed by ownership and are carried at actuals. Taxes reflect the 2025 town-wide revaluation at the now-set 27.21 mill rate; Connecticut does not reassess on sale, so the assessment is fixed through the 2030 revaluation and will not step up at closing. R&M is normalized to $7,307 ($0.50/SF).',
+    },
+    {
+      head: 'Management & Operating Assumptions',
+      body: 'Management is underwritten at 5% of EGI and a 5% residential vacancy/collection-loss factor is applied in both columns. Electric, water & sewer, trash, and landscaping & snow removal are held at recent actuals. The resulting expense ratio is 41.5% (Current) and 36.8% (Pro Forma).',
+    },
+  ]
+  const half = Math.ceil(notes.length / 2)
+  const cols = [notes.slice(0, half), notes.slice(half)]
+  const noiBridge = [
+    { label: 'In-Place', value: 158400, color: '#3F4753' },
+    { label: 'Pro Forma', value: 196491, color: '#F8971D' },
+  ]
+  const Note = (n) => (
+    <div key={n.head} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 14 }}>
+      <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 6 }}>{n.head}</div>
+      <p style={{ fontSize: 10.8, lineHeight: 1.6, color: 'var(--graphite)' }}>{n.body}</p>
+    </div>
+  )
+  return (
+    <div className="page">
+      <PageHeader section="Income & Expense" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2 }}>Underwriting <span style={{ color: '#F8971D' }}>Notes</span></div>
+        <div className="title-rule" />
+        <div style={{ fontSize: 11, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 14 }}>
+          The notes below explain how each line of the Income &amp; Expense schedule is derived. Both columns are built
+          from actual operations; the pro forma reflects achievable, market-supported rents and stabilized expenses.
         </div>
 
-        {/* Underwriting notes — full width, two columns */}
-        <div className="eyebrow" style={{ marginBottom: 6, fontSize: 9 }}>Underwriting Notes</div>
-        <div style={{ columns: 2, columnGap: 26, fontSize: 9.2, lineHeight: 1.5, color: 'var(--graphite)', flex: 1, minHeight: 0 }}>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Going-in basis.</strong> At $2,450,000 the offering prices to $144,100 per unit and $168/SF — a 6.47% going-in cap on normalized in-place NOI and a 7.81% pro forma cap, with room to grow rents across both the residential and commercial income streams.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Rental income.</strong> Current normalized rental income of $251,910 applies a 5% residential vacancy and holds the two vacant commercial suites. Pro forma marks commercial rents to $17.50&ndash;$20/SF and lifts the ten apartments from an average $1,465 toward $1,640, raising effective rental income to $282,610 (residential $175,800 &rarr; $196,800; commercial $84,900 &rarr; $106,300).</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Commercial lease-up &amp; mark-to-market.</strong> Suites 4 and 6 (~500 SF each) are underwritten at $15/SF. Occupied suites mark from ~$14.20 toward $17.50&ndash;$20 on 2026 rollover, raising gross scheduled commercial rent from ~$84,900 to ~$106,300, with added upside from raising CAM water recovery.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Taxes, insurance &amp; R&amp;M.</strong> Taxes ($30,719) and insurance ($14,375) were escrowed in the T12 and normalized in the Current/Pro Forma columns. Taxes reflect the 2025 town-wide revaluation at the now-set Grand List mill rate of 27.21; Connecticut does not reassess on sale, so the assessment is fixed through the 2030 revaluation and will not step up at closing. R&amp;M ran high in the T12 ($21,357) and is normalized to $7,307 ($0.50/SF). Management is underwritten at 5% of EGI.</p>
+        {/* Key-assumptions strip */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, paddingBottom: 12, marginBottom: 16, borderBottom: '1px solid var(--border)' }}>
+          {assumptions.map(a => (
+            <div key={a.l} style={{ textAlign: 'center', borderTop: '3px solid var(--golden)', padding: '7px 2px' }}>
+              <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{a.v}</div>
+              <div style={{ fontSize: 7.6, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>{a.l}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Notes — two columns, left/right; cards distribute to fill the page height */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 30, flex: 1, minHeight: 0 }}>
+          {cols.map((col, i) => (
+            <div key={i} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              {col.map(Note)}
+            </div>
+          ))}
+        </div>
+
+        {/* Compact value-creation strip — headline NOI growth, in-place → pro forma. */}
+        <div style={{ flexShrink: 0, marginTop: 14, paddingTop: 12, borderTop: '1px solid var(--border)' }}>
+          <div style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 9 }}>
+            Net Operating Income — In-Place vs Pro Forma
+          </div>
+          {noiBridge.map(d => (
+            <div key={d.label} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 7 }}>
+              <span style={{ flex: '0 0 64px', fontSize: 10.5, fontWeight: 700, color: 'var(--carbon)' }}>{d.label}</span>
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+                <div style={{ width: `${(d.value / 196491) * 100}%`, height: 18, background: d.color, borderRadius: 3 }} />
+              </div>
+              <span style={{ flex: '0 0 76px', textAlign: 'right', fontSize: 12, fontWeight: 800, color: 'var(--carbon)' }}>${d.value.toLocaleString()}</span>
+            </div>
+          ))}
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -468,23 +571,26 @@ function CityOverview({ pageNum }) {
           <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--carbon)', letterSpacing: '0.02em', marginBottom: 8 }}>A historic Litchfield County mill town on the Naugatuck River.</div>
           <div className="title-rule" />
 
-          <div style={{ fontSize: 11.6, lineHeight: 1.62, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 13 }}>
+          <div style={{ fontSize: 11, lineHeight: 1.62, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 13 }}>
             <p>
-              South End Plaza sits on South Main Street in Thomaston, in the Naugatuck Valley, less than a mile from
-              Route 8 (Exits 38 and 39) — south to Waterbury (10&ndash;15 min) and the shoreline, north to Torrington.
-              U.S. Route 6 runs through downtown. Thomaston is a historic mill town named for the clockmaker Seth
-              Thomas, whose factory helped bring the Naugatuck Railroad through the valley; its walkable downtown
-              centers on the 1884 Thomaston Opera House, still the town hall and home to the Landmark Community
-              Theatre, and the Railroad Museum of New England runs heritage excursions from the historic Thomaston Station.
+              South End Plaza sits on South Main Street in Thomaston, in the Naugatuck Valley. The property is less
+              than a mile from Route 8 (Exits 38 and 39), the expressway that runs the length of the valley. Route 8
+              connects south to Waterbury in 10 to 15 minutes and on toward Bridgeport and the shoreline, and north
+              toward Torrington. U.S. Route 6 runs through Thomaston&rsquo;s Main Street, east to Bristol and southwest
+              to Watertown.
             </p>
             <p>
-              The borough is reinvesting in its center — Sustainable CT certification, Naugatuck River Greenway
+              Thomaston is a historic mill town named for the clockmaker Seth Thomas, whose factory helped bring the
+              Naugatuck Railroad through the valley. Its walkable downtown centers on the 1884 Thomaston Opera House,
+              which still serves as the town hall and home to the Landmark Community Theatre. The Railroad Museum of
+              New England runs heritage excursions from the historic Thomaston Station. The town keeps a working
+              manufacturing base in metalworking, electronics, defense, and packaging.
+            </p>
+            <p>
+              The borough is reinvesting in its center, with Sustainable CT certification, Naugatuck River Greenway
               construction, Seth Thomas Park renovations, and a stated focus on housing and economic development.
-              Thomaston is not itself a Metro-North stop; the nearest station is the Waterbury Branch terminus about
-              nine miles south, connecting to the New Haven Line toward New York. A Litchfield County town of about
-              7,500 with median household income near $92,000 — in line with the Connecticut median — and a stable
-              owner-occupied base, its affordability, highway access, and limited new multifamily supply support
-              steady rental demand for well-run product.
+              Thomaston is not itself a Metro-North stop. The nearest station is the Waterbury Branch terminus about
+              nine miles south, which connects to the New Haven Line toward New York.
             </p>
           </div>
 
@@ -495,7 +601,7 @@ function CityOverview({ pageNum }) {
             <li>Average HH income ~$111,200</li>
             <li>Less than 1 mile from Route 8 (Exits 38 &amp; 39)</li>
             <li>U.S. Route 6 runs through downtown</li>
-            <li>Working manufacturing base (metalworking, defense, packaging)</li>
+            <li>Working manufacturing base (metalworking, electronics, defense, packaging)</li>
             <li>Downtown reinvestment: Greenway, Seth Thomas Park, Sustainable CT</li>
           </ul>
         </div>
@@ -560,7 +666,14 @@ function CountyOverview({ pageNum }) {
             ))}
           </div>
         </div>
-        <div style={{ flex: '0 0 45%', position: 'relative' }}><img src="/photos/aerial-2.jpg" alt="Litchfield County" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>
+        <div style={{ flex: '0 0 45%', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+            <img src="/photos/litchfield-hills.jpg" alt="Litchfield Hills, Litchfield County, CT" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+            <img src="/photos/county-river.jpg" alt="Naugatuck River with fall foliage, Litchfield County, CT" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+        </div>
       </div>
       <PageFooter pageNum={pageNum} />
     </div>
@@ -569,25 +682,24 @@ function CountyOverview({ pageNum }) {
 
 /* ═══════════════════ INVESTMENT HIGHLIGHTS ═══════════════════ */
 function InvestmentHighlights({ pageNum }) {
-  // Two text boxes (4 highlights each) placed diagonally, with two photos on the
-  // opposite diagonal → a 2×2 checkerboard: text · photo / photo · text.
+  // Two text boxes (4 highlights left, 3 right) placed diagonally, with two
+  // photos on the opposite diagonal → a 2×2 checkerboard: text · photo / photo · text.
   const boxes = [
     {
       title: 'Income & Lease-Up Upside',
       items: [
-        { head: 'Residential Rents Below Market', body: 'Ten apartments average $1,465/mo vs. $1,540 already achieved and $1,640 pro forma — lifting residential rent $175,800 → $196,800 as units turn.' },
-        { head: 'Commercial Lease-Up & Mark-to-Market', body: 'Lease the two vacant suites and mark occupied rents from ~$14.20 toward $17.50–$20/SF: commercial rent ~$84,900 → ~$106,300, plus CAM-recovery upside.' },
-        { head: 'Diversified Residential & Commercial Income', body: 'Ten apartments and seven retail suites split the rent roll across two demand sources — both below market — in one 17-unit building.' },
-        { head: 'Established, Service-Oriented Tenancy', body: 'Smoke/vape shop, package store, nail salon, and laundromat anchor the retail, with leases dating to 2011 and 2013 and limited online competition.' },
+        { head: 'Residential Rents Below Achievable Levels', body: 'Apartments average $1,465 against $1,540 already achieved and $1,640 pro forma, lifting residential rent from $175,800 to $196,800.' },
+        { head: 'Commercial Lease-Up and Mark-to-Market', body: 'Leasing two vacant suites and marking occupied rents from $14.20 toward $17.50 to $20 moves commercial rent from $84,900 to $106,300, with added upside from raising CAM water recovery.' },
+        { head: 'Diversified Residential and Commercial Income', body: 'Ten apartments and seven commercial suites split the rent roll between residential and retail demand, both below market, in one 17-unit building on 0.77 acres.' },
+        { head: 'Established, Service-Oriented Commercial Tenancy', body: 'A smoke and vape shop, package store, nail salon, and laundromat anchor the retail, with two leases dating to 2011 and 2013 and limited online competition.' },
       ],
     },
     {
       title: 'Location, Basis & Tax',
       items: [
-        { head: 'Route 8 & Naugatuck Valley Location', body: 'Under a mile from Route 8 (Exits 38 & 39), ~12,800 VPD at the frontage, with Waterbury and its Metro-North terminus 10–15 min south.' },
-        { head: 'Ample On-Site Parking', body: 'A ~10,000 SF on-site asphalt lot serves both the storefront retail and the upstairs apartments — a differentiator on the Route 6 corridor.' },
-        { head: 'Basis of $168 per Square Foot', body: '$168/SF against $300-plus all-in construction — about 56% of replacement cost, $144,100 per unit at the offering price.' },
-        { head: 'Assessment Set Through 2025 Revaluation', body: 'Thomaston’s 2025 revaluation fixes the assessment through 2030, and Connecticut doesn’t reassess on sale — taxes won’t step up at closing.' },
+        { head: 'Route 8 and Naugatuck Valley Location', body: 'Less than a mile from Route 8 at Exits 38 and 39, with about 12,800 vehicles per day at the frontage and Waterbury 10 to 15 minutes south.' },
+        { head: 'Basis of $168 per Square Foot', body: 'At $168 per square foot against $300-plus all-in construction cost, the building trades at about 56% of replacement cost.' },
+        { head: 'Assessment Set Through the 2025 Revaluation', body: 'Thomaston’s 2025 revaluation fixes the assessment through 2030, and Connecticut does not reassess on sale, so taxes will not step up at closing.' },
       ],
     },
   ]
@@ -603,25 +715,28 @@ function InvestmentHighlights({ pageNum }) {
             Each text box holds 4 highlights; cells stretch to fill the page. */}
         <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 12, minHeight: 0, paddingTop: 6 }}>
           {(() => {
-            const TextBox = (g, key) => (
-              <div key={key} style={{ display: 'flex', flexDirection: 'column', minHeight: 0, padding: '2px 6px' }}>
-                <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 9, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>{g.title}</div>
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 9, justifyContent: 'space-between', minHeight: 0 }}>
-                  {g.items.map((it, ii) => (
-                    <div key={ii} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
-                      <div style={{ fontSize: 9.4, fontWeight: 800, color: 'var(--carbon)', marginBottom: 2, lineHeight: 1.18 }}>{it.head}</div>
-                      <p style={{ fontSize: 8.2, lineHeight: 1.38, color: 'var(--graphite)' }}>{it.body}</p>
-                    </div>
-                  ))}
+            const TextBox = (g, key, opts = {}) => {
+              const { headSize = 11, bodySize = 9.6, justify = 'space-between', gap = 9 } = opts
+              return (
+                <div key={key} style={{ display: 'flex', flexDirection: 'column', minHeight: 0, padding: '2px 6px' }}>
+                  <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 9, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>{g.title}</div>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap, justifyContent: justify, minHeight: 0 }}>
+                    {g.items.map((it, ii) => (
+                      <div key={ii} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
+                        <div style={{ fontSize: headSize, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3, lineHeight: 1.2 }}>{it.head}</div>
+                        <p style={{ fontSize: bodySize, lineHeight: 1.42, color: 'var(--graphite)' }}>{it.body}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )
+              )
+            }
             const PhotoBox = (src, key) => (
               <div key={key} style={{ borderRadius: 8, overflow: 'hidden', minHeight: 0, background: 'var(--linen)', border: '1px solid var(--border)' }}>
                 <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
             )
-            return [TextBox(boxes[0], 'tl'), PhotoBox(photos[0], 'tr'), PhotoBox(photos[1], 'bl'), TextBox(boxes[1], 'br')]
+            return [TextBox(boxes[0], 'tl'), PhotoBox(photos[0], 'tr'), PhotoBox(photos[1], 'bl'), TextBox(boxes[1], 'br', { headSize: 12.5, bodySize: 11, justify: 'flex-start', gap: 14 })]
           })()}
         </div>
       </div>
@@ -646,6 +761,7 @@ function App() {
     <Divider eyebrow="02" title="Financial Analysis" image="/photos/ext-2.jpg" />,
     <RentRoll />,
     <IncomeExpense />,
+    <UnderwritingNotes />,
     <Divider eyebrow="03" title="Location & Market" image="/photos/aerial-1.jpg" />,
     <CityOverview />,
     <LocationMap />,
@@ -656,11 +772,11 @@ function App() {
       pin={{ x: 31.8, y: 80, label: 'Subject Property' }}
       streets={[{ x: 43.7, y: 52.7, label: 'South Main Street · US Route 6', arrow: 180 }]}
       pois={[
-        { x: 50, y: 22, label: 'Downtown Thomaston', dir: '↓' },
         ...NEARBY['bleed-1'],
       ]}
-      shields={[{ x: 91.5, y: 30.3, route: '8' }]}
+      shields={[{ x: 91.8, y: 28.4, route: '8' }]}
       markers={[
+        { cat: 'Landmark', color: '#F8971D', name: 'Downtown Thomaston', x: 50.1, y: 31.5, arrow: 180, side: 'left' },
         { cat: 'Dining & Coffee', color: '#C0392B', n: 3, name: 'Clocktown Brewing Co.', note: 'Brewery + wood-fired pizza · Seth Thomas clock factory', x: 60.1, y: 43.3, arrow: 180 },
         { cat: 'Banks, Retail & Employers', color: '#884EA0', n: 1, name: 'Thomaston Savings Bank (Main Office)', note: 'Local bank HQ · downtown', x: 51.4, y: 33.6, logo: '/logos/markers/thomastonsavingsbank-com.png', arrow: 180 },
         { cat: 'Banks, Retail & Employers', color: '#884EA0', n: 2, name: 'Webster Bank', note: 'Regional bank branch · downtown', x: 47.3, y: 36.6, logo: '/logos/markers/websterbank-com.png', side: 'left', arrow: 135 },

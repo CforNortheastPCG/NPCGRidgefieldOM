@@ -131,8 +131,11 @@ function StreetLabel({ x = 50, y = 50, label = 'Street', arrow = 180, draggable,
 }
 
 /* Connecticut state-route shield marker (e.g. Route 8) — a draggable highway
-   sign: white rounded plate, dark keyline, "CONN" banner, big route number. */
-function RouteShield({ x = 50, y = 50, route = '8', draggable, pkey }) {
+   sign: white rounded plate, dark keyline, "CONN" banner, big route number.
+   `arrow` (degrees; 0 = straight down out the bottom, 180 = up) renders a
+   directional arrow off the bottom of the plate, like the "TO Route 8"
+   guide-sign assembly. Pass arrow={null} to hide it. */
+function RouteShield({ x = 50, y = 50, route = '8', arrow = 0, draggable, pkey }) {
   const { pos, active, ref, onDown } = useDrag({ x, y }, undefined, pkey)
   return (
     <div
@@ -145,13 +148,24 @@ function RouteShield({ x = 50, y = 50, route = '8', draggable, pkey }) {
         filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.5))',
       }}
     >
-      <div style={{
-        display: 'flex', flexDirection: 'column', alignItems: 'center',
-        background: '#fff', border: '2px solid var(--carbon)', borderRadius: 6,
-        width: 38, padding: '2px 0 3px', lineHeight: 1,
-      }}>
-        <div style={{ fontSize: 7, fontWeight: 800, letterSpacing: '0.08em', color: 'var(--carbon)' }}>CONN</div>
-        <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--carbon)', marginTop: -1 }}>{route}</div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          background: '#fff', border: '2px solid var(--carbon)', borderRadius: 6,
+          width: 38, padding: '2px 0 3px', lineHeight: 1,
+        }}>
+          <div style={{ fontSize: 7, fontWeight: 800, letterSpacing: '0.08em', color: 'var(--carbon)' }}>CONN</div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--carbon)', marginTop: -1 }}>{route}</div>
+        </div>
+        {arrow != null && (
+          <div style={{ marginTop: 2 }}>
+            <svg width="18" height="20" viewBox="0 0 24 26" aria-hidden="true"
+              style={{ transform: `rotate(${arrow}deg)`, display: 'block' }}>
+              <path d="M12 1 L12 16 M12 25 L4.5 14 L19.5 14 Z" fill="#fff" stroke="var(--carbon)"
+                strokeWidth="2.4" strokeLinejoin="round" strokeLinecap="round" />
+            </svg>
+          </div>
+        )}
       </div>
     </div>
   )

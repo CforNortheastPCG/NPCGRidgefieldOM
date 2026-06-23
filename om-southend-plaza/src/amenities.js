@@ -9,8 +9,8 @@
 */
 
 export const PROPERTY = {
-  lat: 41.6650,
-  lng: -73.0730,
+  lat: 41.66636,
+  lng: -73.08035,
   address: '310 South Main Street, Thomaston, CT 06787',
 }
 
@@ -86,38 +86,37 @@ export const DIRECTORY = [
   },
 ]
 
-/* Geocoded coordinates per address. Markers are plotted by lat/lng.
-   Approximate (block-level) — for the reference map only. */
+/* Precise coordinates per address, geocoded once via the Google Geocoding API
+   (not block-level guesses). Markers are plotted by lat/lng so the Static Maps
+   request does NOT geocode at render time — that matters because Static Maps
+   caps the number of address-geocoded markers per request (~15) and silently
+   returns a blank/error image when exceeded. lat/lng markers have no such cap. */
 const COORDS = {
-  // Dining & Coffee
-  '381 South Main Street, Thomaston, CT 06787': [41.6600, -73.0730],
-  '299 South Main Street, Thomaston, CT 06787': [41.6630, -73.0730],
-  '135 South Main Street, Thomaston, CT 06787': [41.6700, -73.0730],
-  '66 Main Street, Thomaston, CT 06787': [41.6750, -73.0730],
-  '495 South Main Street, Thomaston, CT 06787': [41.6585, -73.0732],
-  // Grocery & Pharmacy
-  '33 South Main Street, Thomaston, CT 06787': [41.6575, -73.0730],
-  '455 South Main Street, Thomaston, CT 06787': [41.6595, -73.0731],
-  '92 Main Street, Thomaston, CT 06787': [41.6740, -73.0730],
-  // Banks, Retail & Employers
-  '203 Main Street, Thomaston, CT 06787': [41.6770, -73.0730],
-  '155 Main Street, Thomaston, CT 06787': [41.6750, -73.0728],
-  '31 River Street, Thomaston, CT 06787': [41.6760, -73.0750],
-  '45 Old Waterbury Road, Thomaston, CT 06787': [41.65184, -73.07750],
-  '401 Watertown Road, Thomaston, CT 06787': [41.65435, -73.09216],
-  // Schools & Civic
-  '185 Branch Road, Thomaston, CT 06787': [41.6800, -73.0830],
-  '57 Branch Road, Thomaston, CT 06787': [41.6790, -73.0810],
-  '248 Main Street, Thomaston, CT 06787': [41.6790, -73.0730],
-  '158 Main Street, Thomaston, CT 06787': [41.6748, -73.0732],
-  // Parks & Recreation
-  '2065 Thomaston Road, Watertown, CT 06795': [41.6590, -73.1170],
-  'CT-222 (Reynolds Bridge), Thomaston, CT 06787': [41.6990, -73.0590],
-  'Turner Road, Thomaston, CT 06787': [41.6680, -73.0900],
+  '381 South Main Street, Thomaston, CT 06787': [41.66474, -73.07917],
+  '299 South Main Street, Thomaston, CT 06787': [41.66636, -73.07938],
+  '135 South Main Street, Thomaston, CT 06787': [41.66922, -73.07665],
+  '66 Main Street, Thomaston, CT 06787': [41.67423, -73.07343],
+  '495 South Main Street, Thomaston, CT 06787': [41.66166, -73.07947],
+  '33 South Main Street, Thomaston, CT 06787': [41.67124, -73.07597],
+  '455 South Main Street, Thomaston, CT 06787': [41.66261, -73.07908],
+  '92 Main Street, Thomaston, CT 06787': [41.67399, -73.07396],
+  '203 Main Street, Thomaston, CT 06787': [41.67246, -73.07475],
+  '155 Main Street, Thomaston, CT 06787': [41.67297, -73.07417],
+  '31 River Street, Thomaston, CT 06787': [41.67229, -73.07039],
+  '45 Old Waterbury Road, Thomaston, CT 06787': [41.65170, -73.07751],
+  '401 Watertown Road, Thomaston, CT 06787': [41.65436, -73.09210],
+  '185 Branch Road, Thomaston, CT 06787': [41.65716, -73.09491],
+  '57 Branch Road, Thomaston, CT 06787': [41.65678, -73.09172],
+  '248 Main Street, Thomaston, CT 06787': [41.67231, -73.07590],
+  '158 Main Street, Thomaston, CT 06787': [41.67295, -73.07574],
+  '2065 Thomaston Road, Watertown, CT 06795': [41.65318, -73.09586],
+  'CT-222 (Reynolds Bridge), Thomaston, CT 06787': [41.64991, -73.08647],
+  'Turner Road, Thomaston, CT 06787': [41.68109, -73.11541],
 }
 
 /* Flattened list of every mapped POI, tagged with category label + colors —
-   consumed by the Location & Amenities map. */
+   consumed by the Location & Amenities map. Every item with an `address` that
+   has a COORDS entry is plotted by lat/lng. */
 export const MAP_POIS = MAP_CATEGORIES.flatMap(cat => {
   const group = DIRECTORY.find(d => d.heading === cat.heading)
   if (!group) return []
