@@ -18,20 +18,22 @@ import { DEAL, ADDR, CITY_STATE, FULL_ADDR, PageHeader, PageFooter, StaticShell 
 function CoverHero({ pageNum }) {
   return (
     <div className="page">
-      <div className="cover-hero">
+      {/* photo-hero → mild print lift (not the strong dark-scrim cover lift), so
+          the bright sky in the cover photo doesn't blow out. */}
+      <div className="cover-hero photo-hero">
         <img className="cover-hero-img" src={DEAL.coverImage} alt="" />
-        {/* Gradient anchored at the BOTTOM — keeps the top of the frame bright and
-            sunny, and darkens the lower third (parking lot) to seat the text. */}
-        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '62%', background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 42%, rgba(0,0,0,0) 100%)', pointerEvents: 'none' }} />
+        {/* Gradient hugs only the BOTTOM of the frame — the upper ~half stays fully
+            bright, sunny and green; the dark is concentrated low to seat the text. */}
+        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '46%', background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 38%, rgba(0,0,0,0) 100%)', pointerEvents: 'none' }} />
         <div className="cover-hero-header" style={{ justifyContent: 'flex-end' }}>
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
-        <div className="cover-hero-overlay" style={{ left: 40, right: 40, bottom: 44, top: 'auto' }}>
+        <div className="cover-hero-overlay" style={{ left: 40, right: 40, bottom: 44, top: 'auto', textAlign: 'right' }}>
           <div style={{ color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 14 }}>{DEAL.status}</div>
           <div className="cover-hero-name" style={{ fontSize: 52, fontWeight: 800, lineHeight: 1.02, marginBottom: 8 }}>{DEAL.name}</div>
           <div className="cover-hero-title" style={{ fontSize: 24, fontWeight: 600 }}>{ADDR}</div>
           <div className="cover-hero-sub">{DEAL.cityLong}</div>
-          <div className="cover-hero-rule" />
+          <div className="cover-hero-rule" style={{ marginLeft: 'auto', marginRight: 0 }} />
           <div className="cover-hero-prep">{DEAL.type}</div>
         </div>
       </div>
@@ -76,14 +78,14 @@ function ExecutiveSummary({ pageNum }) {
               and 2013.
             </p>
             <p style={{ fontSize: 11.9, lineHeight: 1.5, marginBottom: 10 }}>
-              The property presents a compelling value-add mixed-use opportunity with multiple paths to grow revenue.
-              A new buyer can lease the two vacant commercial suites, bring residential and commercial rents to levels
-              established by the market, and recover more of the water and sewer cost through CAM.
-            </p>
-            <p style={{ fontSize: 11.9, lineHeight: 1.5, color: 'var(--stone)' }}>
               The tax basis is stable. Thomaston completed its town-wide revaluation in 2025, which fixes the
               property&rsquo;s assessed value through the next revaluation in 2030, and Connecticut does not reassess on
               sale, so the assessment will not step up at closing.
+            </p>
+            <p style={{ fontSize: 11.9, lineHeight: 1.5, marginBottom: 10 }}>
+              The property presents a compelling value-add mixed-use opportunity with multiple paths to grow revenue.
+              A new buyer can lease the two vacant commercial suites, bring residential and commercial rents to levels
+              established by the market, and recover more of the water and sewer cost through CAM.
             </p>
           </div>
 
@@ -92,7 +94,7 @@ function ExecutiveSummary({ pageNum }) {
               <img src="/photos/aerial-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div style={{ flex: 1, borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
-              <img src="/photos/ext-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src="/photos/aerial-3.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
           </div>
         </div>
@@ -143,7 +145,7 @@ function BuildingDescriptions({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Exterior</span><span className="bldg-val">Brick &amp; block (retail) / frame (apartments)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Roof</span><span className="bldg-val">Pitched · asphalt shingle</span></div>
                 <div className="bldg-row"><span className="bldg-label">Parking</span><span className="bldg-val">On-site ±10,000 SF asphalt</span></div>
-                <div className="bldg-row"><span className="bldg-label">Laundry</span><span className="bldg-val">On-site (landlord)</span></div>
+                <div className="bldg-row"><span className="bldg-label">Laundry</span><span className="bldg-val">On-site laundromat (S &amp; S Laundry)</span></div>
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
@@ -152,7 +154,7 @@ function BuildingDescriptions({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Residential</span><span className="bldg-val">3× 1BR (600 SF) · 7× 2BR (850 SF)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Commercial</span><span className="bldg-val">7 suites · 5,973 SF</span></div>
                 <div className="bldg-row"><span className="bldg-label">Apartment Rents</span><span className="bldg-val">1BR ~$1,333 · 2BR ~$1,521 / mo</span></div>
-                <div className="bldg-row"><span className="bldg-label">Commercial (occ.)</span><span className="bldg-val">~$14.20/SF → $17.50–$20</span></div>
+                <div className="bldg-row"><span className="bldg-label">Commercial (occ.)</span><span className="bldg-val">~$14.20/SF</span></div>
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>

@@ -12,7 +12,7 @@ export const PHOTO_PAGES = [
   {
     kind: 'gallery',
     section: 'Property Photography', title: 'Aerial', accent: '& Site',
-    hero: '/photos/aerial-1.jpg',
+    hero: '/photos/aerial-4.jpg',
     tiles: ['/photos/aerial-2.jpg', '/photos/area-1.jpg', '/photos/area-2.jpg'],
   },
   {

@@ -1,4 +1,4 @@
-import { DEAL, PageHeader, PageFooter } from './Shell.jsx'
+import { PageHeader, PageFooter } from './Shell.jsx'
 
 /* ═══════════════════ TABLE OF CONTENTS ═══════════════════
    Page numbers here are derived from App's page order (auto-numbered). If you
@@ -58,9 +58,10 @@ export default function Toc({ pageNum }) {
             ))}
           </div>
 
-          {/* Accent photo */}
+          {/* Accent photo — the South End Plaza pylon sign (#23). Deliberately NOT
+              the cover image, which would repeat the cover hero one page earlier. */}
           <div style={{ borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
-            <img src={DEAL.coverImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/sign.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(63,71,83,0.55), rgba(63,71,83,0) 45%)' }} />
           </div>
         </div>

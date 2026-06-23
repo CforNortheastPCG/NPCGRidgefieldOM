@@ -95,6 +95,11 @@ async function renderPdf({
   await page.addStyleTag({ content: `
     .page img:not(.cover-hero-img) { filter: brightness(${brighten}); }
     .cover-hero { filter: brightness(${cover}); }
+    /* Full-opacity photo heroes (the cover + the FullBleed drone aerials) share
+       .cover-hero but are NOT dark scrims — give them the mild photo lift so
+       bright skies don't blow out. Declared after .cover-hero so it wins at
+       equal specificity. (Dividers keep the strong cover lift.) */
+    .photo-hero { filter: brightness(${brighten}); }
   ` });
   // One more paint cycle so everything is composited before we capture.
   await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));

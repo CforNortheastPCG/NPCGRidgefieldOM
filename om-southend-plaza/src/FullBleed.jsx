@@ -352,7 +352,10 @@ export default function FullBleed({ image, position, pin, streets = [], pois = [
 
   return (
     <div className="page">
-      <div className="cover-hero">
+      {/* `photo-hero` marks this as a full-opacity drone photo (not a dark-scrim
+          cover/divider), so the print step gives it the mild photo brightness
+          lift instead of the strong cover lift that blows out bright skies. */}
+      <div className="cover-hero photo-hero">
         <img className="cover-hero-img" src={image} alt="" style={{ objectPosition: position || 'center' }} />
         <div className="cover-hero-header" style={{ justifyContent: 'flex-end' }}>
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 36, maxWidth: 180, objectFit: 'contain', opacity: 0.95 }} />
