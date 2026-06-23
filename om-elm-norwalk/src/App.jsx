@@ -60,10 +60,10 @@ function ExecutiveSummary({ pageNum }) {
           ))}
         </div>
 
-        {/* Narrative — two columns */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, flex: 1, minHeight: 0 }}>
+        {/* Narrative left — photos right */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1.35fr 0.65fr', gap: 20, flex: 1, minHeight: 0 }}>
           <div>
-            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
               Northeast Private Client Group is pleased to exclusively present the opportunity to acquire
               6 Elm Street, a 12-unit value-add multifamily investment located in Norwalk, Connecticut &mdash;
               one of Fairfield County&rsquo;s most active and historically resilient rental markets. The offering
@@ -71,7 +71,7 @@ function ExecutiveSummary({ pageNum }) {
               a 0.5-acre lot, now operating as an all-residential property following the recent conversion of two
               former commercial-zoned units to legal residential apartments.
             </p>
-            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
               Built in 1967 and extensively improved through a comprehensive capital program, 6 Elm Street has
               been substantially de-risked for incoming ownership. Completed capital expenditures include five
               fully renovated apartments; the conversion of two commercial-zoned units to legal residential
@@ -82,9 +82,7 @@ function ExecutiveSummary({ pageNum }) {
               already addressed, a new owner can focus on lighter cosmetic and curb-appeal improvements &mdash; a
               lower-cost, lower-risk path to driving rents and unlocking the property&rsquo;s remaining upside.
             </p>
-          </div>
-          <div>
-            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
               The property is defined by its large, family-oriented floor plans &mdash; 10 of the 12 units are
               two-, three-, or four-bedroom layouts, a configuration that is increasingly scarce in the submarket
               and commands premium rents and longer tenancies. In-unit washers and dryers are installed in all
@@ -94,19 +92,19 @@ function ExecutiveSummary({ pageNum }) {
               are tenant-paid electric with landlord-provided gas heat and hot water; and the two rear-building
               units are fully tenant-paid.
             </p>
-            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
               Located in Norwalk, a core Fairfield County rental market with a long track record of high occupancy,
               the property benefits from strong, consistent tenant demand and the area&rsquo;s broader economic
               momentum. Residents enjoy convenient access to Metro-North&rsquo;s New Haven Line, with direct service
               to New York City&rsquo;s Grand Central Station, as well as I-95 and Route 7, connecting them to the
               region&rsquo;s major employment centers and lifestyle amenities.
             </p>
-            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
               6 Elm Street represents a rare opportunity to acquire a recently improved, large-unit asset in an
               established Fairfield County market. Priced at $3,275,000 &mdash; or approximately $273,000 per unit
               and $271 per square foot &mdash; the property delivers a 6.50% going-in cap rate on current income.
             </p>
-            <p style={{ fontSize: 9.6, lineHeight: 1.44, marginBottom: 8 }}>
+            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
               A new owner stands to benefit from meaningful embedded upside. In-place rents currently sit roughly
               $54,000 below market, and a disciplined mark-to-market and revenue-management strategy &mdash;
               executed through natural lease turnover with minimal remaining capital expenditure &mdash; is
@@ -115,20 +113,18 @@ function ExecutiveSummary({ pageNum }) {
               a stabilized, historically high-occupancy asset.
             </p>
           </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
+            {[
+              '/photos/3-web-or-mls-6 Elm St, Norwalk, CT 06850 (2 OF 53).JPG',
+              '/photos/4-web-or-mls-6 Elm St, Norwalk, CT 06850 (3 OF 53).JPG',
+            ].map((src, i) => (
+              <div key={i} style={{ flex: 1, borderRadius: 4, overflow: 'hidden', minHeight: 0 }}>
+                <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Photo band */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, height: 122, marginTop: 10 }}>
-          {[
-            '/photos/3-web-or-mls-6 Elm St, Norwalk, CT 06850 (2 OF 53).JPG',
-            '/photos/4-web-or-mls-6 Elm St, Norwalk, CT 06850 (3 OF 53).JPG',
-            '/photos/39-web-or-mls-6 Elm St, Norwalk, CT 06850 (38 OF 53).JPG',
-          ].map((src, i) => (
-            <div key={i} style={{ borderRadius: 3, overflow: 'hidden' }}>
-              <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            </div>
-          ))}
-        </div>
       </div>
       <PageFooter pageNum={pageNum} />
     </div>
@@ -170,16 +166,16 @@ function InvestmentHighlights({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Investment <span style={{ color: '#F8971D' }}>Highlights</span></div>
         <div className="title-rule" />
 
-        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 12, minHeight: 0, paddingTop: 6 }}>
+        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 6, minHeight: 0, paddingTop: 6 }}>
           {(() => {
             const TextBox = (g, key) => (
               <div key={key} style={{ display: 'flex', flexDirection: 'column', minHeight: 0, padding: '2px 6px' }}>
-                <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>{g.title}</div>
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 7, justifyContent: 'space-between', minHeight: 0 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>{g.title}</div>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8, justifyContent: 'space-between', minHeight: 0 }}>
                   {g.items.map((it, ii) => (
                     <div key={ii} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
-                      <div style={{ fontSize: 9.2, fontWeight: 800, color: 'var(--carbon)', marginBottom: 2, lineHeight: 1.16 }}>{it.head}</div>
-                      <p style={{ fontSize: 8, lineHeight: 1.34, color: 'var(--graphite)' }}>{it.body}</p>
+                      <div style={{ fontSize: 10.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3, lineHeight: 1.16 }}>{it.head}</div>
+                      <p style={{ fontSize: 9.2, lineHeight: 1.38, color: 'var(--graphite)' }}>{it.body}</p>
                     </div>
                   ))}
                 </div>
@@ -351,8 +347,8 @@ function CapexSummary({ pageNum }) {
               </div>
             </div>
 
-            <div style={{ fontSize: 9, lineHeight: 1.5, color: 'var(--stone)', marginTop: 2, padding: '10px 14px', background: 'var(--linen)', borderRadius: 4 }}>
-              <strong>Value-Add Opportunity:</strong> With 5 of 12 units already fully renovated, the remaining
+            <div style={{ fontSize: 9, lineHeight: 1.5, color: 'var(--stone)', marginTop: 2, padding: '4px 2px' }}>
+              <strong>Note:</strong> With 5 of 12 units already fully renovated, the remaining
               units present a clear path to additional rent growth through renovation at turnover. The property
               benefits from historically high occupancy in a desirable Norwalk rental market.
             </div>
@@ -514,14 +510,14 @@ function RentRoll({ pageNum }) {
 
 /* ═══════════════════ INCOME & EXPENSE ═══════════════════ */
 function IncomeExpense({ pageNum }) {
-  const tds = { fontSize: 8, padding: '2px 5px', textAlign: 'right' }
-  const tdsPf = { fontSize: 8, padding: '2px 5px', textAlign: 'right' }
-  const tdl = { fontSize: 8, padding: '2px 5px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
-  const thr = { fontSize: 7, padding: '3px 5px', textAlign: 'right' }
-  const thrPf = { fontSize: 7, padding: '3px 5px', textAlign: 'right' }
-  const thl = { fontSize: 7, padding: '3px 5px', textAlign: 'left' }
-  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 8, padding: '2px 5px', textAlign: 'right' }
-  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 8.5, padding: '3px 5px', textAlign: 'right' }
+  const tds = { fontSize: 8.5, padding: '4px 6px', textAlign: 'right' }
+  const tdsPf = { fontSize: 8.5, padding: '4px 6px', textAlign: 'right' }
+  const tdl = { fontSize: 8.5, padding: '4px 6px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const thr = { fontSize: 7.5, padding: '4px 6px', textAlign: 'right' }
+  const thrPf = { fontSize: 7.5, padding: '4px 6px', textAlign: 'right' }
+  const thl = { fontSize: 7.5, padding: '4px 6px', textAlign: 'left' }
+  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 8.5, padding: '4px 6px', textAlign: 'right' }
+  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9, padding: '5px 6px', textAlign: 'right' }
 
   const Cols = () => (
     <colgroup>
@@ -542,7 +538,7 @@ function IncomeExpense({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2, fontSize: 22 }}>Income & <span style={{ color: '#F8971D' }}>Expense Analysis</span></div>
         <div className="title-rule" style={{ marginBottom: 8 }} />
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24, paddingBottom: 10, marginBottom: 10, borderBottom: '1px solid var(--border)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24, paddingBottom: 16, marginBottom: 16, borderBottom: '1px solid var(--border)' }}>
           {noi.map(n => (
             <div key={n.label} style={{ textAlign: 'center' }}>
               <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--golden)', lineHeight: 1, marginBottom: 4 }}>{n.val}</div>
@@ -572,7 +568,7 @@ function IncomeExpense({ pageNum }) {
           </tbody>
         </table>
 
-        <div className="eyebrow" style={{ marginBottom: 3, fontSize: 8 }}>Operating Expenses</div>
+        <div className="eyebrow" style={{ marginTop: 12, marginBottom: 3, fontSize: 8 }}>Operating Expenses</div>
         <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 4, tableLayout: 'fixed' }}>
           <Cols />
           <thead>
@@ -593,7 +589,7 @@ function IncomeExpense({ pageNum }) {
             <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Repairs & Maintenance</td><td style={tds}>$6,000</td><td style={tds}>$500</td><td style={tds}></td><td style={tdsPf}>$6,000</td><td style={tdsPf}>$500</td><td style={tdsPf}></td></tr>
             <tr><td style={tdl}>Landscaping / Snow</td><td style={tds}>$5,390</td><td style={tds}>$449</td><td style={tds}></td><td style={tdsPf}>$5,390</td><td style={tdsPf}>$449</td><td style={tdsPf}></td></tr>
             <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$90,698</td><td style={totBg}>$7,558</td><td style={totBg}>29.88%</td><td style={totBg}>$93,275</td><td style={totBg}>$7,773</td><td style={totBg}>26.27%</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$212,794</td><td style={noiBg}>$17,733</td><td style={noiBg}>70.12%</td><td style={noiBg}>$261,745</td><td style={noiBg}>$21,812</td><td style={noiBg}>73.73%</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$212,794</td><td style={noiBg}>$17,733</td><td style={noiBg}></td><td style={noiBg}>$261,745</td><td style={noiBg}>$21,812</td><td style={noiBg}></td></tr>
           </tbody>
         </table>
       </div>
@@ -648,7 +644,7 @@ function NorwalkCombined({ pageNum }) {
           <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--carbon)', letterSpacing: '0.02em', marginBottom: 8 }}>A Desirable Coastal Market</div>
           <div className="title-rule" />
 
-          <div style={{ fontSize: 10.5, lineHeight: 1.5, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 9 }}>
+          <div style={{ fontSize: 11.5, lineHeight: 1.6, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 12 }}>
             <p>
               Norwalk is one of Connecticut&rsquo;s most dynamic cities — a coastal community of nearly 92,000
               that blends a thriving arts and dining scene in South Norwalk (SoNo) with quiet residential
@@ -667,8 +663,8 @@ function NorwalkCombined({ pageNum }) {
             </p>
           </div>
 
-          <div className="eyebrow" style={{ marginTop: 10, marginBottom: 6 }}>About Norwalk</div>
-          <ul className="highlights ridge-highlights">
+          <div className="eyebrow" style={{ marginTop: 18, marginBottom: 6 }}>About Norwalk</div>
+          <ul className="highlights ridge-highlights" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', fontSize: 11.5 }}>
             <li>Population of ~92,000 — Connecticut&rsquo;s 6th largest city on the Long Island Sound</li>
             <li>Vibrant SoNo district — dining, arts, waterfront, and The SoNo Collection (Nordstrom, Bloomingdale&rsquo;s)</li>
             <li>Metro-North New Haven Line — ~60-minute express to Grand Central Terminal</li>
@@ -758,7 +754,6 @@ function App() {
     <FairfieldCounty />,
     <RegionalMap />,
     <Divider eyebrow="04" title="The Team" />,
-    <BrokerProfile />,
     <TeamPage />,
     <LocationsPage />,
   ]

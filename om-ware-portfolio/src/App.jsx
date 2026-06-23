@@ -109,13 +109,13 @@ function DealContacts({ pageNum }) {
 /* ═══════════════════ EXECUTIVE SUMMARY ═══════════════════ */
 function ExecutiveSummary({ pageNum }) {
   const facts = [
-    ['Portfolio SF', '13,875 SF'],
+    ['Portfolio SF', '13,775 SF'],
     ['Number of Units', '20'],
     ['Number of Buildings', '4'],
     ['Total Acres', '0.83'],
     ['Zoning', 'DTC'],
     ['Cap Rate (Current)', '8.01%'],
-    ['Pro Forma Cap Rate', '11.33%'],
+    ['Pro Forma Cap Rate', '10.16%'],
     ['Price / Unit', '$127,500'],
   ]
   return (
@@ -209,7 +209,7 @@ function ExecutiveSummary({ pageNum }) {
    attached example). TODO(Ravi): bolster body copy with refreshed writings. */
 function InvestmentHighlights({ pageNum }) {
   const items = [
-    { head: 'Immediate Value-Add Upside Through Below-Market Rents', body: 'A meaningful share of the rent roll sits well below market on leases with near-term expirations. Marking units to proforma as they roll lifts gross scheduled rent from $310,260 to $401,040 — roughly 29% of embedded upside captured through disciplined lease-up and renewals, with no entitlement or repositioning risk.', img: '/photos/ware/p27-int2.jpg' },
+    { head: 'Immediate Value-Add Upside Through Below-Market Rents', body: 'A meaningful share of the rent roll sits well below market on leases with near-term expirations. Marking units to proforma as they roll lifts gross scheduled rent from $310,260 to $367,800 — roughly 19% of embedded upside captured through disciplined lease-up and renewals, with no entitlement or repositioning risk.', img: '/photos/ware/p27-int2.jpg' },
     { head: 'Constrained Supply Environment Supporting Rent Growth', body: 'The Amherst / East Hampshire County submarket carries only ~77 units under construction and no proposed pipeline beyond that. Limited new supply against steady, renter-by-necessity demand supports durable rent fundamentals at the price point where this portfolio competes.', img: '/photos/ware/n2830.jpg' },
     { head: 'Diverse Unit Mix Across a Contiguous Multi-Building Portfolio', body: 'Twenty units across three buildings on three contiguous parcels in downtown Ware — a studio, one-, two-, and three-bedroom apartments. The mix spreads risk across unit types and tenant profiles while keeping operations tight within a single walkable footprint.', img: '/photos/ware/n38-int1.jpg' },
     { head: 'Strong Submarket Fundamentals with Low Competitive Vacancy', body: 'The 1- and 2-Star competitive tier shows healthy absorption with vacancy around 5.0%, and the broader submarket vacancy of ~3.9% is forecast to compress toward its five-year average by year-end 2026 as the near-term supply wave is absorbed.', img: '/photos/ware/p27.jpg' },
@@ -468,11 +468,11 @@ function BarChartCard({ title, data, note }) {
 /* ═══════════════════ PORTFOLIO UNIT MIX ═══════════════════ */
 function UnitMix({ pageNum }) {
   const mix = [
-    ['Studio', 1, 500, 1670, 1670, 1670],
-    ['1 Bed', 7, 668, 1394, 1800, 1450],
-    ['1 Bed - L', 2, 650, 1213, 1225, 1500],
-    ['2 Bed', 6, 700, 1213, 1575, 1800],
-    ['3 Bed', 4, 800, 1181, 1375, 1950],
+    ['Studio', 1, 500, 950, 950, 1000],
+    ['1 Bed', 7, 625, 1175, 1225, 1350],
+    ['1 Bed - L', 2, 650, 1193, 1225, 1400],
+    ['2 Bed', 6, 700, 1250, 1475, 1600],
+    ['3 Bed', 4, 800, 1699, 1800, 1950],
   ]
   const unitType = [
     { label: 'One-Bedroom', value: 9, color: '#3F4753' },
@@ -482,7 +482,7 @@ function UnitMix({ pageNum }) {
   ]
   const upside = [
     { label: 'In-Place', value: 1293, color: '#3F4753' },
-    { label: 'Pro Forma', value: 1671, color: '#F8971D' },
+    { label: 'Pro Forma', value: 1533, color: '#F8971D' },
   ]
   return (
     <div className="page">
@@ -508,16 +508,16 @@ function UnitMix({ pageNum }) {
               <td style={{ textAlign: 'center' }}><strong>20</strong></td>
               <td style={{ textAlign: 'right' }}><strong>&mdash;</strong></td>
               <td style={{ textAlign: 'right' }}><strong>$310,260</strong></td>
-              <td style={{ textAlign: 'right' }}><strong>$380,040</strong></td>
-              <td style={{ textAlign: 'right' }}><strong>$401,040</strong></td>
+              <td style={{ textAlign: 'right' }}><strong>$336,300</strong></td>
+              <td style={{ textAlign: 'right' }}><strong>$367,800</strong></td>
             </tr>
             <tr>
               <td><strong>Average</strong></td>
               <td style={{ textAlign: 'center' }}></td>
-              <td style={{ textAlign: 'right' }}><strong>694</strong></td>
+              <td style={{ textAlign: 'right' }}><strong>689</strong></td>
               <td style={{ textAlign: 'right' }}><strong>$1,293</strong></td>
-              <td style={{ textAlign: 'right' }}><strong>$1,584</strong></td>
-              <td style={{ textAlign: 'right' }}><strong>$1,671</strong></td>
+              <td style={{ textAlign: 'right' }}><strong>$1,401</strong></td>
+              <td style={{ textAlign: 'right' }}><strong>$1,533</strong></td>
             </tr>
           </tbody>
         </table>
@@ -525,7 +525,7 @@ function UnitMix({ pageNum }) {
         {/* TODO(Ravi): unit-mix / rent graphs to be provided — interim charts below. */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 40, marginTop: 38, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
           <ChartCard title="Unit Type" data={unitType} centerLabel="20" centerSub="UNITS" size={168} />
-          <BarChartCard title="Rent Upside — Avg Rent / Unit" data={upside} note="+$378 / unit · +29% mark-to-market" />
+          <BarChartCard title="Rent Upside — Avg Rent / Unit" data={upside} note="+$240 / unit · +19% mark-to-market" />
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -537,26 +537,26 @@ function UnitMix({ pageNum }) {
    Per Jake: no cents; "Monthly Total" label at far left of the total row. */
 function RentRoll({ pageNum }) {
   const rows = [
-    ['27 Parker Street', '1', '1 Bed', 625, 1800, 1800, 1450],
-    ['27 Parker Street', '2', '1 Bed', 625, 1375, 1800, 1450],
-    ['27 Parker Street', '3', '2 Bed', 700, 1200, 1575, 1800],
-    ['27 Parker Street', '4', '3 Bed', 800, 1375, 1375, 1950],
-    ['28.5 North Street', '1', '2 Bed', 700, 1225, 1575, 1800],
-    ['28.5 North Street', '2', '1 Bed - L', 650, 1225, 1225, 1500],
-    ['28.5 North Street', '3', '1 Bed', 625, 1150, 1800, 1450],
-    ['28-30 North Street', '28-1', '2 Bed', 700, 950, 1575, 1800],
-    ['28-30 North Street', '28-2', '2 Bed', 700, 1125, 1575, 1800],
-    ['28-30 North Street', '28-3', '1 Bed - L', 650, 1200, 1225, 1500],
-    ['28-30 North Street', '30-1', 'Studio', 500, 1670, 1670, 1670],
-    ['28-30 North Street', '30-2', '2 Bed', 700, 1575, 1575, 1800],
-    ['28-30 North Street', '30-3', '1 Bed', 625, 1475, 1800, 1450],
-    ['28-30 North Street', '30-4', '1 Bed', 625, 1750, 1800, 1450],
-    ['28-30 North Street', '30-5', '2 Bed', 700, 1200, 1575, 1800],
-    ['28-30 North Street', '30-6', '3 Bed', 800, 1125, 1375, 1950],
-    ['28-30 North Street', '30-7', '3 Bed', 800, 950, 1375, 1950],
-    ['28-30 North Street', '30-8', '3 Bed', 800, 1275, 1375, 1950],
-    ['38 North Street', '1', '1 Bed', 775, 1160, 1800, 1450],
-    ['38 North Street', '2', '1 Bed', 775, 1050, 1800, 1450],
+    ['27 Parker Street', '1', '3 Bed', 800, 1800, 1800, 1950],
+    ['27 Parker Street', '2', '2 Bed', 700, 1375, 1475, 1600],
+    ['27 Parker Street', '3', '1 Bed', 625, 1200, 1225, 1350],
+    ['27 Parker Street', '4', '2 Bed', 700, 1375, 1475, 1600],
+    ['28.5 North Street', '1', '1 Bed', 625, 1225, 1225, 1350],
+    ['28.5 North Street', '2', '1 Bed - L', 650, 1225, 1225, 1400],
+    ['28.5 North Street', '3', '1 Bed', 625, 1150, 1225, 1350],
+    ['28-30 North Street', '28-1', '2 Bed', 700, 950, 1475, 1600],
+    ['28-30 North Street', '28-2', '1 Bed', 625, 1125, 1225, 1350],
+    ['28-30 North Street', '28-3', '1 Bed', 625, 1200, 1225, 1350],
+    ['28-30 North Street', '30-1', '3 Bed', 800, 1670, 1800, 1950],
+    ['28-30 North Street', '30-2', '3 Bed', 800, 1575, 1800, 1950],
+    ['28-30 North Street', '30-3', '2 Bed', 700, 1475, 1475, 1600],
+    ['28-30 North Street', '30-4', '3 Bed', 800, 1750, 1800, 1950],
+    ['28-30 North Street', '30-5', '1 Bed', 625, 1200, 1225, 1350],
+    ['28-30 North Street', '30-6', '1 Bed', 625, 1125, 1225, 1350],
+    ['28-30 North Street', '30-7', 'Studio', 500, 950, 950, 1000],
+    ['28-30 North Street', '30-8', '2 Bed', 700, 1275, 1475, 1600],
+    ['38 North Street', '1', '1 Bed - L', 775, 1160, 1225, 1400],
+    ['38 North Street', '2', '2 Bed', 775, 1050, 1475, 1600],
   ]
   const td = { padding: '2px 8px' }
   return (
@@ -584,10 +584,10 @@ function RentRoll({ pageNum }) {
             <tr className="total-row">
               <td style={td}><strong>Monthly Total</strong></td>
               <td style={td}></td><td style={td}></td>
-              <td style={{ ...td, textAlign: 'right' }}><strong>13,875</strong></td>
+              <td style={{ ...td, textAlign: 'right' }}><strong>13,775</strong></td>
               <td style={{ ...td, textAlign: 'right' }}><strong>$25,855</strong></td>
-              <td style={{ ...td, textAlign: 'right' }}><strong>$31,670</strong></td>
-              <td style={{ ...td, textAlign: 'right' }}><strong>$33,420</strong></td>
+              <td style={{ ...td, textAlign: 'right' }}><strong>$28,025</strong></td>
+              <td style={{ ...td, textAlign: 'right' }}><strong>$30,650</strong></td>
             </tr>
           </tbody>
         </table>
@@ -610,13 +610,14 @@ function IncomeExpense({ pageNum }) {
 
   // [label, current, currentPerUnit, proforma, proformaPerUnit, bold]
   const income = [
-    ['Gross Scheduled Rent', '$310,260', '', '$401,040', ''],
-    ['Vacancy & Collections Loss (5%)', '-$15,513', '', '-$20,052', ''],
-    ['Effective Rental Income', '$294,747', '', '$380,988', '', true],
+    ['Gross Potential Rent', '$367,800', '', '$367,800', ''],
+    ['Gross Scheduled Rent', '$310,260', '', '$367,800', ''],
+    ['Vacancy & Collections Loss (5%)', '-$15,513', '', '-$18,390', ''],
+    ['Effective Rental Income', '$294,747', '', '$349,410', '', true],
     ['Laundry', '$0', '$0', '$3,000', '$150'],
   ]
   const expenses = [
-    ['Property Management (5%)', '$14,737', '$737', '$19,199', '$960'],
+    ['Property Management (5%)', '$14,737', '$737', '$17,621', '$881'],
     ['Real Estate Tax', '$15,461', '$773', '$15,461', '$773'],
     ['Property Insurance', '$12,283', '$614', '$12,283', '$614'],
     ['Electric & Gas', '$3,812', '$191', '$3,812', '$191'],
@@ -654,7 +655,7 @@ function IncomeExpense({ pageNum }) {
   }
   const noi = [
     { label: 'Net Operating Income — Current', val: '$204,206' },
-    { label: 'Net Operating Income — Pro Forma', val: '$288,985' },
+    { label: 'Net Operating Income — Pro Forma', val: '$258,986' },
   ]
   return (
     <div className="page">
@@ -677,7 +678,7 @@ function IncomeExpense({ pageNum }) {
           <Cols /><Head first="Income" />
           <tbody>
             {income.map(Row)}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$294,747</td><td style={totBg}></td><td style={totBg}>$383,988</td><td style={totBg}></td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$294,747</td><td style={totBg}></td><td style={totBg}>$352,410</td><td style={totBg}></td></tr>
           </tbody>
         </table>
 
@@ -686,8 +687,8 @@ function IncomeExpense({ pageNum }) {
           <Cols /><Head first="Expense" />
           <tbody>
             {expenses.map(Row)}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$90,541</td><td style={totBg}>$4,527</td><td style={totBg}>$95,003</td><td style={totBg}>$4,750</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$204,206</td><td style={noiBg}></td><td style={noiBg}>$288,985</td><td style={noiBg}></td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$90,541</td><td style={totBg}>$4,527</td><td style={totBg}>$93,424</td><td style={totBg}>$4,671</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$204,206</td><td style={noiBg}></td><td style={noiBg}>$258,986</td><td style={noiBg}></td></tr>
           </tbody>
         </table>
       </div>
@@ -751,7 +752,7 @@ const BUILDINGS = {
     hero: '/photos/ware/p27.jpg',
     info: [['Year Built', '1890'], ['Building Type', 'Apartment (4-Unit)'], ['Units', '4'], ['Living Area', '2,822 SF'], ['Stories', '3'], ['Exterior Wall', 'Vinyl'], ['Roof', 'Asphalt Shingle · Gable'], ['Heat', 'Forced Hot Water'], ['Heat Fuel', 'Propane'], ['A/C', 'Window Units']],
     utilities: [['Heat', 'Electric & Propane · Tenant Paid'], ['Hot Water', 'Electric & Propane · Tenant Paid'], ['Electric', 'Tenant Paid'], ['Water & Sewer', 'Landlord Paid'], ['Trash', 'Landlord Paid']],
-    units: [['1', '1 Bed', '625', '$1,800', '$1,450'], ['2', '1 Bed', '625', '$1,375', '$1,450'], ['3', '2 Bed', '700', '$1,200', '$1,800'], ['4', '3 Bed', '800', '$1,375', '$1,950']],
+    units: [['1', '3 Bed', '800', '$1,800', '$1,950'], ['2', '2 Bed', '700', '$1,375', '$1,600'], ['3', '1 Bed', '625', '$1,200', '$1,350'], ['4', '2 Bed', '700', '$1,375', '$1,600']],
   },
   n2830: {
     name: '28-30 & 28.5 North Street', titleMain: '28-30 & 28.5', titleAccent: 'North Street',
@@ -759,14 +760,14 @@ const BUILDINGS = {
     // "Asbestos" exterior-wall line dropped per Jake; raw assessor room/story codes omitted.
     info: [['Year Built', '1932'], ['Building Type', 'Apartment Building'], ['Units', '14'], ['Living Area', '6,800 SF'], ['Roof', 'Asphalt Shingle · Gable'], ['Heat', 'Forced Hot Air'], ['Heat Fuel', 'Oil'], ['A/C', 'Window Units']],
     utilities: [['Heat', 'Electric & Propane · Tenant Paid'], ['Hot Water', 'Electric & Propane · Tenant Paid'], ['Electric', 'Tenant Paid'], ['Water & Sewer', 'Landlord Paid'], ['Trash', 'Landlord Paid']],
-    units: [['28-1', '2 Bed', '700', '$950', '$1,800'], ['28-2', '2 Bed', '700', '$1,125', '$1,800'], ['28-3', '1 Bed - L', '650', '$1,200', '$1,500'], ['30-1', 'Studio', '500', '$1,670', '$1,670'], ['30-2', '2 Bed', '700', '$1,575', '$1,800'], ['30-3', '1 Bed', '625', '$1,475', '$1,450'], ['30-4', '1 Bed', '625', '$1,750', '$1,450'], ['30-5', '2 Bed', '700', '$1,200', '$1,800'], ['30-6', '3 Bed', '800', '$1,125', '$1,950'], ['30-7', '3 Bed', '800', '$950', '$1,950'], ['30-8', '3 Bed', '800', '$1,275', '$1,950'], ['28.5-1', '2 Bed', '700', '$1,225', '$1,800'], ['28.5-2', '1 Bed - L', '650', '$1,225', '$1,500'], ['28.5-3', '1 Bed', '625', '$1,150', '$1,450']],
+    units: [['28-1', '2 Bed', '700', '$950', '$1,600'], ['28-2', '1 Bed', '625', '$1,125', '$1,350'], ['28-3', '1 Bed', '625', '$1,200', '$1,350'], ['30-1', '3 Bed', '800', '$1,670', '$1,950'], ['30-2', '3 Bed', '800', '$1,575', '$1,950'], ['30-3', '2 Bed', '700', '$1,475', '$1,600'], ['30-4', '3 Bed', '800', '$1,750', '$1,950'], ['30-5', '1 Bed', '625', '$1,200', '$1,350'], ['30-6', '1 Bed', '625', '$1,125', '$1,350'], ['30-7', 'Studio', '500', '$950', '$1,000'], ['30-8', '2 Bed', '700', '$1,275', '$1,600'], ['28.5-1', '1 Bed', '625', '$1,225', '$1,350'], ['28.5-2', '1 Bed - L', '650', '$1,225', '$1,400'], ['28.5-3', '1 Bed', '625', '$1,150', '$1,350']],
   },
   n38: {
     name: '38 North Street', titleMain: '38 North', titleAccent: 'Street',
     hero: '/photos/ware/n38.jpg',
     info: [['Year Built', '1880'], ['Building Type', 'Two-Family'], ['Units', '2'], ['Living Area', '1,576 SF'], ['Stories', '2'], ['Exterior Wall', 'Vinyl'], ['Roof', 'Asphalt Shingle · Gable'], ['Heat', 'Forced Hot Water'], ['Heat Fuel', 'Oil'], ['A/C', 'Window Units']],
     utilities: [['Heat', 'Oil & Electric · Tenant Paid'], ['Hot Water', 'Electric · Tenant Paid'], ['Electric', 'Tenant Paid'], ['Water & Sewer', 'Landlord Paid'], ['Trash', 'Landlord Paid']],
-    units: [['1', '1 Bed', '775', '$1,160', '$1,450'], ['2', '1 Bed', '775', '$1,050', '$1,450']],
+    units: [['1', '1 Bed - L', '775', '$1,160', '$1,400'], ['2', '2 Bed', '775', '$1,050', '$1,600']],
   },
 }
 
