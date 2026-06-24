@@ -16,16 +16,9 @@ export const PHOTO_PAGES = [
   },
   {
     kind: 'gallery',
-    section: 'Property Photography', title: 'Interiors —', accent: 'Kitchens & Living',
-    subtitle: 'Open kitchens with stainless appliances, granite counters, in-unit laundry, and refinished hardwood.',
+    section: 'Property Photography', title: 'Interiors —', accent: 'Kitchens, Baths & Bedrooms',
+    subtitle: 'Open kitchens with stainless appliances and granite counters, two full baths per unit, and bright bedrooms across spacious 3–4 BR layouts with refinished hardwood.',
     hero: '/photos/apt-1.jpg',
-    tiles: ['/photos/apt-2.jpg', '/photos/apt-3.jpg', '/photos/apt-8.jpg'],
-  },
-  {
-    kind: 'gallery',
-    section: 'Property Photography', title: 'Interiors —', accent: 'Baths & Bedrooms',
-    subtitle: 'Two full baths per unit with tiled tub/shower surrounds; bright bedrooms across spacious 3–4 BR layouts.',
-    hero: '/photos/apt-5.jpg',
-    tiles: ['/photos/apt-4.jpg', '/photos/apt-6.jpg', '/photos/apt-7.jpg'],
+    tiles: ['/photos/apt-3.jpg', '/photos/apt-5.jpg', { src: '/photos/apt-7.jpg', rotate: -90 }],
   },
 ]

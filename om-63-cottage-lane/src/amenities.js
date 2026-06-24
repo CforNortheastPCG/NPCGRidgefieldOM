@@ -4,14 +4,13 @@
    color-coded by category; items without an address still appear in the
    printed directory.
 
-   NOTE: coordinates below are approximate (block-level) and intended for the
-   reference map only — verify against the survey before relying on them. To
-   refine, run the Google Geocoding helper or replace the COORDS lat/lng pairs.
+   NOTE: coordinates are real Google locations (downtown addresses geocode to
+   ROOFTOP; landmarks point at the feature itself, e.g. the North Bridge).
 */
 
 export const PROPERTY = {
-  lat: 42.45835,
-  lng: -71.35350,
+  lat: 42.45734,
+  lng: -71.35885,
   address: '63 Cottage Lane, Concord, MA 01742',
 }
 
@@ -29,7 +28,7 @@ export const MAP_CATEGORIES = [
   { heading: 'Dining & Coffee', label: 'Dining & Coffee', color: '0xC0392B', swatch: '#C0392B' },
   { heading: 'Grocery & Services', label: 'Grocery & Services', color: '0x1E8449', swatch: '#1E8449' },
   { heading: 'Education & Civic', label: 'Education & Civic', color: '0x2471A3', swatch: '#2471A3' },
-  { heading: 'Transit — MBTA', label: 'Transit — MBTA', color: '0xE67E22', swatch: '#E67E22' },
+  { heading: 'Transit — MBTA', label: 'Transit — MBTA', color: '0xD81B60', swatch: '#D81B60' },
   { heading: 'Parks & Landmarks', label: 'Parks & Landmarks', color: '0x0E6655', swatch: '#0E6655' },
 ]
 
@@ -40,7 +39,7 @@ export const DIRECTORY = [
     items: [
       { name: '80 Thoreau', note: 'Acclaimed New American · at Concord Depot', address: '80 Thoreau Street, Concord, MA 01742' },
       { name: 'Caffè Nero', note: 'European-style café · Main St', address: '46 Main Street, Concord, MA 01742' },
-      { name: 'Haute Coffee', note: 'Café & bakery · Thoreau St', address: '12 Walden Street, Concord, MA 01742' },
+      { name: 'Haute Coffee', note: 'Café & bakery · Walden St', address: '12 Walden Street, Concord, MA 01742' },
       { name: "Sally Ann Food Shop", note: 'Bakery & sandwiches · Main St', address: '73 Main Street, Concord, MA 01742' },
       { name: 'Fiorella’s Cucina', note: 'Italian · downtown', address: '24 Walden Street, Concord, MA 01742' },
       { name: "Sorrento's Brick Oven", note: 'Pizza · Sudbury Rd', address: '1 Sudbury Road, Concord, MA 01742' },
@@ -85,33 +84,33 @@ export const DIRECTORY = [
   },
 ]
 
-/* Approximate (block-level) coordinates per address — see the note at the top.
-   Markers are plotted by lat/lng so the Static Maps request stays under the
-   address-geocode cap and every pin renders. */
+/* Real lat/lng per address (landmarks point at the feature itself). Markers are
+   plotted by lat/lng so the Static Maps request stays under the address-geocode
+   cap and every pin renders. */
 export const COORDS = {
-  '80 Thoreau Street, Concord, MA 01742': [42.45760, -71.35690],
-  '46 Main Street, Concord, MA 01742': [42.46050, -71.34880],
-  '12 Walden Street, Concord, MA 01742': [42.45960, -71.34870],
-  '73 Main Street, Concord, MA 01742': [42.46070, -71.34950],
-  '24 Walden Street, Concord, MA 01742': [42.46000, -71.34890],
-  '1 Sudbury Road, Concord, MA 01742': [42.45920, -71.35040],
-  '40 Main Street, Concord, MA 01742': [42.46040, -71.34860],
-  '15 Walden Street, Concord, MA 01742': [42.45980, -71.34880],
-  '42 Main Street, Concord, MA 01742': [42.46045, -71.34870],
-  '23 Walden Street, Concord, MA 01742': [42.45990, -71.34900],
-  '148 Walden Street, Concord, MA 01742': [42.45720, -71.34620],
-  '152 Commonwealth Avenue, Concord, MA 01742': [42.46500, -71.39200],
-  '57 Sudbury Road, Concord, MA 01742': [42.45850, -71.35200],
-  '166 Main Street, Concord, MA 01742': [42.46170, -71.35230],
-  '500 Walden Street, Concord, MA 01742': [42.44600, -71.34160],
-  '129 Main Street, Concord, MA 01742': [42.46110, -71.35060],
-  '133 Old Road to Nine Acre Corner, Concord, MA 01742': [42.44280, -71.38470],
-  '90 Thoreau Street, Concord, MA 01742': [42.45730, -71.35730],
-  '1212 Main Street, Concord, MA 01742': [42.45740, -71.39260],
-  '915 Walden Street, Concord, MA 01742': [42.43960, -71.33890],
-  '174 Liberty Street, Concord, MA 01742': [42.46970, -71.35190],
-  '53 Cambridge Turnpike, Concord, MA 01742': [42.46160, -71.34480],
-  '90 Stow Street, Concord, MA 01742': [42.45870, -71.35470],
+  '80 Thoreau Street, Concord, MA 01742': [42.45665, -71.35758],            // 80 Thoreau
+  '46 Main Street, Concord, MA 01742': [42.46004, -71.35034],               // Caffè Nero
+  '12 Walden Street, Concord, MA 01742': [42.45953, -71.35036],             // Haute Coffee
+  '73 Main Street, Concord, MA 01742': [42.45950, -71.35101],               // Sally Ann
+  '24 Walden Street, Concord, MA 01742': [42.45917, -71.35014],             // Fiorella's
+  '1 Sudbury Road, Concord, MA 01742': [42.45894, -71.35208],               // Sorrento's
+  '40 Main Street, Concord, MA 01742': [42.46007, -71.35012],               // Starbucks
+  '15 Walden Street, Concord, MA 01742': [42.45960, -71.34988],             // Karma
+  '42 Main Street, Concord, MA 01742': [42.46008, -71.35025],               // Main Streets Market
+  '23 Walden Street, Concord, MA 01742': [42.45945, -71.34974],             // CVS
+  '148 Walden Street, Concord, MA 01742': [42.45701, -71.34649],            // Post Office
+  '152 Commonwealth Avenue, Concord, MA 01742': [42.45853, -71.39647],      // The UPS Store
+  '57 Sudbury Road, Concord, MA 01742': [42.45767, -71.35320],              // Mobil
+  '166 Main Street, Concord, MA 01742': [42.45929, -71.35464],              // Concord Academy
+  '500 Walden Street, Concord, MA 01742': [42.44773, -71.34787],            // Concord-Carlisle HS
+  '129 Main Street, Concord, MA 01742': [42.45886, -71.35338],              // Free Public Library
+  '133 Old Road to Nine Acre Corner, Concord, MA 01742': [42.45210, -71.37627],// Emerson Hospital
+  '90 Thoreau Street, Concord, MA 01742': [42.45645, -71.35763],            // Concord Station
+  '1212 Main Street, Concord, MA 01742': [42.45701, -71.39183],             // West Concord Station
+  '915 Walden Street, Concord, MA 01742': [42.44120, -71.33490],            // Walden Pond
+  '174 Liberty Street, Concord, MA 01742': [42.46904, -71.35062],           // Old North Bridge
+  '53 Cambridge Turnpike, Concord, MA 01742': [42.45765, -71.34208],        // Concord Museum
+  '90 Stow Street, Concord, MA 01742': [42.45676, -71.35089],               // Emerson Playground
 }
 
 /* Flattened list of every mapped POI, tagged with category label + colors —

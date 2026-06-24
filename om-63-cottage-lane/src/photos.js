@@ -16,16 +16,9 @@ export const PHOTO_PAGES = [
   },
   {
     kind: 'gallery',
-    section: 'Property Photography', title: 'Interiors —', accent: 'Kitchens & Living',
-    subtitle: 'A mix of updated and value-add studio and one-bedroom layouts with eat-in kitchens and open living areas.',
+    section: 'Property Photography', title: 'Interiors —', accent: 'Kitchens, Baths & Bedrooms',
+    subtitle: 'A mix of updated and value-add studio and one-bedroom layouts with eat-in kitchens, full baths, and bright bedrooms.',
     hero: '/photos/apt-1.jpg',
-    tiles: ['/photos/apt-2.jpg', '/photos/apt-3.jpg', '/photos/apt-4.jpg'],
-  },
-  {
-    kind: 'gallery',
-    section: 'Property Photography', title: 'Interiors —', accent: 'Baths & Bedrooms',
-    subtitle: 'Full baths and bright bedrooms across the studio and one-bedroom units.',
-    hero: '/photos/apt-5.jpg',
-    tiles: ['/photos/apt-6.jpg', '/photos/apt-7.jpg', '/photos/apt-8.jpg'],
+    tiles: ['/photos/apt-3.jpg', '/photos/apt-5.jpg', '/photos/apt-7.jpg'],
   },
 ]

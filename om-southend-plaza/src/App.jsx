@@ -246,6 +246,128 @@ function BarChartCard({ title, data, note }) {
   )
 }
 
+/* ═══════════════════ RENT ROLL (per-suite / per-unit) ═══════════════════
+   Line-by-line rent roll mirroring the underwriting workbook: commercial by
+   suite and residential by unit, each with in-place and pro forma rents. The
+   totals tie to the Unit Mix and Income & Expense pages ($260,700 → $303,100). */
+function RentRollPage({ pageNum }) {
+  const COMM = [
+    { tenant: 'Thomaston Smoke & Vape', suite: '1–3', sf: '1,373', end: '10/31/26', curPSF: '$15.60', cur: '$21,420', pfPSF: '$17.50', pf: '$24,028' },
+    { tenant: 'Vacant', suite: '4', sf: '500', end: '—', curPSF: '$12.00', cur: '$6,000', pfPSF: '$15.00', pf: '$7,500', vacant: true },
+    { tenant: "KC's Package Store", suite: '5', sf: '700', end: '09/30/29', curPSF: '$14.57', cur: '$10,200', pfPSF: '$17.50', pf: '$12,250' },
+    { tenant: 'Vacant', suite: '6', sf: '500', end: '—', curPSF: '$0.00', cur: '$0', pfPSF: '$15.00', pf: '$7,500', vacant: true },
+    { tenant: 'Elegant Nail & Spa', suite: '7', sf: '1,000', end: '06/30/29', curPSF: '$18.10', cur: '$18,096', pfPSF: '$20.00', pf: '$20,000' },
+    { tenant: 'S & S Laundry', suite: '8', sf: '1,200', end: '01/31/29', curPSF: '$14.32', cur: '$17,184', pfPSF: '$17.50', pf: '$21,000' },
+    { tenant: 'Sara Roberts', suite: '9', sf: '700', end: '05/31/26', curPSF: '$17.14', cur: '$12,000', pfPSF: '$20.00', pf: '$14,000' },
+  ]
+  const RES = [
+    { unit: 'Apt 01', type: '1BR / 1BA', sf: '600', end: '06/30/26', curMo: '$1,300', curYr: '$15,600', pfMo: '$1,500', pfYr: '$18,000' },
+    { unit: 'Apt 02', type: '1BR / 1BA', sf: '600', end: '09/30/26', curMo: '$1,400', curYr: '$16,800', pfMo: '$1,500', pfYr: '$18,000' },
+    { unit: 'Apt 03', type: '2BR / 1BA', sf: '850', end: '04/30/27', curMo: '$1,600', curYr: '$19,200', pfMo: '$1,700', pfYr: '$20,400' },
+    { unit: 'Apt 04', type: '2BR / 1BA', sf: '850', end: '11/30/26', curMo: '$1,550', curYr: '$18,600', pfMo: '$1,700', pfYr: '$20,400' },
+    { unit: 'Apt 05', type: '2BR / 1BA', sf: '850', end: '11/30/26', curMo: '$1,550', curYr: '$18,600', pfMo: '$1,700', pfYr: '$20,400' },
+    { unit: 'Apt 06', type: '2BR / 1BA', sf: '850', end: '10/31/26', curMo: '$1,400', curYr: '$16,800', pfMo: '$1,700', pfYr: '$20,400' },
+    { unit: 'Apt 07', type: '2BR / 1BA', sf: '850', end: '02/28/27', curMo: '$1,600', curYr: '$19,200', pfMo: '$1,700', pfYr: '$20,400' },
+    { unit: 'Apt 08', type: '1BR / 1BA', sf: '600', end: '12/31/24', curMo: '$1,300', curYr: '$15,600', pfMo: '$1,500', pfYr: '$18,000' },
+    { unit: 'Apt 09', type: '2BR / 1BA', sf: '850', end: '11/30/26', curMo: '$1,350', curYr: '$16,200', pfMo: '$1,700', pfYr: '$20,400' },
+    { unit: 'Apt 10', type: '2BR / 1BA', sf: '850', end: '06/30/26', curMo: '$1,600', curYr: '$19,200', pfMo: '$1,700', pfYr: '$20,400' },
+  ]
+  const cell = { padding: '3px 10px', fontSize: 10.5 }
+  const th = { fontSize: 9, padding: '4px 10px' }
+  const rt = { textAlign: 'right' }
+  const ct = { textAlign: 'center' }
+  return (
+    <div className="page">
+      <PageHeader section="Rent Roll" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2 }}>Rent <span style={{ color: '#F8971D' }}>Roll</span></div>
+        <div className="title-rule" />
+
+        <div className="eyebrow" style={{ marginBottom: 5 }}>Commercial — In-Place vs Pro Forma</div>
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th style={th}>Tenant</th>
+              <th style={{ ...th, ...ct }}>Suite</th>
+              <th style={{ ...th, ...rt }}>SF</th>
+              <th style={{ ...th, ...ct }}>Lease End</th>
+              <th style={{ ...th, ...rt }}>Cur. $/SF</th>
+              <th style={{ ...th, ...rt }}>Current Rent</th>
+              <th style={{ ...th, ...rt }}>PF $/SF</th>
+              <th style={{ ...th, ...rt }}>Pro Forma</th>
+            </tr>
+          </thead>
+          <tbody>
+            {COMM.map((r, i) => (
+              <tr key={i}>
+                <td style={cell}>{r.tenant}</td>
+                <td style={{ ...cell, ...ct }}>{r.suite}</td>
+                <td style={{ ...cell, ...rt }}>{r.sf}</td>
+                <td style={{ ...cell, ...ct }}>{r.end}</td>
+                <td style={{ ...cell, ...rt }}>{r.curPSF}</td>
+                <td style={{ ...cell, ...rt }}>{r.cur}</td>
+                <td style={{ ...cell, ...rt }}>{r.pfPSF}</td>
+                <td style={{ ...cell, ...rt }}>{r.pf}</td>
+              </tr>
+            ))}
+            <tr className="total-row">
+              <td style={cell}><strong>Commercial Total</strong></td>
+              <td style={{ ...cell, ...ct }}><strong>7</strong></td>
+              <td style={{ ...cell, ...rt }}><strong>5,973</strong></td>
+              <td style={{ ...cell, ...ct }}>—</td>
+              <td style={{ ...cell, ...rt }}><strong>$14.21</strong></td>
+              <td style={{ ...cell, ...rt }}><strong>$84,900</strong></td>
+              <td style={{ ...cell, ...rt }}><strong>$17.79</strong></td>
+              <td style={{ ...cell, ...rt }}><strong>$106,278</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div className="eyebrow" style={{ margin: '12px 0 5px' }}>Residential — In-Place vs Pro Forma</div>
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th style={th}>Unit</th>
+              <th style={th}>Type</th>
+              <th style={{ ...th, ...rt }}>SF</th>
+              <th style={{ ...th, ...ct }}>Lease End</th>
+              <th style={{ ...th, ...rt }}>Cur. / Mo</th>
+              <th style={{ ...th, ...rt }}>Cur. / Yr</th>
+              <th style={{ ...th, ...rt }}>PF / Mo</th>
+              <th style={{ ...th, ...rt }}>PF / Yr</th>
+            </tr>
+          </thead>
+          <tbody>
+            {RES.map((r, i) => (
+              <tr key={i}>
+                <td style={cell}>{r.unit}</td>
+                <td style={{ ...cell, fontWeight: 500, color: 'var(--graphite)' }}>{r.type}</td>
+                <td style={{ ...cell, ...rt }}>{r.sf}</td>
+                <td style={{ ...cell, ...ct }}>{r.end}</td>
+                <td style={{ ...cell, ...rt }}>{r.curMo}</td>
+                <td style={{ ...cell, ...rt }}>{r.curYr}</td>
+                <td style={{ ...cell, ...rt }}>{r.pfMo}</td>
+                <td style={{ ...cell, ...rt }}>{r.pfYr}</td>
+              </tr>
+            ))}
+            <tr className="total-row">
+              <td style={cell}><strong>Residential Total</strong></td>
+              <td style={cell}><strong>10 units</strong></td>
+              <td style={{ ...cell, ...rt }}><strong>7,750</strong></td>
+              <td style={{ ...cell, ...ct }}>—</td>
+              <td style={{ ...cell, ...rt }}><strong>$14,650</strong></td>
+              <td style={{ ...cell, ...rt }}><strong>$175,800</strong></td>
+              <td style={{ ...cell, ...rt }}><strong>$16,400</strong></td>
+              <td style={{ ...cell, ...rt }}><strong>$196,800</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}
+
 /* Mixed-use rent roll — gross scheduled commercial rent vs apartment ranges,
    in-place vs pro forma. Per-suite/per-unit detail lives in the BOV / data room. */
 function RentRoll({ pageNum }) {
@@ -673,7 +795,7 @@ function CountyOverview({ pageNum }) {
             <img src="/photos/litchfield-hills.jpg" alt="Litchfield Hills, Litchfield County, CT" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-            <img src="/photos/county-river.jpg" alt="Naugatuck River with fall foliage, Litchfield County, CT" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/county-river.jpg" alt="Litchfield County, CT" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
         </div>
       </div>
@@ -761,6 +883,7 @@ function App() {
     <BuildingDescriptions />,
     ...PHOTO_PAGES.map(p => (p.kind === 'comingsoon' ? <PhotoComingSoon {...p} /> : <PhotoGallery {...p} />)),
     <Divider eyebrow="02" title="Financial Analysis" image="/photos/ext-2.jpg" />,
+    <RentRollPage />,
     <RentRoll />,
     <IncomeExpense />,
     <UnderwritingNotes />,

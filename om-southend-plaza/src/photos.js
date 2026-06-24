@@ -19,7 +19,7 @@ export const PHOTO_PAGES = [
   },
   {
     kind: 'gallery',
-    section: 'Property Photography', title: 'Retail', accent: 'Exteriors',
+    section: 'Property Photography', title: '', accent: 'Exteriors',
     hero: '/photos/ext-1.jpg',
     tiles: ['/photos/ext-2.jpg', '/photos/ext-3.jpg', '/photos/ext-4.jpg'],
   },
@@ -38,7 +38,7 @@ export const PHOTO_PAGES = [
   },
   {
     kind: 'gallery',
-    section: 'Property Photography', title: 'Apartments', accent: '& Units',
+    section: 'Property Photography', title: 'Apartment', accent: 'Photos',
     subtitle: 'Ten second-floor apartments with private rear ground-level access.',
     hero: '/photos/apt-2.jpg',
     tiles: ['/photos/apt-1.jpg', '/photos/apt-3.jpg', '/photos/apt-4.jpg', '/photos/apt-5.jpg'],

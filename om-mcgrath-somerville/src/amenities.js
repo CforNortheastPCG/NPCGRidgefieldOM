@@ -4,14 +4,13 @@
    color-coded by category; items without an address still appear in the
    printed directory.
 
-   NOTE: coordinates below are approximate (block-level) and intended for the
-   reference map only — verify against the survey before relying on them. To
-   refine, run the Google Geocoding helper or replace the COORDS lat/lng pairs.
+   NOTE: coordinates are real Google locations. For chains with no store at the
+   listed address (McDonald's, Dunkin'), the pin uses the nearest actual store.
 */
 
 export const PROPERTY = {
-  lat: 42.38605,
-  lng: -71.09175,
+  lat: 42.38227,
+  lng: -71.09095,
   address: '416-422 McGrath Highway, Somerville, MA 02143',
 }
 
@@ -29,7 +28,7 @@ export const MAP_CATEGORIES = [
   { heading: 'Dining & Coffee', label: 'Dining & Coffee', color: '0xC0392B', swatch: '#C0392B' },
   { heading: 'Grocery & Retail', label: 'Grocery & Retail', color: '0x1E8449', swatch: '#1E8449' },
   { heading: 'Shopping & Entertainment', label: 'Shopping & Entertainment', color: '0x884EA0', swatch: '#884EA0' },
-  { heading: 'Transit — MBTA', label: 'Transit — MBTA', color: '0xE67E22', swatch: '#E67E22' },
+  { heading: 'Transit — MBTA', label: 'Transit — MBTA', color: '0xD81B60', swatch: '#D81B60' },
   { heading: 'Education & Civic', label: 'Education & Civic', color: '0x2471A3', swatch: '#2471A3' },
   { heading: 'Parks & Landmarks', label: 'Parks & Landmarks', color: '0x0E6655', swatch: '#0E6655' },
 ]
@@ -40,7 +39,7 @@ export const DIRECTORY = [
     heading: 'Dining & Coffee',
     items: [
       { name: 'Sarma', note: 'Acclaimed Mediterranean meze · East Somerville', address: '249 Pearl Street, Somerville, MA 02145' },
-      { name: "McDonald's", note: 'Quick-serve · Mystic Ave corridor', address: '280 Mystic Avenue, Somerville, MA 02145' },
+      { name: "McDonald's", note: 'Quick-serve · McGrath Highway', address: '280 Mystic Avenue, Somerville, MA 02145' },
       { name: "Dunkin'", note: 'Coffee · Broadway, East Somerville', address: '316 Broadway, Somerville, MA 02145' },
       { name: 'Texas Roadhouse', note: 'Steakhouse · near Assembly', address: '157 Santilli Highway, Everett, MA 02149' },
     ],
@@ -48,7 +47,7 @@ export const DIRECTORY = [
   {
     heading: 'Grocery & Retail',
     items: [
-      { name: 'Stop & Shop', note: 'Supermarket · Twin City Plaza', address: '779 McGrath Highway, Somerville, MA 02143' },
+      { name: 'Stop & Shop', note: 'Supermarket · McGrath Highway', address: '779 McGrath Highway, Somerville, MA 02143' },
       { name: 'Market Basket', note: 'Value grocer · Chelsea / Everett line', address: '170 Everett Avenue, Chelsea, MA 02150' },
       { name: 'Target', note: 'Department store · Assembly Row', address: '411 Revolution Drive, Somerville, MA 02145' },
       { name: 'The Home Depot', note: 'Home improvement · Mystic Ave', address: '75 Mystic Avenue, Somerville, MA 02145' },
@@ -91,34 +90,40 @@ export const DIRECTORY = [
   },
 ]
 
-/* Approximate (block-level) coordinates per address — see the note at the top.
-   Markers are plotted by lat/lng so the Static Maps request stays under the
-   address-geocode cap and every pin renders. */
+/* Real lat/lng per address (chains point at the nearest actual store). Markers
+   are plotted by lat/lng so the Static Maps request stays under the address-
+   geocode cap and every pin renders. */
 export const COORDS = {
-  '249 Pearl Street, Somerville, MA 02145': [42.38930, -71.09280],
-  '280 Mystic Avenue, Somerville, MA 02145': [42.38680, -71.08950],
-  '316 Broadway, Somerville, MA 02145': [42.38650, -71.08250],
-  '157 Santilli Highway, Everett, MA 02149': [42.39520, -71.06950],
-  '779 McGrath Highway, Somerville, MA 02143': [42.38120, -71.09380],
-  '170 Everett Avenue, Chelsea, MA 02150': [42.39120, -71.06420],
-  '411 Revolution Drive, Somerville, MA 02145': [42.39200, -71.07720],
-  '75 Mystic Avenue, Somerville, MA 02145': [42.39350, -71.08400],
-  '1 Mystic View Road, Everett, MA 02149': [42.40300, -71.07450],
-  '355 Artisan Way, Somerville, MA 02145': [42.39250, -71.07750],
-  '1 Broadway, Everett, MA 02149': [42.39580, -71.06680],
-  '13 McGrath Highway, Somerville, MA 02143': [42.37850, -71.09080],
-  'Sullivan Square, Charlestown, MA 02129': [42.38390, -71.07690],
-  'Gilman Square Station, Somerville, MA 02143': [42.39380, -71.09720],
-  'Washington Street Station, Somerville, MA 02143': [42.38050, -71.08580],
-  'Assembly Station, Somerville, MA 02145': [42.39280, -71.07740],
-  '77 Massachusetts Avenue, Cambridge, MA 02139': [42.36010, -71.09420],
-  '419 Boston Avenue, Medford, MA 02155': [42.40750, -71.11900],
-  '250 New Rutherford Avenue, Charlestown, MA 02129': [42.37420, -71.07000],
-  'Munroe Street, Somerville, MA 02143': [42.38080, -71.09480],
-  'Fellsway West, Somerville, MA 02145': [42.38780, -71.08580],
-  'Monument Square, Charlestown, MA 02129': [42.37630, -71.06080],
-  'Charlestown Navy Yard, Boston, MA 02129': [42.37240, -71.05670],
+  '249 Pearl Street, Somerville, MA 02145': [42.38826, -71.09546],          // Sarma
+  '280 Mystic Avenue, Somerville, MA 02145': [42.37374, -71.08286],         // McDonald's (14 McGrath)
+  '316 Broadway, Somerville, MA 02145': [42.38966, -71.08881],              // Dunkin' (220 Broadway)
+  '157 Santilli Highway, Everett, MA 02149': [42.40007, -71.06968],         // Texas Roadhouse
+  '779 McGrath Highway, Somerville, MA 02143': [42.39149, -71.08567],       // Stop & Shop
+  '170 Everett Avenue, Chelsea, MA 02150': [42.39648, -71.04225],           // Market Basket
+  '411 Revolution Drive, Somerville, MA 02145': [42.39210, -71.07838],      // Target / Assembly Row
+  '75 Mystic Avenue, Somerville, MA 02145': [42.39003, -71.07940],          // The Home Depot
+  '1 Mystic View Road, Everett, MA 02149': [42.39690, -71.07149],           // Costco
+  '355 Artisan Way, Somerville, MA 02145': [42.39442, -71.07875],           // Assembly Row
+  '1 Broadway, Everett, MA 02149': [42.39521, -71.06954],                   // Encore Boston Harbor
+  '13 McGrath Highway, Somerville, MA 02143': [42.37403, -71.08620],        // Twin City Plaza
+  'Sullivan Square, Charlestown, MA 02129': [42.38399, -71.07696],          // Sullivan Sq station
+  'Gilman Square Station, Somerville, MA 02143': [42.38793, -71.09677],     // Gilman Square GLX
+  'Washington Street Station, Somerville, MA 02143': [42.37942, -71.08662], // East Somerville GLX
+  'Assembly Station, Somerville, MA 02145': [42.39281, -71.07726],          // Assembly station
+  '77 Massachusetts Avenue, Cambridge, MA 02139': [42.36009, -71.09416],    // MIT
+  '419 Boston Avenue, Medford, MA 02155': [42.40854, -71.11827],            // Tufts University
+  '250 New Rutherford Avenue, Charlestown, MA 02129': [42.37507, -71.06952],// Bunker Hill CC
+  'Munroe Street, Somerville, MA 02143': [42.38173, -71.09368],             // Prospect Hill Park
+  'Fellsway West, Somerville, MA 02145': [42.39155, -71.08803],             // Foss Park
+  'Monument Square, Charlestown, MA 02129': [42.37635, -71.06078],          // Bunker Hill Monument
+  'Charlestown Navy Yard, Boston, MA 02129': [42.37246, -71.05658],         // USS Constitution
 }
+
+/* Static-map frame center. Offset east of the property (lng −71.080 vs the
+   property's −71.091) so the far-east pin (Market Basket, Chelsea) and the
+   far-west pin (Tufts, Medford) both clear the zoom-13 frame edges. The golden
+   "P" pin still plots on the property itself. */
+export const MAP_CENTER = { lat: 42.38227, lng: -71.080 }
 
 /* Flattened list of every mapped POI, tagged with category label + colors —
    consumed by the Location & Amenities map. Every item with an `address` that

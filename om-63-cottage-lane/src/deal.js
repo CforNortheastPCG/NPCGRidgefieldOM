@@ -12,7 +12,7 @@ export const DEAL = {
   cityLong: 'Concord, Massachusetts',                      // long form for the cover subtitle
   status: 'For Sale',                                      // listing status chip
   type: '10-Unit Multifamily · Value-Add',                // asset descriptor (cover)
-  coverImage: '/photos/cover.jpg',                         // full-bleed cover photo
+  coverImage: '/photos/cover.png',                         // full-bleed cover photo
   pdfName: 'Cottage-Lane-Concord-OM.pdf',                  // output filename for the exporter
 }
 

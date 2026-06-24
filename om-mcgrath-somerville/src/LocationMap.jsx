@@ -1,4 +1,4 @@
-import { PROPERTY, MAP_POIS, MAP_CATEGORIES } from './amenities.js'
+import { PROPERTY, MAP_CENTER, MAP_POIS, MAP_CATEGORIES } from './amenities.js'
 import { DEAL, FULL_ADDR as DEAL_FULL_ADDR } from './Shell.jsx'
 
 /* ═══════════════════ LOCATION & AMENITIES MAP ═══════════════════
@@ -66,12 +66,12 @@ function buildStaticMapUrl() {
   )
 
   const params = [
-    // Center and the subject pin sit on the property's coords, anchoring the
-    // whole frame on the real location. McGrath's amenities span Somerville →
-    // Cambridge → Charlestown → Everett, so zoom 12 (~6 mi vertical) keeps the
-    // far anchors (Tufts, Encore, USS Constitution) on-frame.
-    `center=${PROPERTY.lat},${PROPERTY.lng}`,
-    'zoom=12',
+    // Frame center (MAP_CENTER) is nudged east of the property so the far-east
+    // and far-west outlier pins both clear the frame edges; the golden "P" pin
+    // still plots on the property's real coords. Zoom 13 (~3 mi vertical)
+    // tightens the frame on the core East Somerville → Assembly amenities.
+    `center=${MAP_CENTER.lat},${MAP_CENTER.lng}`,
+    'zoom=13',
     'size=593x640',
     'scale=2',
     'maptype=hybrid',
@@ -110,7 +110,7 @@ export default function LocationMap({ pageNum = 9 }) {
           Location &amp; <span style={{ color: '#F8971D' }}>Amenities</span>
         </div>
         <div className="title-rule" />
-        <div style={{ fontSize: 11, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 12 }}>
+        <div style={{ fontSize: 11, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 8 }}>
           McGrath Apartments fronts McGrath Highway (Route 28) in East Somerville, two miles from downtown Boston
           and minutes from Cambridge. The surrounding blocks pair everyday retail (Stop &amp; Shop, Target, The Home
           Depot, Costco) with destination shopping and dining at Assembly Row and Encore Boston Harbor, while MIT and
@@ -144,24 +144,24 @@ export default function LocationMap({ pageNum = 9 }) {
           </div>
 
           {/* SUBJECT PROPERTY + NUMBERED PIN LIST (two columns) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0, overflow: 'hidden' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 9, paddingBottom: 10, borderBottom: '1px solid var(--border)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 7, minHeight: 0, overflow: 'hidden' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 9, paddingBottom: 7, borderBottom: '1px solid var(--border)' }}>
               <span style={{ flexShrink: 0, width: 15, height: 15, borderRadius: '50%', background: '#F8971D', border: '2px solid #fff', boxShadow: '0 0 0 1px var(--golden)' }} />
-              <span style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--carbon)' }}>Subject Property &mdash; {DEAL.address}</span>
+              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--carbon)' }}>Subject Property &mdash; {DEAL.address}</span>
             </div>
-            <div style={{ columns: 2, columnGap: 22, flex: 1, minHeight: 0, overflow: 'hidden' }}>
+            <div style={{ columns: 2, columnGap: 16, flex: 1, minHeight: 0, overflow: 'hidden' }}>
             {groups.map(g => (
-              <div key={g.label} style={{ breakInside: 'avoid', marginBottom: 13 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 6 }}>
-                  <span style={{ flexShrink: 0, width: 10, height: 10, borderRadius: '50%', background: g.swatch, border: '1px solid rgba(0,0,0,0.15)' }} />
-                  <span style={{ fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: g.swatch }}>{g.label}</span>
+              <div key={g.label} style={{ breakInside: 'avoid', marginBottom: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
+                  <span style={{ flexShrink: 0, width: 9, height: 9, borderRadius: '50%', background: g.swatch, border: '1px solid rgba(0,0,0,0.15)' }} />
+                  <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', color: g.swatch }}>{g.label}</span>
                 </div>
                 {g.items.map(p => (
-                  <div key={p.n} style={{ display: 'flex', alignItems: 'baseline', gap: 8, padding: '3px 0' }}>
-                    <span style={{ flexShrink: 0, fontSize: 10.5, fontWeight: 700, color: g.swatch, width: 14, textAlign: 'right' }}>{p.n}</span>
+                  <div key={p.n} style={{ display: 'flex', alignItems: 'baseline', gap: 6, padding: '1px 0' }}>
+                    <span style={{ flexShrink: 0, fontSize: 10, fontWeight: 700, color: g.swatch, width: 13, textAlign: 'right' }}>{p.n}</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.25 }}>{p.name}</div>
-                      {p.note && <div style={{ fontSize: 8.6, color: 'var(--stone)', lineHeight: 1.3, marginTop: 1 }}>{p.note}</div>}
+                      <div style={{ fontSize: 10.5, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.2 }}>{p.name}</div>
+                      {p.note && <div style={{ fontSize: 8.2, color: 'var(--stone)', lineHeight: 1.25, marginTop: 0.5 }}>{p.note}</div>}
                     </div>
                   </div>
                 ))}

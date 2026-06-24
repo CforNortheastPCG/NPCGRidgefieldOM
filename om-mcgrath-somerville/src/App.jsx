@@ -9,7 +9,6 @@ import RegionalMap from './RegionalMap.jsx'
 import DriveTimeMap from './DriveTimeMap.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
-import FullBleed from './FullBleed.jsx'
 import { DEAL, ADDR, CITY_STATE, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
 
 /* ═══════════════════ 1 — COVER HERO ═══════════════════ */
@@ -73,34 +72,36 @@ function ExecutiveSummary({ pageNum }) {
               </div>
             </div>
             <div className="eyebrow" style={{ fontSize: 9, marginBottom: 6 }}>Property Overview</div>
-            <p style={{ fontSize: 10.6, lineHeight: 1.42, marginBottom: 7 }}>
-              Northeast Private Client Group is pleased to present <strong>416-422 McGrath Highway</strong>, a 4-unit
-              multifamily property located at the foot of Prospect Hill in Somerville, Massachusetts.
-            </p>
-            <p style={{ fontSize: 10.6, lineHeight: 1.42, marginBottom: 7 }}>
-              The property consists of four spacious residential units, including (2) three-bedroom, two-bathroom units
-              and (2) four-bedroom, two-bathroom units. Each apartment features direct-entry access, providing tenants
-              with the privacy and feel of townhouse-style living. Additional amenities include in-unit laundry, central
-              air conditioning, separately metered utilities with tenants responsible for their own gas and electric
-              expenses, and outdoor space located at the rear of the property.
-            </p>
-            <p style={{ fontSize: 10.6, lineHeight: 1.42, marginBottom: 7 }}>
-              Originally gut renovated in 2016, the asset offers modern layouts and finishes while requiring minimal
-              near-term capital expenditures. Current ownership has maintained the property well, creating an attractive
-              investment opportunity with the potential to further increase cash flow through strategic rent growth as
-              leases turn over and rents are adjusted toward market levels.
-            </p>
-            <p style={{ fontSize: 10.6, lineHeight: 1.42, marginBottom: 7 }}>
-              416-422 McGrath Highway presents the opportunity to acquire a well-maintained four-unit multifamily asset
-              in one of Greater Boston&rsquo;s most dynamic and supply-constrained rental markets. Ideally situated in
-              Somerville, the property offers convenient access to Cambridge, Boston, Assembly Row, Union Square, Kendall
-              Square, and numerous public transportation options, placing residents within minutes of many of the
-              region&rsquo;s largest employment, educational, and entertainment hubs.
-            </p>
-            <p style={{ fontSize: 10, lineHeight: 1.45, color: 'var(--stone)', fontStyle: 'italic', marginTop: 'auto' }}>
-              All interested and qualified parties will have the opportunity to obtain additional information and walk
-              the premises upon request.
-            </p>
+            <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <p style={{ fontSize: 11, lineHeight: 1.52 }}>
+                Northeast Private Client Group is pleased to present <strong>416-422 McGrath Highway</strong>, a 4-unit
+                multifamily property located at the foot of Prospect Hill in Somerville, Massachusetts.
+              </p>
+              <p style={{ fontSize: 11, lineHeight: 1.52 }}>
+                The property consists of four spacious residential units, including (2) three-bedroom, two-bathroom units
+                and (2) four-bedroom, two-bathroom units. Each apartment features direct-entry access, providing tenants
+                with the privacy and feel of townhouse-style living. Additional amenities include in-unit laundry, central
+                air conditioning, separately metered utilities with tenants responsible for their own gas and electric
+                expenses, and outdoor space located at the rear of the property.
+              </p>
+              <p style={{ fontSize: 11, lineHeight: 1.52 }}>
+                Originally gut renovated in 2016, the asset offers modern layouts and finishes while requiring minimal
+                near-term capital expenditures. Current ownership has maintained the property well, creating an attractive
+                investment opportunity with the potential to further increase cash flow through strategic rent growth as
+                leases turn over and rents are adjusted toward market levels.
+              </p>
+              <p style={{ fontSize: 11, lineHeight: 1.52 }}>
+                416-422 McGrath Highway presents the opportunity to acquire a well-maintained four-unit multifamily asset
+                in one of Greater Boston&rsquo;s most dynamic and supply-constrained rental markets. Ideally situated in
+                Somerville, the property offers convenient access to Cambridge, Boston, Assembly Row, Union Square, Kendall
+                Square, and numerous public transportation options, placing residents within minutes of many of the
+                region&rsquo;s largest employment, educational, and entertainment hubs.
+              </p>
+              <p style={{ fontSize: 11, lineHeight: 1.52 }}>
+                All interested and qualified parties will have the opportunity to obtain additional information and walk
+                the premises upon request.
+              </p>
+            </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
@@ -329,13 +330,6 @@ function RentRoll({ pageNum }) {
             </tr>
           </tbody>
         </table>
-        <div style={{ fontSize: 8.5, color: 'var(--stone)', marginTop: 6, lineHeight: 1.45 }}>
-          Monthly scheduled rent totals $13,900 in place ($166,800 annually) and $17,600 pro forma ($211,200 annually) &mdash;
-          a $44,400 (27%) increase. All four leases expire in 2026 (three on 8/31, one on 10/31), positioning a new owner
-          to mark every unit to market within the first year of ownership. Tenants pay their own gas and electric (separately
-          metered); water and sewer is landlord-paid.
-        </div>
-
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 40, marginTop: 36, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
           <ChartCard title="Units by Type" data={unitMix} centerLabel="4" centerSub="UNITS" size={170} />
           <BarChartCard title="Gross Scheduled Rent — In-Place vs Pro Forma" data={grossRent} note="+$44,400 · +27% rental upside on 2026 rollover" />
@@ -443,118 +437,6 @@ function IncomeExpense({ pageNum }) {
             <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$115,126</td><td style={noiBg}>5.01% Cap</td><td style={noiBg}>$150,731</td><td style={noiBg}>6.55% Cap</td></tr>
           </tbody>
         </table>
-        <div style={{ fontSize: 7.8, color: 'var(--stone)', marginTop: 4, lineHeight: 1.4 }}>
-          Current reflects in-place rents with a 2% vacancy and collection-loss factor; Pro Forma marks all four units to
-          market on their 2026 lease rollover at a 3% vacancy (+$41,400 effective gross income). Caps on the $2,300,000
-          offering price. Expense ratio 29.6% (Current) / 26.4% (Pro Forma); $/Unit on 4 units. Property management at 5%
-          of EGI and the vacancy factors are underwriting assumptions; pro forma real estate taxes reflect a post-sale
-          assessment and insurance a market-rate renewal, and may differ from current owner operations.
-        </div>
-        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: 8, paddingTop: 10 }}>
-          <span style={{ flex: 1, borderTop: '1px solid var(--border)' }} />
-          <span style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--golden)' }}>
-            Underwriting notes &amp; assumptions &mdash; see next page &rarr;
-          </span>
-          <span style={{ flex: 1, borderTop: '1px solid var(--border)' }} />
-        </div>
-      </div>
-      <PageFooter pageNum={pageNum} />
-    </div>
-  )
-}
-
-/* ═══════════════════ UNDERWRITING NOTES ═══════════════════ */
-function UnderwritingNotes({ pageNum }) {
-  const assumptions = [
-    { v: '$2,300,000', l: 'Offering Price' },
-    { v: '$575,000', l: 'Price / Unit' },
-    { v: '$487 / SF', l: 'Price / SF' },
-    { v: '5.01% → 6.55%', l: 'Cap: In-Place → Pro Forma' },
-  ]
-  const notes = [
-    {
-      head: 'Going-In Basis',
-      body: 'At $2,300,000 the offering prices to $575,000 per unit and $487/SF — a 5.01% going-in cap on in-place NOI of $115,126 and a 6.55% pro forma cap on $150,731. Pricing reflects an irreplaceable, supply-constrained East Somerville location two miles from downtown Boston.',
-    },
-    {
-      head: 'Rental Income',
-      body: 'In-place scheduled rent of $166,800 ($13,900/mo) marks to $211,200 ($17,600/mo) at market — a $44,400 (27%) lift. Per-unit rents move from $3,000–$4,000 toward $4,200 (3BR) and $4,600 (4BR), levels supported by Somerville’s tight, university-driven rental market.',
-    },
-    {
-      head: '2026 Lease Rollover',
-      body: 'All four leases expire in 2026 — three on 8/31 and one on 10/31 — so a new owner can capture the full mark-to-market within the first year, with no long-dated leases delaying repositioning.',
-    },
-    {
-      head: 'Operating Expenses',
-      body: 'Taxes ($16,755) and insurance ($10,248) are carried at actuals. Pro forma taxes step to $22,729 to reflect a post-sale assessment and insurance to a market-rate $8,000 renewal. Water and sewer is landlord-paid; gas and electric are tenant-paid and separately metered, holding controllable costs low.',
-    },
-    {
-      head: 'Management & Vacancy',
-      body: 'Management is underwritten at 5% of effective gross income, with a 2% vacancy/collection-loss factor in place and 3% pro forma. The resulting expense ratio is 29.6% (Current) and 26.4% (Pro Forma) — efficient for a small, tenant-metered multifamily asset.',
-    },
-    {
-      head: 'Capital & Condition',
-      body: 'The building was gut renovated in 2016 with modern kitchens and baths, in-unit laundry, central air, and refinished hardwood. Minimal near-term capital expenditure is anticipated, so projected NOI growth is rent-driven rather than capital-dependent.',
-    },
-  ]
-  const half = Math.ceil(notes.length / 2)
-  const cols = [notes.slice(0, half), notes.slice(half)]
-  const noiBridge = [
-    { label: 'In-Place', value: 115126, color: '#3F4753' },
-    { label: 'Pro Forma', value: 150731, color: '#F8971D' },
-  ]
-  const Note = (n) => (
-    <div key={n.head} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 14 }}>
-      <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 6 }}>{n.head}</div>
-      <p style={{ fontSize: 10.8, lineHeight: 1.55, color: 'var(--graphite)' }}>{n.body}</p>
-    </div>
-  )
-  return (
-    <div className="page">
-      <PageHeader section="Income & Expense" />
-      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-        <div className="section-title" style={{ marginBottom: 2 }}>Underwriting <span style={{ color: '#F8971D' }}>Notes</span></div>
-        <div className="title-rule" />
-        <div style={{ fontSize: 11, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 14 }}>
-          The notes below explain how each line of the Income &amp; Expense schedule is derived. Current reflects actual
-          operations; the pro forma reflects achievable, market-supported rents and stabilized expenses on the 2026 lease
-          rollover.
-        </div>
-
-        {/* Key-assumptions strip */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, paddingBottom: 12, marginBottom: 16, borderBottom: '1px solid var(--border)' }}>
-          {assumptions.map(a => (
-            <div key={a.l} style={{ textAlign: 'center', borderTop: '3px solid var(--golden)', padding: '7px 2px' }}>
-              <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{a.v}</div>
-              <div style={{ fontSize: 7.6, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>{a.l}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Notes — two columns, left/right; cards distribute to fill the page height */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 30, flex: 1, minHeight: 0 }}>
-          {cols.map((col, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              {col.map(Note)}
-            </div>
-          ))}
-        </div>
-
-        {/* Compact value-creation strip — headline NOI growth, in-place → pro forma. */}
-        <div style={{ flexShrink: 0, marginTop: 14, paddingTop: 12, borderTop: '1px solid var(--border)' }}>
-          <div style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 9 }}>
-            Net Operating Income — In-Place vs Pro Forma
-          </div>
-          {noiBridge.map(d => (
-            <div key={d.label} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 7 }}>
-              <span style={{ flex: '0 0 64px', fontSize: 10.5, fontWeight: 700, color: 'var(--carbon)' }}>{d.label}</span>
-              <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-                <div style={{ width: `${(d.value / 150731) * 100}%`, height: 18, background: d.color, borderRadius: 3 }} />
-              </div>
-              <span style={{ flex: '0 0 76px', textAlign: 'right', fontSize: 12, fontWeight: 800, color: 'var(--carbon)' }}>${d.value.toLocaleString()}</span>
-            </div>
-          ))}
-        </div>
       </div>
       <PageFooter pageNum={pageNum} />
     </div>
@@ -628,7 +510,7 @@ function CityOverview({ pageNum }) {
             </p>
           </div>
 
-          <div className="eyebrow" style={{ marginTop: 'auto', paddingTop: 16, marginBottom: 8 }}>About Somerville</div>
+          <div className="eyebrow" style={{ marginTop: 18, marginBottom: 8 }}>About Somerville</div>
           <ul className="highlights ridge-highlights" style={{ fontSize: 10.6, lineHeight: 1.7 }}>
             <li>Population ~81,000 &mdash; among the densest cities in New England</li>
             <li>Minutes to Cambridge, Boston &amp; Kendall Square</li>
@@ -833,21 +715,10 @@ function App() {
     <Divider eyebrow="02" title="Financial Analysis" image="/photos/aerial-4.jpg" />,
     <RentRoll />,
     <IncomeExpense />,
-    <UnderwritingNotes />,
     <Divider eyebrow="03" title="Location & Market" image="/photos/assembly.jpg" />,
     <CityOverview />,
     <LocationMap />,
     <LocalAttractions />,
-    // Annotated drone aerial — subject pin + Boston / corridor labels. Fine-tune
-    // pin/label positions by dragging in `npm run dev`, then paste back here.
-    <FullBleed
-      image="/photos/aerial-1.jpg"
-      pin={{ x: 46, y: 60, label: 'Subject Property' }}
-      streets={[{ x: 24, y: 64, label: 'McGrath Highway · Route 28', arrow: 135 }]}
-      markers={[
-        { cat: 'Landmark', color: '#F8971D', name: 'Downtown Boston', note: '~2 miles · ~10 minutes', x: 52, y: 12, arrow: 0 },
-      ]}
-    />,
     <DriveTimeMap />,
     <CountyOverview />,
     <RegionalMap />,

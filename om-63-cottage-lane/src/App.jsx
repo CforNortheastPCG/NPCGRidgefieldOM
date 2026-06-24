@@ -9,7 +9,6 @@ import RegionalMap from './RegionalMap.jsx'
 import DriveTimeMap from './DriveTimeMap.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
-import FullBleed from './FullBleed.jsx'
 import { DEAL, ADDR, CITY_STATE, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
 
 /* ═══════════════════ 1 — COVER HERO ═══════════════════ */
@@ -48,7 +47,6 @@ function ExecutiveSummary({ pageNum }) {
     ['Year Built', '1850'],
     ['Net Operating Income', '$100,003'],
     ['Pro Forma NOI', '$139,128'],
-    ['Tenancy', 'All Tenant-at-Will'],
   ]
   return (
     <div className="page">
@@ -61,8 +59,8 @@ function ExecutiveSummary({ pageNum }) {
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 12 }}>
               <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>Subject to Offer</div>
-                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>Listing Price</div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$2,200,000</div>
+                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>Offering Price</div>
               </div>
               <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
                 <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>10</div>
@@ -70,34 +68,36 @@ function ExecutiveSummary({ pageNum }) {
               </div>
             </div>
             <div className="eyebrow" style={{ fontSize: 9, marginBottom: 6 }}>Property Overview</div>
-            <p style={{ fontSize: 10.6, lineHeight: 1.42, marginBottom: 7 }}>
-              Northeast Private Client Group is pleased to present <strong>The Cottage Lane Apartments</strong>, a 10-unit
-              multifamily property located at 63 Cottage Lane in downtown Concord, Massachusetts.
-            </p>
-            <p style={{ fontSize: 10.6, lineHeight: 1.42, marginBottom: 7 }}>
-              The property consists of (4) studio units and (6) one-bedroom apartments. Tenant amenities include
-              off-street parking and on-site laundry facilities. Tenants are responsible for their own electric, while
-              ownership covers gas heat and hot water. The property has been well maintained over the years, including a
-              roof replacement in 2013, and lead compliance certificates for all units.
-            </p>
-            <p style={{ fontSize: 10.6, lineHeight: 1.42, marginBottom: 7 }}>
-              Ideally situated near Concord Center, the property offers convenient access to the Concord MBTA Commuter
-              Rail station, providing direct service into Cambridge and Downtown Boston. Concord is widely regarded as
-              one of Greater Boston&rsquo;s most prestigious suburban communities, known for its top-ranked public
-              schools, strong household incomes, and vibrant downtown district featuring boutique retail, cafés,
-              restaurants, and local amenities.
-            </p>
-            <p style={{ fontSize: 10.6, lineHeight: 1.42, marginBottom: 7 }}>
-              The combination of limited multifamily inventory, strong rental demand, and high barriers to entry makes 63
-              Cottage Lane a compelling long-term investment opportunity in an exceptionally supply-constrained market.
-              The Town has also adopted multifamily zoning districts in connection with the Commonwealth&rsquo;s MBTA
-              Communities Act, intended to accommodate multifamily residential development at an average density of 15
-              units per acre across the district.
-            </p>
-            <p style={{ fontSize: 10, lineHeight: 1.4, color: 'var(--stone)', fontStyle: 'italic', marginTop: 'auto' }}>
-              All interested and qualified parties will have the opportunity to obtain additional information and walk the
-              premises upon request.
-            </p>
+            <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <p style={{ fontSize: 11, lineHeight: 1.52 }}>
+                Northeast Private Client Group is pleased to present <strong>The Cottage Lane Apartments</strong>, a 10-unit
+                multifamily property located at 63 Cottage Lane in downtown Concord, Massachusetts.
+              </p>
+              <p style={{ fontSize: 11, lineHeight: 1.52 }}>
+                The property consists of (4) studio units and (6) one-bedroom apartments. Tenant amenities include
+                off-street parking and on-site laundry facilities. Tenants are responsible for their own electric, while
+                ownership covers gas heat and hot water. The property has been well maintained over the years, including a
+                roof replacement in 2013, and lead compliance certificates for all units.
+              </p>
+              <p style={{ fontSize: 11, lineHeight: 1.52 }}>
+                Ideally situated near Concord Center, the property offers convenient access to the Concord MBTA Commuter
+                Rail station, providing direct service into Cambridge and Downtown Boston. Concord is widely regarded as
+                one of Greater Boston&rsquo;s most prestigious suburban communities, known for its top-ranked public
+                schools, strong household incomes, and vibrant downtown district featuring boutique retail, cafés,
+                restaurants, and local amenities.
+              </p>
+              <p style={{ fontSize: 11, lineHeight: 1.52 }}>
+                The combination of limited multifamily inventory, strong rental demand, and high barriers to entry makes 63
+                Cottage Lane a compelling long-term investment opportunity in an exceptionally supply-constrained market.
+                The Town has also adopted multifamily zoning districts in connection with the Commonwealth&rsquo;s MBTA
+                Communities Act, intended to accommodate multifamily residential development at an average density of 15
+                units per acre across the district.
+              </p>
+              <p style={{ fontSize: 11, lineHeight: 1.52 }}>
+                All interested and qualified parties will have the opportunity to obtain additional information and walk the
+                premises upon request.
+              </p>
+            </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
@@ -178,8 +178,7 @@ function BuildingDescriptions({ pageNum }) {
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Tenancy &amp; Income</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Offering</span><span className="bldg-val">Subject to Offer</span></div>
-                <div className="bldg-row"><span className="bldg-label">Tenancy</span><span className="bldg-val">All Tenant-at-Will (TAW)</span></div>
+                <div className="bldg-row"><span className="bldg-label">Offering</span><span className="bldg-val">$2,200,000</span></div>
                 <div className="bldg-row"><span className="bldg-label">In-Place NOI</span><span className="bldg-val">$100,003</span></div>
                 <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$139,128 (+39%)</span></div>
               </div>
@@ -265,8 +264,8 @@ function BarChartCard({ title, data, note }) {
 }
 
 /* ═══════════════════ RENT ROLL ═══════════════════ */
-/* Full per-unit rent roll — in-place vs pro forma. All ten units are
-   tenant-at-will, supporting an immediate mark-to-market. */
+/* Full per-unit rent roll — in-place vs pro forma, supporting an
+   immediate mark-to-market across all ten units. */
 function RentRoll({ pageNum }) {
   const rows = [
     { unit: '1B', type: 'Studio', sf: '450', inPlace: '$1,500', ips: '$3.33', pf: '$1,550', pfs: '$3.44' },
@@ -291,7 +290,7 @@ function RentRoll({ pageNum }) {
   return (
     <div className="page">
       <PageHeader section="Rent Roll" />
-      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
         <div className="section-title" style={{ marginBottom: 2 }}>Rent <span style={{ color: '#F8971D' }}>Roll</span></div>
         <div className="title-rule" />
         <table className="data-table" style={{ fontSize: 10 }}>
@@ -304,7 +303,6 @@ function RentRoll({ pageNum }) {
               <th style={{ textAlign: 'right' }}>$/SF</th>
               <th style={{ textAlign: 'right' }}>Pro Forma / mo</th>
               <th style={{ textAlign: 'right' }}>$/SF</th>
-              <th style={{ textAlign: 'right' }}>Lease</th>
             </tr>
           </thead>
           <tbody>
@@ -317,7 +315,6 @@ function RentRoll({ pageNum }) {
                 <td style={{ textAlign: 'right' }}>{r.ips}</td>
                 <td style={{ textAlign: 'right' }}>{r.pf}</td>
                 <td style={{ textAlign: 'right' }}>{r.pfs}</td>
-                <td style={{ textAlign: 'right' }}>TAW</td>
               </tr>
             ))}
             <tr className="total-row">
@@ -328,20 +325,12 @@ function RentRoll({ pageNum }) {
               <td style={{ textAlign: 'right' }}>&mdash;</td>
               <td style={{ textAlign: 'right' }}><strong>$17,150</strong></td>
               <td style={{ textAlign: 'right' }}>&mdash;</td>
-              <td style={{ textAlign: 'right' }}>&mdash;</td>
             </tr>
           </tbody>
         </table>
-        <div style={{ fontSize: 8.5, color: 'var(--stone)', marginTop: 6, lineHeight: 1.45 }}>
-          Monthly scheduled rent totals $13,575 in place ($162,900 annually) and $17,150 pro forma ($205,800 annually) &mdash;
-          a $42,900 (26%) increase. All ten units are tenant-at-will (TAW), positioning a new owner to mark rents to market
-          immediately. Ownership pays gas heat and hot water; tenants pay their own electric. On-site coin-op laundry adds
-          ancillary income.
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 40, marginTop: 28, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
-          <ChartCard title="Units by Type" data={unitMix} centerLabel="10" centerSub="UNITS" size={170} />
-          <BarChartCard title="Gross Scheduled Rent — In-Place vs Pro Forma" data={grossRent} note="+$42,900 · +26% upside · all tenant-at-will" />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 40, marginTop: 14, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
+          <ChartCard title="Units by Type" data={unitMix} centerLabel="10" centerSub="UNITS" size={150} />
+          <BarChartCard title="Gross Scheduled Rent — In-Place vs Pro Forma" data={grossRent} note="+$42,900 · +26% rental upside" />
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -448,112 +437,10 @@ function IncomeExpense({ pageNum }) {
         </table>
         <div style={{ fontSize: 7.6, color: 'var(--stone)', marginTop: 3, lineHeight: 1.4 }}>
           Current reflects in-place rents with a 4% vacancy/collection-loss factor plus ~$2,000 of coin-op laundry income;
-          Pro Forma marks all ten tenant-at-will units to market (+$42,900 gross scheduled rent). Ownership pays gas heat and
+          Pro Forma marks all ten units to market (+$42,900 gross scheduled rent). Ownership pays gas heat and
           hot water; tenants pay their own electric. Property management at 5% of EGI and the vacancy factor are underwriting
           assumptions. Expense ratio 36.9% (Current) / 30.3% (Pro Forma); $/Unit on 10 units. The property is offered Subject
           to Offer.
-        </div>
-        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: 8, paddingTop: 10 }}>
-          <span style={{ flex: 1, borderTop: '1px solid var(--border)' }} />
-          <span style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--golden)' }}>
-            Underwriting notes &amp; assumptions &mdash; see next page &rarr;
-          </span>
-          <span style={{ flex: 1, borderTop: '1px solid var(--border)' }} />
-        </div>
-      </div>
-      <PageFooter pageNum={pageNum} />
-    </div>
-  )
-}
-
-/* ═══════════════════ UNDERWRITING NOTES ═══════════════════ */
-function UnderwritingNotes({ pageNum }) {
-  const assumptions = [
-    { v: '$100,003', l: 'In-Place NOI' },
-    { v: '$139,128', l: 'Pro Forma NOI' },
-    { v: '+39%', l: 'NOI Growth' },
-    { v: '10 Units · 4,927 SF', l: 'Scale' },
-  ]
-  const notes = [
-    {
-      head: 'Going-In Basis',
-      body: 'Offered Subject to Offer. The asset produces $100,003 of in-place NOI and $139,128 pro forma — value scales with each bidder’s target return. With ten tenant-at-will units in supply-constrained Concord, the income is positioned to step up quickly post-close.',
-    },
-    {
-      head: 'Rental Income',
-      body: 'In-place scheduled rent of $162,900 ($13,575/mo) marks to $205,800 ($17,150/mo) at market — a $42,900 (26%) lift. Studios move toward ~$1,575 and one-bedrooms toward ~$1,800, levels well supported by Concord’s tight, high-income rental market.',
-    },
-    {
-      head: 'All Tenant-at-Will',
-      body: 'Every unit is tenant-at-will, so a new owner can reset rents to market immediately — no fixed-term leases delay the repositioning, and turnover can be sequenced to fund light renovations.',
-    },
-    {
-      head: 'Operating Expenses',
-      body: 'Taxes ($17,835), insurance ($9,715), and owner-paid gas heat & hot water ($4,749) are carried at actuals; tenants pay their own electric. Water, sewer, trash, snow, and landscaping are held at recent actuals, and R&M is normalized to $5,000.',
-    },
-    {
-      head: 'Management & Vacancy',
-      body: 'Management is underwritten at 5% of effective gross income, with a 4% vacancy/collection-loss factor in both columns and ~$2,000 of annual coin-op laundry income. The resulting expense ratio is 36.9% (Current) and 30.3% (Pro Forma).',
-    },
-    {
-      head: 'Condition & Upside',
-      body: 'The property is well maintained — roof replaced in 2013, lead compliance certificates for all units — with a clear value-add path to renovate and re-tenant studios and one-bedrooms at premium Concord rents. The MBTA Communities Act zoning adds long-term optionality.',
-    },
-  ]
-  const half = Math.ceil(notes.length / 2)
-  const cols = [notes.slice(0, half), notes.slice(half)]
-  const noiBridge = [
-    { label: 'In-Place', value: 100003, color: '#3F4753' },
-    { label: 'Pro Forma', value: 139128, color: '#F8971D' },
-  ]
-  const Note = (n) => (
-    <div key={n.head} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 14 }}>
-      <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 6 }}>{n.head}</div>
-      <p style={{ fontSize: 10.8, lineHeight: 1.55, color: 'var(--graphite)' }}>{n.body}</p>
-    </div>
-  )
-  return (
-    <div className="page">
-      <PageHeader section="Income & Expense" />
-      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-        <div className="section-title" style={{ marginBottom: 2 }}>Underwriting <span style={{ color: '#F8971D' }}>Notes</span></div>
-        <div className="title-rule" />
-        <div style={{ fontSize: 11, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 14 }}>
-          The notes below explain how each line of the Income &amp; Expense schedule is derived. Current reflects actual
-          operations; the pro forma reflects achievable, market-supported rents on the property&rsquo;s entirely
-          tenant-at-will rent roll.
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, paddingBottom: 12, marginBottom: 16, borderBottom: '1px solid var(--border)' }}>
-          {assumptions.map(a => (
-            <div key={a.l} style={{ textAlign: 'center', borderTop: '3px solid var(--golden)', padding: '7px 2px' }}>
-              <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{a.v}</div>
-              <div style={{ fontSize: 7.6, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>{a.l}</div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 30, flex: 1, minHeight: 0 }}>
-          {cols.map((col, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              {col.map(Note)}
-            </div>
-          ))}
-        </div>
-
-        <div style={{ flexShrink: 0, marginTop: 14, paddingTop: 12, borderTop: '1px solid var(--border)' }}>
-          <div style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 9 }}>
-            Net Operating Income — In-Place vs Pro Forma
-          </div>
-          {noiBridge.map(d => (
-            <div key={d.label} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 7 }}>
-              <span style={{ flex: '0 0 64px', fontSize: 10.5, fontWeight: 700, color: 'var(--carbon)' }}>{d.label}</span>
-              <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-                <div style={{ width: `${(d.value / 139128) * 100}%`, height: 18, background: d.color, borderRadius: 3 }} />
-              </div>
-              <span style={{ flex: '0 0 76px', textAlign: 'right', fontSize: 12, fontWeight: 800, color: 'var(--carbon)' }}>${d.value.toLocaleString()}</span>
-            </div>
-          ))}
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -626,7 +513,7 @@ function CityOverview({ pageNum }) {
             </p>
           </div>
 
-          <div className="eyebrow" style={{ marginTop: 'auto', paddingTop: 16, marginBottom: 8 }}>About Concord</div>
+          <div className="eyebrow" style={{ marginTop: 18, marginBottom: 8 }}>About Concord</div>
           <ul className="highlights ridge-highlights" style={{ fontSize: 10.6, lineHeight: 1.7 }}>
             <li>~20 miles northwest of Boston</li>
             <li>MBTA Fitchburg Line &mdash; direct rail to Cambridge &amp; Boston</li>
@@ -723,7 +610,6 @@ function InvestmentHighlights({ pageNum }) {
       title: 'Income & Value-Add Upside',
       items: [
         { head: 'Rents Well Below Market', body: 'In-place rents average ~$1,358/mo and mark to ~$1,715 pro forma, lifting gross rent 26% from $162,900 to $205,800 and NOI 39% from $100,003 to $139,128.' },
-        { head: 'Entirely Tenant-at-Will', body: 'All ten units are tenant-at-will, allowing a new owner to reposition rents to market immediately — no long-term leases in place.' },
         { head: 'Value-Add Interiors', body: 'A mix of original and updated studios and one-bedrooms offers a clear path to renovate and re-tenant at premium Concord rents.' },
         { head: 'Efficient Studio & 1BR Mix', body: 'Ten small, in-demand units (4 studios, 6 one-bedrooms) spread risk and capture strong demand for attainable rentals in an affluent town.' },
       ],
@@ -792,21 +678,9 @@ function App() {
     <Divider eyebrow="02" title="Financial Analysis" image="/photos/aerial-4.jpg" />,
     <RentRoll />,
     <IncomeExpense />,
-    <UnderwritingNotes />,
     <Divider eyebrow="03" title="Location & Market" image="/photos/assembly.jpg" />,
     <CityOverview />,
     <LocationMap />,
-    // Annotated drone aerial — subject pin + Concord context labels. Fine-tune
-    // pin/label positions by dragging in `npm run dev`, then paste back here.
-    <FullBleed
-      image="/photos/aerial-1.jpg"
-      pin={{ x: 46, y: 56, label: 'Subject Property' }}
-      streets={[{ x: 28, y: 62, label: 'Thoreau St · Cottage Lane', arrow: 135 }]}
-      markers={[
-        { cat: 'Transit', color: '#E67E22', name: 'Concord Station', note: 'MBTA Fitchburg Line · commuter rail', x: 60, y: 40, arrow: 90 },
-        { cat: 'Landmark', color: '#F8971D', name: 'Concord Center', note: 'Downtown · dining & retail', x: 62, y: 22, arrow: 45 },
-      ]}
-    />,
     <DriveTimeMap />,
     <CountyOverview />,
     <RegionalMap />,

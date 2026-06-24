@@ -63,11 +63,24 @@ export function PhotoComingSoon({ section, title, accent, subtitle, tiles, pageN
    Renders a page of actual photography. With a `hero` src, the hero fills the
    top and `tiles` form a row beneath it; otherwise `tiles` lay out as a grid. */
 export function PhotoGallery({ section, title, accent, subtitle, hero, heroPosition, tiles = [], pageNum }) {
-  const Img = ({ src, pos }) => (
-    <div style={{ borderRadius: 4, overflow: 'hidden', minHeight: 0, minWidth: 0, height: '100%', width: '100%', background: 'var(--linen)' }}>
-      <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: pos || 'center', display: 'block' }} />
+  const Img = ({ src, pos, rotate }) => (
+    <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', minHeight: 0, minWidth: 0, height: '100%', width: '100%', background: 'var(--linen)', containerType: rotate ? 'size' : undefined }}>
+      {rotate ? (
+        // Quarter-turns (90°/270°) swap the tile's dimensions (cqh↔cqw) so the
+        // rotated image still covers; 180° keeps the same dimensions.
+        <img src={src} alt="" style={{
+          position: 'absolute', top: '50%', left: '50%',
+          width: rotate % 180 === 0 ? '100%' : '100cqh',
+          height: rotate % 180 === 0 ? '100%' : '100cqw',
+          objectFit: 'cover', objectPosition: pos || 'center', display: 'block',
+          transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
+        }} />
+      ) : (
+        <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: pos || 'center', display: 'block' }} />
+      )}
     </div>
   )
+  const tileObjs = tiles.map(t => (typeof t === 'string' ? { src: t } : t))
   return (
     <div className="page">
       <PageHeader section={section} />
@@ -82,13 +95,13 @@ export function PhotoGallery({ section, title, accent, subtitle, hero, heroPosit
         {hero ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1, minHeight: 0 }}>
             <div style={{ flex: 1.7, minHeight: 0, display: 'flex' }}><Img src={hero} pos={heroPosition} /></div>
-            <div style={{ flex: 1, display: 'grid', gridTemplateColumns: `repeat(${tiles.length || 1}, 1fr)`, gridAutoRows: '100%', gap: 10, minHeight: 0 }}>
-              {tiles.map(t => <Img key={t} src={t} />)}
+            <div style={{ flex: 1, display: 'grid', gridTemplateColumns: `repeat(${tileObjs.length || 1}, 1fr)`, gridAutoRows: '100%', gap: 10, minHeight: 0 }}>
+              {tileObjs.map(t => <Img key={t.src} src={t.src} pos={t.pos} rotate={t.rotate} />)}
             </div>
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 10, flex: 1, minHeight: 0 }}>
-            {tiles.map(t => <Img key={t} src={t} />)}
+            {tileObjs.map(t => <Img key={t.src} src={t.src} pos={t.pos} rotate={t.rotate} />)}
           </div>
         )}
       </div>
