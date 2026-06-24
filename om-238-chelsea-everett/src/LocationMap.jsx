@@ -67,11 +67,11 @@ function buildStaticMapUrl() {
 
   const params = [
     // Center and the subject pin sit on the property's coords, anchoring the
-    // whole frame on the real location. McGrath's amenities span Somerville →
-    // Cambridge → Charlestown → Everett, so zoom 12 (~6 mi vertical) keeps the
-    // far anchors (Tufts, Encore, USS Constitution) on-frame.
+    // whole frame on the real location. Chelsea Street's amenities span Everett →
+    // Chelsea → Assembly (Somerville) → Malden, so zoom 13 (~3 mi vertical) keeps
+    // the far anchors (Malden Center, Assembly Row, Home Depot) on-frame.
     `center=${PROPERTY.lat},${PROPERTY.lng}`,
-    'zoom=12',
+    'zoom=13',
     'size=593x640',
     'scale=2',
     'maptype=hybrid',

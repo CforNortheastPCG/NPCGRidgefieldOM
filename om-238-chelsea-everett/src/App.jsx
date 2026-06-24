@@ -28,7 +28,6 @@ function CoverHero({ pageNum }) {
           <div className="cover-hero-title" style={{ fontSize: 24, fontWeight: 600 }}>{ADDR}</div>
           <div className="cover-hero-sub">{DEAL.cityLong}</div>
           <div className="cover-hero-rule" style={{ marginLeft: 0, marginRight: 'auto' }} />
-          <div className="cover-hero-prep">{DEAL.type}</div>
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -43,10 +42,10 @@ function ExecutiveSummary({ pageNum }) {
     ['Lot Size', '0.34 Acres (14,810 SF)'],
     ['Number of Units', '26'],
     ['Year Built', '1970'],
-    ['Price / SF', '$439'],
-    ['Price / Unit', '$278,846'],
-    ['Cap Rate', '5.08%'],
-    ['Pro Forma Cap Rate', '7.77%'],
+    ['Price / SF', '$406'],
+    ['Price / Unit', '$257,692'],
+    ['Cap Rate', '5.49%'],
+    ['Pro Forma Cap Rate', '8.40%'],
     ['Net Operating Income', '$368,028'],
   ]
   return (
@@ -60,7 +59,7 @@ function ExecutiveSummary({ pageNum }) {
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 12 }}>
               <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$7,250,000</div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$6,700,000</div>
                 <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>Listing Price</div>
               </div>
               <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
@@ -69,26 +68,28 @@ function ExecutiveSummary({ pageNum }) {
               </div>
             </div>
             <div className="eyebrow" style={{ fontSize: 9, marginBottom: 6 }}>Property Overview</div>
-            <p style={{ fontSize: 11.2, lineHeight: 1.5, marginBottom: 9 }}>
-              Northeast Private Client Group is pleased to present the <strong>Chelsea Street Apartments</strong> located
-              at 238 Chelsea Street in Everett, MA.
-            </p>
-            <p style={{ fontSize: 11.2, lineHeight: 1.5, marginBottom: 9 }}>
-              Directly north of Boston, in close proximity to Route 1 with easy access to the MBTA (Orange Line) and
-              Chelsea Train Station, this fully de-leaded 3-story brick building built in 1970 sits on a 0.34-acre
-              (14,810 SF) lot. It consists of (20) studio apartments and (6) one-bedroom units. Tenants enjoy off-street
-              parking and coin-op laundry. The property is located less than two miles from Encore Boston Harbor and down
-              the street from new developments including The Pioneer, Jade, and Anthem Everett.
-            </p>
-            <p style={{ fontSize: 11.2, lineHeight: 1.5, marginBottom: 9 }}>
-              With in-place rents well below market, the offering presents a compelling value-add opportunity to mark
-              the rent roll to market through turnover and light renovation in one of Greater Boston&rsquo;s
-              fastest-changing, most supply-constrained submarkets.
-            </p>
-            <p style={{ fontSize: 10, lineHeight: 1.45, color: 'var(--stone)', fontStyle: 'italic', marginTop: 'auto' }}>
-              All interested and qualified parties will have an opportunity to tour the property during scheduled
-              appointments and obtain additional information.
-            </p>
+            <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <p style={{ fontSize: 13.5, lineHeight: 1.62 }}>
+                Northeast Private Client Group is pleased to present the <strong>Chelsea Street Apartments</strong> located
+                at 238 Chelsea Street in Everett, MA.
+              </p>
+              <p style={{ fontSize: 13.5, lineHeight: 1.62 }}>
+                Directly north of Boston, in close proximity to Route 1 with easy access to the MBTA (Orange Line) and
+                Chelsea Train Station, this fully de-leaded 3-story brick building built in 1970 sits on a 0.34-acre
+                (14,810 SF) lot. It consists of (20) studio apartments and (6) one-bedroom units. Tenants enjoy off-street
+                parking and coin-op laundry. The property is located less than two miles from Encore Boston Harbor and down
+                the street from new developments including The Pioneer, Jade, and Anthem Everett.
+              </p>
+              <p style={{ fontSize: 13.5, lineHeight: 1.62 }}>
+                With in-place rents well below market, the offering presents a compelling value-add opportunity to mark
+                the rent roll to market through turnover and light renovation in one of Greater Boston&rsquo;s
+                fastest-changing, most supply-constrained submarkets.
+              </p>
+              <p style={{ fontSize: 13.5, lineHeight: 1.62 }}>
+                All interested and qualified parties will have an opportunity to tour the property during scheduled
+                appointments and obtain additional information.
+              </p>
+            </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
@@ -169,10 +170,10 @@ function BuildingDescriptions({ pageNum }) {
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Investment Profile</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$7,250,000</span></div>
-                <div className="bldg-row"><span className="bldg-label">Price / Unit · / SF</span><span className="bldg-val">$278,846 · $439 / SF</span></div>
-                <div className="bldg-row"><span className="bldg-label">In-Place NOI</span><span className="bldg-val">$368,028 · 5.08% cap</span></div>
-                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$562,969 · 7.77% cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$6,700,000</span></div>
+                <div className="bldg-row"><span className="bldg-label">Price / Unit · / SF</span><span className="bldg-val">$257,692 · $406 / SF</span></div>
+                <div className="bldg-row"><span className="bldg-label">In-Place NOI</span><span className="bldg-val">$368,028 · 5.49% cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$562,969 · 8.40% cap</span></div>
               </div>
             </div>
           </div>
@@ -204,9 +205,9 @@ function RentRoll({ pageNum }) {
   ]
   const left = rows.slice(0, 13)
   const right = rows.slice(13)
-  const th = { fontSize: 8.5, padding: '5px 6px', textAlign: 'left', color: '#fff' }
+  const th = { fontSize: 11.5, padding: '9px 10px', textAlign: 'left', color: '#fff' }
   const thr = { ...th, textAlign: 'right' }
-  const td = { fontSize: 9, padding: '3px 6px', textAlign: 'left', color: 'var(--graphite)' }
+  const td = { fontSize: 12.5, padding: '7.5px 10px', textAlign: 'left', color: 'var(--graphite)' }
   const tdr = { ...td, textAlign: 'right' }
   const Half = ({ data }) => (
     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -236,25 +237,17 @@ function RentRoll({ pageNum }) {
           <Half data={left} />
           <Half data={right} />
         </div>
-        {/* Full-width totals bar */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginTop: 14 }}>
-          {[
-            ['26', 'Total Units (20 Studio · 6 1BR)'],
-            ['16,525 SF', 'Total Rentable Area'],
-            ['$534,264', 'In-Place Gross Rent / yr'],
-            ['$751,320', 'Market Gross Rent / yr (+41%)'],
-          ].map(([v, l]) => (
-            <div key={l} style={{ textAlign: 'center', padding: '8px 4px', borderTop: '3px solid var(--golden)' }}>
-              <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{v}</div>
-              <div style={{ fontSize: 7.8, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>{l}</div>
-            </div>
-          ))}
-        </div>
-        <div style={{ fontSize: 8.6, color: 'var(--stone)', marginTop: 'auto', paddingTop: 12, lineHeight: 1.5 }}>
-          In-place rents total $44,522/mo ($534,264 annually) against market of $62,610/mo ($751,320 annually) — a
-          $217,056 (41%) mark-to-market opportunity. The rent roll is granular across 26 small, in-demand units that
-          lease quickly; below-market rents reset to market through natural turnover and light renovation. Tenants enjoy
-          off-street parking and on-site coin-op laundry.
+        {/* Grand total across all 26 units */}
+        <div style={{ display: 'flex', alignItems: 'baseline', background: 'var(--carbon)', marginTop: 10, padding: '8px 14px' }}>
+          <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--golden)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Total · 26 Units</div>
+          <div style={{ marginLeft: 'auto', display: 'flex', gap: 28 }}>
+            {[['16,525 SF', 'Total SF'], ['$44,522 / mo', 'In-Place Rent'], ['$62,610 / mo', 'Market Rent']].map(([v, l]) => (
+              <div key={l} style={{ textAlign: 'right' }}>
+                <div style={{ fontSize: 14, fontWeight: 800, color: '#fff', lineHeight: 1 }}>{v}</div>
+                <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginTop: 3 }}>{l}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -264,12 +257,12 @@ function RentRoll({ pageNum }) {
 
 /* ═══════════════════ INCOME & EXPENSE ═══════════════════ */
 function IncomeExpense({ pageNum }) {
-  const tds = { fontSize: 9, padding: '3.5px 7px', textAlign: 'right' }
-  const tdl = { fontSize: 9, padding: '3.5px 7px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
-  const thr = { fontSize: 8, padding: '4px 7px', textAlign: 'right' }
-  const thl = { fontSize: 8, padding: '4px 7px', textAlign: 'left' }
-  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 9, padding: '3.5px 7px', textAlign: 'right' }
-  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9.5, padding: '4.5px 7px', textAlign: 'right' }
+  const tds = { fontSize: 9, padding: '5.5px 7px', textAlign: 'right' }
+  const tdl = { fontSize: 9, padding: '5.5px 7px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const thr = { fontSize: 8, padding: '5px 7px', textAlign: 'right' }
+  const thl = { fontSize: 8, padding: '5px 7px', textAlign: 'left' }
+  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 9, padding: '5.5px 7px', textAlign: 'right' }
+  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9.5, padding: '6.5px 7px', textAlign: 'right' }
 
   const Cols = () => (
     <colgroup>
@@ -286,7 +279,8 @@ function IncomeExpense({ pageNum }) {
   return (
     <div className="page">
       <PageHeader section="Income & Expense" />
-      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div>
         <div className="section-title" style={{ marginBottom: 2, fontSize: 22 }}>Income &amp; <span style={{ color: '#F8971D' }}>Expense Analysis</span></div>
         <div className="title-rule" style={{ marginBottom: 8 }} />
 
@@ -298,7 +292,9 @@ function IncomeExpense({ pageNum }) {
             </div>
           ))}
         </div>
+        </div>
 
+        <div>
         <div className="eyebrow" style={{ marginBottom: 3, fontSize: 9 }}>Operating Income</div>
         <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 10, tableLayout: 'fixed' }}>
           <Cols />
@@ -325,7 +321,9 @@ function IncomeExpense({ pageNum }) {
             <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$523,579</td><td style={totBg}>$20,138</td><td style={totBg}>$728,780</td><td style={totBg}>$28,030</td></tr>
           </tbody>
         </table>
+        </div>
 
+        <div>
         <div className="eyebrow" style={{ marginBottom: 4, fontSize: 9 }}>Operating Expenses</div>
         <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 4, tableLayout: 'fixed' }}>
           <Cols />
@@ -354,116 +352,9 @@ function IncomeExpense({ pageNum }) {
               </tr>
             ))}
             <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expenses</td><td style={totBg}>$155,551</td><td style={totBg}>$5,983</td><td style={totBg}>$165,811</td><td style={totBg}>$6,377</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$368,028</td><td style={noiBg}>5.08% Cap</td><td style={noiBg}>$562,969</td><td style={noiBg}>7.77% Cap</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$368,028</td><td style={noiBg}></td><td style={noiBg}>$562,969</td><td style={noiBg}></td></tr>
           </tbody>
         </table>
-        <div style={{ fontSize: 7.8, color: 'var(--stone)', marginTop: 4, lineHeight: 1.4 }}>
-          Year 1 is the current rent roll annualized with stabilized occupancy and expenses; Year 2 marks rents to
-          market (+$217,056 gross rent). Caps on the $7,250,000 offering price. Expense ratio 29.7% (Yr 1) / 22.7% (Yr 2);
-          $/Unit on 26 units. Property management at 5% of EGI and the 2% / 3% vacancy factors are underwriting
-          assumptions and may differ from current owner operations.
-        </div>
-        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: 8, paddingTop: 10 }}>
-          <span style={{ flex: 1, borderTop: '1px solid var(--border)' }} />
-          <span style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--golden)' }}>
-            Underwriting notes &amp; assumptions &mdash; see next page &rarr;
-          </span>
-          <span style={{ flex: 1, borderTop: '1px solid var(--border)' }} />
-        </div>
-      </div>
-      <PageFooter pageNum={pageNum} />
-    </div>
-  )
-}
-
-/* ═══════════════════ UNDERWRITING NOTES ═══════════════════ */
-function UnderwritingNotes({ pageNum }) {
-  const assumptions = [
-    { v: '$7,250,000', l: 'Offering Price' },
-    { v: '$278,846', l: 'Price / Unit' },
-    { v: '$439 / SF', l: 'Price / SF' },
-    { v: '5.08% → 7.77%', l: 'Cap: Yr 1 → Yr 2' },
-  ]
-  const notes = [
-    {
-      head: 'Going-In Basis',
-      body: 'At $7,250,000 the offering prices to $278,846 per unit and $439/SF — a 5.08% going-in cap on $368,028 of Year-1 NOI and a 7.77% pro forma cap on Year-2 NOI of $562,969. A fully de-leaded, 26-unit brick building four miles from downtown Boston and minutes from Encore.',
-    },
-    {
-      head: 'Rental Income',
-      body: 'In-place rents average ~$1,712/mo against market of ~$2,408. Marking the rent roll to market lifts gross rent from $534,264 to $751,320 — a $217,056 (41%) increase — and grows NOI by 53%.',
-    },
-    {
-      head: 'Below-Market Mark-to-Market',
-      body: 'Current rents range $1,322–$1,990 against $2,359–$2,475 market. The spread is the core value-add, achievable through natural turnover and light renovation across many small, fast-leasing units — no major repositioning required.',
-    },
-    {
-      head: 'Operating Expenses',
-      body: 'Real estate tax ($42,114), insurance ($18,705), and owner-paid gas, electric, water/sewer, and trash are carried at actuals. Repairs & maintenance and payroll / contract services are normalized to $500/unit each; management at 5% of EGI.',
-    },
-    {
-      head: 'Management & Vacancy',
-      body: 'Management is underwritten at 5% of effective gross income, with a 2% vacancy/collection-loss factor in Year 1 and 3% in Year 2. The resulting expense ratio is 29.7% (Year 1) and 22.7% (Year 2) — efficient operations for a 26-unit asset.',
-    },
-    {
-      head: 'Condition & Location',
-      body: 'A fully de-leaded 1970 brick building — a meaningful compliance advantage in Massachusetts — less than two miles from Encore Boston Harbor and down the street from the Lower Broadway development pipeline (The Pioneer, Jade, Anthem) reshaping the Everett submarket.',
-    },
-  ]
-  const half = Math.ceil(notes.length / 2)
-  const cols = [notes.slice(0, half), notes.slice(half)]
-  const noiBridge = [
-    { label: 'Year 1', value: 368028, color: '#3F4753' },
-    { label: 'Year 2', value: 562969, color: '#F8971D' },
-  ]
-  const Note = (n) => (
-    <div key={n.head} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 14 }}>
-      <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 6 }}>{n.head}</div>
-      <p style={{ fontSize: 10.8, lineHeight: 1.55, color: 'var(--graphite)' }}>{n.body}</p>
-    </div>
-  )
-  return (
-    <div className="page">
-      <PageHeader section="Income & Expense" />
-      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-        <div className="section-title" style={{ marginBottom: 2 }}>Underwriting <span style={{ color: '#F8971D' }}>Notes</span></div>
-        <div className="title-rule" />
-        <div style={{ fontSize: 11, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 14 }}>
-          The notes below explain how each line of the Income &amp; Expense schedule is derived. Year 1 reflects the
-          current rent roll annualized with stabilized occupancy; Year 2 reflects achievable, market-supported rents on
-          the building&rsquo;s deeply below-market rent roll.
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, paddingBottom: 12, marginBottom: 16, borderBottom: '1px solid var(--border)' }}>
-          {assumptions.map(a => (
-            <div key={a.l} style={{ textAlign: 'center', borderTop: '3px solid var(--golden)', padding: '7px 2px' }}>
-              <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{a.v}</div>
-              <div style={{ fontSize: 7.6, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>{a.l}</div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 30, flex: 1, minHeight: 0 }}>
-          {cols.map((col, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              {col.map(Note)}
-            </div>
-          ))}
-        </div>
-
-        <div style={{ flexShrink: 0, marginTop: 14, paddingTop: 12, borderTop: '1px solid var(--border)' }}>
-          <div style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 9 }}>
-            Net Operating Income — Year 1 vs Year 2
-          </div>
-          {noiBridge.map(d => (
-            <div key={d.label} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 7 }}>
-              <span style={{ flex: '0 0 64px', fontSize: 10.5, fontWeight: 700, color: 'var(--carbon)' }}>{d.label}</span>
-              <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-                <div style={{ width: `${(d.value / 562969) * 100}%`, height: 18, background: d.color, borderRadius: 3 }} />
-              </div>
-              <span style={{ flex: '0 0 76px', textAlign: 'right', fontSize: 12, fontWeight: 800, color: 'var(--carbon)' }}>${d.value.toLocaleString()}</span>
-            </div>
-          ))}
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -539,7 +430,7 @@ function CityOverview({ pageNum }) {
             </p>
           </div>
 
-          <div className="eyebrow" style={{ marginTop: 'auto', paddingTop: 14, marginBottom: 8 }}>About Everett</div>
+          <div className="eyebrow" style={{ marginTop: 18, marginBottom: 8 }}>About Everett</div>
           <ul className="highlights ridge-highlights" style={{ fontSize: 10.4, lineHeight: 1.6 }}>
             <li>Just north of Boston in Middlesex County</li>
             <li>Home to Encore Boston Harbor (resort &amp; casino)</li>
@@ -635,7 +526,7 @@ function InvestmentHighlights({ pageNum }) {
       title: 'Income & Value-Add Upside',
       items: [
         { head: 'Rents 40%+ Below Market', body: 'Marking rents from an average ~$1,712 to ~$2,408 lifts gross rent from $534,264 to $751,320 — a $217,056 (41%) increase.' },
-        { head: 'Pro Forma Cap of 7.77%', body: 'Stabilized Year-2 NOI of $562,969 prices to a 7.77% cap — a 269 bps step-up from the 5.08% going-in cap.' },
+        { head: 'Pro Forma Cap of 8.40%', body: 'Stabilized Year-2 NOI of $562,969 prices to an 8.40% cap — a 291 bps step-up from the 5.49% going-in cap.' },
         { head: 'Granular 26-Unit Rent Roll', body: 'Twenty studios and six one-bedrooms spread risk across many small, in-demand units that lease quickly in a tight market.' },
         { head: 'Mark-to-Market on Turnover', body: 'Below-market in-place rents reset to market through natural turnover and light renovation — no major repositioning required.' },
       ],
@@ -704,7 +595,6 @@ function App() {
     <Divider eyebrow="02" title="Financial Analysis" image="/photos/aerial-4.jpg" />,
     <RentRoll />,
     <IncomeExpense />,
-    <UnderwritingNotes />,
     <Divider eyebrow="03" title="Location & Market" image="/photos/aerial-1.jpg" />,
     <CityOverview />,
     <LocationMap />,
@@ -712,10 +602,9 @@ function App() {
     // by dragging in `npm run dev`, then paste back here.
     <FullBleed
       image="/photos/aerial-1.jpg"
-      pin={{ x: 46, y: 60, label: 'Subject Property' }}
+      pin={{ x: 50.4, y: 42.8, label: 'Subject Property' }}
       markers={[
-        { cat: 'Landmark', color: '#F8971D', name: 'Downtown Boston', note: '~4 miles · ~15 minutes', x: 60, y: 14, arrow: 0 },
-        { cat: 'Landmark', color: '#884EA0', name: 'Encore Boston Harbor', note: '< 2 miles', x: 30, y: 22, arrow: 0 },
+        { cat: 'Landmark', color: '#F8971D', name: 'Downtown Boston', note: '~4 miles · ~15 minutes', x: 62.4, y: 6.4, arrow: 90, side: 'left' },
       ]}
     />,
     <DriveTimeMap />,

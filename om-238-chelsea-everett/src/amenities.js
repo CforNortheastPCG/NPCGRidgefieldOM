@@ -4,13 +4,13 @@
    color-coded by category; items without an address still appear in the
    printed directory.
 
-   NOTE: coordinates below are approximate (block-level) and intended for the
-   reference map only — verify against the survey before relying on them.
+   NOTE: coordinates are real Google locations (geocoded to ROOFTOP where
+   available; stations and parks point at the feature itself).
 */
 
 export const PROPERTY = {
-  lat: 42.40150,
-  lng: -71.05250,
+  lat: 42.40329,
+  lng: -71.04595,
   address: '238 Chelsea Street, Everett, MA 02149',
 }
 
@@ -27,7 +27,7 @@ export const MAP_CATEGORIES = [
   { heading: 'Dining & Coffee', label: 'Dining & Coffee', color: '0xC0392B', swatch: '#C0392B' },
   { heading: 'Grocery & Retail', label: 'Grocery & Retail', color: '0x1E8449', swatch: '#1E8449' },
   { heading: 'Shopping & Entertainment', label: 'Shopping & Entertainment', color: '0x884EA0', swatch: '#884EA0' },
-  { heading: 'Transit — MBTA', label: 'Transit — MBTA', color: '0xE67E22', swatch: '#E67E22' },
+  { heading: 'Transit — MBTA', label: 'Transit — MBTA', color: '0xD81B60', swatch: '#D81B60' },
   { heading: 'Civic & Healthcare', label: 'Civic & Healthcare', color: '0x2471A3', swatch: '#2471A3' },
   { heading: 'Parks & Recreation', label: 'Parks & Recreation', color: '0x0E6655', swatch: '#0E6655' },
 ]
@@ -81,32 +81,34 @@ export const DIRECTORY = [
     heading: 'Parks & Recreation',
     items: [
       { name: 'Glendale Park', note: 'Everett recreation · ballfields', address: 'Elm Street, Everett, MA 02149' },
-      { name: 'Rivergreen Park', note: 'Riverfront path · near Encore', address: 'Lower Broadway, Everett, MA 02149' },
+      { name: 'Rivergreen Park', note: 'Riverfront path · near Encore', address: 'Rivergreen Drive, Everett, MA 02149' },
       { name: 'Gateway Park', note: 'Mystic riverfront open space', address: 'Mystic View Road, Everett, MA 02149' },
     ],
   },
 ]
 
-/* Approximate (block-level) coordinates per address — see the note at the top. */
+/* Real lat/lng per address — geocoded via Google (ROOFTOP where available;
+   stations/parks point at the feature itself). Markers are plotted by lat/lng. */
 export const COORDS = {
-  '87 Santilli Highway, Everett, MA 02149': [42.39650, -71.06650],
-  '414 Broadway, Everett, MA 02149': [42.40550, -71.05700],
-  '1 Broadway, Everett, MA 02149': [42.39580, -71.06680],
-  'Lower Broadway, Everett, MA 02149': [42.39900, -71.06400],
-  '170 Everett Avenue, Chelsea, MA 02150': [42.39120, -71.06420],
-  '1 Mystic View Road, Everett, MA 02149': [42.40300, -71.07450],
-  '36 Mystic View Road, Everett, MA 02149': [42.40450, -71.07600],
-  '1100 Revere Beach Parkway, Everett, MA 02149': [42.40150, -71.06850],
-  '355 Artisan Way, Somerville, MA 02145': [42.39250, -71.07750],
-  'Wellington Station, Medford, MA 02155': [42.40230, -71.07730],
-  'Assembly Station, Somerville, MA 02145': [42.39280, -71.07740],
-  'Chelsea Station, Chelsea, MA 02150': [42.39500, -71.03400],
-  'Malden Center Station, Malden, MA 02148': [42.42670, -71.07420],
-  '103 Garland Street, Everett, MA 02149': [42.40800, -71.05600],
-  '100 Elm Street, Everett, MA 02149': [42.41100, -71.05300],
-  '484 Broadway, Everett, MA 02149': [42.40820, -71.05480],
-  'Elm Street, Everett, MA 02149': [42.41000, -71.04900],
-  'Mystic View Road, Everett, MA 02149': [42.40500, -71.07300],
+  '87 Santilli Highway, Everett, MA 02149': [42.40596, -71.06789],         // Night Shift Brewing
+  '414 Broadway, Everett, MA 02149': [42.40672, -71.05584],                // Dunkin'
+  '1 Broadway, Everett, MA 02149': [42.39521, -71.06954],                  // Encore Boston Harbor
+  'Lower Broadway, Everett, MA 02149': [42.40206, -71.05342],              // Anthem / Jade developments
+  'Rivergreen Drive, Everett, MA 02149': [42.40965, -71.07166],            // Rivergreen Park
+  '170 Everett Avenue, Chelsea, MA 02150': [42.39648, -71.04225],          // Market Basket
+  '1 Mystic View Road, Everett, MA 02149': [42.39690, -71.07149],          // Costco Wholesale
+  '36 Mystic View Road, Everett, MA 02149': [42.39873, -71.07230],         // Target / Gateway Center
+  '1100 Revere Beach Parkway, Everett, MA 02149': [42.40412, -71.02545],   // The Home Depot
+  '355 Artisan Way, Somerville, MA 02145': [42.39425, -71.07914],          // Assembly Row
+  'Wellington Station, Medford, MA 02155': [42.40237, -71.07708],          // Wellington (Orange Line)
+  'Assembly Station, Somerville, MA 02145': [42.39281, -71.07726],         // Assembly (Orange Line)
+  'Chelsea Station, Chelsea, MA 02150': [42.39682, -71.04040],             // Chelsea (CR / SL3)
+  'Malden Center Station, Malden, MA 02148': [42.42734, -71.07423],        // Malden Center (Orange Line)
+  '103 Garland Street, Everett, MA 02149': [42.40942, -71.03968],          // CHA Everett Hospital
+  '100 Elm Street, Everett, MA 02149': [42.41428, -71.04349],              // Everett High School
+  '484 Broadway, Everett, MA 02149': [42.40844, -71.05451],                // Everett City Hall
+  'Elm Street, Everett, MA 02149': [42.41374, -71.04504],                  // Glendale Park
+  'Mystic View Road, Everett, MA 02149': [42.39991, -71.07075],            // Gateway Park
 }
 
 /* Flattened list of every mapped POI, tagged with category label + colors. */
