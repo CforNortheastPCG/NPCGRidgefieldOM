@@ -13,6 +13,8 @@ export const PHOTO_PAGES = [
     kind: 'gallery',
     section: 'Property Photography', title: 'Aerial', accent: '& Site',
     hero: '/photos/aerial-4.jpg',
+    // Anchor lower in the frame so the building at the bottom isn't cropped.
+    heroPosition: 'center bottom',
     tiles: ['/photos/aerial-2.jpg', '/photos/area-1.jpg', '/photos/area-2.jpg'],
   },
   {

@@ -94,7 +94,7 @@ function ExecutiveSummary({ pageNum }) {
               <img src="/photos/aerial-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div style={{ flex: 1, borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
-              <img src="/photos/aerial-3.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src="/photos/storefront-1.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
           </div>
         </div>
@@ -705,7 +705,7 @@ function InvestmentHighlights({ pageNum }) {
       ],
     },
   ]
-  const photos = ['/photos/comm-1.jpg', '/photos/aerial-1.jpg']
+  const photos = ['/photos/comm-1.jpg', '/photos/aerial-5.png']
   return (
     <div className="page">
       <PageHeader section="Investment Highlights" />
