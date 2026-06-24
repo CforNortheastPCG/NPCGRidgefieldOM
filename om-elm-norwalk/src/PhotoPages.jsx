@@ -55,7 +55,6 @@ export function PhotoComingSoon({ section, title, accent, subtitle, tiles, pageN
             ? <PlaceholderTile key={t} caption={t} />
             : <div key={t.caption} style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', minHeight: 0 }}>
                 <img src={t.src} alt={t.caption} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '6px 10px', background: 'rgba(0,0,0,0.55)', color: '#fff', fontSize: 9, fontWeight: 600 }}>{t.caption}</div>
               </div>
           )}
         </div>

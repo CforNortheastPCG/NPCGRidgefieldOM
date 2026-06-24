@@ -500,14 +500,14 @@ body {
 .cover-hero-fallback { width: 100%; height: 100%; background: linear-gradient(135deg, #2a3038 0%, #3f4753 100%); }
 .cover-hero-shade { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.85) 100%); }
 .cover-hero-header { position: absolute; top: 28px; left: 40px; right: 40px; display: flex; justify-content: space-between; align-items: center; }
-.cover-hero-overlay { position: absolute; left: 48px; right: 48px; bottom: 56px; color: #fff; }
+.cover-hero-overlay { position: absolute; left: 48px; right: 48px; bottom: 48px; color: #fff; }
 .cover-hero-box { display: inline-block; background: var(--golden); color: #fff; padding: 6px 14px; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; }
 .cover-hero-type { font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; opacity: 0.85; margin-bottom: 6px; }
-.cover-hero-name { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 4px; }
-.cover-hero-title { font-size: 58px; font-weight: 700; line-height: 1.02; color: #fff; margin: 0 0 6px; letter-spacing: -0.015em; }
-.cover-hero-sub { font-size: 16px; color: #fff; opacity: 0.9; margin-bottom: 16px; }
-.cover-hero-rule { width: 60px; height: 3px; background: var(--golden); margin-bottom: 14px; }
-.cover-hero-prep { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; opacity: 0.75; }
+.cover-hero-name { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 3px; }
+.cover-hero-title { font-size: 42px; font-weight: 700; line-height: 1.0; color: #fff; margin: 0 0 4px; letter-spacing: -0.015em; }
+.cover-hero-sub { font-size: 14px; color: #fff; opacity: 0.9; margin-bottom: 11px; }
+.cover-hero-rule { width: 52px; height: 3px; background: var(--golden); margin-bottom: 10px; }
+.cover-hero-prep { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; opacity: 0.75; }
 
 /* ── EXEC STATS GRID ── */
 .exec-stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; border: 1px solid var(--border); margin-bottom: 14px; }

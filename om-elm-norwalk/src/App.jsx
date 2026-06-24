@@ -1,10 +1,8 @@
 import './App.css'
 import { cloneElement } from 'react'
-import Toc from './Toc.jsx'
 import LocationMap from './LocationMap.jsx'
 import { PhotoComingSoon } from './PhotoPages.jsx'
 import { PHOTO_PAGES } from './photos.js'
-import Divider from './Divider.jsx'
 import RegionalMap from './RegionalMap.jsx'
 import BrokerProfile from './BrokerProfile.jsx'
 import LocationsPage from './LocationsPage.jsx'
@@ -16,14 +14,16 @@ function CoverHero({ pageNum }) {
   return (
     <div className="page">
       <div className="cover-hero">
-        <img className="cover-hero-img" src="/photos/1-web-or-mls-6 Elm St, Norwalk, CT 06850 (1 OF 53).JPG" alt="" />
+        <img src="/photos/35-web-or-mls-6 Elm St, Norwalk, CT 06850 (34 OF 53).JPG" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(26px) brightness(0.65)', transform: 'scale(1.12)' }} />
+        <img className="cover-hero-img" src="/photos/35-web-or-mls-6 Elm St, Norwalk, CT 06850 (34 OF 53).JPG" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center 42%' }} />
         <div className="cover-hero-shade" />
         <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '55%', background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.85) 100%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 88, background: 'var(--carbon)' }} />
         <div className="cover-hero-header">
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
         <div className="cover-hero-overlay">
-          <div style={{ color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 14 }}>For Sale</div>
+          <div style={{ color: '#fff', fontSize: 11, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 10 }}>For Sale</div>
           <div className="cover-hero-name">Elm Street Apartments</div>
           <div className="cover-hero-title">{ADDR}</div>
           <div className="cover-hero-sub">Norwalk, Connecticut</div>
@@ -46,12 +46,10 @@ function ExecutiveSummary({ pageNum }) {
         <div className="section-title">Executive Summary</div>
 
         {/* Stat tiles */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, margin: '8px 0 10px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10, margin: '8px 0 10px' }}>
           {[
-            { v: '$3,275,000', l: 'Asking Price' },
+            { v: 'Subject to Offer', l: 'Pricing' },
             { v: '12', l: 'Total Units' },
-            { v: '6.50%', l: 'Going-In Cap' },
-            { v: '$273K', l: 'Per Unit' },
           ].map((t, i) => (
             <div key={i} style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
               <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{t.v}</div>
@@ -90,7 +88,7 @@ function ExecutiveSummary({ pageNum }) {
               conditioning. Utility structures vary by building: the six front-building units are individually
               metered with fully tenant-paid electric heat, hot water, and cooking; the four middle-building units
               are tenant-paid electric with landlord-provided gas heat and hot water; and the two rear-building
-              units are fully tenant-paid.
+              units are individually metered and fully tenant-paid.
             </p>
             <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
               Located in Norwalk, a core Fairfield County rental market with a long track record of high occupancy,
@@ -101,8 +99,8 @@ function ExecutiveSummary({ pageNum }) {
             </p>
             <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
               6 Elm Street represents a rare opportunity to acquire a recently improved, large-unit asset in an
-              established Fairfield County market. Priced at $3,275,000 &mdash; or approximately $273,000 per unit
-              and $271 per square foot &mdash; the property delivers a 6.50% going-in cap rate on current income.
+              established Fairfield County market. Offered on a subject-to-offer basis, the property delivers a
+              6.50% going-in cap rate on current income.
             </p>
             <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
               A new owner stands to benefit from meaningful embedded upside. In-place rents currently sit roughly
@@ -134,26 +132,15 @@ function ExecutiveSummary({ pageNum }) {
 /* ═══════════════════ 3 — INVESTMENT HIGHLIGHTS ═══════════════════ */
 function InvestmentHighlights({ pageNum }) {
   // 2×2 checkerboard — text box · photo (top), photo · text box (bottom).
-  const boxes = [
-    {
-      title: 'Asset, Capital & Operations',
-      items: [
-        { head: 'Completed Capital Program', body: 'Five renovated apartments plus new parking lot, siding, vinyl windows, HVAC, furnace, commercial hot water heater, brick repointing, storm drains, and more — major capex already behind the asset.' },
-        { head: 'Two Units Added', body: 'Conversion of two commercial-zoned units to legal residential apartments expands the income base.' },
-        { head: 'Large Floor Plans', body: '10 of 12 units are 2BR, 3BR, or 4BR layouts — an increasingly scarce configuration that drives premium rents and tenant retention.' },
-        { head: 'In-Unit Laundry', body: 'Washer and dryer in all renovated units plus both rear-building apartments.' },
-        { head: 'Individually Metered Front Building', body: 'Six front-building units carry fully tenant-paid electric heat, hot water, and cooking, limiting owner expense exposure.' },
-      ],
-    },
-    {
-      title: 'Income, Yield & Market',
-      items: [
-        { head: 'Embedded Rent Upside', body: 'Approximately $54,000 in below-market rents (~15%); average in-place rent of $2,211 versus $2,588 pro forma.' },
-        { head: 'Operational Upside', body: '~23% NOI growth (from ~$213,000 to ~$262,000) achievable through lease turnover with minimal remaining capital expenditure.' },
-        { head: 'Strong Going-In Yield', body: '6.50% current cap rate / 7.99% pro forma on a stabilized, historically high-occupancy asset.' },
-        { head: 'Desirable Rental Market', body: 'Norwalk’s established, high-demand rental market with a history of strong occupancy and Metro-North access to Manhattan.' },
-      ],
-    },
+  const items = [
+    { head: 'Completed Capital Program', body: 'Five renovated apartments plus new parking lot, siding, vinyl windows, HVAC, furnace, commercial hot water heater, brick repointing, storm drains, and more — major capex already behind the asset.' },
+    { head: 'Two Units Added', body: 'Conversion of two commercial-zoned units to legal residential apartments expands the income base.' },
+    { head: 'Large Floor Plans', body: '10 of 12 units are 2BR, 3BR, or 4BR layouts — an increasingly scarce configuration that drives premium rents and tenant retention.' },
+    { head: 'In-Unit Laundry', body: 'Washer and dryer in all renovated units plus both rear-building apartments.' },
+    { head: 'Individually Metered Front Building', body: 'Six front-building units carry fully tenant-paid electric heat, hot water, and cooking, limiting owner expense exposure.' },
+    { head: 'Embedded Rent Upside', body: 'Approximately $54,000 in below-market rents (~15%); average in-place rent of $2,211 versus $2,588 pro forma.' },
+    { head: 'Operational Upside', body: '~23% NOI growth (from ~$213,000 to ~$262,000) achievable through lease turnover with minimal remaining capital expenditure.' },
+    { head: 'Desirable Rental Market', body: 'Norwalk’s established, high-demand rental market with a history of strong occupancy and Metro-North access to Manhattan.' },
   ]
   const photos = [
     '/photos/36-web-or-mls-6 Elm St, Norwalk, CT 06850 (35 OF 53).JPG',
@@ -166,28 +153,22 @@ function InvestmentHighlights({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Investment <span style={{ color: '#F8971D' }}>Highlights</span></div>
         <div className="title-rule" />
 
-        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 6, minHeight: 0, paddingTop: 6 }}>
-          {(() => {
-            const TextBox = (g, key) => (
-              <div key={key} style={{ display: 'flex', flexDirection: 'column', minHeight: 0, padding: '2px 6px' }}>
-                <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>{g.title}</div>
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8, justifyContent: 'space-between', minHeight: 0 }}>
-                  {g.items.map((it, ii) => (
-                    <div key={ii} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
-                      <div style={{ fontSize: 10.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3, lineHeight: 1.16 }}>{it.head}</div>
-                      <p style={{ fontSize: 9.2, lineHeight: 1.38, color: 'var(--graphite)' }}>{it.body}</p>
-                    </div>
-                  ))}
-                </div>
+        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 0.58fr', gap: 18, minHeight: 0, paddingTop: 6 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, justifyContent: 'space-between', minHeight: 0, padding: '2px 6px' }}>
+            {items.map((it, ii) => (
+              <div key={ii} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 12 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 4, lineHeight: 1.16 }}>{it.head}</div>
+                <p style={{ fontSize: 11, lineHeight: 1.4, color: 'var(--graphite)' }}>{it.body}</p>
               </div>
-            )
-            const PhotoBox = (src, key) => (
-              <div key={key} style={{ borderRadius: 8, overflow: 'hidden', minHeight: 0, background: 'var(--linen)', border: '1px solid var(--border)' }}>
+            ))}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minHeight: 0 }}>
+            {photos.map((src, i) => (
+              <div key={i} style={{ borderRadius: 8, overflow: 'hidden', minHeight: 0, flex: 1, background: 'var(--linen)', border: '1px solid var(--border)' }}>
                 <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
-            )
-            return [TextBox(boxes[0], 'tl'), PhotoBox(photos[0], 'tr'), PhotoBox(photos[1], 'bl'), TextBox(boxes[1], 'br')]
-          })()}
+            ))}
+          </div>
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -262,7 +243,7 @@ function BuildingDescriptions({ pageNum }) {
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Front Bldg (6 units)</span><span className="bldg-val">All Tenant Paid Electric (heat, HW, cooking)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Middle Bldg (4 units)</span><span className="bldg-val">Tenant Paid Electric, Landlord Paid Gas Heat & HW</span></div>
-                <div className="bldg-row"><span className="bldg-label">Back Bldg (2 units)</span><span className="bldg-val">All Tenant Paid w/ Central A/C</span></div>
+                <div className="bldg-row"><span className="bldg-label">Back Bldg (2 units)</span><span className="bldg-val">Individually Metered, All Tenant Paid w/ Central A/C</span></div>
               </div>
             </div>
           </div>
@@ -287,7 +268,7 @@ function BuildingDescriptions({ pageNum }) {
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Back Building — 2 Units</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Units</span><span className="bldg-val">2 Apartments</span></div>
-                <div className="bldg-row"><span className="bldg-label">Utilities</span><span className="bldg-val">All tenant paid with central A/C</span></div>
+                <div className="bldg-row"><span className="bldg-label">Utilities</span><span className="bldg-val">Individually metered, all tenant paid with central A/C</span></div>
                 <div className="bldg-row"><span className="bldg-label">Features</span><span className="bldg-val">New HVAC units, ducts, pipes, new electric owners meter</span></div>
               </div>
             </div>
@@ -737,23 +718,18 @@ function FairfieldCounty({ pageNum }) {
 function App() {
   const pages = [
     <CoverHero />,
-    <Toc />,
     <DealContacts />,
     <ExecutiveSummary />,
     <InvestmentHighlights />,
-    <Divider eyebrow="01" title="The Property" />,
     <BuildingDescriptions />,
     <CapexSummary />,
     ...PHOTO_PAGES.map(p => <PhotoComingSoon {...p} />),
-    <Divider eyebrow="02" title="Financial Analysis" />,
     <RentRoll />,
     <IncomeExpense />,
-    <Divider eyebrow="03" title="Location & Market" />,
     <NorwalkCombined />,
     <LocationMap />,
     <FairfieldCounty />,
     <RegionalMap />,
-    <Divider eyebrow="04" title="The Team" />,
     <TeamPage />,
     <LocationsPage />,
   ]
