@@ -1,0 +1,43 @@
+/* ═══════════════════ CLOSING FLYER ═══════════════════
+   One-page landscape "Just Sold" flyer. Inherits .flyer-page (1056×816,
+   Montserrat, carbon) from flyer.css. Full-bleed photo + left scrim panel
+   with the stat ladder + a deal-contact bar across the bottom. */
+
+.cl-page { overflow: hidden; }
+
+.cl-hero { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* dark on the left (for the stat ladder) fading clear to the right, plus a
+   soft bottom darken so the contact bar reads as part of the page. */
+.cl-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(105deg, rgba(20,24,30,0.88) 0%, rgba(20,24,30,0.74) 24%, rgba(20,24,30,0.2) 44%, rgba(20,24,30,0) 56%),
+    linear-gradient(to bottom, rgba(20,24,30,0.28) 0%, rgba(20,24,30,0) 18%);
+}
+
+.cl-logo { position: absolute; top: 36px; right: 44px; height: 50px; object-fit: contain; z-index: 3; }
+
+/* ── left panel ── */
+.cl-panel { position: absolute; left: 56px; top: 54px; width: 430px; z-index: 2; color: #fff; }
+.cl-address { font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
+.cl-dash { width: 64px; height: 5px; background: var(--golden); margin: 16px 0 14px; }
+.cl-status { font-size: 76px; font-weight: 800; line-height: 0.98; letter-spacing: -0.015em; }
+.cl-name { display: inline-block; margin-top: 18px; background: var(--golden); color: #fff; font-size: 15px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 16px; }
+
+/* ── stat ladder ── */
+.cl-stats { margin-top: 26px; }
+.cl-stat { padding-left: 16px; border-left: 4px solid var(--golden); margin-bottom: 17px; }
+.cl-stat-l { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.72); }
+.cl-stat-v { font-size: 27px; font-weight: 800; color: #fff; line-height: 1.04; margin-top: 3px; }
+
+/* ── deal-contact bar ── */
+.cl-contacts { position: absolute; left: 0; right: 0; bottom: 0; background: var(--carbon); z-index: 3; padding: 13px 40px 15px; }
+.cl-contacts-tag { font-size: 9.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--golden); margin-bottom: 10px; }
+.cl-contacts-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+.cl-broker { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.cl-broker img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid var(--golden); flex-shrink: 0; }
+.cl-b-info { min-width: 0; }
+.cl-b-name { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.1; }
+.cl-b-title { font-size: 7.5px; font-weight: 500; letter-spacing: 0.02em; color: var(--stone); text-transform: uppercase; margin: 2px 0 2px; line-height: 1.15; }
+.cl-b-meta { font-size: 7.5px; color: rgba(255,255,255,0.82); font-weight: 500; line-height: 1.2; word-break: break-word; }
