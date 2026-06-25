@@ -15,6 +15,10 @@ const puppeteer = require('puppeteer');
 const ROOT = __dirname;
 const b64 = (p, m) => `data:${m};base64,` + fs.readFileSync(path.join(ROOT, p)).toString('base64');
 const BG = b64('public/photos/cover.jpg', 'image/jpeg');
+// farther-out aerial used for the full-bleed "listed" post so the whole building fits
+const LISTED_BG = b64('OM Photos (1)/300-310 S Main St-16.jpg', 'image/jpeg');
+// ground-level pylon-sign shot used for the Instagram "listed" post
+const PYLON_BG = b64('OM Photos (1)/image.png', 'image/png');
 const LOGO = b64('public/logos/npcg-white-hires.png', 'image/png');
 const GOLD = '#F8971D';
 const CARBON = '#2b3038';
@@ -72,14 +76,21 @@ const variants = {
       <div class="foot">${statRow(u)}</div>`,
   }),
 
-  // 2 — gold "JUST LISTED" ribbon, title at bottom
+  // 2 — gold "JUST LISTED" ribbon, title bottom-right, whole building in frame
   listed: (W, H, u, pad) => ({
     css: `
+      ${H > W
+        ? `.bg{background:url('${PYLON_BG}') 54% center/cover no-repeat}` /* portrait (IG): pylon sign, crops out the SH realtor sign on the left */
+        : `.bg{background:url('${LISTED_BG}') 54% center/cover no-repeat}`}
+      .bg{filter:brightness(1.07) saturate(1.05)}
+      .scrim-bottom{background:linear-gradient(to bottom,
+          rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 42%, rgba(0,0,0,0.30) 70%, rgba(0,0,0,0.86) 100%)}
       .ribbon{position:absolute;top:${Math.round(54*u)}px;left:0;background:${GOLD};color:#1b1e23;
           font-size:${Math.round(20*u)}px;font-weight:800;letter-spacing:${0.18*u}em;text-transform:uppercase;
           padding:${Math.round(12*u)}px ${Math.round(34*u)}px ${Math.round(12*u)}px ${pad}px;
           box-shadow:0 6px 18px rgba(0,0,0,0.4)}
-      .foot{position:absolute;left:${pad}px;right:${pad}px;bottom:${pad}px}
+      .foot{position:absolute;left:${pad}px;right:${pad}px;bottom:${pad}px;text-align:right}
+      .foot .rule{margin-left:auto}
       .foot .eyebrow{color:${GOLD}}
       .foot .addr{margin-top:${Math.round(18*u)}px}`,
     scrim: 'scrim-bottom',
@@ -161,7 +172,8 @@ const sizes = [
 ];
 (async () => {
   const browser = await puppeteer.launch({ headless: true });
-  for (const name of Object.keys(variants)) {
+  const only = process.env.ONLY ? process.env.ONLY.split(',') : Object.keys(variants);
+  for (const name of only) {
     for (const s of sizes) {
       const page = await browser.newPage();
       await page.setViewport({ width: s.w, height: s.h, deviceScaleFactor: 2 });
