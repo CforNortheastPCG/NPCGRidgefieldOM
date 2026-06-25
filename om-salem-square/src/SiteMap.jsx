@@ -67,6 +67,14 @@ export default function SiteMap({ pageNum }) {
                 Set VITE_GOOGLE_MAPS_API_KEY in .env.local and enable Maps Static API to render the parcel map.
               </div>
             )}
+            {/* Circular render pin over the ±1.69-ac excess land (the entitled development parcel) */}
+            <div style={{ position: 'absolute', left: '43%', top: '34%', transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+              <div style={{ background: 'rgba(43,48,56,0.88)', color: '#fff', fontSize: 8, fontWeight: 700, letterSpacing: '0.03em', padding: '2px 7px', borderRadius: 3, whiteSpace: 'nowrap', marginBottom: 4 }}>Proposed 51-Unit Building</div>
+              <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--golden)', boxShadow: '0 2px 7px rgba(0,0,0,0.5)' }}>
+                <img src="/photos/rendering.png" alt="Conceptual rendering of the proposed 51-unit building" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+              <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '9px solid var(--golden)', marginTop: -1, filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.4))' }} />
+            </div>
           </div>
 
           {/* SITE FACTS */}

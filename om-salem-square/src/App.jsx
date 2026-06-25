@@ -660,6 +660,50 @@ function InvestmentHighlights({ pageNum }) {
   )
 }
 
+/* ═══════════════════ PROPOSED DEVELOPMENT ═══════════════════ */
+function ProposedDevelopment({ pageNum }) {
+  const stats = [
+    { v: '51', k: 'Entitled Units' },
+    { v: '4', k: 'Stories' },
+    { v: '±1.69', k: 'Acres · Excess Land' },
+    { v: 'Sept 2025', k: 'Site Plan Approved' },
+    { v: 'Summer 2027', k: 'New Metro-North Station' },
+  ]
+  return (
+    <div className="page">
+      <PageHeader section="Proposed Development" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2 }}>Proposed 51-Unit <span style={{ color: '#F8971D' }}>Development</span></div>
+        <div className="title-rule" />
+        <div style={{ fontSize: 12, lineHeight: 1.6, color: 'var(--graphite)', marginBottom: 12 }}>
+          On about <strong>1.69 acres of excess land</strong> behind the existing center, Salem Square is entitled for a
+          <strong> 51-unit multifamily building</strong>, with site plans approved by the Naugatuck Zoning Commission in
+          September 2025. Building permits are the remaining step &mdash; a de-risked, shovel-ready second phase rather
+          than a speculative rezoning, positioned for Naugatuck&rsquo;s push toward transit-oriented housing around the
+          new $33.2M Metro-North station opening summer 2027.
+        </div>
+
+        {/* Full-bleed conceptual rendering */}
+        <div style={{ position: 'relative', flex: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--linen)' }}>
+          <img src="/photos/rendering.png" alt="Conceptual rendering of the proposed 51-unit multifamily building at Salem Square" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(43,48,56,0.85)', color: '#fff', fontSize: 8.5, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '4px 10px', borderRadius: 3 }}>Conceptual Rendering</div>
+        </div>
+
+        {/* Development stat strip */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginTop: 12 }}>
+          {stats.map(s => (
+            <div key={s.k} style={{ textAlign: 'center', padding: '7px 4px', borderTop: '3px solid var(--golden)' }}>
+              <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 5 }}>{s.k}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}
+
 /* ═══════════════════ MAIN APP ═══════════════════ */
 function App() {
   // Page order is the single source of truth — pageNum is auto-assigned by
@@ -673,6 +717,7 @@ function App() {
     <Divider eyebrow="01" title="The Property" image="/photos/ext-1.jpg" />,
     <BuildingDescriptions />,
     <SiteMap />,
+    <ProposedDevelopment />,
     ...PHOTO_PAGES.map(p => (p.kind === 'comingsoon' ? <PhotoComingSoon {...p} /> : <PhotoGallery {...p} />)),
     <Divider eyebrow="02" title="Financial Analysis" image="/photos/ext-2.jpg" />,
     <RentRoll />,
