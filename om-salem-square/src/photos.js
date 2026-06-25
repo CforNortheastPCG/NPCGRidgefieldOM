@@ -33,8 +33,8 @@ export const PHOTO_PAGES = [
   {
     kind: 'gallery',
     section: 'Property Photography', title: 'Retail Exteriors', accent: '(cont.)',
-    hero: '/photos/ext-6.jpg',
-    tiles: ['/photos/ext-7.jpg', '/photos/ext-8.jpg', '/photos/ext-9.jpg', '/photos/ext-10.jpg'],
+    hero: '/photos/ext-7.jpg',
+    tiles: ['/photos/ext-6.jpg', '/photos/ext-8.jpg', '/photos/ext-9.jpg', '/photos/ext-10.jpg'],
   },
   {
     kind: 'gallery',
@@ -50,9 +50,9 @@ export const PHOTO_PAGES = [
     tiles: ['/photos/comm-6.jpg'],
   },
   {
-    kind: 'comingsoon',
+    kind: 'gallery',
     section: 'Property Photography', title: 'Apartment', accent: 'Interiors',
-    subtitle: 'Interior photography of the in-building apartments to follow.',
-    tiles: ['Living', 'Kitchen', 'Bedroom', 'Bath'],
+    subtitle: 'Interior photography of the two in-building apartments.',
+    tiles: ['/photos/apt-2.jpg', '/photos/apt-3.jpg', '/photos/apt-4.jpg', '/photos/apt-5.jpg'],
   },
 ]

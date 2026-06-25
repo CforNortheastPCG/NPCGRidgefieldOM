@@ -44,6 +44,31 @@ function CoverHero({ pageNum }) {
 
 /* ═══════════════════ 2 — EXECUTIVE SUMMARY ═══════════════════ */
 function ExecutiveSummary({ pageNum }) {
+  // Right-rail fact box: headline price → asking-price allocation → key stats.
+  const alloc = [
+    { c: 'Operating Plaza — Existing Income', v: '$2,525,000', p: '66.4%' },
+    { c: 'Entitled Land — 51 × $25,000 / Unit', v: '$1,275,000', p: '33.6%' },
+  ]
+  const stats = [
+    { v: '13', k: 'In-Place Units' },
+    { v: '51', k: 'Entitled Units' },
+    { v: '±19,266', k: 'Building SF' },
+    { v: '2.69', k: 'Acres (±1.69 Entitled)' },
+  ]
+  const allocRow = (c, v, p, total) => (
+    <div key={c} style={{
+      display: 'flex', alignItems: 'baseline',
+      padding: total ? '8px 0 0' : '5px 0',
+      borderBottom: total ? 'none' : '1px solid var(--linen)',
+      borderTop: total ? '2px solid var(--carbon)' : 'none',
+      marginTop: total ? 3 : 0,
+    }}>
+      <span style={{ flex: 1, fontSize: total ? 9.5 : 9, fontWeight: total ? 800 : 600, color: 'var(--carbon)' }}>{c}</span>
+      <span style={{ fontSize: total ? 10 : 9.5, fontWeight: total ? 800 : 700, color: 'var(--carbon)', whiteSpace: 'nowrap', marginLeft: 8 }}>{v}</span>
+      <span style={{ width: 44, textAlign: 'right', fontSize: 9, fontWeight: total ? 800 : 700, color: 'var(--golden)' }}>{p}</span>
+    </div>
+  )
+
   return (
     <div className="page">
       <PageHeader section="Executive Summary" />
@@ -51,39 +76,17 @@ function ExecutiveSummary({ pageNum }) {
         <div className="eyebrow">Overview</div>
         <div className="section-title">Executive Summary</div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, flex: 1, minHeight: 0 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
-            <div>
-              <div style={{ textAlign: 'center', padding: '7px 4px', borderTop: '3px solid var(--golden)', marginBottom: 10 }}>
-                <div style={{ fontSize: 26, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$3,800,000</div>
-                <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>Offering Price</div>
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                  <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>13</div>
-                  <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>In-Place Units</div>
-                </div>
-                <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                  <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>51</div>
-                  <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>Entitled Units</div>
-                </div>
-                <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                  <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>&plusmn;19,266 <span style={{ fontSize: 11 }}>SF</span></div>
-                  <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>Existing Building Area</div>
-                </div>
-                <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                  <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>2.69 <span style={{ fontSize: 11 }}>Acres</span></div>
-                  <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>Lot Size (±1.69 Entitled)</div>
-                </div>
-              </div>
-            </div>
-            <p style={{ fontSize: 9, lineHeight: 1.46, margin: '0 0 10px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.32fr 1fr', gap: 30, flex: 1, minHeight: 0 }}>
+          {/* LEFT — narrative + accent image */}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <p style={{ fontSize: 9.4, lineHeight: 1.5, margin: '0 0 9px' }}>
               Northeast Private Client Group is pleased to present <strong>Salem Square</strong>, a value-add
               commercial mixed-use opportunity at {ADDR} in Naugatuck, Connecticut. The 2.69-acre parcel includes an
               approved 51-unit multifamily development site, so a buyer acquires an income-producing center and a
-              shovel-ready residential project together.
+              shovel-ready residential project together — with the $3,800,000 price allocated $2,525,000 to the
+              operating plaza and $1,275,000 to the entitled land.
             </p>
-            <p style={{ fontSize: 9, lineHeight: 1.46, margin: '0 0 10px' }}>
+            <p style={{ fontSize: 9.4, lineHeight: 1.5, margin: '0 0 9px' }}>
               Built in 1960, the two-story building holds about 19,266 square feet, 18,770 of it rentable, with ten
               ground-floor commercial suites and two rear apartments. The property fronts New Haven Road, which is
               Route 63, with direct access to Route 8. The center sits in the heart of the Naugatuck Valley, with
@@ -92,25 +95,41 @@ function ExecutiveSummary({ pageNum }) {
               convenience and service businesses, several of them in place for fifteen years or more, including Great
               China, Rose Spa &amp; Nails, Salem Wine &amp; Spirits, and Mexican Deli.
             </p>
-            <p style={{ fontSize: 9, lineHeight: 1.46, margin: '0 0 10px' }}>
+            <p style={{ fontSize: 9.4, lineHeight: 1.5, margin: '0 0 10px' }}>
               The opportunity is a commercial center with several clear paths to grow income, paired with a residential
               development site that adds a second phase. Inside the existing center, a buyer leases up the vacant
               ground-floor commercial space, marks the occupied suites from about $13.38 per square foot toward the $15
               to $22 the building achieves on renewal, implements CAM recovery, and converts the vacant rear commercial
-              suite into two apartments. That conversion is proven rather than theoretical, since the two apartments
-              already in the building were created from similar space. On the same parcel, about 1.69 acres of excess
-              land is entitled for a 51-unit multifamily building, with updated site plans approved by the Naugatuck
-              Zoning Commission in September 2025. A buyer can run and improve the center while permitting the
-              residential project, then build into Naugatuck&rsquo;s push for transit-oriented housing around the new
-              station.
+              suite into two apartments — proven rather than theoretical, since the two existing apartments were created
+              from similar space. On the same parcel, about 1.69 acres is entitled for a 51-unit multifamily building,
+              with updated site plans approved by the Naugatuck Zoning Commission in September 2025.
             </p>
+            <div style={{ flex: 1, minHeight: 0, borderRadius: 3, overflow: 'hidden', marginTop: 4 }}>
+              <img src="/photos/aerial-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 80%', display: 'block' }} />
+            </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minHeight: 0 }}>
-            <div style={{ flex: 1, borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
-              <img src="/photos/aerial-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          {/* RIGHT — offering summary */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, minHeight: 0 }}>
+            <div>
+              <div style={{ textAlign: 'center', padding: '8px 4px 11px', borderTop: '3px solid var(--golden)' }}>
+                <div style={{ fontSize: 28, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$3,800,000</div>
+                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 5 }}>Offering Price</div>
+              </div>
+              <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginBottom: 4, paddingBottom: 4, borderBottom: '2px solid var(--golden)' }}>Asking Price Allocation</div>
+              {alloc.map(a => allocRow(a.c, a.v, a.p, false))}
             </div>
-            <div style={{ flex: 1, borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+              {stats.map(s => (
+                <div key={s.k} style={{ textAlign: 'center', padding: '7px 4px', borderTop: '3px solid var(--golden)' }}>
+                  <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
+                  <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>{s.k}</div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ flex: 1, minHeight: 0, borderRadius: 3, overflow: 'hidden' }}>
               <img src="/photos/ext-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
           </div>
@@ -149,9 +168,9 @@ function BuildingDescriptions({ pageNum }) {
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Utilities</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Heat / Hot Water</span><span className="bldg-val">Forced hot air, natural gas / [TO CONFIRM]</span></div>
-                <div className="bldg-row"><span className="bldg-label">Electric</span><span className="bldg-val">Individually metered (16-meter modular, 2020); common areas LL</span></div>
-                <div className="bldg-row"><span className="bldg-label">Water / Sewer / Trash</span><span className="bldg-val">Landlord paid</span></div>
+                <div className="bldg-row"><span className="bldg-label">Heat / Hot Water</span><span className="bldg-val">Commercial: natural gas · Apartments: all-electric</span></div>
+                <div className="bldg-row"><span className="bldg-label">Heating / Cooling</span><span className="bldg-val">Commercial: rooftop package units (heat &amp; cool)</span></div>
+                <div className="bldg-row"><span className="bldg-label">Utilities Paid</span><span className="bldg-val">Tenants pay all utilities (individually metered)</span></div>
               </div>
             </div>
           </div>
@@ -164,7 +183,7 @@ function BuildingDescriptions({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Exterior</span><span className="bldg-val">Brick veneer / cedar / redwood</span></div>
                 <div className="bldg-row"><span className="bldg-label">Roof</span><span className="bldg-val">Flat · tar and gravel</span></div>
                 <div className="bldg-row"><span className="bldg-label">Parking</span><span className="bldg-val">±26,000 SF paved asphalt</span></div>
-                <div className="bldg-row"><span className="bldg-label">A/C</span><span className="bldg-val">None central; apartments on mini-split heat pumps</span></div>
+                <div className="bldg-row"><span className="bldg-label">A/C</span><span className="bldg-val">Rooftop package units (commercial); electric (apartments)</span></div>
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
@@ -179,10 +198,10 @@ function BuildingDescriptions({ pageNum }) {
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Investment Profile</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$3,800,000</span></div>
-                <div className="bldg-row"><span className="bldg-label">Price / Entitled Unit</span><span className="bldg-val">$74,510 (51 units)</span></div>
-                <div className="bldg-row"><span className="bldg-label">In-Place NOI (Norm.)</span><span className="bldg-val">$167,602</span></div>
-                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$245,217</span></div>
+                <div className="bldg-row"><span className="bldg-label">Asking Price</span><span className="bldg-val">$3,800,000</span></div>
+                <div className="bldg-row"><span className="bldg-label">Allocation</span><span className="bldg-val">$2.53M plaza · $1.28M land</span></div>
+                <div className="bldg-row"><span className="bldg-label">In-Place NOI (Norm.)</span><span className="bldg-val">$169,629</span></div>
+                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$247,244</span></div>
               </div>
             </div>
           </div>
@@ -194,136 +213,244 @@ function BuildingDescriptions({ pageNum }) {
 }
 
 /* ═══════════════════ RENT ROLL ═══════════════════ */
-function DonutChart({ data, size = 112, thickness = 20, centerLabel, centerSub }) {
-  const r = (size - thickness) / 2
-  const C = 2 * Math.PI * r
-  const total = data.reduce((s, d) => s + d.value, 0)
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ display: 'block', flexShrink: 0 }}>
-      <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#ece7e1" strokeWidth={thickness} />
-        {data.map((d, i) => {
-          const len = (d.value / total) * C
-          const offset = data.slice(0, i).reduce((s, x) => s + (x.value / total) * C, 0)
-          return (
-            <circle key={i} cx={size / 2} cy={size / 2} r={r} fill="none" stroke={d.color}
-              strokeWidth={thickness} strokeDasharray={`${len} ${C - len}`} strokeDashoffset={-offset} />
-          )
-        })}
-      </g>
-      {centerLabel && (
-        <text x="50%" y="47%" textAnchor="middle" dominantBaseline="middle" style={{ fontSize: 22, fontWeight: 800, fill: 'var(--carbon)' }}>{centerLabel}</text>
-      )}
-      {centerSub && (
-        <text x="50%" y="63%" textAnchor="middle" dominantBaseline="middle" style={{ fontSize: 7.5, fontWeight: 700, letterSpacing: '0.12em', fill: 'var(--stone)' }}>{centerSub}</text>
-      )}
-    </svg>
-  )
-}
-
-function ChartCard({ title, data, centerLabel, centerSub, size = 112, money = false }) {
-  const total = data.reduce((s, d) => s + d.value, 0)
-  return (
-    <div style={{ padding: '2px 6px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-      <h3 style={{ fontSize: 10, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10, paddingBottom: 6, borderBottom: '2px solid var(--golden)' }}>{title}</h3>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20, flex: 1, minHeight: 0 }}>
-        <DonutChart data={data} centerLabel={centerLabel} centerSub={centerSub} size={size} thickness={24} />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flex: 1, maxWidth: 220 }}>
-          {data.map(d => (
-            <div key={d.label} style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 11 }}>
-              <span style={{ width: 12, height: 12, borderRadius: 2, background: d.color, flexShrink: 0 }} />
-              <span style={{ flex: 1, color: 'var(--carbon)', fontWeight: 600 }}>{d.label}</span>
-              <span style={{ color: 'var(--stone)', fontWeight: 700, whiteSpace: 'nowrap' }}>{money ? `$${d.value.toLocaleString()}` : d.value} · {Math.round((d.value / total) * 100)}%</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* Horizontal bar chart — in-place vs pro forma, with upside note. */
-function BarChartCard({ title, data, note }) {
-  const max = Math.max(...data.map(d => d.value))
-  return (
-    <div style={{ padding: '2px 6px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-      <h3 style={{ fontSize: 10, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10, paddingBottom: 6, borderBottom: '2px solid var(--golden)' }}>{title}</h3>
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 22, minHeight: 0, padding: '0 8px' }}>
-        {data.map(d => (
-          <div key={d.label} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <span style={{ flex: '0 0 84px', textAlign: 'right', fontSize: 11.5, fontWeight: 700, color: 'var(--carbon)' }}>{d.label}</span>
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-              <div style={{ width: `${(d.value / max) * 100}%`, height: 34, background: d.color, borderRadius: 4 }} />
-            </div>
-            <span style={{ flex: '0 0 72px', fontSize: 13, fontWeight: 800, color: 'var(--carbon)' }}>${d.value.toLocaleString()}</span>
-          </div>
-        ))}
-        {note && (
-          <div style={{ textAlign: 'center', fontSize: 11, fontWeight: 700, color: 'var(--golden)', marginTop: 2 }}>{note}</div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-/* Mixed-use rent roll — gross scheduled rent by income component, in-place vs
-   pro forma. Per-suite detail lives in the BOV / data room; this summarizes the
-   figures carried in the underwriting. */
+/* Full per-unit / per-suite rent roll for the existing center, as of
+   04.30.2026 (Blue Brook Properties). 13 occupied/vacant units across 18,770
+   rentable SF; 84.6% occupied. Annual rent and $/SF calculated from monthly. */
 function RentRoll({ pageNum }) {
-  const rows = [
-    { comp: 'Commercial Retail', count: '10 suites', inPlace: 229788, pf: 319160, note: '2 vacant lease-up · mark to $15–$22/SF' },
-    { comp: 'Apartments', count: '2 units', inPlace: 39600, pf: 43200, note: '$1,650 → $1,800 / mo' },
-    { comp: 'Suite 12 Conversion', count: '+2 units (PF)', inPlace: 0, pf: 43200, note: '1,600 SF retail → two apartments' },
-    { comp: 'Storage', count: '1 unit', inPlace: 0, pf: 0, note: 'Ancillary' },
+  const th = { fontSize: 7.8, padding: '5px 7px', color: '#fff', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700 }
+  const td = { fontSize: 9, padding: '3.5px 7px', color: 'var(--carbon)' }
+  const grp = { fontSize: 7.8, padding: '4px 7px', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--golden)', background: 'var(--linen)' }
+  const sub = { fontSize: 9, padding: '4px 7px', fontWeight: 700, color: 'var(--carbon)', background: '#efeae3', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }
+  const tot = { fontSize: 9.5, padding: '5px 7px', fontWeight: 800, color: '#fff', background: 'var(--carbon)' }
+  const R = '—'
+
+  // [unit, tenant, sf, mo, yr, psf]
+  const residential = [
+    ['Apt 10A', '2 Bed / 1 Bath', '800', '$1,650', '$19,800', '$24.75'],
+    ['Apt 10B', '2 Bed / 1 Bath', '800', '$1,650', '$19,800', '$24.75'],
   ]
-  const totalInPlace = rows.reduce((s, r) => s + r.inPlace, 0)
-  const totalPf = rows.reduce((s, r) => s + r.pf, 0)
-  const useMix = [
-    { label: 'Commercial Suites', value: 10, color: '#3F4753' },
-    { label: 'Apartments', value: 2, color: '#F8971D' },
-    { label: 'Storage', value: 1, color: '#B55D37' },
+  const commercial = [
+    ['Suite 01', 'Great China', '1,530', '$2,770', '$33,240', '$21.73'],
+    ['Suite 02', 'Mexican Deli', '1,500', '$2,300', '$27,600', '$18.40'],
+    ['Suite 03', 'Rose Spa & Nails', '1,500', '$2,450', '$29,400', '$19.60'],
+    ['Suite 04', 'Smoke Vibe (Naugatuck)', '1,500', '$1,654', '$19,848', '$13.23'],
+    ['Suite 05 & 06', 'Video Temptations', '3,340', '$4,797', '$57,564', '$17.23'],
+    ['Suite 07', 'Vacant', '1,000', R, R, R],
+    ['Suite 08', 'Roberto Valentin', '1,000', '$1,100', '$13,200', '$13.20'],
+    ['Suite 09', 'Salem Wine & Spirits', '2,100', '$2,378', '$28,536', '$13.59'],
+    ['Suite 12', 'Vacant — convert to 2 apts', '1,600', R, R, R],
+    ['Suite 13', 'Valley Social Club', '2,100', '$1,700', '$20,400', '$9.71'],
   ]
-  const commercialUpside = [
-    { label: 'In-Place', value: 229788, color: '#3F4753' },
-    { label: 'Pro Forma', value: 319160, color: '#F8971D' },
+  const other = [
+    ['Lot Storage', "Garci's Landscaping LLC", R, '$1,000', '$12,000', R],
   ]
+  const align = [null, null, 'right', 'right', 'right', 'right']
+  const Row = (r, i) => (
+    <tr key={r[0]} style={i % 2 ? { background: 'var(--linen)' } : undefined}>
+      {r.map((c, j) => (
+        <td key={j} style={{ ...td, textAlign: align[j] || 'left', fontWeight: j === 0 ? 700 : 400, color: c === 'Vacant' ? 'var(--terracotta)' : td.color }}>{c}</td>
+      ))}
+    </tr>
+  )
+  const SubRow = (label, cells) => (
+    <tr>
+      <td style={{ ...sub, textAlign: 'left' }} colSpan={2}>{label}</td>
+      {cells.map((c, j) => (<td key={j} style={{ ...sub, textAlign: align[j + 2] || 'right' }}>{c}</td>))}
+    </tr>
+  )
+
   return (
     <div className="page">
-      <PageHeader section="Rent Roll" />
-      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div className="section-title" style={{ marginBottom: 2 }}>Rent Roll & <span style={{ color: '#F8971D' }}>Lease-Up</span></div>
+      <PageHeader section="Existing Rent Roll" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2 }}>Existing Rent <span style={{ color: '#F8971D' }}>Roll</span></div>
         <div className="title-rule" />
-        <table className="data-table" style={{ fontSize: 11 }}>
-          <thead><tr><th>Income Component</th><th style={{ textAlign: 'center' }}>Count</th><th style={{ textAlign: 'right' }}>In-Place GSR</th><th style={{ textAlign: 'right' }}>Pro Forma GSR</th><th>Notes</th></tr></thead>
+        <div style={{ fontSize: 8.8, color: 'var(--stone)', margin: '4px 0 8px', letterSpacing: '0.04em' }}>
+          Salem Square &mdash; rent roll as of 04.30.2026 &middot; 13 units &middot; 18,770 rentable SF &middot; 84.6% occupied
+        </div>
+
+        <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+          <colgroup>
+            <col style={{ width: '14%' }} /><col style={{ width: '34%' }} /><col style={{ width: '12%' }} />
+            <col style={{ width: '14%' }} /><col style={{ width: '16%' }} /><col style={{ width: '10%' }} />
+          </colgroup>
+          <thead>
+            <tr style={{ background: 'var(--carbon)' }}>
+              <th style={{ ...th, textAlign: 'left' }}>Unit</th>
+              <th style={{ ...th, textAlign: 'left' }}>Tenant</th>
+              <th style={{ ...th, textAlign: 'right' }}>SF</th>
+              <th style={{ ...th, textAlign: 'right' }}>Rent / Mo</th>
+              <th style={{ ...th, textAlign: 'right' }}>Rent / Yr</th>
+              <th style={{ ...th, textAlign: 'right' }}>$/SF</th>
+            </tr>
+          </thead>
           <tbody>
-            {rows.map((r, i) => (
-              <tr key={i}>
-                <td>{r.comp}</td>
-                <td style={{ textAlign: 'center' }}>{r.count}</td>
-                <td style={{ textAlign: 'right' }}>{r.inPlace ? `$${r.inPlace.toLocaleString()}` : '—'}</td>
-                <td style={{ textAlign: 'right' }}>{r.pf ? `$${r.pf.toLocaleString()}` : '—'}</td>
-                <td style={{ fontSize: 9.5, color: 'var(--stone)' }}>{r.note}</td>
-              </tr>
-            ))}
-            <tr className="total-row">
-              <td><strong>Total</strong></td>
-              <td style={{ textAlign: 'center' }}><strong>13 (+2 PF)</strong></td>
-              <td style={{ textAlign: 'right' }}><strong>${totalInPlace.toLocaleString()}</strong></td>
-              <td style={{ textAlign: 'right' }}><strong>${totalPf.toLocaleString()}</strong></td>
-              <td></td>
+            <tr><td style={grp} colSpan={6}>Residential</td></tr>
+            {residential.map(Row)}
+            {SubRow('Residential Subtotal', ['1,600', '$3,300', '$39,600', '$24.75'])}
+            <tr><td style={grp} colSpan={6}>Commercial</td></tr>
+            {commercial.map(Row)}
+            {SubRow('Commercial Subtotal', ['17,170', '$19,149', '$229,788', '$13.38'])}
+            <tr><td style={grp} colSpan={6}>Other</td></tr>
+            {other.map(Row)}
+            <tr>
+              <td style={{ ...tot, textAlign: 'left' }} colSpan={2}>Property Total</td>
+              <td style={{ ...tot, textAlign: 'right' }}>18,770</td>
+              <td style={{ ...tot, textAlign: 'right' }}>$23,449</td>
+              <td style={{ ...tot, textAlign: 'right' }}>$281,388</td>
+              <td style={{ ...tot, textAlign: 'right' }}>$14.99</td>
             </tr>
           </tbody>
         </table>
-        <div style={{ fontSize: 8.5, color: 'var(--stone)', marginTop: 6, lineHeight: 1.45 }}>
-          Gross scheduled rent (annual). Occupied commercial suites currently average ~$13.38/SF against $15&ndash;$22
-          underwritten on renewal; Salem Wine &amp; Spirits (exp. 6/30/2026) and Video Temptations (exp. 8/31/2026)
-          roll in 2026. Effective and normalized figures appear on the Income &amp; Expense page; per-suite detail is
-          in the data room.
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}
+
+/* ═══════════════════ SALEM SQUARE PLAZA ANALYSIS ═══════════════════ */
+/* Existing center, standalone — Current (Year 1) vs Stabilized Pro Forma
+   operating statement, with the plaza-only investment metrics (allocated basis
+   $2,525,000, 70% LTV on that basis). Figures per the I&E pro forma 06.25.2026
+   (Blue Brook T12; Naugatuck mill rate 37.79). The pro forma reflects commercial
+   lease-up, mark-to-market, CAM recovery, and the Suite 12 residential conversion. */
+function SalemSquarePlazaAnalysis({ pageNum }) {
+  const tdl = { fontSize: 9, padding: '3px 8px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const tdr = { fontSize: 9, padding: '3px 8px', textAlign: 'right' }
+  const thl = { fontSize: 7.5, padding: '4px 8px', textAlign: 'left', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const thr = { fontSize: 7.5, padding: '4px 8px', textAlign: 'right', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 9, padding: '3px 8px' }
+  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9.5, padding: '4px 8px' }
+  const eyebrow = { marginBottom: 4, fontSize: 8.5 }
+  const subStyle = { background: '#efeae3', fontWeight: 700, fontSize: 9, padding: '3px 8px', color: 'var(--carbon)' }
+
+  const strip = [
+    { v: '$169,629', k: 'Current NOI' },
+    { v: '$247,244', k: 'Pro Forma NOI' },
+  ]
+  // [label, current, proforma, kind] kind: row | sub | tot | noi
+  const income = [
+    ['Effective Rental Income — Commercial', '$229,788', '$303,202', 'row'],
+    ['Effective Rental Income — Residential', '$37,620', '$41,040', 'row'],
+    ['Effective Rental Income — Total', '$267,408', '$344,242', 'sub'],
+    ['CAM Reimbursement', '—', '$19,266', 'row'],
+    ['Additional Income', '$16,860', '$2,460', 'row'],
+    ['Effective Gross Income', '$284,268', '$365,968', 'tot'],
+  ]
+  const expenses = [
+    ['Property Management', '$14,213', '$18,298', 'row'],
+    ['Real Estate Tax', '$38,309', '$38,309', 'row'],
+    ['Property Insurance', '$16,975', '$16,975', 'row'],
+    ['Electric', '$2,228', '$2,228', 'row'],
+    ['Water & Sewer', '$6,979', '$6,979', 'row'],
+    ['Trash Removal', '$10,856', '$10,856', 'row'],
+    ['Repairs & Maintenance', '$9,633', '$9,633', 'row'],
+    ['Landscaping / Snow Removal', '$15,445', '$15,445', 'row'],
+    ['Total Operating Expense', '$114,639', '$118,724', 'tot'],
+    ['Net Operating Income', '$169,629', '$247,244', 'noi'],
+  ]
+  const StmtRow = ([label, cur, pf, kind], i) => {
+    if (kind === 'tot') return (
+      <tr key={label}><td style={{ ...totBg, textAlign: 'left' }}>{label}</td><td style={{ ...totBg, textAlign: 'right' }}>{cur}</td><td style={{ ...totBg, textAlign: 'right' }}>{pf}</td></tr>
+    )
+    if (kind === 'noi') return (
+      <tr key={label}><td style={{ ...noiBg, textAlign: 'left' }}>{label}</td><td style={{ ...noiBg, textAlign: 'right' }}>{cur}</td><td style={{ ...noiBg, textAlign: 'right' }}>{pf}</td></tr>
+    )
+    if (kind === 'sub') return (
+      <tr key={label}><td style={{ ...subStyle, textAlign: 'left' }}>{label}</td><td style={{ ...subStyle, textAlign: 'right' }}>{cur}</td><td style={{ ...subStyle, textAlign: 'right' }}>{pf}</td></tr>
+    )
+    return (
+      <tr key={label} style={i % 2 ? { background: 'var(--linen)' } : undefined}>
+        <td style={tdl}>{label}</td><td style={tdr}>{cur}</td><td style={tdr}>{pf}</td>
+      </tr>
+    )
+  }
+  const MetricTable = ({ title, rows }) => (
+    <>
+      <div className="eyebrow" style={eyebrow}>{title}</div>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 12, tableLayout: 'fixed' }}>
+        <colgroup><col style={{ width: '60%' }} /><col style={{ width: '40%' }} /></colgroup>
+        <tbody>
+          {rows.map(([l, v], i) => (
+            <tr key={l} style={i % 2 ? { background: 'var(--linen)' } : undefined}>
+              <td style={tdl}>{l}</td><td style={tdr}>{v}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
+
+  return (
+    <div className="page">
+      <PageHeader section="In-Place Analysis" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2, fontSize: 20 }}>In-Place <span style={{ color: '#F8971D' }}>Analysis</span></div>
+        <div className="title-rule" />
+        <div style={{ fontSize: 8.8, color: 'var(--stone)', margin: '4px 0 8px', letterSpacing: '0.04em' }}>
+          Existing center, standalone &mdash; Current (Year 1) vs Stabilized Pro Forma &middot; allocated basis $2,525,000
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 40, marginTop: 40, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
-          <ChartCard title="In-Place Units by Use" data={useMix} centerLabel="13" centerSub="UNITS" size={170} />
-          <BarChartCard title="Commercial GSR — In-Place vs Pro Forma" data={commercialUpside} note="+$89,372 · +39% lease-up & mark-to-market" />
+        {/* NOI strip */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 18, paddingBottom: 7, marginBottom: 10, borderBottom: '1px solid var(--border)' }}>
+          {strip.map(n => (
+            <div key={n.k} style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--golden)', lineHeight: 1, marginBottom: 3 }}>{n.v}</div>
+              <div style={{ fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', fontWeight: 600 }}>{n.k}</div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: 26, flex: 1, minHeight: 0 }}>
+          {/* LEFT — operating statement */}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <div className="eyebrow" style={eyebrow}>Operating Income</div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 12, tableLayout: 'fixed' }}>
+              <colgroup><col style={{ width: '52%' }} /><col style={{ width: '24%' }} /><col style={{ width: '24%' }} /></colgroup>
+              <thead><tr style={{ background: 'var(--carbon)' }}><th style={thl}>Income</th><th style={thr}>Current</th><th style={thr}>Pro Forma</th></tr></thead>
+              <tbody>{income.map(StmtRow)}</tbody>
+            </table>
+            <div className="eyebrow" style={eyebrow}>Operating Expenses</div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+              <colgroup><col style={{ width: '52%' }} /><col style={{ width: '24%' }} /><col style={{ width: '24%' }} /></colgroup>
+              <thead><tr style={{ background: 'var(--carbon)' }}><th style={thl}>Expense</th><th style={thr}>Current</th><th style={thr}>Pro Forma</th></tr></thead>
+              <tbody>{expenses.map(StmtRow)}</tbody>
+            </table>
+          </div>
+
+          {/* RIGHT — investment metrics */}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <MetricTable title="Valuation & Pricing" rows={[
+              ['Purchase Price (Allocated)', '$2,525,000'],
+              ['Price / SF', '$134.52'],
+              ['Cap Rate — Current', '6.72%'],
+              ['Cap Rate — Pro Forma', '9.79%'],
+            ]} />
+            <MetricTable title="Debt Assumptions" rows={[
+              ['LTV', '70%'],
+              ['Interest Rate', '6.5%'],
+              ['Amortization', '25 yrs'],
+              ['Loan Amount', '$1,767,500'],
+              ['Down Payment', '$757,500'],
+              ['Annual Debt Service', '$143,211'],
+              ['DSCR (Pro Forma)', '1.18×'],
+            ]} />
+            <MetricTable title="Cash Flow & Return" rows={[
+              ['Capital Budget', '$250,000'],
+              ['Total Cash In', '$1,007,500'],
+              ['Cash Flow After Debt — Current', '$26,418'],
+              ['Cash Flow After Debt — Pro Forma', '$104,033'],
+              ['Cash-on-Cash — Current', '2.62%'],
+              ['Cash-on-Cash — Pro Forma', '10.33%'],
+            ]} />
+          </div>
+        </div>
+
+        <div style={{ fontSize: 7.4, color: 'var(--stone)', marginTop: 8, lineHeight: 1.45 }}>
+          Plaza shown on its allocated $2,525,000 basis (70% LTV = $1,767,500 loan). Pro forma marks commercial rents to
+          $15&ndash;$22/SF, leases the vacant suites, converts Suite 12 to two apartments (~$43,200/yr), and introduces
+          CAM recovery of $19,266 (~$1.00/SF). Taxes ($38,309; mill 37.79) and insurance carried at full market; R&amp;M
+          normalized to $0.50/SF and management to 5% of EGI. Interim lot-storage income burns off at redevelopment.
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -331,117 +458,256 @@ function RentRoll({ pageNum }) {
   )
 }
 
-/* ═══════════════════ INCOME & EXPENSE ═══════════════════ */
-/* Summary income statement — T12 → Current (normalized) → Pro Forma. The figures
-   shown are those carried in the underwriting; real estate taxes and insurance
-   were escrowed in the T12 and normalized in the Current/Pro Forma columns. The
-   full line-item schedule (electric, water/sewer, trash, etc., held at recent
-   actuals) lives in the BOV / data room. The pro forma reflects the center's
-   value-add path: commercial lease-up, mark-to-market, CAM recovery, and the
-   Suite 12 residential conversion. NOTE: financials are pending an updated set
-   of numbers from the deal team — table values left as-is until those land. */
-function IncomeExpense({ pageNum }) {
-  const tdl = { fontSize: 9, padding: '3px 8px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
-  const tds = { fontSize: 9, padding: '3px 8px', textAlign: 'right' }
-  const thl = { fontSize: 8, padding: '4px 8px', textAlign: 'left', color: '#fff' }
-  const thr = { fontSize: 8, padding: '4px 8px', textAlign: 'right', color: '#fff' }
-  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 9, padding: '3px 8px', textAlign: 'right' }
-  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9.5, padding: '4px 8px', textAlign: 'right' }
+/* ═══════════════════ PRICING & ALLOCATION + DEVELOPMENT PRO FORMA ═══════════════════ */
+/* One page combining (a) how the $3,800,000 asking price is allocated across the
+   single fee-simple parcel — income-producing plaza vs entitled land — with an
+   independent value check, and (b) the entitled 51-unit development pro forma and
+   the combined fully-built economics. Per the I&E pro forma 06.25.2026: plaza
+   stabilized NOI $247,244 @ 7.5% = $3,296,593; land 51 × $25,000 = $1,275,000;
+   indicated $4,571,593 vs $3,800,000 ask (16.9% discount). Development EGI
+   $1,197,299, NOI $683,734 on $9,275,000 cost (7.4% yield), $11.4M @ 6% cap.
+   Combined fully built: $930,979 NOI · $14,692,171 value · $12,050,000 cost. */
+function PricingDevelopment({ pageNum }) {
+  const tdl = { fontSize: 10, padding: '5px 9px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const tdr = { fontSize: 10, padding: '5px 9px', textAlign: 'right' }
+  const thl = { fontSize: 8.5, padding: '5px 9px', textAlign: 'left', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const thr = { fontSize: 8.5, padding: '5px 9px', textAlign: 'right', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 10, padding: '5px 9px' }
+  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 10, padding: '5px 9px' }
+  const eyebrow = { marginBottom: 5, fontSize: 9 }
+  // Taller cells for the left column — fewer rows than the right, so they get
+  // extra vertical padding to fill the column height and kill the white space.
+  const LP = '9.5px 9px'
+  const ltdl = { ...tdl, padding: LP }
+  const ltdr = { ...tdr, padding: LP }
+  const lthl = { ...thl, padding: '7px 9px' }
+  const lthr = { ...thr, padding: '7px 9px' }
+  const ltot = { ...totBg, padding: LP }
+  const lnoi = { ...noiBg, padding: LP }
 
-  const noi = [
-    { label: 'T12 NOI', val: '$203,218' },
-    { label: 'In-Place (Normalized) NOI', val: '$167,602' },
-    { label: 'Pro Forma NOI', val: '$245,217' },
+  const combined = [
+    { v: '$930,979', k: 'Combined Stabilized NOI' },
+    { v: '$14.69M', k: 'Combined Stabilized Value' },
+    { v: '$12.05M', k: 'Total Cost Basis' },
+    { v: '1.36×', k: 'DSCR · 70% LTV' },
+    { v: '6.85%', k: 'Stabilized Cash-on-Cash' },
   ]
-
-  // [label, t12, current, proforma, bold]
-  const income = [
-    ['Effective Rental Income', '$256,767', '$267,408', '$344,242'],
-    ['Other Income', '$2,460', '$2,460', '$21,726'],
-  ]
-  const expenses = [
-    ['Real Estate Taxes', 'escrowed²', '$40,337', '$40,337'],
-    ['Property Insurance', 'escrowed²', '$16,975', '$16,975'],
-    ['Repairs & Maintenance', '$3,601', '$9,633', '$9,633'],
-    ['Property Management (5% EGI)', '—³', '$13,493', '$18,298'],
-    ['All Other Operating', 'actuals⁴', 'actuals⁴', 'actuals⁴'],
-  ]
-
-  const Cols = () => (
-    <colgroup>
-      <col style={{ width: '34%' }} />
-      <col style={{ width: '22%' }} /><col style={{ width: '22%' }} /><col style={{ width: '22%' }} />
-    </colgroup>
-  )
-  const Head = ({ first }) => (
-    <thead>
-      <tr style={{ background: 'var(--carbon)' }}>
-        <th style={thl}>{first}</th>
-        <th style={thr}>T12</th><th style={thr}>Current</th><th style={thr}>Pro Forma</th>
-      </tr>
-    </thead>
-  )
-  const Row = ([label, t12, cur, pf, bold], i) => {
-    const w = bold ? { fontWeight: 700 } : null
-    return (
-      <tr key={label} style={i % 2 === 1 ? { background: 'var(--linen)' } : undefined}>
-        <td style={{ ...tdl, ...w }}>{label}</td>
-        <td style={{ ...tds, ...w }}>{t12}</td><td style={{ ...tds, ...w }}>{cur}</td><td style={{ ...tds, ...w }}>{pf}</td>
-      </tr>
-    )
-  }
 
   return (
     <div className="page">
-      <PageHeader section="Income & Expense" />
-      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div className="section-title" style={{ marginBottom: 2, fontSize: 22 }}>Income & <span style={{ color: '#F8971D' }}>Expense Analysis</span></div>
-        <div className="title-rule" style={{ marginBottom: 6 }} />
+      <PageHeader section="The Combined Property" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2, fontSize: 19 }}>If Built — The <span style={{ color: '#F8971D' }}>Combined Property</span></div>
+        <div className="title-rule" />
 
-        {/* NOI summary strip — T12 → Current → Pro Forma */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, paddingBottom: 7, marginBottom: 8, borderBottom: '1px solid var(--border)' }}>
-          {noi.map(n => (
-            <div key={n.label} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--golden)', lineHeight: 1, marginBottom: 3 }}>{n.val}</div>
-              <div style={{ fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', fontWeight: 600 }}>{n.label}</div>
+        <div style={{ fontSize: 8.8, lineHeight: 1.45, color: 'var(--graphite)', margin: '8px 0 10px' }}>
+          Build out the entitled 51-unit development and Salem Square becomes a single <strong>combined property</strong>
+          &mdash; the income-producing plaza plus a stabilized multifamily building on the same lot. The figures below
+          show what that fully-built, stabilized asset looks like: a combined <strong>$930,979 NOI</strong> and
+          <strong> $14.69M value</strong> against a $12.05M all-in basis &mdash; more than quadrupling the plaza&rsquo;s
+          standalone income.
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 22, flex: 1, minHeight: 0 }}>
+          {/* LEFT — Pricing & Allocation */}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <div className="eyebrow" style={eyebrow}>Asking Price Allocation</div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 14, tableLayout: 'fixed' }}>
+              <colgroup><col style={{ width: '54%' }} /><col style={{ width: '28%' }} /><col style={{ width: '18%' }} /></colgroup>
+              <thead><tr style={{ background: 'var(--carbon)' }}><th style={lthl}>Component</th><th style={lthr}>Allocated</th><th style={lthr}>% Ask</th></tr></thead>
+              <tbody>
+                <tr><td style={ltdl}>Existing Income — Operating Plaza</td><td style={ltdr}>$2,525,000</td><td style={ltdr}>66%</td></tr>
+                <tr style={{ background: 'var(--linen)' }}><td style={ltdl}>Entitled Land — 51 × $25,000 / Unit</td><td style={ltdr}>$1,275,000</td><td style={ltdr}>34%</td></tr>
+                <tr><td style={{ ...ltot, textAlign: 'left' }}>Total Asking Price</td><td style={{ ...ltot, textAlign: 'right' }}>$3,800,000</td><td style={{ ...ltot, textAlign: 'right' }}>100%</td></tr>
+              </tbody>
+            </table>
+
+            <div className="eyebrow" style={eyebrow}>Independent Value Check</div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 8, tableLayout: 'fixed' }}>
+              <colgroup><col style={{ width: '40%' }} /><col style={{ width: '20%' }} /><col style={{ width: '15%' }} /><col style={{ width: '25%' }} /></colgroup>
+              <thead><tr style={{ background: 'var(--carbon)' }}><th style={lthl}>Component</th><th style={lthr}>Stab. NOI</th><th style={lthr}>Cap</th><th style={lthr}>Value</th></tr></thead>
+              <tbody>
+                <tr><td style={ltdl}>Existing Plaza (Stabilized)</td><td style={ltdr}>$247,244</td><td style={ltdr}>7.5%</td><td style={ltdr}>$3,296,593</td></tr>
+                <tr style={{ background: 'var(--linen)' }}><td style={ltdl}>Entitled Land (51 × $25,000)</td><td style={ltdr}>—</td><td style={ltdr}>—</td><td style={ltdr}>$1,275,000</td></tr>
+                <tr><td style={{ ...ltot, textAlign: 'left' }}>Indicated Total Value</td><td style={ltot}></td><td style={ltot}></td><td style={{ ...ltot, textAlign: 'right' }}>$4,571,593</td></tr>
+                <tr><td style={ltdl}>Asking Price</td><td style={ltdr}></td><td style={ltdr}></td><td style={ltdr}>$3,800,000</td></tr>
+                <tr><td style={{ ...lnoi, textAlign: 'left' }}>Discount to Indicated</td><td style={lnoi}></td><td style={{ ...lnoi, textAlign: 'right' }}>−16.9%</td><td style={{ ...lnoi, textAlign: 'right' }}>−$771,593</td></tr>
+              </tbody>
+            </table>
+            <div style={{ fontSize: 7.3, color: 'var(--stone)', lineHeight: 1.38, marginTop: 'auto' }}>
+              Plaza capitalized at a 7.5% market cap for stabilized Naugatuck Valley mixed-use; land held at the same
+              $25,000/unit basis. The plaza&rsquo;s $2,525,000 allocated basis implies a <strong>9.8% cap on stabilized
+              income</strong> — well inside the 7.5% market cap.
             </div>
+          </div>
+
+          {/* RIGHT — Fully built & stabilized economics */}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <div className="eyebrow" style={eyebrow}>Fully Built &amp; Stabilized</div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 14, tableLayout: 'fixed' }}>
+              <colgroup><col style={{ width: '36%' }} /><col style={{ width: '21%' }} /><col style={{ width: '21%' }} /><col style={{ width: '22%' }} /></colgroup>
+              <thead><tr style={{ background: 'var(--carbon)' }}><th style={thl}>Component</th><th style={thr}>Plaza</th><th style={thr}>Dev.</th><th style={thr}>Combined</th></tr></thead>
+              <tbody>
+                <tr><td style={tdl}>Stabilized NOI</td><td style={tdr}>$247,244</td><td style={tdr}>$683,735</td><td style={tdr}>$930,979</td></tr>
+                <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Valuation Cap</td><td style={tdr}>7.5%</td><td style={tdr}>6.0%</td><td style={tdr}>6.3%</td></tr>
+                <tr><td style={tdl}>Stabilized Value</td><td style={tdr}>$3.30M</td><td style={tdr}>$11.40M</td><td style={tdr}>$14.69M</td></tr>
+                <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Total Cost</td><td style={tdr}>$2.78M</td><td style={tdr}>$9.28M</td><td style={tdr}>$12.05M</td></tr>
+                <tr><td style={tdl}>Unlevered Yield on Cost</td><td style={tdr}>8.9%</td><td style={tdr}>7.4%</td><td style={tdr}>7.7%</td></tr>
+                <tr><td style={{ ...totBg, textAlign: 'left' }}>Value Created Over Cost</td><td style={{ ...totBg, textAlign: 'right' }}>$0.52M</td><td style={{ ...totBg, textAlign: 'right' }}>$2.12M</td><td style={{ ...totBg, textAlign: 'right' }}>$2.64M</td></tr>
+              </tbody>
+            </table>
+
+            <div className="eyebrow" style={eyebrow}>Levered Return — Combined · 70% LTV</div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+              <colgroup><col style={{ width: '62%' }} /><col style={{ width: '38%' }} /></colgroup>
+              <tbody>
+                <tr><td style={tdl}>Loan (70% of Total Cost)</td><td style={tdr}>$8,435,000</td></tr>
+                <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Equity</td><td style={tdr}>$3,615,000</td></tr>
+                <tr><td style={tdl}>Annual Debt Service (6.5%, 25 yr)</td><td style={tdr}>($683,445)</td></tr>
+                <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Stabilized Cash Flow After Debt</td><td style={tdr}>$247,534</td></tr>
+                <tr><td style={{ ...noiBg, textAlign: 'left' }}>Cash-on-Cash Return</td><td style={{ ...noiBg, textAlign: 'right' }}>6.85%</td></tr>
+                <tr><td style={{ ...totBg, textAlign: 'left' }}>DSCR</td><td style={{ ...totBg, textAlign: 'right' }}>1.36&times;</td></tr>
+              </tbody>
+            </table>
+            <div style={{ fontSize: 7.3, color: 'var(--stone)', lineHeight: 1.38, marginTop: 'auto' }}>
+              Total cost basis $12,050,000 = $3,800,000 acquisition + $8,000,000 construction + $250,000 plaza capital;
+              the $1,275,000 land sits inside acquisition and is not double-counted. Stabilized line-item detail by
+              component appears on the Combined Operating Statement.
+            </div>
+          </div>
+        </div>
+
+        {/* Combined fully-built stat strip — below the tables */}
+        <div style={{ marginTop: 12 }}>
+          <div className="eyebrow" style={{ ...eyebrow, marginBottom: 6 }}>Combined — Plaza + Development, Fully Built &amp; Stabilized</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 10 }}>
+            {combined.map(s => (
+              <div key={s.k} style={{ textAlign: 'center', padding: '8px 4px', borderTop: '3px solid var(--golden)' }}>
+                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
+                <div style={{ fontSize: 7.6, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>{s.k}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}
+
+/* ═══════════════════ COMBINED OPERATING STATEMENT ═══════════════════ */
+/* Stabilized standalone page — existing plaza + new development, side by side,
+   with the combined summary on top. Figures per the I&E pro forma 06.25.2026.
+   Total cost $12,050,000 carries the $250,000 plaza capital and $8,000,000
+   development hard cost; the $1,275,000 land sits inside acquisition. */
+function CombinedOperatingStatement({ pageNum }) {
+  const tdl = { fontSize: 8.6, padding: '2.8px 8px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const tdr = { fontSize: 8.6, padding: '2.8px 8px', textAlign: 'right' }
+  const thl = { fontSize: 7.5, padding: '4px 8px', textAlign: 'left', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const thr = { fontSize: 7.5, padding: '4px 8px', textAlign: 'right', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 8.8, padding: '3px 8px' }
+  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9, padding: '3.5px 8px' }
+  const eyebrow = { marginBottom: 4, fontSize: 8.5 }
+
+  const Detail = ({ title, eyebrowLabel, income, egi, expenses, opexTotal, noi }) => (
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+      <div className="eyebrow" style={eyebrow}>{eyebrowLabel}</div>
+      <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+        <colgroup><col style={{ width: '64%' }} /><col style={{ width: '36%' }} /></colgroup>
+        <thead><tr style={{ background: 'var(--carbon)' }}><th style={thl}>{title}</th><th style={thr}>Amount</th></tr></thead>
+        <tbody>
+          {income.map(([l, v], i) => (
+            <tr key={l} style={i % 2 ? { background: 'var(--linen)' } : undefined}><td style={tdl}>{l}</td><td style={tdr}>{v}</td></tr>
           ))}
+          <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={{ ...totBg, textAlign: 'right' }}>{egi}</td></tr>
+          {expenses.map(([l, v], i) => (
+            <tr key={l} style={i % 2 ? { background: 'var(--linen)' } : undefined}><td style={tdl}>{l}</td><td style={tdr}>{v}</td></tr>
+          ))}
+          <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Operating Expenses</td><td style={{ ...totBg, textAlign: 'right' }}>{opexTotal}</td></tr>
+          <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={{ ...noiBg, textAlign: 'right' }}>{noi}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  )
+
+  return (
+    <div className="page">
+      <PageHeader section="Operating Statement" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2, fontSize: 20 }}>Combined Operating <span style={{ color: '#F8971D' }}>Statement</span></div>
+        <div className="title-rule" />
+        <div style={{ fontSize: 8.8, color: 'var(--stone)', margin: '4px 0 8px', letterSpacing: '0.04em' }}>
+          Stabilized &mdash; existing plaza + entitled 51-unit development, fully built
         </div>
 
-        {/* Operating income — full width */}
-        <div className="eyebrow" style={{ marginBottom: 3, fontSize: 9 }}>Operating Income</div>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 9, tableLayout: 'fixed' }}>
-          <Cols /><Head first="Income" />
+        {/* Combined summary */}
+        <div className="eyebrow" style={eyebrow}>Stabilized Summary</div>
+        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 14, tableLayout: 'fixed' }}>
+          <colgroup><col style={{ width: '34%' }} /><col style={{ width: '22%' }} /><col style={{ width: '22%' }} /><col style={{ width: '22%' }} /></colgroup>
+          <thead><tr style={{ background: 'var(--carbon)' }}><th style={thl}>Component</th><th style={thr}>Existing Plaza</th><th style={thr}>New Development</th><th style={thr}>Combined</th></tr></thead>
           <tbody>
-            {income.map(Row)}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$259,227</td><td style={totBg}>$269,868&sup1;</td><td style={totBg}>$365,968</td></tr>
+            <tr><td style={tdl}>Effective Gross Income</td><td style={tdr}>$365,968</td><td style={tdr}>$1,197,299</td><td style={tdr}>$1,563,267</td></tr>
+            <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Total Operating Expenses</td><td style={tdr}>($118,724)</td><td style={tdr}>($513,565)</td><td style={tdr}>($632,288)</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={{ ...noiBg, textAlign: 'right' }}>$247,244</td><td style={{ ...noiBg, textAlign: 'right' }}>$683,735</td><td style={{ ...noiBg, textAlign: 'right' }}>$930,979</td></tr>
+            <tr><td style={tdl}>Total Cost</td><td style={tdr}>$2,775,000</td><td style={tdr}>$9,275,000</td><td style={tdr}>$12,050,000</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Unlevered Yield on Cost</td><td style={{ ...totBg, textAlign: 'right' }}>8.9%</td><td style={{ ...totBg, textAlign: 'right' }}>7.4%</td><td style={{ ...totBg, textAlign: 'right' }}>7.7%</td></tr>
           </tbody>
         </table>
-        {/* Operating expenses — full width */}
-        <div className="eyebrow" style={{ marginBottom: 3, fontSize: 9 }}>Operating Expenses — Normalized</div>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 6, tableLayout: 'fixed' }}>
-          <Cols /><Head first="Expense" />
-          <tbody>
-            {expenses.map(Row)}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Operating Expense</td><td style={totBg}>$56,009</td><td style={totBg}>$102,266</td><td style={totBg}>$120,751</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$203,218</td><td style={noiBg}>$167,602</td><td style={noiBg}>$245,217</td></tr>
-          </tbody>
-        </table>
-        <div style={{ fontSize: 7, color: 'var(--stone)', marginBottom: 8, lineHeight: 1.4 }}>
-          <sup>1</sup> Current EGI derived (stabilized rental + other income). <sup>2</sup> RE taxes and insurance
-          were escrowed in the T12 and normalized in the Current/Pro Forma columns (mill rate 39.79; town-wide
-          revaluation due 2028). <sup>3</sup> Management not separately booked in the T12. <sup>4</sup> Electric,
-          water &amp; sewer, trash and other lines held at recent actuals across all periods — see the BOV / data room
-          for the full schedule.
+
+        {/* Side-by-side stabilized detail */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 22, flex: 1, minHeight: 0 }}>
+          <Detail
+            eyebrowLabel="Existing Plaza — Stabilized Detail (Pro Forma)"
+            title="Plaza"
+            income={[
+              ['Effective Rental Income — Total', '$344,242'],
+              ['CAM Reimbursement', '$19,266'],
+              ['Additional Income', '$2,460'],
+            ]}
+            egi="$365,968"
+            expenses={[
+              ['Property Management', '$18,298'],
+              ['Real Estate Tax', '$38,309'],
+              ['Property Insurance', '$16,975'],
+              ['Electric', '$2,228'],
+              ['Water & Sewer', '$6,979'],
+              ['Trash Removal', '$10,856'],
+              ['Repairs & Maintenance', '$9,633'],
+              ['Landscaping / Snow Removal', '$15,445'],
+            ]}
+            opexTotal="$118,724"
+            noi="$247,244"
+          />
+          <Detail
+            eyebrowLabel="New Development — Stabilized Detail (Year 1)"
+            title="Development"
+            income={[
+              ['Gross Rental Income', '$1,185,600'],
+              ['Total Other Income', '$74,715'],
+              ['Vacancy (5%)', '($63,016)'],
+            ]}
+            egi="$1,197,299"
+            expenses={[
+              ['Property Taxes', '$269,821'],
+              ['Payroll', '$63,750'],
+              ['Utilities', '$45,900'],
+              ['Management Fee', '$35,919'],
+              ['Insurance', '$30,600'],
+              ['Repairs & Maintenance', '$20,400'],
+              ['Marketing', '$12,750'],
+              ['Contract Services', '$12,750'],
+              ['General & Administrative', '$11,475'],
+              ['Make Ready Cost', '$10,200'],
+            ]}
+            opexTotal="$513,565"
+            noi="$683,735"
+          />
         </div>
 
-        {/* Underwriting notes — full width, two columns */}
-        <div className="eyebrow" style={{ marginBottom: 6, fontSize: 9 }}>Underwriting Notes</div>
-        <div style={{ columns: 2, columnGap: 26, fontSize: 9.2, lineHeight: 1.5, color: 'var(--graphite)', flex: 1, minHeight: 0 }}>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Value-add commercial center.</strong> Current effective rental income of $267,408 reflects in-place rents with the ground-floor commercial vacancy. Pro forma marks commercial rents to $15&ndash;$22/SF, leases the vacant space, converts Suite 12 to apartments, and implements CAM recovery — lifting effective rental income to $344,242 and EGI to $365,968.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Commercial lease-up &amp; mark-to-market.</strong> Suite 7 (~1,000 SF) is underwritten at $15/SF, and occupied suites mark from ~$13.38 toward $15&ndash;$22 on 2026 rollover, raising gross scheduled commercial rent from $229,788 to $319,160.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Residential conversion &amp; CAM recovery.</strong> Suite 12 (~1,600 SF of vacant rear retail) converts to two apartments (~$43,200/yr) — proven, since the two existing units were built from similar space in 2019&ndash;2020 and mark from $1,650 toward $1,800/mo. Pro forma also introduces CAM reimbursement of $19,266 (~$1.00/SF of GBA), recovering costs the landlord currently absorbs.</p>
-          <p style={{ breakInside: 'avoid', marginBottom: 8 }}><strong>Other income, taxes, insurance &amp; R&amp;M.</strong> Current other income includes interim lot-storage income from a tenant parking on the development parcel, which burns off at pro forma when the residential project is built. Taxes ($40,337; mill 39.79) and insurance ($16,975) are carried at full market levels; R&amp;M is normalized to $9,633 ($0.50/SF) and management to 5% of EGI in both columns.</p>
+        <div style={{ fontSize: 7.4, color: 'var(--stone)', marginTop: 8, lineHeight: 1.45 }}>
+          Combined total cost $12,050,000 carries the $250,000 plaza capital budget and the $8,000,000 development hard
+          cost; the $1,275,000 entitled land sits inside acquisition and is not double-counted. Plaza shown at stabilized
+          pro forma; development at Year-1 stabilization (5% vacancy). Naugatuck mill rate 37.79.
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -635,12 +901,12 @@ function InvestmentHighlights({ pageNum }) {
           {(() => {
             const TextBox = (g, key) => (
               <div key={key} style={{ display: 'flex', flexDirection: 'column', minHeight: 0, padding: '2px 6px' }}>
-                <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 9, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>{g.title}</div>
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, justifyContent: 'space-between', minHeight: 0 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 11, paddingBottom: 6, borderBottom: '2px solid var(--golden)' }}>{g.title}</div>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 13, minHeight: 0 }}>
                   {g.items.map((it, ii) => (
-                    <div key={ii} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
-                      <div style={{ fontSize: 9.6, fontWeight: 800, color: 'var(--carbon)', marginBottom: 2, lineHeight: 1.18 }}>{it.head}</div>
-                      <p style={{ fontSize: 8.4, lineHeight: 1.4, color: 'var(--graphite)' }}>{it.body}</p>
+                    <div key={ii} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 11 }}>
+                      <div style={{ fontSize: 11.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3, lineHeight: 1.22 }}>{it.head}</div>
+                      <p style={{ fontSize: 10, lineHeight: 1.5, color: 'var(--graphite)' }}>{it.body}</p>
                     </div>
                   ))}
                 </div>
@@ -669,34 +935,155 @@ function ProposedDevelopment({ pageNum }) {
     { v: 'Sept 2025', k: 'Site Plan Approved' },
     { v: 'Summer 2027', k: 'New Metro-North Station' },
   ]
+  const tdl = { fontSize: 9, padding: '3.5px 8px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const tdr = { fontSize: 9, padding: '3.5px 8px', textAlign: 'right' }
+  const thl = { fontSize: 7.5, padding: '4px 8px', textAlign: 'left', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const thr = { fontSize: 7.5, padding: '4px 8px', textAlign: 'right', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 9, padding: '3.5px 8px' }
+  const mix = [
+    { t: 'Studio', u: 16, sf: 500, tot: '8,000' },
+    { t: 'One Bedroom', u: 27, sf: 700, tot: '18,900' },
+    { t: 'Two Bedroom', u: 8, sf: 900, tot: '7,200' },
+  ]
   return (
     <div className="page">
       <PageHeader section="Proposed Development" />
       <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
         <div className="section-title" style={{ marginBottom: 2 }}>Proposed 51-Unit <span style={{ color: '#F8971D' }}>Development</span></div>
         <div className="title-rule" />
-        <div style={{ fontSize: 12, lineHeight: 1.6, color: 'var(--graphite)', marginBottom: 12 }}>
-          On about <strong>1.69 acres of excess land</strong> behind the existing center, Salem Square is entitled for a
-          <strong> 51-unit multifamily building</strong>, with site plans approved by the Naugatuck Zoning Commission in
-          September 2025. Building permits are the remaining step &mdash; a de-risked, shovel-ready second phase rather
-          than a speculative rezoning, positioned for Naugatuck&rsquo;s push toward transit-oriented housing around the
-          new $33.2M Metro-North station opening summer 2027.
-        </div>
 
-        {/* Full-bleed conceptual rendering */}
-        <div style={{ position: 'relative', flex: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--linen)' }}>
-          <img src="/photos/rendering.png" alt="Conceptual rendering of the proposed 51-unit multifamily building at Salem Square" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(43,48,56,0.85)', color: '#fff', fontSize: 8.5, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '4px 10px', borderRadius: 3 }}>Conceptual Rendering</div>
-        </div>
-
-        {/* Development stat strip */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginTop: 12 }}>
+        {/* Development stat strip — top */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 12 }}>
           {stats.map(s => (
             <div key={s.k} style={{ textAlign: 'center', padding: '7px 4px', borderTop: '3px solid var(--golden)' }}>
               <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
               <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 5 }}>{s.k}</div>
             </div>
           ))}
+        </div>
+
+        {/* Rendering + unit-mix sidebar */}
+        <div style={{ display: 'flex', gap: 14, flex: 1, minHeight: 0 }}>
+          {/* Full-bleed conceptual rendering */}
+          <div style={{ position: 'relative', flex: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--linen)' }}>
+            <img src="/photos/rendering.png" alt="Conceptual rendering of the proposed 51-unit multifamily building at Salem Square" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(43,48,56,0.85)', color: '#fff', fontSize: 8.5, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '4px 10px', borderRadius: 3 }}>Conceptual Rendering</div>
+          </div>
+
+          {/* Entitled unit mix + narrative — sidebar */}
+          <div style={{ width: 232, flexShrink: 0, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <div className="eyebrow" style={{ marginBottom: 4, fontSize: 8.5 }}>Entitled 51-Unit — Unit Mix</div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+              <colgroup><col style={{ width: '40%' }} /><col style={{ width: '18%' }} /><col style={{ width: '20%' }} /><col style={{ width: '22%' }} /></colgroup>
+              <thead><tr style={{ background: 'var(--carbon)' }}><th style={thl}>Type</th><th style={thr}>Units</th><th style={thr}>Avg SF</th><th style={thr}>Tot SF</th></tr></thead>
+              <tbody>
+                {mix.map((m, i) => (
+                  <tr key={m.t} style={i % 2 ? { background: 'var(--linen)' } : undefined}>
+                    <td style={tdl}>{m.t}</td><td style={tdr}>{m.u}</td><td style={tdr}>{m.sf}</td><td style={tdr}>{m.tot}</td>
+                  </tr>
+                ))}
+                <tr>
+                  <td style={{ ...totBg, textAlign: 'left' }}>Total</td>
+                  <td style={{ ...totBg, textAlign: 'right' }}>51</td>
+                  <td style={{ ...totBg, textAlign: 'right' }}>669</td>
+                  <td style={{ ...totBg, textAlign: 'right' }}>34,100</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 12 }}>
+              <p style={{ fontSize: 10.5, lineHeight: 1.55, color: 'var(--graphite)', margin: 0 }}>
+                On about <strong>1.69 acres of excess land</strong> behind the existing center, Salem Square is entitled
+                for a <strong>51-unit multifamily building</strong> &mdash; 34,100 net rentable SF of studios, one- and
+                two-bedrooms. Site plans were approved by the Naugatuck Zoning Commission in <strong>September 2025</strong>.
+              </p>
+              <p style={{ fontSize: 10.5, lineHeight: 1.55, color: 'var(--graphite)', margin: 0 }}>
+                Building permits are the remaining step &mdash; a de-risked, shovel-ready second phase rather than a
+                speculative rezoning &mdash; positioned for Naugatuck&rsquo;s push toward transit-oriented housing around
+                the new <strong>$33.2M Metro-North station</strong> opening summer 2027.
+              </p>
+              <div style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
+                <div style={{ fontSize: 10.5, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1.35 }}>
+                  Acquire an income center and a shovel-ready second phase on a single lot.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}
+
+/* ═══════════════════ EXISTING BUILDING ═══════════════════ */
+function ExistingBuilding({ pageNum }) {
+  const tdl = { fontSize: 11.5, padding: '7px 10px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const tdr = { fontSize: 11.5, padding: '7px 10px', textAlign: 'right' }
+  const thl = { fontSize: 9, padding: '6px 10px', textAlign: 'left', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const thr = { fontSize: 9, padding: '6px 10px', textAlign: 'right', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 11.5, padding: '7px 10px' }
+  const stats = [
+    { v: '18,770', k: 'Rentable SF' },
+    { v: '13', k: 'In-Place Units' },
+    { v: '1960', k: 'Year Built' },
+    { v: '10', k: 'Commercial Units' },
+    { v: '2', k: 'Residential Units' },
+  ]
+  const mix = [
+    { t: 'Commercial Retail', u: 10, pct: '77%' },
+    { t: 'Apartments', u: 2, pct: '15%' },
+    { t: 'Storage', u: 1, pct: '8%' },
+  ]
+  return (
+    <div className="page">
+      <PageHeader section="The Property" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2 }}>Existing 18,770 SF <span style={{ color: '#F8971D' }}>Building</span></div>
+        <div className="title-rule" />
+
+        {/* Building stat strip — top */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 12 }}>
+          {stats.map(s => (
+            <div key={s.k} style={{ textAlign: 'center', padding: '7px 4px', borderTop: '3px solid var(--golden)' }}>
+              <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 5 }}>{s.k}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Photo collage + unit-mix sidebar */}
+        <div style={{ display: 'flex', gap: 14, flex: 1, minHeight: 0 }}>
+          {/* Single property photo */}
+          <div style={{ flex: 1, borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--linen)', minHeight: 0 }}>
+            <img src="/photos/ext-1.jpg" alt="Existing Salem Square property" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+
+          {/* Existing unit mix — sidebar */}
+          <div style={{ width: 232, flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
+            <div className="eyebrow" style={{ marginBottom: 6, fontSize: 10 }}>In-Place Unit Mix</div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+              <colgroup><col style={{ width: '56%' }} /><col style={{ width: '22%' }} /><col style={{ width: '22%' }} /></colgroup>
+              <thead><tr style={{ background: 'var(--carbon)' }}><th style={thl}>Component</th><th style={thr}>Units</th><th style={thr}>Share</th></tr></thead>
+              <tbody>
+                {mix.map((m, i) => (
+                  <tr key={m.t} style={i % 2 ? { background: 'var(--linen)' } : undefined}>
+                    <td style={tdl}>{m.t}</td><td style={tdr}>{m.u}</td><td style={tdr}>{m.pct}</td>
+                  </tr>
+                ))}
+                <tr>
+                  <td style={{ ...totBg, textAlign: 'left' }}>Total</td>
+                  <td style={{ ...totBg, textAlign: 'right' }}>13</td>
+                  <td style={{ ...totBg, textAlign: 'right' }}>100%</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style={{ fontSize: 12, color: 'var(--graphite)', lineHeight: 1.65, marginTop: 16 }}>
+              18,770 rentable SF (19,266 gross) of brick-and-cedar mixed-use built in 1960 across two stories &mdash;
+              ground-floor retail and service suites fronting New Haven Road, with two in-building apartments and
+              ancillary storage. Individually metered electric (16-meter modular, 2020); ±26,000 SF of paved parking.
+            </div>
+          </div>
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -718,10 +1105,13 @@ function App() {
     <BuildingDescriptions />,
     <SiteMap />,
     <ProposedDevelopment />,
+    <ExistingBuilding />,
     ...PHOTO_PAGES.map(p => (p.kind === 'comingsoon' ? <PhotoComingSoon {...p} /> : <PhotoGallery {...p} />)),
     <Divider eyebrow="02" title="Financial Analysis" image="/photos/ext-2.jpg" />,
+    <PricingDevelopment />,
+    <CombinedOperatingStatement />,
     <RentRoll />,
-    <IncomeExpense />,
+    <SalemSquarePlazaAnalysis />,
     <Divider eyebrow="03" title="Location & Market" image="/photos/aerial-1.jpg" />,
     <CityOverview />,
     <LocationMap />,

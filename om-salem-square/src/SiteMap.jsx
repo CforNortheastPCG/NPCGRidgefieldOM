@@ -1,5 +1,12 @@
+import { useState, useRef } from 'react'
 import { PageHeader, PageFooter } from './Shell.jsx'
 import { PARCEL } from './parcel.js'
+
+/* Render-pin positions, as a percentage of the map image. To reposition: open
+   the Site Map page with ?editpin in the URL, drag a pin onto the spot, then copy
+   that pin's readout value and paste its left/top here. */
+const PIN = { left: 41.9, top: 38.8 }        // proposed 51-unit building
+const PIN_BUILDING = { left: 54.7, top: 59.9 }   // existing income building
 
 /* ═══════════════════ SITE MAP ═══════════════════
    Google Static (hybrid satellite) map of the Salem Square parcel at 668 New
@@ -39,6 +46,32 @@ const FACTS = [
 
 export default function SiteMap({ pageNum }) {
   const mapUrl = API_KEY ? buildStaticMapUrl() : null
+  const EDIT = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('editpin')
+  const mapRef = useRef(null)
+  const dragging = useRef(null)
+  const [pin, setPin] = useState(PIN)
+  const [pinB, setPinB] = useState(PIN_BUILDING)
+
+  const onMove = (e) => {
+    if (!dragging.current || !mapRef.current) return
+    const r = mapRef.current.getBoundingClientRect()
+    const left = Math.round(Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100)) * 10) / 10
+    const top = Math.round(Math.min(100, Math.max(0, ((e.clientY - r.top) / r.height) * 100)) * 10) / 10
+    ;(dragging.current === 'building' ? setPinB : setPin)({ left, top })
+  }
+  const stopDrag = () => {
+    dragging.current = null
+    window.removeEventListener('pointermove', onMove)
+    window.removeEventListener('pointerup', stopDrag)
+  }
+  const startDrag = (which) => (e) => {
+    if (!EDIT) return
+    e.preventDefault()
+    dragging.current = which
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', stopDrag)
+  }
+
   return (
     <div className="page">
       <PageHeader section="Site Map" />
@@ -55,7 +88,7 @@ export default function SiteMap({ pageNum }) {
 
         <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 16, flex: 1, minHeight: 0 }}>
           {/* AERIAL MAP WITH PARCEL OUTLINE */}
-          <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', minHeight: 0, background: 'var(--linen)' }}>
+          <div ref={mapRef} style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', minHeight: 0, background: 'var(--linen)' }}>
             {mapUrl ? (
               <img
                 src={mapUrl}
@@ -68,13 +101,28 @@ export default function SiteMap({ pageNum }) {
               </div>
             )}
             {/* Circular render pin over the ±1.69-ac excess land (the entitled development parcel) */}
-            <div style={{ position: 'absolute', left: '43%', top: '34%', transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+            <div onPointerDown={startDrag('dev')} style={{ position: 'absolute', left: `${pin.left}%`, top: `${pin.top}%`, transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: EDIT ? 'auto' : 'none', cursor: EDIT ? 'grab' : 'default' }}>
               <div style={{ background: 'rgba(43,48,56,0.88)', color: '#fff', fontSize: 8, fontWeight: 700, letterSpacing: '0.03em', padding: '2px 7px', borderRadius: 3, whiteSpace: 'nowrap', marginBottom: 4 }}>Proposed 51-Unit Building</div>
               <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--golden)', boxShadow: '0 2px 7px rgba(0,0,0,0.5)' }}>
                 <img src="/photos/rendering.png" alt="Conceptual rendering of the proposed 51-unit building" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
               <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '9px solid var(--golden)', marginTop: -1, filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.4))' }} />
             </div>
+            {/* Circular pin over the existing income-producing building */}
+            <div onPointerDown={startDrag('building')} style={{ position: 'absolute', left: `${pinB.left}%`, top: `${pinB.top}%`, transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: EDIT ? 'auto' : 'none', cursor: EDIT ? 'grab' : 'default' }}>
+              <div style={{ background: 'var(--golden)', color: '#fff', fontSize: 8, fontWeight: 700, letterSpacing: '0.03em', padding: '2px 7px', borderRadius: 3, whiteSpace: 'nowrap', marginBottom: 4 }}>Existing Building</div>
+              <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', border: '3px solid #fff', boxShadow: '0 2px 7px rgba(0,0,0,0.5)' }}>
+                <img src="/photos/ext-1.jpg" alt="Existing Salem Square building" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+              <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '9px solid #fff', marginTop: -1, filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.4))' }} />
+            </div>
+            {/* Edit-mode readout — drag a pin, then copy its values into the PIN consts above */}
+            {EDIT && (
+              <div style={{ position: 'absolute', left: 8, bottom: 8, background: 'rgba(43,48,56,0.92)', color: '#fff', fontSize: 10.5, fontWeight: 700, fontFamily: 'monospace', padding: '6px 10px', borderRadius: 4, pointerEvents: 'none', lineHeight: 1.5 }}>
+                <div>51-unit &nbsp;left: {pin.left}% · top: {pin.top}%</div>
+                <div>building left: {pinB.left}% · top: {pinB.top}%</div>
+              </div>
+            )}
           </div>
 
           {/* SITE FACTS */}

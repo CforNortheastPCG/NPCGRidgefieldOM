@@ -1,4 +1,4 @@
-import { DEAL, PageHeader, PageFooter } from './Shell.jsx'
+import { PageHeader, PageFooter } from './Shell.jsx'
 
 /* ═══════════════════ TABLE OF CONTENTS ═══════════════════
    Page numbers here are derived from App's page order (auto-numbered). If you
@@ -12,19 +12,22 @@ const TOC = [
   { n: 7, label: 'Property Overview', sub: true },
   { n: 8, label: 'Site Map', sub: true },
   { n: 9, label: 'Proposed Development', sub: true },
-  { n: 10, label: 'Property Photography', sub: true },
-  { n: 17, label: 'Financial Analysis', section: true },
-  { n: 18, label: 'Rent Roll & Lease-Up', sub: true },
-  { n: 19, label: 'Income & Expense', sub: true },
-  { n: 20, label: 'Location & Market', section: true },
-  { n: 21, label: 'City Overview', sub: true },
-  { n: 22, label: 'Location & Amenities', sub: true },
-  { n: 23, label: 'Drive Times', sub: true },
-  { n: 24, label: 'County Overview & Employment', sub: true },
-  { n: 25, label: 'Regional Positioning', sub: true },
-  { n: 26, label: 'The Team', section: true },
-  { n: 27, label: 'Team', sub: true },
-  { n: 28, label: 'Our Locations', sub: true },
+  { n: 10, label: 'Existing Building', sub: true },
+  { n: 11, label: 'Property Photography', sub: true },
+  { n: 18, label: 'Financial Analysis', section: true },
+  { n: 19, label: 'The Combined Property', sub: true },
+  { n: 20, label: 'Combined Operating Statement', sub: true },
+  { n: 21, label: 'Existing Rent Roll', sub: true },
+  { n: 22, label: 'In-Place Analysis', sub: true },
+  { n: 23, label: 'Location & Market', section: true },
+  { n: 24, label: 'City Overview', sub: true },
+  { n: 25, label: 'Location & Amenities', sub: true },
+  { n: 26, label: 'Drive Times', sub: true },
+  { n: 27, label: 'County Overview & Employment', sub: true },
+  { n: 28, label: 'Regional Positioning', sub: true },
+  { n: 29, label: 'The Team', section: true },
+  { n: 30, label: 'Team', sub: true },
+  { n: 31, label: 'Our Locations', sub: true },
 ]
 
 export default function Toc({ pageNum }) {
@@ -61,7 +64,7 @@ export default function Toc({ pageNum }) {
 
           {/* Accent photo */}
           <div style={{ borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
-            <img src={DEAL.coverImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/Sign.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(63,71,83,0.55), rgba(63,71,83,0) 45%)' }} />
           </div>
         </div>

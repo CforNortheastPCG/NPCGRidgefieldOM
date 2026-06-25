@@ -27,7 +27,9 @@
       "WebFetch(domain:www.arcgis.com)",
       "Bash(node -e \"try{require.resolve\\('pdfjs-dist'\\);console.log\\('pdfjs-dist present'\\)}catch\\(e\\){console.log\\('no pdfjs-dist'\\)}\")",
       "Bash(node scripts/render-siteplans.cjs)",
-      "PowerShell(Get-Content *)"
+      "PowerShell(Get-Content *)",
+      "Bash(node -e \"try{require.resolve\\('xlsx'\\);console.log\\('xlsx OK'\\)}catch\\(e\\){console.log\\('no xlsx'\\)}; try{require.resolve\\('exceljs'\\);console.log\\('exceljs OK'\\)}catch\\(e\\){console.log\\('no exceljs'\\)}\")",
+      "Bash(python3 *)"
     ]
   }
 }

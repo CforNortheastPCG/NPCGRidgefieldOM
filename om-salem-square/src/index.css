@@ -534,7 +534,7 @@ body {
 .dc-contacts { display: flex; flex-direction: column; gap: 10px; align-self: start; }
 .dc-card { padding: 12px 0; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
 .dc-contacts--1 .dc-card { padding: 20px 0; gap: 4px; }
-.dc-avatar { width: 64px; height: 64px; border-radius: 50%; border: 2.5px solid var(--golden); object-fit: cover; margin-bottom: 6px; background: var(--linen); }
+.dc-avatar { width: 64px; height: 64px; border-radius: 50%; border: 2.5px solid var(--golden); object-fit: cover; object-position: center top; margin-bottom: 6px; background: var(--linen); }
 .dc-avatar--ph { display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #4b5562 0%, var(--carbon) 100%); color: #fff; font-weight: 800; font-size: 20px; letter-spacing: 0.04em; }
 .dc-contacts--1 .dc-avatar { width: 72px; height: 72px; margin-bottom: 10px; }
 .dc-name { font-size: 13px; font-weight: 700; color: var(--carbon); }
@@ -656,6 +656,7 @@ a.team__big:hover .team__avatar { border-color: var(--terracotta); }
   height: 54px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center top;
   border: 2px solid var(--golden);
   margin-bottom: 6px;
 }
