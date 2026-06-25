@@ -3,6 +3,27 @@ const os = require('os');
 const path = require('path');
 const puppeteer = require('puppeteer');
 
+// Write listing/broker info into the PDF's document metadata. The OM pages are
+// rasterized images, so this is the only machine-readable text in the file —
+// it points any reader (or AI ingesting it) at the exclusive listing brokers.
+async function embedMetadata(out) {
+  try {
+    const { PDFDocument } = require('pdf-lib');
+    const meta = require('./pdf-meta.cjs');
+    const doc = await PDFDocument.load(fs.readFileSync(out));
+    doc.setTitle(meta.title);
+    doc.setAuthor(meta.author);
+    doc.setSubject(meta.subject);
+    doc.setKeywords(meta.keywords);
+    doc.setCreator(meta.creator);
+    doc.setProducer(meta.producer);
+    fs.writeFileSync(out, await doc.save());
+    console.log('Embedded broker metadata (Title/Author/Subject/Keywords).');
+  } catch (err) {
+    console.warn('  ↳ metadata embed skipped:', err.message);
+  }
+}
+
 /* ═══════════════════ OM PDF RENDERER ═══════════════════
    Screenshots every `.page` from a running OM (dev or preview server) and
    composes a print-ready, rasterized PDF (one 11x8.5in landscape page each).
@@ -26,7 +47,7 @@ function dealPdfName() {
     const m = src.match(/pdfName:\s*'([^']+)'/);
     if (m) return m[1];
   } catch { /* fall through */ }
-  return 'offering-memorandum.pdf';
+  return '6-Elm-Street-Norwalk-OM.pdf';
 }
 
 async function renderPdf({
@@ -108,6 +129,9 @@ async function renderPdf({
     printBackground: true,
     margin: { top: 0, right: 0, bottom: 0, left: 0 },
   });
+
+  // Embed AI-facing metadata (rasterized pages → this is the only readable text).
+  await embedMetadata(out);
 
   const mb = (fs.statSync(out).size / 1024 / 1024).toFixed(1);
   console.log(`PDF saved to ${out} · ${mb} MB`);

@@ -14,21 +14,32 @@ function CoverHero({ pageNum }) {
   return (
     <div className="page">
       <div className="cover-hero">
-        <img src="/photos/35-web-or-mls-6 Elm St, Norwalk, CT 06850 (34 OF 53).JPG" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(26px) brightness(0.65)', transform: 'scale(1.12)' }} />
-        <img className="cover-hero-img" src="/photos/35-web-or-mls-6 Elm St, Norwalk, CT 06850 (34 OF 53).JPG" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center 42%' }} />
-        <div className="cover-hero-shade" />
-        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '55%', background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.85) 100%)', pointerEvents: 'none' }} />
+        <img src="/photos/35-web-or-mls-6 Elm St, Norwalk, CT 06850 (34 OF 53).JPG" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(26px) brightness(0.82)', transform: 'scale(1.12)' }} />
+        <img className="cover-hero-img" src="/photos/35-web-or-mls-6 Elm St, Norwalk, CT 06850 (34 OF 53).JPG" alt="" style={{ position: 'absolute', top: 88, left: 0, right: 0, bottom: 130, width: '100%', height: 'auto', objectFit: 'cover', objectPosition: 'center 42%' }} />
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 88, background: 'var(--carbon)' }} />
         <div className="cover-hero-header">
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
-        <div className="cover-hero-overlay">
-          <div style={{ color: '#fff', fontSize: 11, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 10 }}>For Sale</div>
-          <div className="cover-hero-name">Elm Street Apartments</div>
-          <div className="cover-hero-title">{ADDR}</div>
-          <div className="cover-hero-sub">Norwalk, Connecticut</div>
-          <div className="cover-hero-rule" />
-          <div className="cover-hero-prep">12-Unit Multifamily Property</div>
+        {/* Bottom broker band */}
+        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 130, background: 'var(--carbon)', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 36, padding: '0 48px 22px' }}>
+          <div>
+            <div style={{ color: '#fff', fontSize: 9, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', marginBottom: 6 }}>For Sale</div>
+            <div className="cover-hero-name" style={{ fontSize: 14 }}>Elm Street Apartments</div>
+            <div className="cover-hero-title" style={{ fontSize: 30 }}>{ADDR}</div>
+            <div className="cover-hero-sub" style={{ marginBottom: 0, fontSize: 11, marginTop: 4 }}>Norwalk, Connecticut &nbsp;·&nbsp; 12-Unit Multifamily</div>
+          </div>
+          <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--golden)' }}>Exclusively Listed By</div>
+            {[
+              { name: 'Rich Edwards Jr.', phone: '203.307.1577' },
+              { name: 'Jeff Wright', phone: '203.307.1581' },
+            ].map((b, i) => (
+              <div key={i}>
+                <div style={{ fontSize: 11.5, fontWeight: 800, color: '#fff', lineHeight: 1.1 }}>{b.name}</div>
+                <div style={{ fontSize: 8.5, color: '#fff', opacity: 0.8, marginTop: 1 }}>Vice President, Investments &nbsp;·&nbsp; {b.phone}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -60,8 +71,8 @@ function ExecutiveSummary({ pageNum }) {
 
         {/* Narrative left — photos right */}
         <div style={{ display: 'grid', gridTemplateColumns: '1.35fr 0.65fr', gap: 20, flex: 1, minHeight: 0 }}>
-          <div>
-            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <p style={{ fontSize: 8.5, lineHeight: 1.55, marginBottom: 11, fontWeight: 500, color: 'var(--carbon)' }}>
               Northeast Private Client Group is pleased to exclusively present the opportunity to acquire
               6 Elm Street, a 12-unit value-add multifamily investment located in Norwalk, Connecticut &mdash;
               one of Fairfield County&rsquo;s most active and historically resilient rental markets. The offering
@@ -69,7 +80,7 @@ function ExecutiveSummary({ pageNum }) {
               a 0.5-acre lot, now operating as an all-residential property following the recent conversion of two
               former commercial-zoned units to legal residential apartments.
             </p>
-            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
+            <p style={{ fontSize: 8.5, lineHeight: 1.55, marginBottom: 11, fontWeight: 500, color: 'var(--carbon)' }}>
               Built in 1967 and extensively improved through a comprehensive capital program, 6 Elm Street has
               been substantially de-risked for incoming ownership. Completed capital expenditures include five
               fully renovated apartments; the conversion of two commercial-zoned units to legal residential
@@ -80,7 +91,7 @@ function ExecutiveSummary({ pageNum }) {
               already addressed, a new owner can focus on lighter cosmetic and curb-appeal improvements &mdash; a
               lower-cost, lower-risk path to driving rents and unlocking the property&rsquo;s remaining upside.
             </p>
-            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
+            <p style={{ fontSize: 8.5, lineHeight: 1.55, marginBottom: 11, fontWeight: 500, color: 'var(--carbon)' }}>
               The property is defined by its large, family-oriented floor plans &mdash; 10 of the 12 units are
               two-, three-, or four-bedroom layouts, a configuration that is increasingly scarce in the submarket
               and commands premium rents and longer tenancies. In-unit washers and dryers are installed in all
@@ -90,19 +101,19 @@ function ExecutiveSummary({ pageNum }) {
               are tenant-paid electric with landlord-provided gas heat and hot water; and the two rear-building
               units are individually metered and fully tenant-paid.
             </p>
-            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
+            <p style={{ fontSize: 8.5, lineHeight: 1.55, marginBottom: 11, fontWeight: 500, color: 'var(--carbon)' }}>
               Located in Norwalk, a core Fairfield County rental market with a long track record of high occupancy,
               the property benefits from strong, consistent tenant demand and the area&rsquo;s broader economic
               momentum. Residents enjoy convenient access to Metro-North&rsquo;s New Haven Line, with direct service
               to New York City&rsquo;s Grand Central Station, as well as I-95 and Route 7, connecting them to the
               region&rsquo;s major employment centers and lifestyle amenities.
             </p>
-            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
+            <p style={{ fontSize: 8.5, lineHeight: 1.55, marginBottom: 11, fontWeight: 500, color: 'var(--carbon)' }}>
               6 Elm Street represents a rare opportunity to acquire a recently improved, large-unit asset in an
               established Fairfield County market. Offered on a subject-to-offer basis, the property delivers a
               6.50% going-in cap rate on current income.
             </p>
-            <p style={{ fontSize: 9, lineHeight: 1.4, marginBottom: 7 }}>
+            <p style={{ fontSize: 8.5, lineHeight: 1.55, marginBottom: 11, fontWeight: 500, color: 'var(--carbon)' }}>
               A new owner stands to benefit from meaningful embedded upside. In-place rents currently sit roughly
               $54,000 below market, and a disciplined mark-to-market and revenue-management strategy &mdash;
               executed through natural lease turnover with minimal remaining capital expenditure &mdash; is
@@ -113,8 +124,8 @@ function ExecutiveSummary({ pageNum }) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
             {[
-              '/photos/3-web-or-mls-6 Elm St, Norwalk, CT 06850 (2 OF 53).JPG',
-              '/photos/4-web-or-mls-6 Elm St, Norwalk, CT 06850 (3 OF 53).JPG',
+              '/photos/43-web-or-mls-6 Elm St, Norwalk, CT 06850 (42 OF 53).JPG',
+              '/photos/45-web-or-mls-6 Elm St, Norwalk, CT 06850 (44 OF 53).JPG',
             ].map((src, i) => (
               <div key={i} style={{ flex: 1, borderRadius: 4, overflow: 'hidden', minHeight: 0 }}>
                 <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -144,7 +155,7 @@ function InvestmentHighlights({ pageNum }) {
   ]
   const photos = [
     '/photos/36-web-or-mls-6 Elm St, Norwalk, CT 06850 (35 OF 53).JPG',
-    '/photos/7-web-or-mls-6 Elm St, Norwalk, CT 06850 (6 OF 53).JPG',
+    '/photos/37-web-or-mls-6 Elm St, Norwalk, CT 06850 (36 OF 53).JPG',
   ]
   return (
     <div className="page">
@@ -707,7 +718,7 @@ function FairfieldCounty({ pageNum }) {
             Norwalk&rsquo;s large employment base and coastal location drive deep, durable rental demand. Source: U.S. Census ACS 2024 5-Year Estimates.
           </div>
         </div>
-        <div style={{ flex: '0 0 45%', position: 'relative' }}><img src="/photos/19-web-or-mls-6 Elm St, Norwalk, CT 06850 (18 OF 53).JPG" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>
+        <div style={{ flex: '0 0 45%', position: 'relative' }}><img src="/photos/54-web-or-mls-6 Elm St, Norwalk, CT 06850 (53 OF 53).JPG" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>
       </div>
       <PageFooter pageNum={pageNum} />
     </div>
