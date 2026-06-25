@@ -7,12 +7,13 @@
 
 export const PORTFOLIO = {
   name: 'West End Portfolio',
-  subtitle: '29-Property Multifamily Portfolio · Hartford, CT',
+  subtitle: 'West End · Hartford, CT',
   status: 'Just Sold',
   hero: '/properties/cover-shot.png', // the curated 6-building collage cover
   heroPos: 'center',
   stats: [
     { l: 'Sale Price', v: '$14,281,500' },
+    { l: 'Number of Properties', v: '23' },
     { l: 'Units', v: '167' },
     { l: 'Price / Unit', v: '$85,517' },
     { l: 'Cap Rate', v: '7.01%' },

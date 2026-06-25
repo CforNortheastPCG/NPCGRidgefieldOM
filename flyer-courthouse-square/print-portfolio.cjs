@@ -86,7 +86,7 @@ async function embedMetadata(out, d) {
   await new Promise((r) => setTimeout(r, 800));
 
   const el = await page.$('.flyer-page');
-  const png = path.join(OUTDIR, `west-end-portfolio-closing.png`);
+  const png = path.join(OUTDIR, `courthouse-square-closing.png`);
   await el.screenshot({ path: png, type: 'png' });
   console.log(`PNG: ${png}`);
 
@@ -97,7 +97,7 @@ async function embedMetadata(out, d) {
     `.pp img{width:100%;height:100%;object-fit:contain}</style>` +
     `<body><div class="pp"><img src="file://${png}"></div></body></html>`);
   await pdfPage.goto('file://' + pHtml, { waitUntil: 'networkidle0', timeout: 60000 });
-  const pdfOut = path.join(OUTDIR, `west-end-portfolio-closing.pdf`);
+  const pdfOut = path.join(OUTDIR, `courthouse-square-closing.pdf`);
   await pdfPage.pdf({ path: pdfOut, width: '11in', height: '8.5in', printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
   await browser.close();
   fs.rmSync(TMP, { recursive: true, force: true });
