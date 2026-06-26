@@ -76,17 +76,17 @@ function PinLayer({ pins: initial, varName = 'PINS' }) {
 /* Pin coordinates — % of the frame; tip points at the building. Drag-tunable in
    dev (see the readout), frozen here for the PDF. */
 const MAP_PINS = [
-  { label: '103 Danbury Rd', img: '/maps/bldg-103-a.jpg', x: 53.6, y: 27 },
-  { label: '105 Danbury Rd', img: '/maps/bldg-105.jpg', x: 19.8, y: 39 },
-  { label: '107 Danbury Rd', img: '/maps/bldg-107.jpg', x: 29.8, y: 46.8 },
-  { label: '109 Danbury Rd', img: '/maps/bldg-109-a.jpg', x: 81.3, y: 36.1 },
+  { label: '103 Danbury Rd', img: '/photos/bldg-103.jpg', x: 53.6, y: 27 },
+  { label: '105 Danbury Rd', img: '/photos/bldg-105.jpg', x: 19.8, y: 39 },
+  { label: '107 Danbury Rd', img: '/photos/bldg-107.jpg', x: 29.8, y: 46.8 },
+  { label: '109 Danbury Rd', img: '/photos/bldg-109.jpg', x: 81.3, y: 36.1 },
 ]
 // Site Aerial uses a different (top-down) photo, so it carries its own positions.
 const SITE_PINS = [
-  { label: '103 Danbury Rd', img: '/maps/bldg-103-a.jpg', x: 38.7, y: 67.9 },
-  { label: '105 Danbury Rd', img: '/maps/bldg-105.jpg', x: 53.4, y: 65.6 },
-  { label: '107 Danbury Rd', img: '/maps/bldg-107.jpg', x: 68.7, y: 48.5 },
-  { label: '109 Danbury Rd', img: '/maps/bldg-109-a.jpg', x: 31.6, y: 35 },
+  { label: '103 Danbury Rd', img: '/photos/bldg-103.jpg', x: 38.7, y: 67.9 },
+  { label: '105 Danbury Rd', img: '/photos/bldg-105.jpg', x: 53.4, y: 65.6 },
+  { label: '107 Danbury Rd', img: '/photos/bldg-107.jpg', x: 68.7, y: 48.5 },
+  { label: '109 Danbury Rd', img: '/photos/bldg-109.jpg', x: 31.6, y: 35 },
 ]
 
 /* ═══════════════════ FULL-BLEED IMAGE ═══════════════════
@@ -139,9 +139,9 @@ function CoverHero({ pageNum }) {
     <div className="page">
       <div className="cover-hero photo-hero">
         <img className="cover-hero-img" src={DEAL.coverImage} alt="" />
-        {/* Gradient hugs the bottom so the upper aerial stays bright while the
-            title block seats on a darkened base. */}
-        <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '55%', background: 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%)', pointerEvents: 'none' }} />
+        {/* Lighter top scrim — just enough to seat the white title/status text
+            while letting the aerial read through (kept off-dark for print). */}
+        <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '55%', background: 'linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0) 100%)', pointerEvents: 'none' }} />
         <div className="cover-hero-header" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase' }}>{DEAL.status}</div>
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
@@ -264,11 +264,11 @@ function TheOffering({ pageNum }) {
           {/* Right — aerial + building facts */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minHeight: 0 }}>
             <div style={{ flex: 1, borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
-              <img src="/photos/aerial-front.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src="/photos/offering-aerial.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div>
               <div className="eyebrow" style={{ marginBottom: 6 }}>Property Facts</div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '4px 18px', fontSize: 9.4 }}>
+              <div className="facts-lg" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5px 0' }}>
                 <div className="bldg-row"><span className="bldg-label">Address</span><span className="bldg-val">103–109 Danbury Rd</span></div>
                 <div className="bldg-row"><span className="bldg-label">Site Area</span><span className="bldg-val">2.29 Acres</span></div>
                 <div className="bldg-row"><span className="bldg-label">Year(s) Built</span><span className="bldg-val">1983 · 1984 · 1985 · 2009</span></div>
@@ -303,7 +303,7 @@ function InvestmentHighlights({ pageNum }) {
       ],
     },
   ]
-  const photos = ['/maps/bldg-109-a.jpg', '/photos/aerial-wide.jpg']
+  const photos = ['/photos/highlights-tr.jpg', '/photos/aerial-wide.jpg']
   return (
     <div className="page">
       <PageHeader section="Investment Highlights" />
@@ -425,19 +425,21 @@ function tenantLogo(name) {
   const key = Object.keys(TENANT_LOGOS).find(k => name.startsWith(k) || name.includes(k))
   return key ? TENANT_LOGOS[key] : null
 }
-function TenantLogos({ tenants }) {
+function TenantLogos({ tenants, compact }) {
+  const chipH = compact ? 44 : 38
+  const imgH = compact ? 34 : 28
   return (
     <div>
-      <div className="eyebrow" style={{ marginBottom: 6 }}>Tenants</div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, alignContent: 'flex-start' }}>
+      <div className="eyebrow" style={{ marginBottom: compact ? 4 : 6 }}>Tenants</div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: compact ? 5 : 7, alignContent: 'flex-start' }}>
         {tenants.map(t => {
           const logo = tenantLogo(t)
           return logo ? (
-            <div key={t} style={{ height: 38, padding: '4px 9px', background: '#fff', border: '1px solid var(--border)', borderRadius: 4, display: 'flex', alignItems: 'center' }}>
-              <img src={logo} alt={t} style={{ maxHeight: 28, maxWidth: 92, objectFit: 'contain', display: 'block' }} />
+            <div key={t} style={{ height: chipH, padding: '4px 9px', background: '#fff', border: '1px solid var(--border)', borderRadius: 4, display: 'flex', alignItems: 'center' }}>
+              <img src={logo} alt={t} style={{ maxHeight: imgH, maxWidth: 92, objectFit: 'contain', display: 'block' }} />
             </div>
           ) : (
-            <span key={t} style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--carbon)', background: 'var(--linen)', border: '1px solid var(--border)', borderLeft: '3px solid var(--golden)', borderRadius: 3, padding: '0 9px', display: 'flex', alignItems: 'center', height: 38 }}>{t}</span>
+            <span key={t} style={{ fontSize: compact ? 10.5 : 9.5, fontWeight: 700, color: 'var(--carbon)', background: 'var(--linen)', border: '1px solid var(--border)', borderLeft: '3px solid var(--golden)', borderRadius: 3, padding: '0 11px', display: 'flex', alignItems: 'center', height: chipH }}>{t}</span>
           )
         })}
       </div>
@@ -451,6 +453,29 @@ function TenantLogos({ tenants }) {
    space-composition table and the building's notable tenants on the right.
    Data is drawn from each building's Canva "Building Overview" / "Tenant"
    pages and the Building Specifications comparison. */
+/* Space Composition table — shared by the gallery / fold-tenants / standard
+   layouts so it can sit in either column. */
+function SpaceComposition({ b }) {
+  return (
+    <div>
+      <div className="eyebrow" style={{ marginBottom: 6 }}>Space Composition</div>
+      <table className="data-table" style={{ fontSize: b.tableFont || 10.6 }}>
+        <thead>
+          <tr><th>Use</th><th style={{ textAlign: 'center' }}>Units / Suites</th><th style={{ textAlign: 'right' }}>SF</th></tr>
+        </thead>
+        <tbody>
+          {b.composition.map(([t, u, sf]) => (
+            <tr key={t}><td>{t}</td><td style={{ textAlign: 'center' }}>{u}</td><td style={{ textAlign: 'right' }}>{sf}</td></tr>
+          ))}
+          <tr className="total-row">
+            <td><strong>Total</strong></td><td style={{ textAlign: 'center' }}><strong>{b.totalUnits}</strong></td><td style={{ textAlign: 'right' }}><strong>{b.totalSF}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
 function BuildingOverview({ b, pageNum }) {
   return (
     <div className="page">
@@ -471,21 +496,32 @@ function BuildingOverview({ b, pageNum }) {
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, flex: 1, minHeight: 0 }}>
           {/* Left — hero (unless the hero lives on the right) + building facts (tenants folded in) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: b.tableLeft ? 7 : 10, minHeight: 0 }}>
             {!b.foldTenants && (
               <div style={{ flex: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden' }}>
                 <img src={b.hero} alt={b.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
             )}
-            <div className={b.plainFacts ? '' : 'bldg-card'} style={{ padding: b.plainFacts ? 0 : '12px 14px' }}>
+            <div className={`${b.plainFacts ? '' : 'bldg-card'} ${b.compact ? 'facts-compact' : ''}`} style={{ padding: b.plainFacts ? 0 : '12px 14px' }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Building Facts</h3>
               {b.facts.map(([k, v]) => (
                 <div className="bldg-row" key={k}><span className="bldg-label">{k}</span><span className="bldg-val">{v}</span></div>
               ))}
             </div>
-            {(b.gallery || b.foldTenants) && <TenantLogos tenants={b.tenants} />}
+            {(b.gallery || b.foldTenants) && <TenantLogos tenants={b.tenants} compact={b.compact} />}
             {(b.gallery || b.foldTenants) && b.note && (
-              <p style={{ fontSize: 9, lineHeight: 1.4, color: 'var(--stone)' }}>{b.note}</p>
+              <p style={{ fontSize: b.compact ? 9 : 9, lineHeight: 1.35, color: 'var(--stone)' }}>{b.note}</p>
+            )}
+            {/* When tableLeft, the Space Composition table sits here (and the
+                second photo moves to the right column). Otherwise an optional
+                second photo absorbs the remaining vertical space so a short
+                left column doesn't leave a white gap. */}
+            {b.tableLeft ? (
+              <SpaceComposition b={b} />
+            ) : b.extraPhoto && (
+              <div style={{ flex: 1, minHeight: 90, borderRadius: 4, overflow: 'hidden' }}>
+                <img src={b.extraPhoto} alt={b.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: b.extraPhotoPos || 'center center', display: 'block' }} />
+              </div>
             )}
           </div>
 
@@ -520,27 +556,19 @@ function BuildingOverview({ b, pageNum }) {
               </div>
             </div>
           ) : b.foldTenants ? (
-            /* Right (fold-tenants layout) — hero photo on top, space composition below */
+            /* Right (fold-tenants layout) — hero photo on top; below it either the
+               space-composition table or, when tableLeft, the second photo. */
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minHeight: 0 }}>
-              <div style={{ flex: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden' }}>
-                <img src={b.hero} alt={b.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <div style={{ flex: b.tableLeft ? 1.8 : 1, minHeight: 0, borderRadius: 4, overflow: 'hidden' }}>
+                <img src={b.hero} alt={b.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: b.heroPos || 'center center', display: 'block' }} />
               </div>
-              <div>
-                <div className="eyebrow" style={{ marginBottom: 6 }}>Space Composition</div>
-                <table className="data-table" style={{ fontSize: 10.6 }}>
-                  <thead>
-                    <tr><th>Use</th><th style={{ textAlign: 'center' }}>Units / Suites</th><th style={{ textAlign: 'right' }}>SF</th></tr>
-                  </thead>
-                  <tbody>
-                    {b.composition.map(([t, u, sf]) => (
-                      <tr key={t}><td>{t}</td><td style={{ textAlign: 'center' }}>{u}</td><td style={{ textAlign: 'right' }}>{sf}</td></tr>
-                    ))}
-                    <tr className="total-row">
-                      <td><strong>Total</strong></td><td style={{ textAlign: 'center' }}><strong>{b.totalUnits}</strong></td><td style={{ textAlign: 'right' }}><strong>{b.totalSF}</strong></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              {b.tableLeft && b.extraPhoto ? (
+                <div style={{ flex: 1, minHeight: 90, borderRadius: 4, overflow: 'hidden' }}>
+                  <img src={b.extraPhoto} alt={b.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: b.extraPhotoPos || 'center center', display: 'block' }} />
+                </div>
+              ) : (
+                <SpaceComposition b={b} />
+              )}
             </div>
           ) : (
             /* Right (standard layout) — space composition + notable tenants */
@@ -598,8 +626,9 @@ const BUILDINGS = {
   },
   b105: {
     name: '105 Danbury Road', titleMain: '105 Danbury', titleAccent: 'Road',
-    hero: '/photos/bldg-105.jpg',
-    plainFacts: true, foldTenants: true,
+    hero: '/maps/bldg-105.jpg', heroPos: 'center 55%', cardImg: '/photos/bldg-105.jpg',
+    extraPhoto: '/photos/bldg-105-aerial.jpg',
+    plainFacts: true, foldTenants: true, tableLeft: true,
     stats: [{ v: '8,092', l: 'Building SF' }, { v: '4', l: 'Total Units' }, { v: '2', l: 'Stories' }, { v: '2009', l: 'Year Built' }],
     facts: [['Property Type', 'Retail & Office'], ['Year Built', '2009'], ['Building SF', '8,092 SF'], ['Stories', '2'], ['Construction', 'Masonry'], ['Roof / Façade', 'Asphalt / Vinyl'], ['Lot Size', '0.48 Acres'], ['Real Estate Taxes', '$37,460']],
     composition: [['Retail', '3', '4,822'], ['Office', '1', '3,270']],
@@ -609,8 +638,9 @@ const BUILDINGS = {
   },
   b107: {
     name: '107 Danbury Road', titleMain: '107 Danbury', titleAccent: 'Road',
-    hero: '/photos/bldg-107.jpg',
-    plainFacts: true, foldTenants: true,
+    hero: '/maps/bldg-107.jpg', heroPos: 'center 55%', cardImg: '/photos/bldg-107.jpg',
+    extraPhoto: '/photos/bldg-107.jpg',
+    plainFacts: true, foldTenants: true, tableLeft: true,
     stats: [{ v: '10,529', l: 'Building SF' }, { v: '5', l: 'Total Units' }, { v: '2', l: 'Stories' }, { v: '1983', l: 'Year Built' }],
     facts: [['Property Type', 'Retail & Residential'], ['Year Built', '1983'], ['Building SF', '10,529 SF'], ['Stories', '2'], ['Construction', 'Frame'], ['Roof / Façade', 'Asphalt / Vinyl'], ['Lot Size', '1.55 Acres*'], ['Real Estate Taxes', '$99,684*']],
     composition: [['Retail', '2', '7,229'], ['Residential', '2', '1,400'], ['Office / Storage', '1', '1,900']],
@@ -620,8 +650,9 @@ const BUILDINGS = {
   },
   b109: {
     name: '109 Danbury Road', titleMain: '109 Danbury', titleAccent: 'Road',
-    hero: '/photos/bldg-109.jpg',
-    plainFacts: true, foldTenants: true,
+    hero: '/maps/bldg-109-a.jpg', heroPos: 'center 55%', cardImg: '/photos/bldg-109.jpg',
+    extraPhoto: '/photos/bldg-109-b.jpg',
+    plainFacts: true, foldTenants: true, tableLeft: true, compact: true,
     stats: [{ v: '20,885', l: 'Building SF' }, { v: '20', l: 'Total Units' }, { v: '3', l: 'Stories' }, { v: '1983', l: 'Year Built' }],
     facts: [['Property Type', 'Retail & Office'], ['Year Built', '1983'], ['Building SF', '20,885 SF'], ['Stories', '3'], ['Construction', 'Frame'], ['Roof / Façade', 'Asphalt / Vinyl'], ['Lot Size', '1.55 Acres*'], ['Real Estate Taxes', '$95,899*']],
     composition: [['Retail', '8', '12,931'], ['Office / Storage', '12', '7,954']],
@@ -639,7 +670,7 @@ function PropertyOverview({ pageNum }) {
   const fact = (b, key) => b.facts.find(([k]) => k === key)?.[1]
   const cards = [BUILDINGS.b103, BUILDINGS.b105, BUILDINGS.b107, BUILDINGS.b109].map(b => ({
     name: b.name,
-    img: b.hero,
+    img: b.cardImg || b.hero,
     rows: [
       ['Building SF', `${b.totalSF} SF`],
       ['Total Units', b.totalUnits],
@@ -717,29 +748,31 @@ function typeChipStyle(type) {
 
 function BuildingTenants({ b }) {
   return (
-    <div style={{ marginBottom: 14 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 7 }}>
-        <span style={{ fontSize: 11.5, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>{b.addr}</span>
+    <div style={{ display: 'flex', flexDirection: 'column', flex: b.tenants.length, minHeight: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 9 }}>
+        <span style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>{b.addr}</span>
         <span style={{ flex: 1, borderBottom: '2px solid var(--golden)' }} />
-        <span style={{ fontSize: 8.5, fontWeight: 700, color: 'var(--stone)', whiteSpace: 'nowrap' }}>{b.tenants.length} {b.tenants.length === 1 ? 'tenant' : 'tenants'}</span>
+        <span style={{ fontSize: 9, fontWeight: 700, color: 'var(--stone)', whiteSpace: 'nowrap' }}>{b.tenants.length} {b.tenants.length === 1 ? 'tenant' : 'tenants'}</span>
       </div>
-      {b.tenants.map(t => (
-        <div key={t.name} style={{ display: 'flex', gap: 11, alignItems: 'center', padding: '6px 0' }}>
-          <TenantLogo name={t.name} />
-          <div style={{ minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
-              <span style={{ fontSize: 11.5, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1.1 }}>{t.name}</span>
-              <span style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--golden)' }}>{t.tag}</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 2 }}>
-              {t.type && (
-                <span style={{ flexShrink: 0, fontSize: 7, fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase', padding: '1px 5px', borderRadius: 3, border: '1px solid', whiteSpace: 'nowrap', ...typeChipStyle(t.type) }}>{t.type}</span>
-              )}
-              <span style={{ fontSize: 9, lineHeight: 1.35, color: 'var(--graphite)' }}>{t.desc}</span>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', flex: 1, minHeight: 0 }}>
+        {b.tenants.map(t => (
+          <div key={t.name} style={{ display: 'flex', gap: 13, alignItems: 'center' }}>
+            <TenantLogo name={t.name} size={46} />
+            <div style={{ minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
+                <span style={{ fontSize: 13, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1.1 }}>{t.name}</span>
+                <span style={{ fontSize: 8.5, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--golden)' }}>{t.tag}</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 3 }}>
+                {t.type && (
+                  <span style={{ flexShrink: 0, fontSize: 7.5, fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase', padding: '1px 5px', borderRadius: 3, border: '1px solid', whiteSpace: 'nowrap', ...typeChipStyle(t.type) }}>{t.type}</span>
+                )}
+                <span style={{ fontSize: 10, lineHeight: 1.35, color: 'var(--graphite)' }}>{t.desc}</span>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }
@@ -759,8 +792,8 @@ function TenantDirectory({ pageNum }) {
           grocery, fitness, beauty, education, and professional office.
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 30, flex: 1, minHeight: 0 }}>
-          <div>{left.map(b => <BuildingTenants key={b.addr} b={b} />)}</div>
-          <div>{right.map(b => <BuildingTenants key={b.addr} b={b} />)}</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, minHeight: 0 }}>{left.map(b => <BuildingTenants key={b.addr} b={b} />)}</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, minHeight: 0 }}>{right.map(b => <BuildingTenants key={b.addr} b={b} />)}</div>
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -911,7 +944,7 @@ function App() {
     <TheOffering />,
     <InvestmentHighlights />,
 
-    <Divider eyebrow="01" title="The Property" image="/photos/aerial-front.jpg" />,
+    <Divider eyebrow="01" title="The Property" image="/photos/divider-bg.jpg" />,
     <PropertyOverview />,
     <BuildingSpecs />,
     <PropertyMap />,
@@ -921,20 +954,19 @@ function App() {
     <BuildingOverview b={BUILDINGS.b107} />,
     <BuildingOverview b={BUILDINGS.b109} />,
 
-    <Divider eyebrow="02" title="The Tenants" image="/photos/aerial-wide.jpg" />,
+    <Divider eyebrow="02" title="The Tenants" image="/photos/divider-bg.jpg" />,
     <TenantDirectory />,
 
-    <Divider eyebrow="03" title="Location & Market" image="/photos/aerial-top.jpg" />,
+    <Divider eyebrow="03" title="Location & Market" image="/photos/divider-bg.jpg" />,
     <RidgefieldCombined />,
     <LocationMap />,
-    <FullBleedImage section="Local Map" src="/maps/local-map.jpg" hideLabel />,
     <FullBleedImage section="Aerial Overview" src="/maps/aerial-context-1.jpg" />,
     <FullBleedImage section="Aerial Overview" src="/maps/aerial-context-2.jpg" />,
     <DriveTimeMap />,
     <FairfieldCounty />,
     <RegionalMap />,
 
-    <Divider eyebrow="04" title="The Team" image="/photos/aerial-cover.jpg" />,
+    <Divider eyebrow="04" title="The Team" image="/photos/divider-bg.jpg" />,
     <TeamPage />,
     <LocationsPage />,
   ]

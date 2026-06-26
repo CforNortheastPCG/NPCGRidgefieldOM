@@ -19,13 +19,13 @@ const TOC = [
   { n: 17, label: 'Location & Market', section: true },
   { n: 18, label: 'Ridgefield, Connecticut', sub: true },
   { n: 19, label: 'Location & Amenities', sub: true },
-  { n: 20, label: 'Local & Aerial Maps', sub: true },
-  { n: 23, label: 'Drive Times', sub: true },
-  { n: 24, label: 'Demographics', sub: true },
-  { n: 25, label: 'Regional Map', sub: true },
-  { n: 26, label: 'The Team', section: true },
-  { n: 27, label: 'Our Team', sub: true },
-  { n: 28, label: 'Our Locations', sub: true },
+  { n: 20, label: 'Aerial Maps', sub: true },
+  { n: 22, label: 'Drive Times', sub: true },
+  { n: 23, label: 'Demographics', sub: true },
+  { n: 24, label: 'Regional Map', sub: true },
+  { n: 25, label: 'The Team', section: true },
+  { n: 26, label: 'Our Team', sub: true },
+  { n: 27, label: 'Our Locations', sub: true },
 ]
 
 export default function Toc({ pageNum }) {

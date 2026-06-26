@@ -486,6 +486,12 @@ body {
 .bldg-row .bldg-label { color: var(--stone); }
 .bldg-row .bldg-val { font-weight: 600; color: var(--carbon); }
 
+/* Tighter facts block for content-heavy building pages (e.g. 109) so the
+   left column fits without shrinking the data table. */
+.facts-compact h3 { font-size: 11px; margin-bottom: 3px; padding-bottom: 2px; }
+.facts-compact .bldg-row { padding: 1.5px 0; font-size: 10px; }
+.facts-lg .bldg-row { font-size: 11.5px; }
+
 /* ── DISCLAIMER ── */
 .disclaimer-text {
   font-size: 10px;
