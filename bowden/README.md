@@ -23,6 +23,20 @@ node closing.cjs                 # all three
 ONLY=email node closing.cjs      # just one (email | linkedin | instagram)
 ```
 
+## Slide 2 — "Transaction Brokered By" (brokers.cjs)
+
+Companion broker slide (a **separate** page from the sold post). Full-bleed
+property photo + dark veil, centered "Transaction Brokered By" header, small
+property·location line, then a centered row of circular headshots
+(name · title · phone · email). Bowden's 5-broker team wraps to a 3-over-2 grid.
+Headshots live in `photos/team/`; edit the `BROKERS` array in `brokers.cjs`.
+
+Brokers: Drew Kirkland, Francis Saenz, Jim Casey, Patrick Wheeler, Anthony Rakauskas.
+
+```sh
+node brokers.cjs                 # <slug>-brokers-{email,linkedin,instagram}.png
+```
+
 ## Setup / assets
 
 - `photos/cover.jpg` — the hero photo (required). Drop a fresh shot here and re-run.

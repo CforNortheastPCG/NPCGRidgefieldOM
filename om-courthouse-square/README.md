@@ -21,6 +21,21 @@ node closing.cjs                 # all three
 ONLY=email node closing.cjs      # just one (email | linkedin | instagram)
 ```
 
+## Slide 2 — "Transaction Brokered By" (brokers.cjs)
+
+Companion broker slide (a **separate** page from the sold post — the sale message
+lives on slide 1). Full-bleed property photo + dark veil, centered
+"Transaction Brokered By" header, small property·location line, then a centered
+row of circular headshots (name · title · phone · email). Scales to broker count
+(wraps to a 3-up grid for larger teams). Headshots go in `photos/team/`; edit the
+`BROKERS` array in `brokers.cjs`.
+
+```sh
+node brokers.cjs                 # <slug>-brokers-{email,linkedin,instagram}.png
+```
+
+Design was picked from `brokers-variants.cjs` (centered/panel/cards/rail explorations).
+
 ## Setup / assets
 
 - `photos/cover.jpg` — the hero photo (required). Drop a fresh shot here and re-run.

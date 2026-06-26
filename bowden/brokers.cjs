@@ -26,18 +26,21 @@ const CARBON = '#2b3038';
 
 // ── deal + broker config ─────────────────────────────────────────────────────
 const DEAL = {
-  slug: 'Courthouse-Square',
-  title: 'Courthouse Square',
-  addr: 'Westfield, MA',
+  slug: 'Bowden-Street',
+  title: 'Bowden Street Apartments',
+  addr: 'Lowell, MA',
   heading: 'Transaction Brokered By',
-  focus: '54% center',            // cover-photo framing
+  focus: '55% center',            // cover-photo framing
   faceSize: '115% auto',          // headshot zoom inside the circle (top-anchored)
 };
 DEAL.sub = `${DEAL.title} · ${DEAL.addr}`;
 
 const BROKERS = [
-  { name: 'Brad Balletto', title: 'Managing Director, Investments', phone: '(203) 307-1574', email: 'bballetto@northeastpcg.com', photo: 'Brad-Balletto.jpg' },
-  { name: 'Taylor Perun',  title: 'Senior Vice President, Investments', phone: '(203) 307-1576', email: 'tperun@northeastpcg.com', photo: 'Taylor-Perun.jpg' },
+  { name: 'Drew Kirkland',     title: 'Vice President, Investments', phone: '(857) 990-6802', email: 'dkirkland@northeastpcg.com', photo: 'Drew-Kirkland.png' },
+  { name: 'Francis Saenz',     title: 'Vice President, Investments', phone: '(857) 990-6803', email: 'fsaenz@northeastpcg.com', photo: 'Francis-Saenz.png' },
+  { name: 'Jim Casey',         title: 'Senior Associate', phone: '(857) 990-6821', email: 'jcasey@northeastpcg.com', photo: 'Jim-Casey.png' },
+  { name: 'Patrick Wheeler',   title: 'Investment Associate', phone: '(857) 990-6819', email: 'pwheeler@northeastpcg.com', photo: 'Patrick-Wheeler.jpg' },
+  { name: 'Anthony Rakauskas', title: 'Associate', phone: '(857) 990-6807', email: 'arakauskas@northeastpcg.com', photo: 'Anthony-Rakauskas.png' },
 ];
 
 // ── assets ──────────────────────────────────────────────────────────────────

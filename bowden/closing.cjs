@@ -70,15 +70,16 @@ const bigtitle = (W, H, u, pad, bg, align, tagInTitle) => {
   return {
     css: `
       .bg{position:absolute;inset:0;background:url('${bg}') ${H>W?DEAL.focusPortrait:DEAL.focus}/cover no-repeat;
-          filter:brightness(1.05) saturate(1.04)}
+          filter:brightness(1.20) contrast(1.04) saturate(1.07)}
       .scrim{position:absolute;inset:0;background:linear-gradient(to bottom,
-          rgba(0,0,0,0.30) 0%, rgba(0,0,0,0) 38%, rgba(0,0,0,0.42) 60%, rgba(0,0,0,0.93) 100%)}
+          rgba(0,0,0,0.26) 0%, rgba(0,0,0,0) 44%, rgba(0,0,0,0.18) 66%, rgba(0,0,0,0.62) 86%, rgba(0,0,0,0.80) 100%)}
       .logo{top:${pad}px;right:${pad}px}
       .ribbon{position:absolute;top:${Math.round(54*u)}px;left:0;background:${GOLD};color:#1b1e23;
           font-size:${Math.round(20*u)}px;font-weight:800;letter-spacing:${0.18*u}em;text-transform:uppercase;
           padding:${Math.round(12*u)}px ${Math.round(34*u)}px ${Math.round(12*u)}px ${pad}px;
           box-shadow:0 6px 18px rgba(0,0,0,0.4)}
       .foot{position:absolute;left:${pad}px;right:${pad}px;bottom:${pad}px;text-align:${centered?'center':'left'}}
+      .foot .title{text-shadow:0 2px 20px rgba(0,0,0,0.85),0 1px 4px rgba(0,0,0,0.7)}
       .foot .eyebrow{color:${GOLD};font-size:${Math.round((tagInTitle?34:25)*u)}px;
           letter-spacing:${(tagInTitle?0.28:0.22)*u}em;text-shadow:0 2px 16px rgba(0,0,0,0.95),0 1px 3px rgba(0,0,0,0.85)}
       .foot .rule{margin:${Math.round(22*u)}px ${centered?'auto':'0'} 0}
