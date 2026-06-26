@@ -32,6 +32,7 @@ export const MAP_CATEGORIES = [
   { heading: 'Parks & Recreation', label: 'Parks & Recreation', color: '0x1E8449', swatch: '#1E8449' },
   { heading: 'Grocery & Markets', label: 'Grocery & Markets', color: '0x2471A3', swatch: '#2471A3' },
   { heading: 'Regional Shopping', label: 'Shopping', color: '0x117A65', swatch: '#117A65' },
+  { heading: 'Copps Hill Plaza — On-Site Retail', label: 'Copps Hill Plaza', color: '0xD81B60', swatch: '#D81B60' },
   { heading: 'Pharmacy & Daily Needs', label: 'Pharmacy & Daily Needs', color: '0xB55D37', swatch: '#B55D37' },
   { heading: 'Banking', label: 'Banking', color: '0x566573', swatch: '#566573' },
   { heading: 'NYC Connectivity', label: 'Transit', color: '0x2C3E50', swatch: '#2C3E50' },
@@ -99,8 +100,25 @@ export const DIRECTORY = [
   {
     heading: 'Regional Shopping',
     items: [
-      { name: 'Copps Hill Plaza', note: '125 Danbury Rd · Marshalls, HomeGoods · ~1 mi', address: '113 Danbury Rd, Ridgefield, CT 06877' },
+      { name: 'Copps Hill Plaza', note: '125 Danbury Rd · 172K SF center · adjacent', address: '113 Danbury Rd, Ridgefield, CT 06877' },
       { name: 'Danbury Fair Mall', note: '7 Backus Ave, Danbury · ~200 stores · ~8 mi' },
+    ],
+  },
+  {
+    /* Copps Hill Plaza (125 Danbury Rd) — the 172K SF Regency Centers shopping
+       center directly adjacent to the subject. Anchors + key tenants plotted on
+       the map (≤9 so Static Maps numeric labels stay single-character). */
+    heading: 'Copps Hill Plaza — On-Site Retail',
+    items: [
+      { name: 'HomeGoods', note: '125 Danbury Rd · Home decor anchor (24K SF)', address: 'CHP-HomeGoods' },
+      { name: 'Marshalls', note: '125 Danbury Rd · Off-price apparel anchor (28K SF)', address: 'CHP-Marshalls' },
+      { name: "Michael's", note: '125 Danbury Rd · Arts & crafts anchor (16K SF)', address: 'CHP-Michaels' },
+      { name: "Jersey Mike's Subs", note: '125 Danbury Rd · Sandwiches', address: 'CHP-JerseyMikes' },
+      { name: "Fletch's Bagels", note: '125 Danbury Rd · Bagels & breakfast', address: 'CHP-Fletchs' },
+      { name: 'Venice Restaurant & Pizza', note: '125 Danbury Rd · Italian', address: 'CHP-Venice' },
+      { name: 'Choice Pet Supply', note: '125 Danbury Rd · Pet store', address: 'CHP-ChoicePet' },
+      { name: 'Ridgefield Liquors', note: '125 Danbury Rd · Wine & spirits', address: 'CHP-RidgefieldLiquors' },
+      { name: 'MyEyeDr.', note: '125 Danbury Rd · Optometry', address: 'CHP-MyEyeDr' },
     ],
   },
   {
@@ -158,6 +176,17 @@ const COORDS = {
   '2 Prospect St, Ridgefield, CT 06877': [41.283294, -73.497543],
   '621 Main St, Ridgefield, CT 06877': [41.289201, -73.50033],
   '108 Danbury Rd, Ridgefield, CT 06877': [41.294085, -73.492561],
+  // Copps Hill Plaza tenants — approximate positions across the 125 Danbury Rd
+  // center footprint (declutter() spaces any that still collide).
+  'CHP-HomeGoods': [41.29455, -73.49355],
+  'CHP-Marshalls': [41.29435, -73.49340],
+  'CHP-Michaels': [41.29420, -73.49325],
+  'CHP-JerseyMikes': [41.29500, -73.49400],
+  'CHP-Fletchs': [41.29515, -73.49420],
+  'CHP-Venice': [41.29470, -73.49300],
+  'CHP-ChoicePet': [41.29490, -73.49440],
+  'CHP-RidgefieldLiquors': [41.29445, -73.49460],
+  'CHP-MyEyeDr': [41.29460, -73.49475],
 }
 
 /* Flattened list of every mapped POI, tagged with category label + colors —

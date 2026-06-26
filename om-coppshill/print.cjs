@@ -55,7 +55,7 @@ async function renderPdf({
   out = path.join(__dirname, dealPdfName()),
   dsf = Number(process.env.DSF || 3),
   quality = Number(process.env.QUALITY || 62),
-  brighten = Number(process.env.BRIGHTEN || 1.05),
+  brighten = Number(process.env.BRIGHTEN || 1.08),
   cover = Number(process.env.COVER || 1.18),
 } = {}) {
   const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'ompdf-'));

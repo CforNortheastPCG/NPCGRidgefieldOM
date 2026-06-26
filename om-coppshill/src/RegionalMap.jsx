@@ -1,5 +1,4 @@
 import { PageHeader } from './Shell.jsx'
-import { ISOCHRONES } from './regionalRings.js'
 
 /* ═══════════════════ REGIONAL POSITIONING ═══════════════════
    A tristate-scale Static Maps view with highways emphasized in golden and
@@ -97,14 +96,6 @@ function buildStaticMapUrl() {
   const academicPins = `markers=${encodeURIComponent(`size:mid|color:${PURPLE}|label:A|${ACADEMIC.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
   const industryPins = `markers=${encodeURIComponent(`size:mid|color:${TEAL}|label:I|${INDUSTRY.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
   const subjectPin = `markers=${encodeURIComponent(`size:mid|color:${GOLDEN}|label:R|${SUBJECT.lat},${SUBJECT.lng}`)}`
-  // Real road-network drive-time isochrones (encoded polylines) — server-drawn,
-  // so they stay correctly placed/scaled in the auto-fit frame. Outline-only
-  // (no fill): translucent fills stacked across the four nested bands washed out
-  // the basemap labels, city dots, and rail beneath them. Drawn first in the
-  // params list so they sit as a quiet behind-layer under the rail + pins.
-  const ringPaths = ISOCHRONES.map(r =>
-    `path=${encodeURIComponent(`color:${r.color}cc|weight:3|enc:${r.enc}`)}`
-  )
   const railPath = `path=${encodeURIComponent(`color:0xB55D37|weight:5|${RAIL.map(p => `${p[0]},${p[1]}`).join('|')}`)}`
   const params = [
     'size=640x520',
@@ -112,7 +103,6 @@ function buildStaticMapUrl() {
     'maptype=roadmap',
     'format=png',
     ...style.map(s => `style=${encodeURIComponent(s)}`),
-    ...ringPaths,
     railPath,
     cityPins,
     airportPins,
@@ -162,10 +152,6 @@ export default function RegionalMap({ pageNum }) {
         {/* MAP KEY — compact strip above the map so it never covers the imagery */}
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '4px 14px', marginBottom: 10, paddingBottom: 8, borderBottom: '1px solid var(--border)' }}>
           <LegendRow color="#F8971D" label="Subject Property — Ridgefield" />
-          <LegendRow color="#27AE60" label="15-min drive" ring />
-          <LegendRow color="#F39C12" label="30-min drive" ring />
-          <LegendRow color="#E67E22" label="45-min drive" ring />
-          <LegendRow color="#C0392B" label="60-min drive" ring />
           <LegendRow color="#3F4753" label="Major Cities" />
           <LegendRow color="#884EA0" label="Academic Anchors (A)" />
           <LegendRow color="#117A65" label="Industry Anchors (I)" />

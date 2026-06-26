@@ -14,14 +14,12 @@ import { PROPERTY, MAP_POIS, MAP_CATEGORIES } from './amenities.js'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
-const GOLDEN = '0xF8971D'
-
 /* Nudge any marker that lands on top of an already-placed one (or the property
    pin) just enough that its number is readable. Google draws southern markers
    on top, so co-located pins otherwise hide each other. Offsets are tiny
    (~50–90 m) — acceptable for a "nearby amenities" reference map. */
 function declutter(pois, anchor) {
-  const MIN = 0.00055 // ~60 m collision radius (in degrees latitude)
+  const MIN = 0.00068 // ~75 m collision radius (in degrees latitude)
   const placed = anchor ? [{ lat: anchor.lat, lng: anchor.lng }] : []
   const near = (aLat, aLng, bLat, bLng) => {
     const dLat = aLat - bLat
@@ -61,10 +59,11 @@ function buildStaticMapUrl() {
   )
 
   const params = [
-    // Fixed frame on the downtown cluster (auto-fit zoomed too tight). zoom 14
-    // shows Main Street + the Danbury Rd retail corridor with room to breathe.
+    // Fixed frame on the property (auto-fit zoomed too tight). zoom 14 pulls back
+    // to show the full Danbury Rd retail corridor — Copps Hill Plaza next door —
+    // together with the Main Street village cluster to the south.
     `center=${PROPERTY.lat},${PROPERTY.lng}`,
-    'zoom=15',
+    'zoom=14',
     'size=593x640',
     'scale=2',
     'maptype=hybrid',
@@ -107,19 +106,24 @@ export default function LocationMap({ pageNum = 9 }) {
         </div>
         <div className="title-rule" />
         <div style={{ fontSize: 9.5, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
-          Positioned at the heart of Ridgefield&rsquo;s walkable Main Street, the property sits steps from dozens of
-          the town&rsquo;s dining, cultural, retail, and everyday destinations &mdash; with convenient Metro-North
-          access to New York City via the nearby Branchville station.
+          Anchoring Ridgefield&rsquo;s Danbury Road retail corridor, the property sits directly beside Copps Hill
+          Plaza &mdash; the town&rsquo;s primary shopping center (Stop &amp; Shop, HomeGoods, Marshalls, Michael&rsquo;s)
+          &mdash; and a short drive from the walkable Main Street village, with dozens of dining, cultural, and everyday
+          destinations nearby and convenient Metro-North access to New York City via the Branchville station.
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 1fr', gap: 16, flex: 1, minHeight: 0 }}>
-          {/* MAP — natural aspect (no crop) keeps Google attribution visible */}
-          <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', alignSelf: 'start' }}>
+          {/* LEFT COLUMN — map fills the column height; disclaimer pinned below
+              so it can never overflow into the page footer. */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minHeight: 0 }}>
+          {/* MAP — contain-fit (whole map + Google attribution stay visible; the
+              property sits at image center, so the centered marker stays exact). */}
+          <div style={{ position: 'relative', flex: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--linen)' }}>
             {mapUrl ? (
               <img
                 src={mapUrl}
                 alt={`Map of ${FULL_ADDR} and nearby amenities`}
-                style={{ width: '100%', height: 'auto', display: 'block', background: 'var(--linen)' }}
+                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', background: 'var(--linen)' }}
               />
             ) : (
               <div style={{ width: '100%', height: 480, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--linen)', color: 'var(--stone)', fontSize: 10, textAlign: 'center', padding: 24 }}>
@@ -128,14 +132,16 @@ export default function LocationMap({ pageNum = 9 }) {
               </div>
             )}
             {/* Subject property photo marker — the map is centered on the
-                property, so this sits at dead center; the pointer tip marks the
-                exact spot. */}
+                property, so the pointer TIP sits at dead center on the exact
+                spot. The photo bubble hangs DOWNWARD (south), into open space,
+                so it never covers the Copps Hill Plaza pins that sit just north
+                of the property. */}
             {mapUrl && (
-              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
-                <div style={{ width: 54, height: 54, borderRadius: '50%', overflow: 'hidden', border: '3px solid #F8971D', boxShadow: '0 2px 7px rgba(0,0,0,0.55)', background: '#fff' }}>
+              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, 0)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+                <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderBottom: '9px solid #F8971D', marginBottom: -1 }} />
+                <div style={{ width: 48, height: 48, borderRadius: '50%', overflow: 'hidden', border: '3px solid #F8971D', boxShadow: '0 2px 7px rgba(0,0,0,0.55)', background: '#fff' }}>
                   <img src="/photos/property-pin.jpg" alt="Subject property" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                 </div>
-                <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '9px solid #F8971D', marginTop: -1 }} />
               </div>
             )}
             {/* Branchville Station is ~3.5 mi SE, off-frame — point to it.
@@ -150,12 +156,18 @@ export default function LocationMap({ pageNum = 9 }) {
               </div>
             )}
           </div>
+          {/* Spacing disclaimer — declutter() nudges co-located pins apart. */}
+          <div style={{ fontSize: 7.5, color: 'var(--stone)', lineHeight: 1.35, flexShrink: 0 }}>
+            Marker positions are approximate; co-located destinations may be spaced farther apart than their
+            true locations to keep each numbered pin legible. See the directory for exact addresses.
+          </div>
+          </div>
 
           {/* SUBJECT PROPERTY + NUMBERED PIN LIST (two columns) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0, overflow: 'hidden' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingBottom: 8, borderBottom: '1px solid var(--border)' }}>
               <span style={{ flexShrink: 0, width: 14, height: 14, borderRadius: '50%', background: '#F8971D', border: '2px solid #fff', boxShadow: '0 0 0 1px var(--golden)' }} />
-              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--carbon)' }}>Subject Property &mdash; 613-615 Main Street</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--carbon)' }}>Subject Property &mdash; Copps Hill Commons, 103&ndash;109 Danbury Road</span>
             </div>
             <div style={{ columns: 2, columnGap: 18, minHeight: 0, overflow: 'hidden' }}>
             {groups.map(g => (

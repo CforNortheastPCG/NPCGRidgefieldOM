@@ -357,7 +357,7 @@ function BuildingSpecs({ pageNum }) {
     ['Construction', 'Wood Frame', 'Masonry', 'Frame', 'Frame'],
     ['Roof / Façade', 'Asphalt / Vinyl', 'Asphalt / Vinyl', 'Asphalt / Vinyl', 'Asphalt / Vinyl'],
     ['Lot Size', '0.26 ac', '0.48 ac', '1.55 ac*', '1.55 ac*'],
-    ['Real Estate Taxes', '$30,531', '$37,460', '$99,684**', '$95,899**'],
+    ['Real Estate Taxes', '$30,531', '$37,460', '$99,684**', 'incl. w/ 107**'],
   ]
   const cell = { fontSize: 10, padding: '4px 10px', textAlign: 'center', borderBottom: '1px solid var(--border)' }
   const labelCell = { ...cell, textAlign: 'left', fontWeight: 700, color: 'var(--carbon)' }
@@ -405,7 +405,7 @@ function BuildingSpecs({ pageNum }) {
           </tbody>
         </table>
         <div style={{ fontSize: 8.4, color: 'var(--stone)', marginTop: 9, lineHeight: 1.45 }}>
-          *107 &amp; 109 Danbury Road share a single 1.55-acre parcel. **107 &amp; 109 are taxed as one property.
+          *107 &amp; 109 Danbury Road share a single 1.55-acre parcel. **107 &amp; 109 are taxed as one property &mdash; combined real estate taxes are $99,684.28.
           Utilities across all buildings: water &amp; sewer are city, landlord-paid; electric/gas are separately metered
           and tenant-paid; internet/phone are tenant-paid. Figures per the most recent building descriptions and are
           approximate — buyers should verify all areas, taxes, and unit counts independently.
@@ -642,7 +642,7 @@ const BUILDINGS = {
     extraPhoto: '/photos/bldg-107.jpg',
     plainFacts: true, foldTenants: true, tableLeft: true,
     stats: [{ v: '10,529', l: 'Building SF' }, { v: '5', l: 'Total Units' }, { v: '2', l: 'Stories' }, { v: '1983', l: 'Year Built' }],
-    facts: [['Property Type', 'Retail & Residential'], ['Year Built', '1983'], ['Building SF', '10,529 SF'], ['Stories', '2'], ['Construction', 'Frame'], ['Roof / Façade', 'Asphalt / Vinyl'], ['Lot Size', '1.55 Acres*'], ['Real Estate Taxes', '$99,684*']],
+    facts: [['Property Type', 'Retail & Residential'], ['Year Built', '1983'], ['Building SF', '10,529 SF'], ['Stories', '2'], ['Construction', 'Frame'], ['Roof / Façade', 'Asphalt / Vinyl'], ['Lot Size', '1.55 Acres*'], ['Real Estate Taxes', '$99,684 (incl. 109)']],
     composition: [['Retail', '2', '7,229'], ['Residential', '2', '1,400'], ['Office / Storage', '1', '1,900']],
     totalUnits: '5', totalSF: '10,529',
     tenants: ['Talbots', 'DiMaggio Hair Design', 'Apartments (2)'],
@@ -654,7 +654,7 @@ const BUILDINGS = {
     extraPhoto: '/photos/bldg-109-b.jpg',
     plainFacts: true, foldTenants: true, tableLeft: true, compact: true,
     stats: [{ v: '20,885', l: 'Building SF' }, { v: '20', l: 'Total Units' }, { v: '3', l: 'Stories' }, { v: '1983', l: 'Year Built' }],
-    facts: [['Property Type', 'Retail & Office'], ['Year Built', '1983'], ['Building SF', '20,885 SF'], ['Stories', '3'], ['Construction', 'Frame'], ['Roof / Façade', 'Asphalt / Vinyl'], ['Lot Size', '1.55 Acres*'], ['Real Estate Taxes', '$95,899*']],
+    facts: [['Property Type', 'Retail & Office'], ['Year Built', '1983'], ['Building SF', '20,885 SF'], ['Stories', '3'], ['Construction', 'Frame'], ['Roof / Façade', 'Asphalt / Vinyl'], ['Lot Size', '1.55 Acres*'], ['Real Estate Taxes', '$99,684 (incl. 107)']],
     composition: [['Retail', '8', '12,931'], ['Office / Storage', '12', '7,954']],
     totalUnits: '20', totalSF: '20,885',
     tenants: ['Southwest Café', 'Ridgefield Organics', 'Ross Bakery & Café', 'No. 109 Cheese Market', 'À Table', 'JKH Laundry', 'Kick Fit', 'Ridgefield Health & Wellness', 'Ridgefield Power Yoga'],

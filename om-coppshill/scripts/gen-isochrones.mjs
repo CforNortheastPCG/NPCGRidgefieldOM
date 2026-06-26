@@ -1,4 +1,4 @@
-/* Drive-time ring generator for South End Plaza — "radial envelope" method.
+/* Drive-time ring generator for Copps Hill Commons — "radial envelope" method.
 
    Raw Valhalla isochrone polygons are wavy but scribbly (self-intersecting
    tendrils); the pure spider method is clean but too smooth. This takes the raw
@@ -93,7 +93,7 @@ function chaikin(pts, iters) {
 
 const body = { locations: [SUBJECT], costing: 'auto', contours: CONTOURS.map(c => ({ time: c.time })), polygons: true, generalize: 6, denoise: 0.1 }
 console.log('Requesting isochrone polygons from Valhalla…')
-const res = await fetch(`${VALHALLA}?json=${encodeURIComponent(JSON.stringify(body))}`, { headers: { 'User-Agent': 'npcg-om-southend/1.0' } })
+const res = await fetch(`${VALHALLA}?json=${encodeURIComponent(JSON.stringify(body))}`, { headers: { 'User-Agent': 'npcg-om-coppshill/1.0' } })
 if (!res.ok) throw new Error(`Valhalla ${res.status} — ${(await res.text()).slice(0, 200)}`)
 const gj = await res.json()
 const byTime = new Map()
