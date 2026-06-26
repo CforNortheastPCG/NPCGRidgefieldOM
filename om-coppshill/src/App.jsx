@@ -305,7 +305,7 @@ function InvestmentHighlights({ pageNum }) {
       ],
     },
   ]
-  const photos = ['/photos/highlights-tr.jpg', '/photos/aerial-wide.jpg']
+  const photos = ['/photos/highlights-tr.jpg', '/photos/highlights-bl.jpg']
   return (
     <div className="page">
       <PageHeader section="Investment Highlights" />
