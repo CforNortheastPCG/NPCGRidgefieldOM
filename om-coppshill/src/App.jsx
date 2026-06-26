@@ -227,9 +227,9 @@ function TheOffering({ pageNum }) {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 1fr', gap: 26, flex: 1, minHeight: 0 }}>
-          {/* Left — narrative + property summary */}
-          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 1fr', gridTemplateRows: 'auto 1fr', columnGap: 26, rowGap: 14, flex: 1, minHeight: 0 }}>
+          {/* Row 1, left — narrative (drives the row height; aerial matches it) */}
+          <div>
             <p style={{ fontSize: 11.5, lineHeight: 1.72, marginBottom: 11 }}>
               <strong>Northeast Private Client Group is pleased to exclusively present for sale Copps Hill Commons in
               Ridgefield, CT.</strong> Copps Hill Commons is comprised of four mixed-use buildings located in the heart of
@@ -237,44 +237,46 @@ function TheOffering({ pageNum }) {
               is 100% leased — configured into fourteen street-level retail suites, fourteen residential units, eleven
               small-office suites, and two shared professional suites.
             </p>
-            <p style={{ fontSize: 11.5, lineHeight: 1.72, marginBottom: 14 }}>
+            <p style={{ fontSize: 11.5, lineHeight: 1.72, margin: 0 }}>
               Its position in the center of Ridgefield&rsquo;s primary retail corridor — the commercial core of a town
               repeatedly named &ldquo;Connecticut&rsquo;s #1 Town&rdquo; by Connecticut Magazine — gives it outstanding
               access to elite demographics and consumer spending. Ridgefield&rsquo;s central location between Danbury and
               Norwalk keeps Stamford, Greenwich, and White Plains within a 45-minute commute.
             </p>
-
-            <div className="eyebrow" style={{ marginBottom: 6 }}>Property Summary</div>
-            <ul style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: 12.5, display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
-              {summary.map(([t, u, sf]) => (
-                <li key={t} style={{ display: 'flex', alignItems: 'baseline', gap: 10, flex: 1, padding: '0 0', borderBottom: '1px solid #ececec' }}>
-                  <span style={{ color: 'var(--golden)', fontWeight: 800, lineHeight: 1 }}>▪</span>
-                  <span style={{ fontWeight: 700, color: 'var(--carbon)' }}>{t}</span>
-                  <span style={{ marginLeft: 'auto', color: 'var(--stone)' }}>{u} units · {sf} SF</span>
-                </li>
-              ))}
-              <li style={{ display: 'flex', alignItems: 'baseline', gap: 10, flex: 1, padding: '0 0' }}>
-                <span style={{ color: 'var(--golden)', fontWeight: 800, lineHeight: 1 }}>▪</span>
-                <span style={{ fontWeight: 800, color: 'var(--carbon)' }}>Total</span>
-                <span style={{ marginLeft: 'auto', fontWeight: 800, color: 'var(--carbon)' }}>42 units · 47,025 SF</span>
-              </li>
-            </ul>
           </div>
 
-          {/* Right — aerial + building facts */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minHeight: 0 }}>
-            <div style={{ flex: 1, borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
-              <img src="/photos/offering-aerial.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          {/* Row 1, right — aerial. Absolutely filled so it tracks the narrative's
+              height exactly, so its bottom lines up with the text. */}
+          <div style={{ position: 'relative', borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
+            <img src="/photos/offering-aerial.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+
+          {/* Row 2, left — Property Facts */}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <div className="eyebrow" style={{ marginBottom: 6 }}>Property Facts</div>
+            <div className="facts-lg" style={{ display: 'grid', gridTemplateColumns: '1fr', flex: 1, minHeight: 0, gridAutoRows: '1fr' }}>
+              <div className="bldg-row" style={{ borderBottom: '1px solid #ececec', fontSize: 10.5 }}><span className="bldg-label">Address</span><span className="bldg-val">103–109 Danbury Rd</span></div>
+              <div className="bldg-row" style={{ borderBottom: '1px solid #ececec', fontSize: 10.5 }}><span className="bldg-label">Site Area</span><span className="bldg-val">2.29 Acres</span></div>
+              <div className="bldg-row" style={{ borderBottom: '1px solid #ececec', fontSize: 10.5 }}><span className="bldg-label">Year(s) Built</span><span className="bldg-val">1983 · 1984 · 1985 · 2009</span></div>
+              <div className="bldg-row" style={{ borderBottom: '1px solid #ececec', fontSize: 10.5 }}><span className="bldg-label">Parking</span><span className="bldg-val">±105 Spaces</span></div>
+              <div className="bldg-row" style={{ borderBottom: '1px solid #ececec', fontSize: 10.5 }}><span className="bldg-label">Buildings</span><span className="bldg-val">4</span></div>
+              <div className="bldg-row" style={{ fontSize: 10.5 }}><span className="bldg-label">Zoning</span><span className="bldg-val">B-1 (Business)</span></div>
             </div>
-            <div>
-              <div className="eyebrow" style={{ marginBottom: 6 }}>Property Facts</div>
-              <div className="facts-lg" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5px 0' }}>
-                <div className="bldg-row"><span className="bldg-label">Address</span><span className="bldg-val">103–109 Danbury Rd</span></div>
-                <div className="bldg-row"><span className="bldg-label">Site Area</span><span className="bldg-val">2.29 Acres</span></div>
-                <div className="bldg-row"><span className="bldg-label">Year(s) Built</span><span className="bldg-val">1983 · 1984 · 1985 · 2009</span></div>
-                <div className="bldg-row"><span className="bldg-label">Parking</span><span className="bldg-val">±105 Spaces</span></div>
-                <div className="bldg-row"><span className="bldg-label">Buildings</span><span className="bldg-val">4</span></div>
-                <div className="bldg-row"><span className="bldg-label">Zoning</span><span className="bldg-val">B-1 (Business)</span></div>
+          </div>
+
+          {/* Row 2, right — Property Summary */}
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <div className="eyebrow" style={{ marginBottom: 6 }}>Property Summary</div>
+            <div className="facts-lg" style={{ display: 'grid', gridTemplateColumns: '1fr', flex: 1, minHeight: 0, gridAutoRows: '1fr' }}>
+              {summary.map(([t, u, sf]) => (
+                <div key={t} className="bldg-row" style={{ borderBottom: '1px solid #ececec', fontSize: 10.5 }}>
+                  <span className="bldg-label">{t}</span>
+                  <span className="bldg-val">{u} units · {sf} SF</span>
+                </div>
+              ))}
+              <div className="bldg-row" style={{ fontSize: 10.5 }}>
+                <span className="bldg-label" style={{ fontWeight: 800, color: 'var(--carbon)' }}>Total</span>
+                <span className="bldg-val" style={{ fontWeight: 800 }}>42 units · 47,025 SF</span>
               </div>
             </div>
           </div>
@@ -876,10 +878,10 @@ function RidgefieldCombined({ pageNum }) {
 
         <div style={{ flex: '0 0 44%', display: 'flex', flexDirection: 'column', gap: 4 }}>
           <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-            <img src="/photos/aerial-wide.jpg" alt="Aerial view of Copps Hill Commons and Ridgefield, CT" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/ridgefield-1.jpg" alt="Copps Hill Commons, Ridgefield, CT" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-            <img src="/photos/aerial-top.jpg" alt="Aerial of the Danbury Road retail corridor, Ridgefield" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/ridgefield-2.jpg" alt="Copps Hill Commons, Ridgefield, CT" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
         </div>
       </div>
@@ -926,7 +928,7 @@ function FairfieldCounty({ pageNum }) {
             Ridgefield&rsquo;s median household income runs well above the county&rsquo;s &mdash; reflecting the town&rsquo;s affluent, high-barrier consumer base. Source: U.S. Census ACS 2024 5-Year Estimates. Avg = mean household income.
           </div>
         </div>
-        <div style={{ flex: '0 0 45%', position: 'relative' }}><img src="/photos/aerial-front.jpg" alt="Copps Hill Commons, Ridgefield, CT" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>
+        <div style={{ flex: '0 0 45%', position: 'relative' }}><img src="/photos/fairfield-county.jpg" alt="Copps Hill Commons, Ridgefield, CT" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>
       </div>
       <PageFooter pageNum={pageNum} />
     </div>

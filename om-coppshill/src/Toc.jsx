@@ -60,10 +60,10 @@ export default function Toc({ pageNum }) {
             ))}
           </div>
 
-          {/* Accent photo — a street-level aerial of the assemblage. Deliberately NOT
+          {/* Accent photo — street-level shot of the assemblage. Deliberately NOT
               the cover image, which would repeat the cover hero one page earlier. */}
           <div style={{ borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
-            <img src="/photos/aerial-wide.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/toc-photo.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(63,71,83,0.55), rgba(63,71,83,0) 45%)' }} />
           </div>
         </div>
