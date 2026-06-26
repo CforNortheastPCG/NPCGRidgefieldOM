@@ -20,17 +20,17 @@ import { ISOCHRONES } from './isochrones.js'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
-const SUBJECT = { lat: 41.6650, lng: -73.0730 } // 310 South Main St, Thomaston CT
-const CENTER = { lat: 41.60, lng: -72.95 }
+const SUBJECT = { lat: 41.2929, lng: -73.4942 } // Copps Hill Commons, 103 Danbury Rd, Ridgefield CT
+const CENTER = { lat: 41.30, lng: -73.45 }
 const ZOOM = 8, W = 640, H = 460
 
 const CITIES = [
-  { name: 'Waterbury', drive: '~9 mi · 15 min' },
-  { name: 'Torrington', drive: '~10 mi · 15 min' },
-  { name: 'Bristol', drive: '~12 mi · 25 min' },
-  { name: 'Hartford', drive: '~30 mi · 40 min' },
-  { name: 'New Haven', drive: '~30 mi · 40 min' },
-  { name: 'Danbury', drive: '~35 mi · 45 min' },
+  { name: 'Danbury', drive: '~9 mi · 15 min' },
+  { name: 'Norwalk', drive: '~18 mi · 28 min' },
+  { name: 'Stamford', drive: '~25 mi · 36 min' },
+  { name: 'Greenwich', drive: '~30 mi · 40 min' },
+  { name: 'White Plains', drive: '~33 mi · 46 min' },
+  { name: 'New Haven', drive: '~44 mi · 55 min' },
 ]
 const BAND_HEX = { 15: '#229954', 30: '#2471A3', 45: '#7D3C98', 60: '#C0392B' }
 
@@ -103,13 +103,14 @@ export default function DriveTimeMap({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Drive <span style={{ color: '#F8971D' }}>Times</span></div>
         <div className="title-rule" />
         <div style={{ fontSize: 11.5, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
-          <strong>Road-network drive-time reach from the property.</strong> Route 8, less than a mile away, puts
-          Waterbury and Torrington inside ~15 minutes and Hartford, New Haven, and Danbury inside ~45, drawing on a
-          deep Naugatuck Valley and Greater Waterbury labor and tenant pool.
+          <strong>Road-network drive-time reach from the property.</strong> Copps Hill Commons anchors the center of
+          lower Fairfield County between Danbury and Norwalk. U.S. Route 7 and Route 35 feed the Merritt Parkway and
+          I-84, putting Stamford, Greenwich, and White Plains inside ~45 minutes and New Haven inside ~55 — tapping the
+          affluent Gold Coast and Greater Danbury consumer and labor pool.
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '4px 16px', marginBottom: 10, paddingBottom: 8, borderBottom: '1px solid var(--border)' }}>
-          <LegendRow color="#F8971D" label="South End Plaza (subject)" pin />
+          <LegendRow color="#F8971D" label="Copps Hill Commons (subject)" pin />
           <LegendRow color={BAND_HEX[15]} label="15-min drive" ring />
           <LegendRow color={BAND_HEX[30]} label="30-min drive" ring />
           <LegendRow color={BAND_HEX[45]} label="45-min drive" ring />
@@ -120,7 +121,7 @@ export default function DriveTimeMap({ pageNum }) {
         <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', flex: 1, minHeight: 0 }}>
           {ok ? (
             <>
-              <img src={baseUrl} alt="Drive-time map centered on South End Plaza, Thomaston CT" style={{ ...fill, objectFit: 'fill', display: 'block' }} />
+              <img src={baseUrl} alt="Drive-time map centered on Copps Hill Commons, Ridgefield CT" style={{ ...fill, objectFit: 'fill', display: 'block' }} />
               <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" style={{ ...fill, pointerEvents: 'none' }}>
                 {/* filled shaded bands — translucent fill then thin stroke, largest
                     contour first so they nest into a heat-map darkening inward */}

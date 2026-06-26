@@ -1,122 +1,167 @@
 /* ═══════════════════ AREA AMENITIES DATA ═══════════════════
-   Single source of truth for the Location & Amenities map page. Items with an
-   `address` (and a matching entry in COORDS) are plotted on the map,
-   color-coded by category; items without an address still appear in the
-   printed directory.
+   Single source of truth for the Location & Amenities map page and the
+   Area Amenities directory page. Hand-curated for the 613-615 Main Street
+   offering (June 2026). Distances are approximate from the property.
 
-   NOTE: coordinates below are approximate (block-level) and intended for the
-   reference map only — verify against the survey before relying on them.
+   Each directory item carries an optional `address`. Items with an address
+   are plotted on the map (geocoded server-side by the Static Maps API),
+   color-coded by category. Far-out items (Danbury / Bethel / Katonah) are
+   intentionally left without an address so the map stays zoomed on
+   Ridgefield, while still appearing in the printed directory.
 */
 
 export const PROPERTY = {
-  lat: 41.66636,
-  lng: -73.08035,
-  address: '310 South Main Street, Thomaston, CT 06787',
+  lat: 41.2929,
+  lng: -73.4942,
+  address: '109 Danbury Road, Ridgefield, CT 06877',
 }
 
-/* Connectivity facts shown on the map page. */
+/* Connectivity facts shown on the map page (consistent with the OM body). */
 export const CONNECTIVITY = [
-  { label: 'Route 8 (Exits 38 & 39)', value: 'Less than 1 mile' },
-  { label: 'U.S. Route 6', value: 'Through downtown Thomaston' },
-  { label: 'Waterbury / Metro-North', value: '~10–15 min south on Rte 8' },
-  { label: 'South Main Street', value: '12,800 VPD frontage' },
+  { label: 'Metro-North', value: 'Branchville (5 min)' },
+  { label: 'Route 7', value: '5 minutes' },
+  { label: 'I-84', value: '10 minutes' },
+  { label: 'NYC Commute', value: '~75 min by train' },
 ]
 
 /* Map category styling, keyed by directory heading. `color` is the Static
-   Maps marker color (0xRRGGBB); `swatch` is the CSS hex for the legend.
-   Five local categories, all within the zoom-13 frame, so every pin in the
-   directory also shows on the map (off-frame Waterbury anchors live on the
-   County Overview and Drive Times pages instead). */
+   Maps marker color (0xRRGGBB); `swatch` is the CSS hex for the legend. */
 export const MAP_CATEGORIES = [
-  { heading: 'Dining & Coffee', label: 'Dining & Coffee', color: '0xC0392B', swatch: '#C0392B' },
-  { heading: 'Grocery & Pharmacy', label: 'Grocery & Pharmacy', color: '0x1E8449', swatch: '#1E8449' },
-  { heading: 'Banks, Retail & Employers', label: 'Banks, Retail & Employers', color: '0x884EA0', swatch: '#884EA0' },
-  { heading: 'Schools & Civic', label: 'Schools & Civic', color: '0x2471A3', swatch: '#2471A3' },
-  { heading: 'Parks & Recreation', label: 'Parks & Recreation', color: '0x0E6655', swatch: '#0E6655' },
+  { heading: 'Dining — Walkable Main Street', label: 'Dining', color: '0xC0392B', swatch: '#C0392B' },
+  { heading: 'Arts & Culture', label: 'Arts & Culture', color: '0x884EA0', swatch: '#884EA0' },
+  { heading: 'Parks & Recreation', label: 'Parks & Recreation', color: '0x1E8449', swatch: '#1E8449' },
+  { heading: 'Grocery & Markets', label: 'Grocery & Markets', color: '0x2471A3', swatch: '#2471A3' },
+  { heading: 'Regional Shopping', label: 'Shopping', color: '0x117A65', swatch: '#117A65' },
+  { heading: 'Pharmacy & Daily Needs', label: 'Pharmacy & Daily Needs', color: '0xB55D37', swatch: '#B55D37' },
+  { heading: 'Banking', label: 'Banking', color: '0x566573', swatch: '#566573' },
+  { heading: 'NYC Connectivity', label: 'Transit', color: '0x2C3E50', swatch: '#2C3E50' },
 ]
 
-/* Full categorized directory. Each entry: { name, note, address? }.
-   Every address below is verified and carries an approximate (block-level)
-   entry in COORDS — see the note at the top of this file. */
+/* Full categorized directory. Each entry: { name, note, address? }. `note` is a
+   short descriptor for the directory layout; `address` (when present) plots the
+   item on the map. */
 export const DIRECTORY = [
   {
-    heading: 'Dining & Coffee',
+    heading: 'Dining — Walkable Main Street',
     items: [
-      { name: 'Thomaston Family Diner', note: 'Classic American diner · S Main corridor', address: '381 South Main Street, Thomaston, CT 06787' },
-      { name: 'Hometown Pizza III', note: 'Pizzeria / Italian · near the site', address: '299 South Main Street, Thomaston, CT 06787' },
-      { name: 'Clocktown Brewing Co.', note: 'Brewery + wood-fired pizza · Seth Thomas clock factory', address: '135 South Main Street, Thomaston, CT 06787' },
-      { name: 'Mona Lisa Ristorante', note: 'Italian / NY-style · downtown', address: '66 Main Street, Thomaston, CT 06787' },
-      { name: "Dunkin'", note: 'Coffee · drive-thru · S Main corridor', address: '495 South Main Street, Thomaston, CT 06787' },
+      { name: 'Tequila Escape', note: '439 Main St · Mexican/American · 4.5★', address: '439 Main St, Ridgefield, CT 06877' },
+      { name: 'Brasserie Saint Germain', note: '470 Main St · French brasserie', address: '470 Main St, Ridgefield, CT 06877' },
+      { name: 'Tablao Wine Bar', note: '426 Main St · Spanish tapas', address: '426 Main St, Ridgefield, CT 06877' },
+      { name: "Bailey's Backyard", note: '23 Bailey Ave · Farm-to-table', address: '23 Bailey Ave, Ridgefield, CT 06877' },
+      { name: 'R House', note: '20 West Ln · Upscale steakhouse', address: '20 West Ln, Ridgefield, CT 06877' },
+      { name: 'The Lantern', note: '378 Main St · Casual American', address: '378 Main St, Ridgefield, CT 06877' },
+      { name: 'Tazza Cafe', note: '408 Main St · Coffee & lunch', address: '408 Main St, Ridgefield, CT 06877' },
+      { name: 'Queen B Coffee Co.', note: '417 Main St · Roaster + cafe', address: '417 Main St, Ridgefield, CT 06877' },
+      { name: 'Corner Cafe', note: '622 Main St · Breakfast/lunch', address: '622 Main St, Ridgefield, CT 06877' },
     ],
   },
   {
-    heading: 'Grocery & Pharmacy',
+    heading: 'Arts & Culture',
     items: [
-      { name: 'Stop & Shop', note: 'Supermarket + pharmacy · just south of the site', address: '33 South Main Street, Thomaston, CT 06787' },
-      { name: 'Walgreens', note: 'Drugstore / pharmacy · S Main', address: '455 South Main Street, Thomaston, CT 06787' },
-      { name: 'Adams Hometown Market', note: 'Community grocery · downtown', address: '92 Main Street, Thomaston, CT 06787' },
-    ],
-  },
-  {
-    heading: 'Banks, Retail & Employers',
-    items: [
-      { name: 'Thomaston Savings Bank (Main Office)', note: 'Local bank HQ · downtown', address: '203 Main Street, Thomaston, CT 06787' },
-      { name: 'Webster Bank', note: 'Regional bank branch · downtown', address: '155 Main Street, Thomaston, CT 06787' },
-      { name: 'NAPA Auto Parts', note: 'Auto parts · off the corridor', address: '31 River Street, Thomaston, CT 06787' },
-      { name: 'Stewart EFI', note: 'Precision metal stamping · employer', address: '45 Old Waterbury Road, Thomaston, CT 06787' },
-      { name: 'Ward Leonard (Fairbanks Morse Defense)', note: 'Defense manufacturing · employer', address: '401 Watertown Road, Thomaston, CT 06787' },
-    ],
-  },
-  {
-    heading: 'Schools & Civic',
-    items: [
-      { name: 'Thomaston High School (gr. 7–12)', note: "Town's secondary school", address: '185 Branch Road, Thomaston, CT 06787' },
-      { name: 'Black Rock School', note: 'Elementary school', address: '57 Branch Road, Thomaston, CT 06787' },
-      { name: 'Thomaston Public Library', note: 'Town library · downtown', address: '248 Main Street, Thomaston, CT 06787' },
-      { name: 'Town Hall / Opera House', note: '1884 landmark · municipal offices', address: '158 Main Street, Thomaston, CT 06787' },
+      { name: 'The Prospector Theater', note: '25 Prospect St · Cinema · 4.9★', address: '25 Prospect St, Ridgefield, CT 06877' },
+      { name: 'The Ridgefield Playhouse', note: '80 E Ridge Rd · 500-seat venue', address: '80 East Ridge Rd, Ridgefield, CT 06877' },
+      { name: 'A.C.T. of Connecticut', note: '36 Old Quarry Rd · Regional theater', address: '36 Old Quarry Rd, Ridgefield, CT 06877' },
+      { name: 'Ridgefield Theater Barn', note: '37 Halpin Ln · Community theater', address: '37 Halpin Ln, Ridgefield, CT 06877' },
+      { name: 'Aldrich Contemporary Art Museum', note: '258 Main St · Contemporary art', address: '258 Main St, Ridgefield, CT 06877' },
     ],
   },
   {
     heading: 'Parks & Recreation',
     items: [
-      { name: 'Black Rock State Park', note: 'State park / campground · ~4 mi west', address: '2065 Thomaston Road, Watertown, CT 06795' },
-      { name: 'Thomaston Dam Recreation Area', note: 'Flood-control dam · trails · ~1.5 mi north', address: 'CT-222 (Reynolds Bridge), Thomaston, CT 06787' },
-      { name: "Nystrom's Park", note: 'Town recreation park · ballfields', address: 'Turner Road, Thomaston, CT 06787' },
+      { name: 'Ballard Park', note: '485 Main St · Green + CHIRP concerts', address: '485 Main St, Ridgefield, CT 06877' },
+      { name: 'Ridgefield Recreation Center', note: '195 Danbury Rd · Pool, fitness, courts', address: '195 Danbury Rd, Ridgefield, CT 06877' },
+      { name: 'Martin Park Beach', note: '19 Great Pond Rd · Lake beach, kayaking', address: '19 Great Pond Rd, Ridgefield, CT 06877' },
+      { name: 'Seth Low Pierrepont State Park', note: '139 Knollwood Dr · Hiking, MTB', address: '139 Knollwood Dr, Ridgefield, CT 06877' },
+      { name: 'Hemlock Hills / Pine Mtn', note: 'North Ridgefield · Trail network' },
+      { name: 'Sturges Park', note: '217 Rippowam Rd · Open space, camping', address: '217 Rippowam Rd, Ridgefield, CT 06877' },
+    ],
+  },
+  {
+    heading: 'NYC Connectivity',
+    items: [
+      { name: 'Branchville Station', note: '787 Branchville Rd · Metro-North → GCT', address: '787 Branchville Rd, Ridgefield, CT 06877' },
+      { name: 'Katonah Station', note: '~20 min W · Harlem Line, ~1 hr express' },
+      { name: 'Route 7 / I-84 / I-684', note: 'All within ~15 min' },
+      { name: 'Drive to Midtown', note: '~1 hr 15 min off-peak' },
+    ],
+  },
+  {
+    heading: 'Grocery & Markets',
+    items: [
+      { name: 'Stop & Shop', note: 'Copps Hill Plaza, 125 Danbury Rd · ~1 mi', address: '125 Danbury Rd, Ridgefield, CT 06877' },
+      { name: 'Ridgefield Organics & Specialty', note: '109 Danbury Rd · ~1 mi', address: '109 Danbury Rd, Ridgefield, CT 06877' },
+      { name: 'Whole Foods Market', note: 'Sugar Hollow Rd, Danbury · ~8 mi' },
+      { name: "Trader Joe's", note: '113 Mill Plain Rd, Danbury · ~9 mi' },
+      { name: "Caraluzzi's Market", note: '102 Mill Plain Rd, Danbury · ~9 mi' },
+      { name: 'Big Y', note: '83 Stony Hill Rd, Bethel · ~10 mi' },
+    ],
+  },
+  {
+    heading: 'Regional Shopping',
+    items: [
+      { name: 'Copps Hill Plaza', note: '125 Danbury Rd · Marshalls, HomeGoods · ~1 mi', address: '113 Danbury Rd, Ridgefield, CT 06877' },
+      { name: 'Danbury Fair Mall', note: '7 Backus Ave, Danbury · ~200 stores · ~8 mi' },
+    ],
+  },
+  {
+    heading: 'Pharmacy & Daily Needs',
+    items: [
+      { name: 'CVS', note: '467 Main St · Village center', address: '467 Main St, Ridgefield, CT 06877' },
+      { name: 'Walgreens', note: '46A Danbury Rd · Pharmacy', address: '46A Danbury Rd, Ridgefield, CT 06877' },
+      { name: 'Ridgefield Hardware (Ace)', note: '385 Main St', address: '385 Main St, Ridgefield, CT 06877' },
+    ],
+  },
+  {
+    heading: 'Banking',
+    items: [
+      { name: 'Fairfield County Bank', note: '374 Main St · Local, HQ in Ridgefield', address: '374 Main St, Ridgefield, CT 06877' },
+      { name: 'Wells Fargo', note: '368 Main St · In village', address: '368 Main St, Ridgefield, CT 06877' },
+      { name: 'M&T Bank', note: '2 Prospect St · Village center', address: '2 Prospect St, Ridgefield, CT 06877' },
+      { name: 'Citibank', note: '621 Main St · North end of Main', address: '621 Main St, Ridgefield, CT 06877' },
+      { name: 'Chase Bank', note: '108 Danbury Rd · Branch + ATM · ~1 mi', address: '108 Danbury Rd, Ridgefield, CT 06877' },
     ],
   },
 ]
 
-/* Precise coordinates per address, geocoded once via the Google Geocoding API
-   (not block-level guesses). Markers are plotted by lat/lng so the Static Maps
-   request does NOT geocode at render time — that matters because Static Maps
-   caps the number of address-geocoded markers per request (~15) and silently
-   returns a blank/error image when exceeded. lat/lng markers have no such cap. */
+/* Geocoded coordinates per address (Google Geocoding API, June 2026). Markers
+   are plotted by lat/lng — this Static Maps key renders coordinate markers
+   reliably, whereas address-geocoded markers trip g.co/staticmaperror. */
 const COORDS = {
-  '381 South Main Street, Thomaston, CT 06787': [41.66474, -73.07917],
-  '299 South Main Street, Thomaston, CT 06787': [41.66636, -73.07938],
-  '135 South Main Street, Thomaston, CT 06787': [41.66922, -73.07665],
-  '66 Main Street, Thomaston, CT 06787': [41.67423, -73.07343],
-  '495 South Main Street, Thomaston, CT 06787': [41.66166, -73.07947],
-  '33 South Main Street, Thomaston, CT 06787': [41.67124, -73.07597],
-  '455 South Main Street, Thomaston, CT 06787': [41.66261, -73.07908],
-  '92 Main Street, Thomaston, CT 06787': [41.67399, -73.07396],
-  '203 Main Street, Thomaston, CT 06787': [41.67246, -73.07475],
-  '155 Main Street, Thomaston, CT 06787': [41.67297, -73.07417],
-  '31 River Street, Thomaston, CT 06787': [41.67229, -73.07039],
-  '45 Old Waterbury Road, Thomaston, CT 06787': [41.65170, -73.07751],
-  '401 Watertown Road, Thomaston, CT 06787': [41.65436, -73.09210],
-  '185 Branch Road, Thomaston, CT 06787': [41.65716, -73.09491],
-  '57 Branch Road, Thomaston, CT 06787': [41.65678, -73.09172],
-  '248 Main Street, Thomaston, CT 06787': [41.67231, -73.07590],
-  '158 Main Street, Thomaston, CT 06787': [41.67295, -73.07574],
-  '2065 Thomaston Road, Watertown, CT 06795': [41.65318, -73.09586],
-  'CT-222 (Reynolds Bridge), Thomaston, CT 06787': [41.64991, -73.08647],
-  'Turner Road, Thomaston, CT 06787': [41.68109, -73.11541],
+  '439 Main St, Ridgefield, CT 06877': [41.282337, -73.499391],
+  '470 Main St, Ridgefield, CT 06877': [41.283017, -73.49818],
+  '426 Main St, Ridgefield, CT 06877': [41.282218, -73.498131],
+  '23 Bailey Ave, Ridgefield, CT 06877': [41.281864, -73.497361],
+  '20 West Ln, Ridgefield, CT 06877': [41.272238, -73.498834],
+  '378 Main St, Ridgefield, CT 06877': [41.280843, -73.498058],
+  '408 Main St, Ridgefield, CT 06877': [41.281853, -73.498198],
+  '417 Main St, Ridgefield, CT 06877': [41.282098, -73.498785],
+  '622 Main St, Ridgefield, CT 06877': [41.289465, -73.499797],
+  '25 Prospect St, Ridgefield, CT 06877': [41.283773, -73.497376],
+  '80 East Ridge Rd, Ridgefield, CT 06877': [41.282734, -73.493184],
+  '36 Old Quarry Rd, Ridgefield, CT 06877': [41.286247, -73.490888],
+  '37 Halpin Ln, Ridgefield, CT 06877': [41.282466, -73.487226],
+  '258 Main St, Ridgefield, CT 06877': [41.277056, -73.496816],
+  '485 Main St, Ridgefield, CT 06877': [41.283752, -73.498644],
+  '195 Danbury Rd, Ridgefield, CT 06877': [41.300616, -73.495301],
+  '19 Great Pond Rd, Ridgefield, CT 06877': [41.31492, -73.470233],
+  '139 Knollwood Dr, Ridgefield, CT 06877': [41.331083, -73.501318],
+  '217 Rippowam Rd, Ridgefield, CT 06877': [41.313322, -73.547818],
+  '787 Branchville Rd, Ridgefield, CT 06877': [41.26795, -73.442285],
+  '125 Danbury Rd, Ridgefield, CT 06877': [41.295007, -73.49354],
+  '109 Danbury Rd, Ridgefield, CT 06877': [41.293289, -73.494265],
+  '113 Danbury Rd, Ridgefield, CT 06877': [41.292793, -73.494252],
+  '467 Main St, Ridgefield, CT 06877': [41.282853, -73.499867],
+  '46A Danbury Rd, Ridgefield, CT 06877': [41.290127, -73.496369],
+  '385 Main St, Ridgefield, CT 06877': [41.281003, -73.499034],
+  '374 Main St, Ridgefield, CT 06877': [41.2807, -73.498037],
+  '368 Main St, Ridgefield, CT 06877': [41.280536, -73.498003],
+  '2 Prospect St, Ridgefield, CT 06877': [41.283294, -73.497543],
+  '621 Main St, Ridgefield, CT 06877': [41.289201, -73.50033],
+  '108 Danbury Rd, Ridgefield, CT 06877': [41.294085, -73.492561],
 }
 
 /* Flattened list of every mapped POI, tagged with category label + colors —
-   consumed by the Location & Amenities map. Every item with an `address` that
-   has a COORDS entry is plotted by lat/lng. */
+   consumed by the Location & Amenities map. */
 export const MAP_POIS = MAP_CATEGORIES.flatMap(cat => {
   const group = DIRECTORY.find(d => d.heading === cat.heading)
   if (!group) return []
@@ -124,7 +169,6 @@ export const MAP_POIS = MAP_CATEGORIES.flatMap(cat => {
     .filter(it => it.address && COORDS[it.address])
     .map((it, idx) => ({
       name: it.name,
-      note: it.note,
       address: it.address,
       lat: COORDS[it.address][0],
       lng: COORDS[it.address][1],
