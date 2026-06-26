@@ -38,7 +38,7 @@ const FACTS = [
   { k: 'Parcel ID', v: 'MBL N-5E211 · VisionPID 7366 (048-3303)' },
   { k: 'Parcel', v: '2.69 acres — ±1.00 ac improved + ±1.69 ac excess land' },
   { k: 'Building', v: '19,266 SF gross (18,770 rentable) · 2 stories + full basement · 1960' },
-  { k: 'In-Place Units', v: '13 — 10 commercial · 2 residential · 1 storage' },
+  { k: 'In-Place Units', v: '12 — 10 commercial · 2 residential' },
   { k: 'Entitlement', v: '51-unit multifamily approved on the ±1.69-ac excess land (Sept 2025)' },
   { k: 'Frontage / Access', v: 'New Haven Road (Route 63) · direct Route 8 access' },
   { k: 'Parking · Zoning', v: '±26,000 SF paved asphalt · R8' },

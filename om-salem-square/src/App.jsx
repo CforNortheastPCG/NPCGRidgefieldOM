@@ -18,21 +18,16 @@ function CoverHero({ pageNum }) {
     <div className="page">
       <div className="cover-hero">
         <img className="cover-hero-img" src={DEAL.coverImage} alt="" />
-        {/* Scrim — light top shade so the white logo reads, strong bottom shade for the title */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 38%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.88) 100%)', pointerEvents: 'none' }} />
         {/* NPCG logo — top right */}
         <div className="cover-hero-header" style={{ justifyContent: 'flex-end' }}>
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
-        {/* Name & address — top left */}
-        <div className="cover-hero-overlay" style={{ top: 40, bottom: 'auto', left: 48, right: 'auto', textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}>
+        {/* Title block — bottom left */}
+        <div className="cover-hero-overlay" style={{ left: 48, right: 'auto', textShadow: '0 2px 14px rgba(0,0,0,0.85)' }}>
           <div style={{ color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 14 }}>{DEAL.status}</div>
           <div className="cover-hero-name">{DEAL.name}</div>
           <div className="cover-hero-title" style={{ fontSize: 40 }}>{ADDR}</div>
-          <div className="cover-hero-sub" style={{ marginBottom: 0 }}>{DEAL.cityLong}</div>
-        </div>
-        {/* Rule & descriptor — bottom left */}
-        <div className="cover-hero-overlay" style={{ left: 48, right: 'auto', textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}>
+          <div className="cover-hero-sub">{DEAL.cityLong}</div>
           <div className="cover-hero-rule" />
           <div className="cover-hero-prep">{DEAL.type}</div>
         </div>
@@ -50,10 +45,9 @@ function ExecutiveSummary({ pageNum }) {
     { c: 'Entitled Land — 51 × $25,000 / Unit', v: '$1,275,000', p: '33.6%' },
   ]
   const stats = [
-    { v: '13', k: 'In-Place Units' },
-    { v: '51', k: 'Entitled Units' },
     { v: '±19,266', k: 'Building SF' },
-    { v: '2.69', k: 'Acres (±1.69 Entitled)' },
+    { v: '51', k: 'Entitled Units' },
+    { v: '2.69', k: 'Acres (±1.69 Entitled)', full: true },
   ]
   const allocRow = (c, v, p, total) => (
     <div key={c} style={{
@@ -75,10 +69,25 @@ function ExecutiveSummary({ pageNum }) {
       <div className="section" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
         <div className="eyebrow">Overview</div>
         <div className="section-title">Executive Summary</div>
+        <div className="title-rule" />
 
         <div style={{ display: 'grid', gridTemplateColumns: '1.32fr 1fr', gap: 30, flex: 1, minHeight: 0 }}>
-          {/* LEFT — narrative + accent image */}
+          {/* LEFT — offering summary + narrative */}
           <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <div style={{ textAlign: 'center', padding: '8px 4px 11px', borderTop: '3px solid var(--golden)' }}>
+              <div style={{ fontSize: 28, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$3,800,000</div>
+              <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 5 }}>Offering Price</div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 12, marginBottom: 14 }}>
+              {stats.map(s => (
+                <div key={s.k} style={{ textAlign: 'center', padding: '7px 4px', borderTop: '3px solid var(--golden)', gridColumn: s.full ? '1 / -1' : undefined }}>
+                  <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
+                  <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>{s.k}</div>
+                </div>
+              ))}
+            </div>
+
             <p style={{ fontSize: 9.4, lineHeight: 1.5, margin: '0 0 9px' }}>
               Northeast Private Client Group is pleased to present <strong>Salem Square</strong>, a value-add
               commercial mixed-use opportunity at {ADDR} in Naugatuck, Connecticut. The 2.69-acre parcel includes an
@@ -95,7 +104,7 @@ function ExecutiveSummary({ pageNum }) {
               convenience and service businesses, several of them in place for fifteen years or more, including Great
               China, Rose Spa &amp; Nails, Salem Wine &amp; Spirits, and Mexican Deli.
             </p>
-            <p style={{ fontSize: 9.4, lineHeight: 1.5, margin: '0 0 10px' }}>
+            <p style={{ fontSize: 9.4, lineHeight: 1.5, margin: 0 }}>
               The opportunity is a commercial center with several clear paths to grow income, paired with a residential
               development site that adds a second phase. Inside the existing center, a buyer leases up the vacant
               ground-floor commercial space, marks the occupied suites from about $13.38 per square foot toward the $15
@@ -104,33 +113,15 @@ function ExecutiveSummary({ pageNum }) {
               from similar space. On the same parcel, about 1.69 acres is entitled for a 51-unit multifamily building,
               with updated site plans approved by the Naugatuck Zoning Commission in September 2025.
             </p>
-            <div style={{ flex: 1, minHeight: 0, borderRadius: 3, overflow: 'hidden', marginTop: 4 }}>
-              <img src="/photos/aerial-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 80%', display: 'block' }} />
-            </div>
           </div>
 
-          {/* RIGHT — offering summary */}
+          {/* RIGHT — photos */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14, minHeight: 0 }}>
-            <div>
-              <div style={{ textAlign: 'center', padding: '8px 4px 11px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 28, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$3,800,000</div>
-                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 5 }}>Offering Price</div>
-              </div>
-              <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginBottom: 4, paddingBottom: 4, borderBottom: '2px solid var(--golden)' }}>Asking Price Allocation</div>
-              {alloc.map(a => allocRow(a.c, a.v, a.p, false))}
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-              {stats.map(s => (
-                <div key={s.k} style={{ textAlign: 'center', padding: '7px 4px', borderTop: '3px solid var(--golden)' }}>
-                  <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>{s.v}</div>
-                  <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 4 }}>{s.k}</div>
-                </div>
-              ))}
-            </div>
-
             <div style={{ flex: 1, minHeight: 0, borderRadius: 3, overflow: 'hidden' }}>
               <img src="/photos/ext-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            </div>
+            <div style={{ flex: 1, minHeight: 0, borderRadius: 3, overflow: 'hidden' }}>
+              <img src="/photos/aerial-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 80%', display: 'block' }} />
             </div>
           </div>
         </div>
@@ -151,22 +142,21 @@ function BuildingDescriptions({ pageNum }) {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, flex: 1, minHeight: 0 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 3, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-              <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Site Summary</h3>
+              <h3 style={{ fontSize: 12.5, marginBottom: 6, paddingBottom: 4 }}>Site Summary</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Address</span><span className="bldg-val">{FULL_ADDR}</span></div>
                 <div className="bldg-row"><span className="bldg-label">Property Type</span><span className="bldg-val">Mixed-Use Retail + Development Site</span></div>
-                <div className="bldg-row"><span className="bldg-label">In-Place Units</span><span className="bldg-val">13 (10 commercial · 2 residential · 1 storage)</span></div>
+                <div className="bldg-row"><span className="bldg-label">In-Place Units</span><span className="bldg-val">12 (10 commercial · 2 residential)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Building SF</span><span className="bldg-val">18,770 rentable (19,266 gross)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Lot Size</span><span className="bldg-val">2.69 Acres (±1.00 improved + ±1.69 entitled)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Year Built</span><span className="bldg-val">1960</span></div>
                 <div className="bldg-row"><span className="bldg-label">Zoning</span><span className="bldg-val">R8</span></div>
                 <div className="bldg-row"><span className="bldg-label">Traffic Count</span><span className="bldg-val">16,200 VPD (New Haven Rd / Rte 63)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Parcel ID</span><span className="bldg-val">048-3303 (MBL N-5E211 · VisionPID 7366)</span></div>
-                <div className="bldg-row"><span className="bldg-label">Occupancy</span><span className="bldg-val">84.6%</span></div>
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-              <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Utilities</h3>
+              <h3 style={{ fontSize: 12.5, marginBottom: 6, paddingBottom: 4 }}>Utilities</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Heat / Hot Water</span><span className="bldg-val">Commercial: natural gas · Apartments: all-electric</span></div>
                 <div className="bldg-row"><span className="bldg-label">Heating / Cooling</span><span className="bldg-val">Commercial: rooftop package units (heat &amp; cool)</span></div>
@@ -176,7 +166,7 @@ function BuildingDescriptions({ pageNum }) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-              <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Construction &amp; Systems</h3>
+              <h3 style={{ fontSize: 12.5, marginBottom: 6, paddingBottom: 4 }}>Construction &amp; Systems</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Foundation</span><span className="bldg-val">Concrete; full basement (±8,814 SF)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Frame / Stories</span><span className="bldg-val">Wood frame · two stories</span></div>
@@ -187,7 +177,7 @@ function BuildingDescriptions({ pageNum }) {
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-              <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Entitled Development</h3>
+              <h3 style={{ fontSize: 12.5, marginBottom: 6, paddingBottom: 4 }}>Entitled Development</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Development Rights</span><span className="bldg-val">51-unit multifamily building</span></div>
                 <div className="bldg-row"><span className="bldg-label">Approval</span><span className="bldg-val">Site plans approved Sept 2025</span></div>
@@ -196,12 +186,12 @@ function BuildingDescriptions({ pageNum }) {
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-              <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Investment Profile</h3>
+              <h3 style={{ fontSize: 12.5, marginBottom: 6, paddingBottom: 4 }}>Investment Profile</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Asking Price</span><span className="bldg-val">$3,800,000</span></div>
-                <div className="bldg-row"><span className="bldg-label">Allocation</span><span className="bldg-val">$2.53M plaza · $1.28M land</span></div>
-                <div className="bldg-row"><span className="bldg-label">In-Place NOI (Norm.)</span><span className="bldg-val">$169,629</span></div>
-                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$247,244</span></div>
+                <div className="bldg-row"><span className="bldg-label">In-Place Cap (Plaza)</span><span className="bldg-val">6.7%</span></div>
+                <div className="bldg-row"><span className="bldg-label">Stabilized Cap (Plaza)</span><span className="bldg-val">9.8%</span></div>
+                <div className="bldg-row"><span className="bldg-label">Entitled Land Value</span><span className="bldg-val">$1,275,000 (51 × $25K)</span></div>
               </div>
             </div>
           </div>
@@ -214,8 +204,8 @@ function BuildingDescriptions({ pageNum }) {
 
 /* ═══════════════════ RENT ROLL ═══════════════════ */
 /* Full per-unit / per-suite rent roll for the existing center, as of
-   04.30.2026 (Blue Brook Properties). 13 occupied/vacant units across 18,770
-   rentable SF; 84.6% occupied. Annual rent and $/SF calculated from monthly. */
+   04.30.2026 (Blue Brook Properties). 12 occupied/vacant units across 18,770
+   rentable SF. Annual rent and $/SF calculated from monthly. */
 function RentRoll({ pageNum }) {
   const th = { fontSize: 7.8, padding: '5px 7px', color: '#fff', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700 }
   const td = { fontSize: 9, padding: '3.5px 7px', color: 'var(--carbon)' }
@@ -266,7 +256,7 @@ function RentRoll({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Existing Rent <span style={{ color: '#F8971D' }}>Roll</span></div>
         <div className="title-rule" />
         <div style={{ fontSize: 8.8, color: 'var(--stone)', margin: '4px 0 8px', letterSpacing: '0.04em' }}>
-          Salem Square &mdash; rent roll as of 04.30.2026 &middot; 13 units &middot; 18,770 rentable SF &middot; 84.6% occupied
+          Salem Square &mdash; rent roll as of 04.30.2026 &middot; 12 units &middot; 18,770 rentable SF
         </div>
 
         <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
@@ -1025,15 +1015,14 @@ function ExistingBuilding({ pageNum }) {
   const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 11.5, padding: '7px 10px' }
   const stats = [
     { v: '18,770', k: 'Rentable SF' },
-    { v: '13', k: 'In-Place Units' },
+    { v: '12', k: 'In-Place Units' },
     { v: '1960', k: 'Year Built' },
     { v: '10', k: 'Commercial Units' },
     { v: '2', k: 'Residential Units' },
   ]
   const mix = [
-    { t: 'Commercial Retail', u: 10, pct: '77%' },
-    { t: 'Apartments', u: 2, pct: '15%' },
-    { t: 'Storage', u: 1, pct: '8%' },
+    { t: 'Commercial Retail', u: 10, pct: '83%' },
+    { t: 'Apartments', u: 2, pct: '17%' },
   ]
   return (
     <div className="page">
@@ -1073,7 +1062,7 @@ function ExistingBuilding({ pageNum }) {
                 ))}
                 <tr>
                   <td style={{ ...totBg, textAlign: 'left' }}>Total</td>
-                  <td style={{ ...totBg, textAlign: 'right' }}>13</td>
+                  <td style={{ ...totBg, textAlign: 'right' }}>12</td>
                   <td style={{ ...totBg, textAlign: 'right' }}>100%</td>
                 </tr>
               </tbody>

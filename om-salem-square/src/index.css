@@ -477,6 +477,7 @@ body {
 /* Boxless variant — drops the linen card background but keeps the golden-rule
    headings. Applied to pages tagged `.flat-cards`. */
 .flat-cards .bldg-card { background: transparent; border-radius: 0; padding-top: 0; padding-bottom: 0; }
+.flat-cards .bldg-row { font-size: 11.5px; padding: 4px 0; }
 .bldg-row {
   display: flex;
   justify-content: space-between;
