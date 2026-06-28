@@ -29,7 +29,14 @@
       "Bash(node scripts/render-siteplans.cjs)",
       "PowerShell(Get-Content *)",
       "Bash(node -e \"try{require.resolve\\('xlsx'\\);console.log\\('xlsx OK'\\)}catch\\(e\\){console.log\\('no xlsx'\\)}; try{require.resolve\\('exceljs'\\);console.log\\('exceljs OK'\\)}catch\\(e\\){console.log\\('no exceljs'\\)}\")",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(npx vite *)",
+      "Read(//tmp/**)",
+      "Bash(curl -s -o /tmp/f.png -w \"http=%{http_code} bytes=%{size_download}\\\\n\" \"https://www.google.com/s2/favicons?domain=talbots.com&sz=256\")",
+      "Bash(node --input-type=module -e \"const r=await fetch\\('https://logo.clearbit.com/talbots.com?size=256&format=png'\\).catch\\(e=>\\({err:e.message}\\)\\); console.log\\(r.status||r.err\\)\")",
+      "Bash(curl -s -o /dev/null -w \"http=%{http_code}\\\\n\" \"https://www.talbots.com\")",
+      "Bash(npx eslint *)",
+      "Bash(echo \"exit: $?\")"
     ]
   }
 }

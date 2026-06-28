@@ -17,7 +17,7 @@ const TOC = [
   { n: 18, label: 'Financial Analysis', section: true },
   { n: 19, label: 'The Combined Property', sub: true },
   { n: 20, label: 'Combined Operating Statement', sub: true },
-  { n: 21, label: 'Existing Rent Roll', sub: true },
+  { n: 21, label: 'In-Place Rent Roll & Unit Mix', sub: true },
   { n: 22, label: 'In-Place Analysis', sub: true },
   { n: 23, label: 'Location & Market', section: true },
   { n: 24, label: 'City Overview', sub: true },

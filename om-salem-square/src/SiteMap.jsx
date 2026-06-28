@@ -21,6 +21,14 @@ function buildStaticMapUrl() {
   // Parcel outline: golden stroke + translucent golden fill.
   const ring = PARCEL.ring.map(([lat, lng]) => `${lat},${lng}`).join('|')
   const path = `path=${encodeURIComponent(`color:0xF8971Dff|weight:4|fillcolor:0xF8971D33|${ring}`)}`
+  // Hide the business POI labels Google bakes into the hybrid imagery (e.g. the
+  // dispensary, restaurants, and auto shops along New Haven Road) — Static Maps
+  // styling can't drop named businesses individually, so turn off POI labels
+  // wholesale. The HTML overlay pins below carry our own labels.
+  const style = [
+    'feature:poi|element:labels|visibility:off',
+    'feature:transit|element:labels|visibility:off',
+  ]
   const params = [
     `center=${PARCEL.center.lat},${PARCEL.center.lng}`,
     'zoom=18',
@@ -28,6 +36,7 @@ function buildStaticMapUrl() {
     'scale=2',
     'maptype=hybrid',
     'format=png',
+    ...style.map(s => `style=${encodeURIComponent(s)}`),
     path,
     `key=${API_KEY}`,
   ]

@@ -25,9 +25,9 @@ function CoverHero({ pageNum }) {
         {/* Title block — bottom left */}
         <div className="cover-hero-overlay" style={{ left: 48, right: 'auto', textShadow: '0 2px 14px rgba(0,0,0,0.85)' }}>
           <div style={{ color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 14 }}>{DEAL.status}</div>
-          <div className="cover-hero-name">{DEAL.name}</div>
-          <div className="cover-hero-title" style={{ fontSize: 40 }}>{ADDR}</div>
-          <div className="cover-hero-sub">{DEAL.cityLong}</div>
+          <div className="cover-hero-name" style={{ fontSize: 58, fontWeight: 700, letterSpacing: '-0.015em', lineHeight: 1.02, marginBottom: 6 }}>{DEAL.name}</div>
+          <div className="cover-hero-title" style={{ fontSize: 22, fontWeight: 600 }}>{ADDR}</div>
+          <div className="cover-hero-sub">{DEAL.cityState}</div>
           <div className="cover-hero-rule" />
           <div className="cover-hero-prep">{DEAL.type}</div>
         </div>
@@ -207,11 +207,11 @@ function BuildingDescriptions({ pageNum }) {
    04.30.2026 (Blue Brook Properties). 12 occupied/vacant units across 18,770
    rentable SF. Annual rent and $/SF calculated from monthly. */
 function RentRoll({ pageNum }) {
-  const th = { fontSize: 7.8, padding: '5px 7px', color: '#fff', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700 }
-  const td = { fontSize: 9, padding: '3.5px 7px', color: 'var(--carbon)' }
-  const grp = { fontSize: 7.8, padding: '4px 7px', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--golden)', background: 'var(--linen)' }
-  const sub = { fontSize: 9, padding: '4px 7px', fontWeight: 700, color: 'var(--carbon)', background: '#efeae3', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }
-  const tot = { fontSize: 9.5, padding: '5px 7px', fontWeight: 800, color: '#fff', background: 'var(--carbon)' }
+  const th = { fontSize: 7.8, padding: '3.5px 7px', color: '#fff', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700 }
+  const td = { fontSize: 9, padding: '2.5px 7px', color: 'var(--carbon)' }
+  const grp = { fontSize: 7.8, padding: '2.5px 7px', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--golden)', background: 'var(--linen)' }
+  const sub = { fontSize: 9, padding: '3px 7px', fontWeight: 700, color: 'var(--carbon)', background: '#efeae3', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }
+  const tot = { fontSize: 9.5, padding: '3.5px 7px', fontWeight: 800, color: '#fff', background: 'var(--carbon)' }
   const R = '—'
 
   // [unit, tenant, sf, mo, yr, psf]
@@ -234,6 +234,21 @@ function RentRoll({ pageNum }) {
   const other = [
     ['Lot Storage', "Garci's Landscaping LLC", R, '$1,000', '$12,000', R],
   ]
+
+  // Unit-mix rollup (excludes lot-storage license). [type, units, sf, %sf, rent/yr, $/sf]
+  const unitMix = [
+    ['Residential — 2 BR / 1 BA', '2', '1,600', '8.5%', '$39,600', '$24.75'],
+    ['Commercial — Retail / Service', '10', '17,170', '91.5%', '$229,788', '$13.38'],
+  ]
+  const mixAlign = [null, 'right', 'right', 'right', 'right', 'right']
+  const MixRow = (r, i) => (
+    <tr key={r[0]} style={i % 2 ? { background: 'var(--linen)' } : undefined}>
+      {r.map((c, j) => (
+        <td key={j} style={{ ...td, textAlign: mixAlign[j] || 'left', fontWeight: j === 0 ? 700 : 400 }}>{c}</td>
+      ))}
+    </tr>
+  )
+
   const align = [null, null, 'right', 'right', 'right', 'right']
   const Row = (r, i) => (
     <tr key={r[0]} style={i % 2 ? { background: 'var(--linen)' } : undefined}>
@@ -251,14 +266,44 @@ function RentRoll({ pageNum }) {
 
   return (
     <div className="page">
-      <PageHeader section="Existing Rent Roll" />
+      <PageHeader section="In-Place Rent Roll & Unit Mix" />
       <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-        <div className="section-title" style={{ marginBottom: 2 }}>Existing Rent <span style={{ color: '#F8971D' }}>Roll</span></div>
+        <div className="section-title" style={{ marginBottom: 2 }}>In-Place Rent Roll <span style={{ color: '#F8971D' }}>&amp; Unit Mix</span></div>
         <div className="title-rule" />
         <div style={{ fontSize: 8.8, color: 'var(--stone)', margin: '4px 0 8px', letterSpacing: '0.04em' }}>
           Salem Square &mdash; rent roll as of 04.30.2026 &middot; 12 units &middot; 18,770 rentable SF
         </div>
 
+        <div className="eyebrow" style={{ marginBottom: 3, fontSize: 8.5 }}>Unit Mix</div>
+        <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed', marginBottom: 10 }}>
+          <colgroup>
+            <col style={{ width: '34%' }} /><col style={{ width: '10%' }} /><col style={{ width: '14%' }} />
+            <col style={{ width: '12%' }} /><col style={{ width: '20%' }} /><col style={{ width: '10%' }} />
+          </colgroup>
+          <thead>
+            <tr style={{ background: 'var(--carbon)' }}>
+              <th style={{ ...th, textAlign: 'left' }}>Unit Type</th>
+              <th style={{ ...th, textAlign: 'right' }}>Units</th>
+              <th style={{ ...th, textAlign: 'right' }}>SF</th>
+              <th style={{ ...th, textAlign: 'right' }}>% SF</th>
+              <th style={{ ...th, textAlign: 'right' }}>In-Place Rent / Yr</th>
+              <th style={{ ...th, textAlign: 'right' }}>Avg $/SF</th>
+            </tr>
+          </thead>
+          <tbody>
+            {unitMix.map(MixRow)}
+            <tr>
+              <td style={{ ...tot, textAlign: 'left' }}>Total / Avg</td>
+              <td style={{ ...tot, textAlign: 'right' }}>12</td>
+              <td style={{ ...tot, textAlign: 'right' }}>18,770</td>
+              <td style={{ ...tot, textAlign: 'right' }}>100%</td>
+              <td style={{ ...tot, textAlign: 'right' }}>$269,388</td>
+              <td style={{ ...tot, textAlign: 'right' }}>$14.35</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div className="eyebrow" style={{ marginBottom: 3, fontSize: 8.5 }}>Rent Roll Detail</div>
         <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
           <colgroup>
             <col style={{ width: '14%' }} /><col style={{ width: '34%' }} /><col style={{ width: '12%' }} />
@@ -305,14 +350,17 @@ function RentRoll({ pageNum }) {
    (Blue Brook T12; Naugatuck mill rate 37.79). The pro forma reflects commercial
    lease-up, mark-to-market, CAM recovery, and the Suite 12 residential conversion. */
 function SalemSquarePlazaAnalysis({ pageNum }) {
-  const tdl = { fontSize: 9, padding: '3px 8px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
-  const tdr = { fontSize: 9, padding: '3px 8px', textAlign: 'right' }
-  const thl = { fontSize: 7.5, padding: '4px 8px', textAlign: 'left', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
-  const thr = { fontSize: 7.5, padding: '4px 8px', textAlign: 'right', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
-  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 9, padding: '3px 8px' }
-  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 9.5, padding: '4px 8px' }
+  const tdl = { fontSize: 10, padding: '4px 8px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const tdr = { fontSize: 10, padding: '4px 8px', textAlign: 'right' }
+  // Income & Expense statement (left side)
+  const sTdl = { fontSize: 10, padding: '3.5px 9px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const sTdr = { fontSize: 10, padding: '3.5px 9px', textAlign: 'right' }
+  const thl = { fontSize: 8, padding: '4px 9px', textAlign: 'left', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const thr = { fontSize: 8, padding: '4px 9px', textAlign: 'right', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 10, padding: '3.5px 9px' }
+  const noiBg = { background: 'var(--golden)', color: '#fff', fontWeight: 800, fontSize: 10.5, padding: '4.5px 9px' }
   const eyebrow = { marginBottom: 4, fontSize: 8.5 }
-  const subStyle = { background: '#efeae3', fontWeight: 700, fontSize: 9, padding: '3px 8px', color: 'var(--carbon)' }
+  const subStyle = { background: '#efeae3', fontWeight: 700, fontSize: 10, padding: '3.5px 9px', color: 'var(--carbon)' }
 
   const strip = [
     { v: '$169,629', k: 'Current NOI' },
@@ -351,14 +399,14 @@ function SalemSquarePlazaAnalysis({ pageNum }) {
     )
     return (
       <tr key={label} style={i % 2 ? { background: 'var(--linen)' } : undefined}>
-        <td style={tdl}>{label}</td><td style={tdr}>{cur}</td><td style={tdr}>{pf}</td>
+        <td style={sTdl}>{label}</td><td style={sTdr}>{cur}</td><td style={sTdr}>{pf}</td>
       </tr>
     )
   }
   const MetricTable = ({ title, rows }) => (
-    <>
+    <div>
       <div className="eyebrow" style={eyebrow}>{title}</div>
-      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 12, tableLayout: 'fixed' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
         <colgroup><col style={{ width: '60%' }} /><col style={{ width: '40%' }} /></colgroup>
         <tbody>
           {rows.map(([l, v], i) => (
@@ -368,7 +416,7 @@ function SalemSquarePlazaAnalysis({ pageNum }) {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   )
 
   return (
@@ -434,13 +482,6 @@ function SalemSquarePlazaAnalysis({ pageNum }) {
               ['Cash-on-Cash — Pro Forma', '10.33%'],
             ]} />
           </div>
-        </div>
-
-        <div style={{ fontSize: 7.4, color: 'var(--stone)', marginTop: 8, lineHeight: 1.45 }}>
-          Plaza shown on its allocated $2,525,000 basis (70% LTV = $1,767,500 loan). Pro forma marks commercial rents to
-          $15&ndash;$22/SF, leases the vacant suites, converts Suite 12 to two apartments (~$43,200/yr), and introduces
-          CAM recovery of $19,266 (~$1.00/SF). Taxes ($38,309; mill 37.79) and insurance carried at full market; R&amp;M
-          normalized to $0.50/SF and management to 5% of EGI. Interim lot-storage income burns off at redevelopment.
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -814,7 +855,7 @@ function CountyOverview({ pageNum }) {
           <div className="section-title" style={{ marginBottom: 2 }}>New Haven County <span style={{ color: '#F8971D' }}>Overview &amp; Employment</span></div>
           <div className="title-rule" />
           <div style={{ fontSize: 10, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 11 }}>
-            <p>New Haven County is south-central Connecticut&rsquo;s anchor — the state&rsquo;s second-most-populous county (~864,000), led by New Haven and Waterbury, with the Naugatuck Valley (Naugatuck, Waterbury, the Route 8 corridor) forming its industrial spine. Naugatuck&rsquo;s affordability relative to income, direct highway and rail access, and limited new multifamily supply support steady rental demand — the backdrop for the entitled 51-unit development.</p>
+            <p>New Haven County is south-central Connecticut&rsquo;s anchor — the state&rsquo;s third-most-populous county (~864,000), led by New Haven and Waterbury, with the Naugatuck Valley (Naugatuck, Waterbury, the Route 8 corridor) forming its industrial spine. Naugatuck&rsquo;s affordability relative to income, direct highway and rail access, and limited new multifamily supply support steady rental demand — the backdrop for the entitled 51-unit development.</p>
           </div>
 
           <div className="eyebrow" style={{ marginBottom: 5 }}>Demographics — Naugatuck vs. County</div>
@@ -848,7 +889,7 @@ function CountyOverview({ pageNum }) {
             ))}
           </div>
         </div>
-        <div style={{ flex: '0 0 43%', position: 'relative' }}><img src="/photos/aerial-1.jpg" alt="New Haven County" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>
+        <div style={{ flex: '0 0 43%', position: 'relative' }}><img src="/photos/new-haven-green.jpg" alt="New Haven County" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>
       </div>
       <PageFooter pageNum={pageNum} />
     </div>
@@ -983,18 +1024,20 @@ function ProposedDevelopment({ pageNum }) {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 12 }}>
               <p style={{ fontSize: 10.5, lineHeight: 1.55, color: 'var(--graphite)', margin: 0 }}>
-                On about <strong>1.69 acres of excess land</strong> behind the existing center, Salem Square is entitled
-                for a <strong>51-unit multifamily building</strong> &mdash; 34,100 net rentable SF of studios, one- and
-                two-bedrooms. Site plans were approved by the Naugatuck Zoning Commission in <strong>September 2025</strong>.
+                Behind the existing center, about <strong>1.69 acres of excess land</strong> is entitled for a
+                four-story, <strong>51-unit multifamily building</strong> &mdash; 34,100 net rentable SF of studios,
+                one- and two-bedrooms averaging 669 SF. Updated site plans were approved by the Naugatuck Zoning
+                Commission in <strong>September 2025</strong>.
               </p>
               <p style={{ fontSize: 10.5, lineHeight: 1.55, color: 'var(--graphite)', margin: 0 }}>
-                Building permits are the remaining step &mdash; a de-risked, shovel-ready second phase rather than a
-                speculative rezoning &mdash; positioned for Naugatuck&rsquo;s push toward transit-oriented housing around
-                the new <strong>$33.2M Metro-North station</strong> opening summer 2027.
+                Building permits are the only remaining step &mdash; a de-risked, shovel-ready second phase rather than a
+                speculative rezoning &mdash; with the entitled land carried at just <strong>$1,275,000</strong> ($25,000/unit)
+                of the price. It arrives as Naugatuck pushes transit-oriented housing around the new <strong>$33.2M
+                Metro-North station</strong> opening summer 2027, ten minutes north.
               </p>
               <div style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
                 <div style={{ fontSize: 10.5, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1.35 }}>
-                  Acquire an income center and a shovel-ready second phase on a single lot.
+                  Acquire an income center and a shovel-ready 51-unit second phase on a single fee-simple lot.
                 </div>
               </div>
             </div>
@@ -1008,11 +1051,11 @@ function ProposedDevelopment({ pageNum }) {
 
 /* ═══════════════════ EXISTING BUILDING ═══════════════════ */
 function ExistingBuilding({ pageNum }) {
-  const tdl = { fontSize: 11.5, padding: '7px 10px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
-  const tdr = { fontSize: 11.5, padding: '7px 10px', textAlign: 'right' }
-  const thl = { fontSize: 9, padding: '6px 10px', textAlign: 'left', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
-  const thr = { fontSize: 9, padding: '6px 10px', textAlign: 'right', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
-  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 11.5, padding: '7px 10px' }
+  const tdl = { fontSize: 10.5, padding: '5px 10px', textAlign: 'left', fontWeight: 600, color: 'var(--carbon)' }
+  const tdr = { fontSize: 10.5, padding: '5px 10px', textAlign: 'right' }
+  const thl = { fontSize: 8, padding: '5px 10px', textAlign: 'left', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const thr = { fontSize: 8, padding: '5px 10px', textAlign: 'right', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }
+  const totBg = { background: 'var(--carbon)', color: '#fff', fontWeight: 700, fontSize: 10.5, padding: '5px 10px' }
   const stats = [
     { v: '18,770', k: 'Rentable SF' },
     { v: '12', k: 'In-Place Units' },
@@ -1020,15 +1063,16 @@ function ExistingBuilding({ pageNum }) {
     { v: '10', k: 'Commercial Units' },
     { v: '2', k: 'Residential Units' },
   ]
-  const mix = [
-    { t: 'Commercial Retail', u: 10, pct: '83%' },
-    { t: 'Apartments', u: 2, pct: '17%' },
+  // [type, units, sf, %sf, rent/yr, $/sf] — excludes the lot-storage license
+  const unitMix = [
+    ['Residential — 2 BR / 1 BA', '2', '1,600', '8.5%', '$39,600', '$24.75'],
+    ['Commercial — Retail / Service', '10', '17,170', '91.5%', '$229,788', '$13.38'],
   ]
   return (
     <div className="page">
       <PageHeader section="The Property" />
       <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-        <div className="section-title" style={{ marginBottom: 2 }}>Existing 18,770 SF <span style={{ color: '#F8971D' }}>Building</span></div>
+        <div className="section-title" style={{ marginBottom: 2 }}>Salem Square <span style={{ color: '#F8971D' }}>(Existing Building)</span></div>
         <div className="title-rule" />
 
         {/* Building stat strip — top */}
@@ -1041,36 +1085,60 @@ function ExistingBuilding({ pageNum }) {
           ))}
         </div>
 
-        {/* Photo collage + unit-mix sidebar */}
+        {/* In-place unit mix — full width */}
+        <div className="eyebrow" style={{ marginBottom: 5, fontSize: 10 }}>In-Place Unit Mix</div>
+        <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed', marginBottom: 14 }}>
+          <colgroup>
+            <col style={{ width: '34%' }} /><col style={{ width: '10%' }} /><col style={{ width: '13%' }} />
+            <col style={{ width: '12%' }} /><col style={{ width: '21%' }} /><col style={{ width: '10%' }} />
+          </colgroup>
+          <thead>
+            <tr style={{ background: 'var(--carbon)' }}>
+              <th style={thl}>Unit Type</th>
+              <th style={thr}>Units</th>
+              <th style={thr}>SF</th>
+              <th style={thr}>% SF</th>
+              <th style={thr}>In-Place Rent / Yr</th>
+              <th style={thr}>Avg $/SF</th>
+            </tr>
+          </thead>
+          <tbody>
+            {unitMix.map((r, i) => (
+              <tr key={r[0]} style={i % 2 ? { background: 'var(--linen)' } : undefined}>
+                <td style={tdl}>{r[0]}</td>
+                {r.slice(1).map((c, j) => (<td key={j} style={tdr}>{c}</td>))}
+              </tr>
+            ))}
+            <tr>
+              <td style={{ ...totBg, textAlign: 'left' }}>Total / Avg</td>
+              <td style={{ ...totBg, textAlign: 'right' }}>12</td>
+              <td style={{ ...totBg, textAlign: 'right' }}>18,770</td>
+              <td style={{ ...totBg, textAlign: 'right' }}>100%</td>
+              <td style={{ ...totBg, textAlign: 'right' }}>$269,388</td>
+              <td style={{ ...totBg, textAlign: 'right' }}>$14.35</td>
+            </tr>
+          </tbody>
+        </table>
+
+        {/* Property photo + description */}
         <div style={{ display: 'flex', gap: 14, flex: 1, minHeight: 0 }}>
-          {/* Single property photo */}
           <div style={{ flex: 1, borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--linen)', minHeight: 0 }}>
             <img src="/photos/ext-1.jpg" alt="Existing Salem Square property" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
 
-          {/* Existing unit mix — sidebar */}
           <div style={{ width: 232, flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
-            <div className="eyebrow" style={{ marginBottom: 6, fontSize: 10 }}>In-Place Unit Mix</div>
-            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
-              <colgroup><col style={{ width: '56%' }} /><col style={{ width: '22%' }} /><col style={{ width: '22%' }} /></colgroup>
-              <thead><tr style={{ background: 'var(--carbon)' }}><th style={thl}>Component</th><th style={thr}>Units</th><th style={thr}>Share</th></tr></thead>
-              <tbody>
-                {mix.map((m, i) => (
-                  <tr key={m.t} style={i % 2 ? { background: 'var(--linen)' } : undefined}>
-                    <td style={tdl}>{m.t}</td><td style={tdr}>{m.u}</td><td style={tdr}>{m.pct}</td>
-                  </tr>
-                ))}
-                <tr>
-                  <td style={{ ...totBg, textAlign: 'left' }}>Total</td>
-                  <td style={{ ...totBg, textAlign: 'right' }}>12</td>
-                  <td style={{ ...totBg, textAlign: 'right' }}>100%</td>
-                </tr>
-              </tbody>
-            </table>
-            <div style={{ fontSize: 12, color: 'var(--graphite)', lineHeight: 1.65, marginTop: 16 }}>
-              18,770 rentable SF (19,266 gross) of brick-and-cedar mixed-use built in 1960 across two stories &mdash;
-              ground-floor retail and service suites fronting New Haven Road, with two in-building apartments and
-              ancillary storage. Individually metered electric (16-meter modular, 2020); ±26,000 SF of paved parking.
+            <div className="eyebrow" style={{ marginBottom: 6, fontSize: 10 }}>The Building</div>
+            <div style={{ fontSize: 12, color: 'var(--graphite)', lineHeight: 1.65 }}>
+              <p style={{ margin: '0 0 9px' }}>
+                Built in 1960 across two stories, Salem Square is <strong>18,770 rentable SF</strong> (19,266 gross) of
+                brick-and-cedar mixed-use &mdash; ten ground-floor retail and service suites fronting New Haven Road
+                (Route 63), with two rear apartments and ancillary storage.
+              </p>
+              <p style={{ margin: 0 }}>
+                Electric is individually metered (16-meter modular, 2020) and the site carries ±26,000 SF of paved
+                parking. The commercial tenancy is convenience- and service-oriented, several tenants in place fifteen
+                years or more &mdash; durable in-place income with clear room to mark rents to market.
+              </p>
             </div>
           </div>
         </div>

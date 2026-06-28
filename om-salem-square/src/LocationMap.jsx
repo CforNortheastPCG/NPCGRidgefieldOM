@@ -23,7 +23,7 @@ const GOLDEN = '0xF8971D'
    on top, so co-located pins otherwise hide each other. Offsets are tiny
    (~50–90 m) — acceptable for a "nearby amenities" reference map. */
 function declutter(pois, anchor) {
-  const MIN = 0.0034 // ~380 m collision radius — sized so mid pins separate at zoom 13
+  const MIN = 0.0052 // ~580 m collision radius — sized so mid pins separate at zoom 12
   const placed = anchor ? [{ lat: anchor.lat, lng: anchor.lng }] : []
   const near = (aLat, aLng, bLat, bLng) => {
     const dLat = aLat - bLat
@@ -63,10 +63,13 @@ function buildStaticMapUrl() {
   )
 
   const params = [
-    // TODO: set map center near the property (lat,lng) and adjust zoom to frame
-    // the surrounding amenities. zoom 13 spans roughly 5 mi vertically.
-    `center=${PROPERTY.lat},${PROPERTY.lng}`,
-    'zoom=13',
+    // Center is pulled north of the property so the frame spans from Salem
+    // Square (south) up through Naugatuck center and into Greater Waterbury,
+    // where the hospitals, UConn, Post University and Brass Mill Center sit.
+    // zoom 12 spans ~11 mi vertically — enough to keep every pin on-frame;
+    // zoom 13 (~5.7 mi) clipped the Waterbury markers off the top.
+    `center=41.5160,-73.0500`,
+    'zoom=12',
     'size=593x640',
     'scale=2',
     'maptype=hybrid',
@@ -105,22 +108,24 @@ export default function LocationMap({ pageNum = 9 }) {
           Location &amp; <span style={{ color: '#F8971D' }}>Amenities</span>
         </div>
         <div className="title-rule" />
-        <div style={{ fontSize: 11.6, lineHeight: 1.6, color: 'var(--graphite)', marginBottom: 12 }}>
+        <div style={{ fontSize: 11.4, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 8 }}>
           Salem Square fronts New Haven Road (Route 63) with direct Route 8 access, in the heart of the Naugatuck
-          Valley. Greater Waterbury — its hospitals, Webster Bank, Post University, and UConn Waterbury — is about
-          ten minutes north, and Naugatuck&rsquo;s walkable downtown and Naugatuck Green sit just up the road. A new
-          $33.2 million Metro-North station on the Waterbury Branch, opening summer 2027, anchors transit-oriented
-          development minutes away.
+          Valley. Everyday retail is minutes away — a Walmart Supercenter, Stop &amp; Shop, and the borough&rsquo;s
+          national tenants — while Greater Waterbury (hospitals, Post University, UConn Waterbury, Brass Mill Center)
+          sits about ten minutes north. Naugatuck&rsquo;s walkable downtown and historic Green are just up the road,
+          where a new $33.2 million Metro-North station, opening summer 2027, anchors Platform at Naugatuck, a
+          180-unit transit-oriented redevelopment.
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 1fr', gap: 16, flex: 1, minHeight: 0 }}>
-          {/* MAP — natural aspect (no crop) keeps Google attribution visible */}
-          <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', alignSelf: 'start' }}>
+          {/* MAP — capped to the grid cell height so it never spills into the
+              footer; object-fit:contain preserves aspect + Google attribution. */}
+          <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', alignSelf: 'stretch', minHeight: 0 }}>
             {mapUrl ? (
               <img
                 src={mapUrl}
                 alt={`Map of ${FULL_ADDR} and nearby amenities`}
-                style={{ width: '100%', height: 'auto', display: 'block', background: 'var(--linen)' }}
+                style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'top center', display: 'block', background: 'var(--linen)' }}
               />
             ) : (
               <div style={{ width: '100%', height: 480, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--linen)', color: 'var(--stone)', fontSize: 10, textAlign: 'center', padding: 24 }}>
@@ -131,22 +136,22 @@ export default function LocationMap({ pageNum = 9 }) {
           </div>
 
           {/* SUBJECT PROPERTY + NUMBERED PIN LIST (two columns) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, minHeight: 0, overflow: 'hidden' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 9, paddingBottom: 11, borderBottom: '1px solid var(--border)' }}>
-              <span style={{ flexShrink: 0, width: 16, height: 16, borderRadius: '50%', background: '#F8971D', border: '2px solid #fff', boxShadow: '0 0 0 1px var(--golden)' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 9, minHeight: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 9, paddingTop: 2, paddingBottom: 8, borderBottom: '1px solid var(--border)' }}>
+              <span style={{ flexShrink: 0, width: 19, height: 19, borderRadius: '50%', background: '#F8971D', border: '2px solid #fff', boxShadow: '0 0 0 1px var(--golden)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800, color: '#fff', lineHeight: 1, paddingBottom: 0.5 }}>P</span>
               <span style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--carbon)' }}>Subject Property &mdash; {DEAL.address}</span>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 20, rowGap: 2, alignContent: 'start', minHeight: 0, overflow: 'hidden' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 18, rowGap: 1, alignContent: 'start', minHeight: 0, overflow: 'hidden' }}>
             {groups.map(g => (
               <Fragment key={g.label}>
-                <div style={{ gridColumn: '1 / -1', display: 'flex', alignItems: 'center', gap: 7, margin: '6px 0 2px' }}>
+                <div style={{ gridColumn: '1 / -1', display: 'flex', alignItems: 'center', gap: 7, margin: '4px 0 1px' }}>
                   <span style={{ flexShrink: 0, width: 10, height: 10, borderRadius: '50%', background: g.swatch, border: '1px solid rgba(0,0,0,0.15)' }} />
                   <span style={{ fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: g.swatch }}>{g.label}</span>
                 </div>
                 {g.items.map(p => (
-                  <div key={p.n} style={{ display: 'flex', alignItems: 'baseline', gap: 7, padding: '2.5px 0' }}>
+                  <div key={p.n} style={{ display: 'flex', alignItems: 'baseline', gap: 7, padding: '1px 0' }}>
                     <span style={{ flexShrink: 0, fontSize: 10.5, fontWeight: 700, color: g.swatch, width: 14, textAlign: 'right' }}>{p.n}</span>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.3, flex: 1 }}>{p.name}</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.25, flex: 1 }}>{p.name}</span>
                   </div>
                 ))}
               </Fragment>

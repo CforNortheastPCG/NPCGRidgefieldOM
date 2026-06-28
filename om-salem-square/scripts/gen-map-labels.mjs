@@ -16,7 +16,8 @@ import puppeteer from 'puppeteer'
 const KEY = readFileSync(new URL('../.env.local', import.meta.url), 'utf8')
   .match(/VITE_GOOGLE_MAPS_API_KEY=(\S+)/)[1].trim()
 
-const CENTER = { lat: 41.405, lng: -72.926 }, ZOOM = 8, W = 640, H = 460
+// MUST stay identical to the frame in src/DriveTimeMap.jsx (CENTER/ZOOM/W/H).
+const CENTER = { lat: 41.54, lng: -73.06 }, ZOOM = 8, W = 640, H = 312
 
 // Labels + highways on a pure-white field (everything else white so it keys out).
 const LABELS_STYLE = [

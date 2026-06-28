@@ -17,6 +17,10 @@ const CITIES = [
   { name: 'New Haven', lat: 41.3083, lng: -72.9279 },
   { name: 'Bridgeport', lat: 41.1792, lng: -73.1894 },
   { name: 'Hartford', lat: 41.7637, lng: -72.6851 },
+  { name: 'Danbury', lat: 41.3948, lng: -73.4540 },
+  { name: 'Stamford', lat: 41.0534, lng: -73.5387 },
+  { name: 'Norwalk', lat: 41.1177, lng: -73.4079 },
+  { name: 'Meriden', lat: 41.5382, lng: -72.8070 },
 ]
 
 const AIRPORTS = [
@@ -40,6 +44,7 @@ const COMMUTE = [
   { label: 'New Haven', value: '~25 mi · ~30 min' },
   { label: 'Bridgeport', value: '~28 mi · ~35 min' },
   { label: 'Hartford', value: '~32 mi · ~40 min' },
+  { label: 'Danbury', value: '~22 mi · ~35 min' },
   { label: 'Tweed New Haven (HVN)', value: '~30 minutes' },
   { label: 'Bradley Intl (BDL)', value: '~40 minutes' },
   { label: 'New York City', value: '~80 mi · ~1h40m' },
@@ -89,7 +94,9 @@ function buildStaticMapUrl() {
   const industry = INDUSTRY.map(place)
   const airports = AIRPORTS.map(place)
 
-  const cityPins = `markers=${encodeURIComponent(`size:mid|color:${CARBON}|${cities.map(c => `${c.lat},${c.lng}`).join('|')}`)}`
+  // Cities use small dots (not mid pins) so the marker sits on the point without
+  // covering the locality name label that Google renders at the city center.
+  const cityPins = `markers=${encodeURIComponent(`size:small|color:${CARBON}|${cities.map(c => `${c.lat},${c.lng}`).join('|')}`)}`
   const airportPins = `markers=${encodeURIComponent(`size:mid|color:${BLUE}|${airports.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
   const academicPins = `markers=${encodeURIComponent(`size:mid|color:${PURPLE}|label:A|${academic.map(a => `${a.lat},${a.lng}`).join('|')}`)}`
   const industryPins = `markers=${encodeURIComponent(`size:mid|color:${TEAL}|label:I|${industry.map(a => `${a.lat},${a.lng}`).join('|')}`)}`

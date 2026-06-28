@@ -64,7 +64,7 @@ export default function TeamPage({ pageNum }) {
 
         <section className="team__section">
           <h2 className="team__heading">Senior Investment Sales</h2>
-          <div className="team__row" style={{ '--cols': 6 }}>
+          <div className="team__row" style={{ '--cols': 5 }}>
             {SENIOR_INVESTMENT_SALES.map((m) => <BigCard key={m.name} member={m} />)}
           </div>
         </section>

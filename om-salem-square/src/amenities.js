@@ -9,8 +9,8 @@
 */
 
 export const PROPERTY = {
-  lat: 41.4705,
-  lng: -73.0490,
+  lat: 41.4776,
+  lng: -73.0466,
   address: '628 New Haven Road, Naugatuck, CT 06770',
 }
 
@@ -36,8 +36,14 @@ export const DIRECTORY = [
   {
     heading: 'Dining & Retail',
     items: [
-      { name: 'Downtown Naugatuck / Naugatuck Green', note: 'Walkable historic center · ~2 mi', address: 'Naugatuck Green, Naugatuck, CT 06770' },
       { name: 'Salem Square Retail Center', note: 'On-site retail & service tenants', address: '628 New Haven Road, Naugatuck, CT 06770' },
+      { name: 'Walmart Supercenter', note: 'Big-box anchor · New Haven Rd · ~1.5 mi', address: '1100 New Haven Road, Naugatuck, CT 06770' },
+      { name: 'Stop & Shop', note: 'Grocery anchor · ~2 mi', address: '727 Rubber Avenue, Naugatuck, CT 06770' },
+      { name: 'Brass Mill Center', note: 'Regional mall · ~10 min north', address: '495 Union Street, Waterbury, CT 06706' },
+      { name: 'The Home Depot', note: 'Home improvement · ~10 min north', address: '575 Bank Street, Waterbury, CT 06708' },
+      { name: 'Downtown Naugatuck / Naugatuck Green', note: 'Walkable historic center · ~2 mi', address: 'Naugatuck Green, Naugatuck, CT 06770' },
+      { name: 'La Casita Mexican Restaurant', note: 'Downtown Green dining', address: '9 Church Street, Naugatuck, CT 06770' },
+      { name: 'The Loaded Goat Coffee Co.', note: 'Downtown Green café', address: '64 Church Street, Naugatuck, CT 06770' },
       { name: "McDonald's", note: 'New Haven Rd · ~0.7 mi', address: '571 New Haven Road, Naugatuck, CT 06770' },
     ],
   },
@@ -64,6 +70,7 @@ export const DIRECTORY = [
     heading: 'Transit & Connectivity',
     items: [
       { name: 'Metro-North · Naugatuck Station', note: 'New $33.2M station · opens 2027', address: 'Water Street, Naugatuck, CT 06770' },
+      { name: 'Platform at Naugatuck (TOD)', note: '7-acre, 180-unit mixed-use TOD at new station', address: '20 Old Firehouse Road, Naugatuck, CT 06770' },
       { name: 'Metro-North · Waterbury Terminus', note: 'Waterbury Branch → New Haven Line', address: '510 Meadow Street, Waterbury, CT 06702' },
       { name: 'Route 8 Interchange', note: 'Limited-access expressway', address: 'Route 8, Naugatuck, CT 06770' },
     ],
@@ -74,10 +81,17 @@ export const DIRECTORY = [
    Approximate — for the reference map only. */
 const COORDS = {
   'Naugatuck Green, Naugatuck, CT 06770': [41.4859, -73.0517],
-  '628 New Haven Road, Naugatuck, CT 06770': [41.4705, -73.0490],
+  '628 New Haven Road, Naugatuck, CT 06770': [41.478096, -73.046652], // Google rooftop geocode (matches parcel.js)
+  '1100 New Haven Road, Naugatuck, CT 06770': [41.47065, -73.02799],
+  '727 Rubber Avenue, Naugatuck, CT 06770': [41.49387, -73.07787],
+  '495 Union Street, Waterbury, CT 06706': [41.54932, -73.02526],
+  '575 Bank Street, Waterbury, CT 06708': [41.54820, -73.04181],
   '571 New Haven Road, Naugatuck, CT 06770': [41.47434, -73.04318],
   'Cherry Street Extension, Naugatuck, CT 06770': [41.4760, -73.0560],
-  '229 Church Street, Naugatuck, CT 06770': [41.50130, -73.05808],
+  '229 Church Street, Naugatuck, CT 06770': [41.49069, -73.05500],
+  '9 Church Street, Naugatuck, CT 06770': [41.48747, -73.05602],
+  '64 Church Street, Naugatuck, CT 06770': [41.48820, -73.05617],
+  '20 Old Firehouse Road, Naugatuck, CT 06770': [41.48330, -73.05250],
   '543 Rubber Avenue, Naugatuck, CT 06770': [41.49127, -73.07224],
   '243 Church Street, Naugatuck, CT 06770': [41.49094, -73.05473],
   '284 Church Street, Naugatuck, CT 06770': [41.49216, -73.05502],

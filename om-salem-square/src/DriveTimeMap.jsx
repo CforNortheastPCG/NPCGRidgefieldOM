@@ -21,8 +21,11 @@ import { ISOCHRONES } from './isochrones.js'
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
 const SUBJECT = { lat: 41.4705, lng: -73.0490 } // 628 New Haven Road, Naugatuck CT
-const CENTER = { lat: 41.405, lng: -72.926 }
-const ZOOM = 8, W = 640, H = 460
+// Frame aspect (W/H) MUST match the on-page map box, else objectFit:'fill' stretches
+// the Mercator map (CT looked ~1.5x too wide). The box is wide-and-short, so the frame
+// is too; centered on the band cluster so the 60-min ring fits top/bottom with margin.
+const CENTER = { lat: 41.54, lng: -73.06 }
+const ZOOM = 8, W = 640, H = 312
 
 const CITIES = [
   { name: 'Waterbury', drive: '~6 mi · 12 min' },
@@ -116,8 +119,13 @@ export default function DriveTimeMap({ pageNum }) {
           <LegendRow color={BAND_HEX[60]} label="60-min drive" ring />
         </div>
 
-        {/* MAP — layered: base → rings → labels(multiply) → subject marker */}
-        <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', flex: 1, minHeight: 0 }}>
+        {/* MAP — layered: base → rings → labels(multiply) → subject marker.
+            Outer box fills the leftover height; inner box locks to the frame's W/H
+            aspect (height-driven, centered) so every layer's objectFit:'fill' /
+            preserveAspectRatio="none" stretch-fills a box that already has the
+            frame's proportions — i.e. no distortion. Small side gutters are intended. */}
+        <div style={{ flex: 1, minHeight: 0, display: 'flex', justifyContent: 'center' }}>
+        <div style={{ position: 'relative', height: '100%', aspectRatio: `${W} / ${H}`, maxWidth: '100%', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)' }}>
           {ok ? (
             <>
               <img src={baseUrl} alt="Drive-time map centered on Salem Square, Naugatuck CT" style={{ ...fill, objectFit: 'fill', display: 'block' }} />
@@ -148,6 +156,7 @@ export default function DriveTimeMap({ pageNum }) {
               Set VITE_GOOGLE_MAPS_API_KEY in .env.local and enable Maps Static API.
             </div>
           )}
+        </div>
         </div>
 
         {/* DRIVE-TIME STRIP */}

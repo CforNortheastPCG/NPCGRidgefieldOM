@@ -75,12 +75,41 @@ updates automatically from the component's copy.
 re-registers. Pick a frame whose 60-min reach fits with margin (verify with the
 proof composite below).
 
+> **Re-bake gotcha:** the labels PNG is the *only* layer that doesn't update
+> live — the base image and SVG bands/pin re-read `CENTER/ZOOM/W/H` at render, so
+> they move the instant you edit the frame, but the overlay stays baked to the
+> *old* frame until you re-run `map-labels`. Symptom of a skipped re-bake: town
+> labels/shields offset and double-imaged over the new base (e.g. "New Haven where
+> Hartford should be"). If you see that, you forgot the re-bake — it's not a
+> projection bug.
+
+### The W:H aspect MUST match the on-page map box (or CT stretches)
+Every layer stretch-fills its container (`objectFit:'fill'` / `preserveAspectRatio="none"`),
+which keeps them registered **but only looks right if the box has the frame's
+proportions.** If the page slot is a different aspect than `W:H`, the whole
+Mercator map is stretched along the mismatched axis — on Salem Square a 640×460
+(1.39:1) frame painted into a wide-and-short ~2.5:1 slot squashed latitude and
+made **Connecticut read ~1.5× too wide** ("not to scale / stretched").
+
+Fix = make the two aspects equal, two complementary moves:
+1. **Match the frame to the slot.** Decks with more above/below the map (intro +
+   legend + city strip) leave a wide-short slot, so the frame must be wide-short
+   too. Cap the frame so the 60-min ring still fits **vertically** at the chosen
+   zoom — at zoom 8, Google's 640-px width limit means aspect ≲ 2.1:1 before the
+   ring clips top/bottom; wider than that needs zoom 7 (bigger region, smaller bands).
+2. **Lock the box to the frame.** Don't let the map box be whatever flex leaves —
+   wrap it `flex:1; display:flex; justify-content:center` and give the inner box
+   `height:100%; aspectRatio:'${W} / ${H}'`. Now the box *is* the frame's aspect,
+   `fill` is a no-op stretch, and you get small intentional side gutters instead
+   of distortion. Re-center on the band cluster so the rings sit inside with margin.
+
 ### Reference builds
-| Deal | Subject | CENTER | ZOOM | Geometry |
-|---|---|---|---|---|
-| South End Plaza (Thomaston, inland) | `41.6650, -73.0730` | `41.60, -72.95` | 8 | radial rings + filled shaded bands |
-| Black Rock — 2836 Fairfield (coastal) | `41.157532, -73.226828` | `41.15, -73.40` | 8 | raw-polygon + filled shaded bands |
-| Ware Portfolio (Ware MA, inland) | `42.2616, -72.2420` | `42.18, -72.25` | 8 | radial rings + filled shaded bands |
+| Deal | Subject | CENTER | ZOOM | W×H | Geometry |
+|---|---|---|---|---|---|
+| South End Plaza (Thomaston, inland) | `41.6650, -73.0730` | `41.60, -72.95` | 8 | 640×460 | radial rings + filled shaded bands |
+| Black Rock — 2836 Fairfield (coastal) | `41.157532, -73.226828` | `41.15, -73.40` | 8 | 640×460 | raw-polygon + filled shaded bands |
+| Ware Portfolio (Ware MA, inland) | `42.2616, -72.2420` | `42.18, -72.25` | 8 | 640×460 | radial rings + filled shaded bands |
+| Salem Square (Naugatuck, inland) | `41.4705, -73.0490` | `41.54, -73.06` | 8 | 640×312 | radial rings; wide-short frame to match a tall-content slot (2.05:1, box locked via `aspectRatio`) |
 
 ---
 
@@ -141,6 +170,18 @@ so there's a hard limit before it looks wrong.
   guesses. → compute them from the same Valhalla engine (matrix call). ✗→✓
 - **Inland smoothness:** `SMOOTH=5` was the landing spot — lower got too wavy,
   higher washed the rings flat.
+- **Frame aspect ≠ slot aspect → stretched map:** a 640×460 frame stretch-filled
+  into a wide-short page slot squashed latitude and made CT ~1.5× too wide. Tried
+  letterboxing (`objectFit:contain`) — correct shape but huge side gutters. Tried a
+  full-width zoom-7 wide frame — to-scale but bands shrink in a big region. Landing
+  spot: a **wide-short frame matched to the slot** (640×312, ~2.05:1) at zoom 8 with
+  the **box locked to the frame's `aspectRatio`** and re-centered on the bands —
+  to-scale, bands stay large, small intentional gutters. See *The frame* above. ✗→✓
+- **Forgot the re-bake after the frame change:** changed the frame but ran the page
+  before `npm run map-labels`, so the old-frame labels PNG got stretched/offset over
+  the new base — drifted town names + a **doubled Google watermark**. The base and
+  SVG layers move live; the labels PNG does not. Doubled watermark = stale overlay,
+  re-bake. ✗→✓
 
 ---
 
