@@ -17,7 +17,7 @@ export const PHOTO_PAGES = [
     section: 'Exteriors', title: 'Building', accent: 'Exteriors',
     subtitle: 'Front, middle & back buildings · 12 units across three structures',
     tiles: [
-      { src: '/photos/1-web-or-mls-6 Elm St, Norwalk, CT 06850 (1 OF 53).JPG', caption: 'Front Building — Elevation' },
+      { src: '/photos/35-web-or-mls-6 Elm St, Norwalk, CT 06850 (34 OF 53).JPG', caption: 'Front Building — Elevation' },
       { src: '/photos/37-web-or-mls-6 Elm St, Norwalk, CT 06850 (36 OF 53).JPG', caption: 'Rear View — All Buildings' },
       { src: '/photos/33-web-or-mls-6 Elm St, Norwalk, CT 06850 (32 OF 53).JPG', caption: 'Back Building — Exterior' },
       { src: '/photos/30-web-or-mls-6 Elm St, Norwalk, CT 06850 (29 OF 53).JPG', caption: 'Middle Building — Elevation' },

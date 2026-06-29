@@ -1,6 +1,7 @@
 import './App.css'
 import { cloneElement } from 'react'
 import LocationMap from './LocationMap.jsx'
+import DriveTimeMap from './DriveTimeMap.jsx'
 import { PhotoComingSoon } from './PhotoPages.jsx'
 import { PHOTO_PAGES } from './photos.js'
 import RegionalMap from './RegionalMap.jsx'
@@ -14,31 +15,18 @@ function CoverHero({ pageNum }) {
   return (
     <div className="page">
       <div className="cover-hero">
-        <img src="/photos/35-web-or-mls-6 Elm St, Norwalk, CT 06850 (34 OF 53).JPG" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(26px) brightness(0.82)', transform: 'scale(1.12)' }} />
-        <img className="cover-hero-img" src="/photos/35-web-or-mls-6 Elm St, Norwalk, CT 06850 (34 OF 53).JPG" alt="" style={{ position: 'absolute', top: 88, left: 0, right: 0, bottom: 130, width: '100%', height: 'auto', objectFit: 'cover', objectPosition: 'center 42%' }} />
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 88, background: 'var(--carbon)' }} />
+        <img className="cover-hero-img" src="/photos/1-web-or-mls-6 Elm St, Norwalk, CT 06850 (1 OF 53).JPG" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 50%' }} />
+        <div className="cover-hero-shade" />
         <div className="cover-hero-header">
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
-        {/* Bottom broker band */}
-        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 130, background: 'var(--carbon)', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 36, padding: '0 48px 22px' }}>
+        {/* Bottom text overlay */}
+        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 36, padding: '0 48px 30px' }}>
           <div>
             <div style={{ color: '#fff', fontSize: 9, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', marginBottom: 6 }}>For Sale</div>
             <div className="cover-hero-name" style={{ fontSize: 14 }}>Elm Street Apartments</div>
             <div className="cover-hero-title" style={{ fontSize: 30 }}>{ADDR}</div>
             <div className="cover-hero-sub" style={{ marginBottom: 0, fontSize: 11, marginTop: 4 }}>Norwalk, Connecticut &nbsp;·&nbsp; 12-Unit Multifamily</div>
-          </div>
-          <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--golden)' }}>Exclusively Listed By</div>
-            {[
-              { name: 'Rich Edwards Jr.', phone: '203.307.1577' },
-              { name: 'Jeff Wright', phone: '203.307.1581' },
-            ].map((b, i) => (
-              <div key={i}>
-                <div style={{ fontSize: 11.5, fontWeight: 800, color: '#fff', lineHeight: 1.1 }}>{b.name}</div>
-                <div style={{ fontSize: 8.5, color: '#fff', opacity: 0.8, marginTop: 1 }}>Vice President, Investments &nbsp;·&nbsp; {b.phone}</div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -110,21 +98,19 @@ function ExecutiveSummary({ pageNum }) {
             </p>
             <p style={{ fontSize: 8.5, lineHeight: 1.55, marginBottom: 11, fontWeight: 500, color: 'var(--carbon)' }}>
               6 Elm Street represents a rare opportunity to acquire a recently improved, large-unit asset in an
-              established Fairfield County market. Offered on a subject-to-offer basis, the property delivers a
-              6.50% going-in cap rate on current income.
+              established Fairfield County market. The property is offered on a subject-to-offer basis.
             </p>
             <p style={{ fontSize: 8.5, lineHeight: 1.55, marginBottom: 11, fontWeight: 500, color: 'var(--carbon)' }}>
               A new owner stands to benefit from meaningful embedded upside. In-place rents currently sit roughly
               $54,000 below market, and a disciplined mark-to-market and revenue-management strategy &mdash;
               executed through natural lease turnover with minimal remaining capital expenditure &mdash; is
-              projected to grow net operating income from approximately $213,000 to $262,000, a gain of roughly
-              23%. That operational upside expands the cap rate from a 6.50% going-in yield to 8.00% pro forma, on
-              a stabilized, historically high-occupancy asset.
+              projected to grow net operating income from approximately $216,000 to $265,000, a gain of roughly
+              23%.
             </p>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0 }}>
             {[
-              '/photos/43-web-or-mls-6 Elm St, Norwalk, CT 06850 (42 OF 53).JPG',
+              '/photos/42-web-or-mls-6 Elm St, Norwalk, CT 06850 (41 OF 53).JPG',
               '/photos/45-web-or-mls-6 Elm St, Norwalk, CT 06850 (44 OF 53).JPG',
             ].map((src, i) => (
               <div key={i} style={{ flex: 1, borderRadius: 4, overflow: 'hidden', minHeight: 0 }}>
@@ -149,13 +135,13 @@ function InvestmentHighlights({ pageNum }) {
     { head: 'Large Floor Plans', body: '10 of 12 units are 2BR, 3BR, or 4BR layouts — an increasingly scarce configuration that drives premium rents and tenant retention.' },
     { head: 'In-Unit Laundry', body: 'Washer and dryer in all renovated units plus both rear-building apartments.' },
     { head: 'Individually Metered Front Building', body: 'Six front-building units carry fully tenant-paid electric heat, hot water, and cooking, limiting owner expense exposure.' },
-    { head: 'Embedded Rent Upside', body: 'Approximately $54,000 in below-market rents (~15%); average in-place rent of $2,211 versus $2,588 pro forma.' },
-    { head: 'Operational Upside', body: '~23% NOI growth (from ~$213,000 to ~$262,000) achievable through lease turnover with minimal remaining capital expenditure.' },
+    { head: 'Embedded Rent Upside', body: 'Approximately $54,000 in below-market rents (~15%); average in-place rent of $2,234 versus $2,613 pro forma.' },
+    { head: 'Operational Upside', body: '~23% NOI growth (from ~$216,000 to ~$265,000) achievable through lease turnover with minimal remaining capital expenditure.' },
     { head: 'Desirable Rental Market', body: 'Norwalk’s established, high-demand rental market with a history of strong occupancy and Metro-North access to Manhattan.' },
   ]
   const photos = [
-    '/photos/36-web-or-mls-6 Elm St, Norwalk, CT 06850 (35 OF 53).JPG',
-    '/photos/37-web-or-mls-6 Elm St, Norwalk, CT 06850 (36 OF 53).JPG',
+    '/photos/3-web-or-mls-6 Elm St, Norwalk, CT 06850 (2 OF 53).JPG',
+    '/photos/18-web-or-mls-6 Elm St, Norwalk, CT 06850 (17 OF 53).JPG',
   ]
   return (
     <div className="page">
@@ -403,18 +389,18 @@ function ChartCard({ title, data, centerLabel, centerSub, size, thickness }) {
 
 function RentRoll({ pageNum }) {
   const units = [
-    { unit: '1', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 2170, high: 2550, proforma: 2600, leaseStart: '12/1/2023', leaseEnd: '12/31/2026' },
-    { unit: '2', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 2150, high: 2550, proforma: 2600, leaseStart: '12/20/2025', leaseEnd: '12/19/2026' },
-    { unit: '3', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 1900, high: 2550, proforma: 2600, leaseStart: '7/1/2023', leaseEnd: '2/28/2026' },
-    { unit: '4', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 2220, high: 2550, proforma: 2600, leaseStart: '12/1/2023', leaseEnd: '12/31/2026' },
-    { unit: '5', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 2550, high: 2550, proforma: 2600, leaseStart: '9/1/2024', leaseEnd: '8/31/2026' },
-    { unit: '6', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 1950, high: 2550, proforma: 2600, leaseStart: '4/1/2025', leaseEnd: '3/31/2027' },
+    { unit: '1', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 2170, high: 2550, proforma: 2650, leaseStart: '12/1/2023', leaseEnd: '12/31/2026' },
+    { unit: '2', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 2150, high: 2550, proforma: 2650, leaseStart: '12/20/2025', leaseEnd: '12/19/2026' },
+    { unit: '3', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 1900, high: 2550, proforma: 2650, leaseStart: '7/1/2023', leaseEnd: '2/28/2026' },
+    { unit: '4', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 2220, high: 2550, proforma: 2650, leaseStart: '12/1/2023', leaseEnd: '12/31/2026' },
+    { unit: '5', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 2550, high: 2550, proforma: 2650, leaseStart: '9/1/2024', leaseEnd: '8/31/2026' },
+    { unit: '6', bldg: 'Front', type: '2/1.00', sqft: 800, inPlace: 1950, high: 2550, proforma: 2650, leaseStart: '4/1/2025', leaseEnd: '3/31/2027' },
     { unit: '7', bldg: 'Middle', type: '1/1.00', sqft: 700, inPlace: 1800, high: 1895, proforma: 2000, leaseStart: '2/1/2026', leaseEnd: '1/31/2027' },
     { unit: '8', bldg: 'Middle', type: '1/1.00', sqft: 845, inPlace: 1895, high: 1895, proforma: 2000, leaseStart: '7/1/2025', leaseEnd: '6/30/2026' },
-    { unit: '9', bldg: 'Middle', type: '3/1.50', sqft: 1374, inPlace: 2000, high: 2000, proforma: 2850, leaseStart: '7/1/2023', leaseEnd: '2/28/2027' },
-    { unit: '10', bldg: 'Middle', type: '2/1.00', sqft: 1374, inPlace: 2170, high: 2550, proforma: 2600, leaseStart: '12/1/2023', leaseEnd: '1/31/2027' },
+    { unit: '9', bldg: 'Middle', type: '3/1.50', sqft: 1374, inPlace: 2000, high: 2000, proforma: 2800, leaseStart: '7/1/2023', leaseEnd: '2/28/2027' },
+    { unit: '10', bldg: 'Middle', type: '2/1.00', sqft: 1374, inPlace: 2400, high: 2550, proforma: 2650, leaseStart: 'Vacant', leaseEnd: '—' },
     { unit: '11', bldg: 'Rear', type: '4/1.00', sqft: 1782, inPlace: 3100, high: 3100, proforma: 3250, leaseStart: '12/1/2024', leaseEnd: '11/30/2026' },
-    { unit: '12', bldg: 'Rear', type: '3/1.00', sqft: 1210, inPlace: 2625, high: 2625, proforma: 2750, leaseStart: '12/1/2023', leaseEnd: '6/30/2026' },
+    { unit: '12', bldg: 'Rear', type: '3/1.00', sqft: 1210, inPlace: 2675, high: 2675, proforma: 2750, leaseStart: '12/1/2023', leaseEnd: '6/30/2027' },
   ]
   const totalSqft = units.reduce((s, u) => s + u.sqft, 0)
   const totalInPlace = units.reduce((s, u) => s + u.inPlace, 0)
@@ -519,8 +505,8 @@ function IncomeExpense({ pageNum }) {
   )
 
   const noi = [
-    { label: 'NOI — Current', val: '$212,794' },
-    { label: 'NOI — Pro Forma', val: '$261,745' },
+    { label: 'NOI — Current', val: '$215,826' },
+    { label: 'NOI — Pro Forma', val: '$264,994' },
   ]
 
   return (
@@ -550,13 +536,13 @@ function IncomeExpense({ pageNum }) {
             </tr>
           </thead>
           <tbody>
-            <tr><td style={tdl}>Gross Potential Rent</td><td style={tds}>$372,600</td><td style={tds}>$31,050</td><td style={tds}></td><td style={tdsPf}>$372,600</td><td style={tdsPf}>$31,050</td><td style={tdsPf}></td></tr>
-            <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Below Market Rent</td><td style={tds}>-$54,240</td><td style={tds}>-$4,520</td><td style={tds}>-14.56%</td><td style={tdsPf}>$0</td><td style={tdsPf}>$0</td><td style={tdsPf}>0.00%</td></tr>
-            <tr><td style={{ ...tdl, fontWeight: 700 }}>Gross Scheduled Rent</td><td style={{ ...tds, fontWeight: 700 }}>$318,360</td><td style={{ ...tds, fontWeight: 700 }}>$26,530</td><td style={{ ...tds, fontWeight: 700 }}></td><td style={{ ...tdsPf, fontWeight: 700 }}>$372,600</td><td style={{ ...tdsPf, fontWeight: 700 }}>$31,050</td><td style={{ ...tdsPf, fontWeight: 700 }}></td></tr>
-            <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Vacancy & Collections Loss (5%)</td><td style={tds}>-$15,918</td><td style={tds}>-$1,327</td><td style={tds}>-5.00%</td><td style={tdsPf}>-$18,630</td><td style={tdsPf}>-$1,553</td><td style={tdsPf}>-5.00%</td></tr>
-            <tr><td style={{ ...tdl, fontWeight: 700 }}>Effective Rental Income</td><td style={{ ...tds, fontWeight: 700 }}>$302,442</td><td style={{ ...tds, fontWeight: 700 }}>$25,204</td><td style={{ ...tds, fontWeight: 700 }}></td><td style={{ ...tdsPf, fontWeight: 700 }}>$353,970</td><td style={{ ...tdsPf, fontWeight: 700 }}>$29,498</td><td style={{ ...tdsPf, fontWeight: 700 }}></td></tr>
+            <tr><td style={tdl}>Gross Potential Rent</td><td style={tds}>$376,200</td><td style={tds}>$31,350</td><td style={tds}></td><td style={tdsPf}>$376,200</td><td style={tdsPf}>$31,350</td><td style={tdsPf}></td></tr>
+            <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Below Market Rent</td><td style={tds}>-$54,480</td><td style={tds}>-$4,540</td><td style={tds}>-14.48%</td><td style={tdsPf}>$0</td><td style={tdsPf}>$0</td><td style={tdsPf}>0.00%</td></tr>
+            <tr><td style={{ ...tdl, fontWeight: 700 }}>Gross Scheduled Rent</td><td style={{ ...tds, fontWeight: 700 }}>$321,720</td><td style={{ ...tds, fontWeight: 700 }}>$26,810</td><td style={{ ...tds, fontWeight: 700 }}></td><td style={{ ...tdsPf, fontWeight: 700 }}>$376,200</td><td style={{ ...tdsPf, fontWeight: 700 }}>$31,350</td><td style={{ ...tdsPf, fontWeight: 700 }}></td></tr>
+            <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Vacancy & Collections Loss (5%)</td><td style={tds}>-$16,086</td><td style={tds}>-$1,341</td><td style={tds}>-5.00%</td><td style={tdsPf}>-$18,810</td><td style={tdsPf}>-$1,568</td><td style={tdsPf}>-5.00%</td></tr>
+            <tr><td style={{ ...tdl, fontWeight: 700 }}>Effective Rental Income</td><td style={{ ...tds, fontWeight: 700 }}>$305,634</td><td style={{ ...tds, fontWeight: 700 }}>$25,470</td><td style={{ ...tds, fontWeight: 700 }}></td><td style={{ ...tdsPf, fontWeight: 700 }}>$357,390</td><td style={{ ...tdsPf, fontWeight: 700 }}>$29,783</td><td style={{ ...tdsPf, fontWeight: 700 }}></td></tr>
             <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Late Fee, App Fee, Misc</td><td style={tds}>$1,050</td><td style={tds}>$88</td><td style={tds}></td><td style={tdsPf}>$1,050</td><td style={tdsPf}>$88</td><td style={tdsPf}></td></tr>
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$303,492</td><td style={totBg}>$25,291</td><td style={totBg}></td><td style={totBg}>$355,020</td><td style={totBg}>$29,585</td><td style={totBg}></td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$306,684</td><td style={totBg}>$25,557</td><td style={totBg}></td><td style={totBg}>$358,440</td><td style={totBg}>$29,870</td><td style={totBg}></td></tr>
           </tbody>
         </table>
 
@@ -571,7 +557,7 @@ function IncomeExpense({ pageNum }) {
             </tr>
           </thead>
           <tbody>
-            <tr><td style={tdl}>Property Management (5%)</td><td style={tds}>$15,175</td><td style={tds}>$1,265</td><td style={tds}>5.00%</td><td style={tdsPf}>$17,751</td><td style={tdsPf}>$1,479</td><td style={tdsPf}>5.00%</td></tr>
+            <tr><td style={tdl}>Property Management (5%)</td><td style={tds}>$15,334</td><td style={tds}>$1,278</td><td style={tds}>5.00%</td><td style={tdsPf}>$17,922</td><td style={tdsPf}>$1,494</td><td style={tdsPf}>5.00%</td></tr>
             <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Real Estate Tax</td><td style={tds}>$35,338</td><td style={tds}>$2,945</td><td style={tds}></td><td style={tdsPf}>$35,338</td><td style={tdsPf}>$2,945</td><td style={tdsPf}></td></tr>
             <tr><td style={tdl}>Property Insurance</td><td style={tds}>$9,745</td><td style={tds}>$812</td><td style={tds}></td><td style={tdsPf}>$9,745</td><td style={tdsPf}>$812</td><td style={tdsPf}></td></tr>
             <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Electric</td><td style={tds}>$4,169</td><td style={tds}>$347</td><td style={tds}></td><td style={tdsPf}>$4,169</td><td style={tdsPf}>$347</td><td style={tdsPf}></td></tr>
@@ -580,8 +566,8 @@ function IncomeExpense({ pageNum }) {
             <tr><td style={tdl}>Trash Removal</td><td style={tds}>$4,767</td><td style={tds}>$397</td><td style={tds}></td><td style={tdsPf}>$4,767</td><td style={tdsPf}>$397</td><td style={tdsPf}></td></tr>
             <tr style={{ background: 'var(--linen)' }}><td style={tdl}>Repairs & Maintenance</td><td style={tds}>$6,000</td><td style={tds}>$500</td><td style={tds}></td><td style={tdsPf}>$6,000</td><td style={tdsPf}>$500</td><td style={tdsPf}></td></tr>
             <tr><td style={tdl}>Landscaping / Snow</td><td style={tds}>$5,390</td><td style={tds}>$449</td><td style={tds}></td><td style={tdsPf}>$5,390</td><td style={tdsPf}>$449</td><td style={tdsPf}></td></tr>
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$90,698</td><td style={totBg}>$7,558</td><td style={totBg}>29.88%</td><td style={totBg}>$93,275</td><td style={totBg}>$7,773</td><td style={totBg}>26.27%</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$212,794</td><td style={noiBg}>$17,733</td><td style={noiBg}></td><td style={noiBg}>$261,745</td><td style={noiBg}>$21,812</td><td style={noiBg}></td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$90,858</td><td style={totBg}>$7,571</td><td style={totBg}>29.63%</td><td style={totBg}>$93,446</td><td style={totBg}>$7,787</td><td style={totBg}>26.07%</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$215,826</td><td style={noiBg}>$17,986</td><td style={noiBg}></td><td style={noiBg}>$264,994</td><td style={noiBg}>$22,083</td><td style={noiBg}></td></tr>
           </tbody>
         </table>
       </div>
@@ -739,6 +725,7 @@ function App() {
     <IncomeExpense />,
     <NorwalkCombined />,
     <LocationMap />,
+    <DriveTimeMap />,
     <FairfieldCounty />,
     <RegionalMap />,
     <TeamPage />,

@@ -499,7 +499,7 @@ body {
 .cover-hero { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--carbon); }
 .cover-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cover-hero-fallback { width: 100%; height: 100%; background: linear-gradient(135deg, #2a3038 0%, #3f4753 100%); }
-.cover-hero-shade { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.85) 100%); }
+.cover-hero-shade { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.55) 72%, rgba(0,0,0,0.92) 100%); }
 .cover-hero-header { position: absolute; top: 28px; left: 40px; right: 40px; display: flex; justify-content: space-between; align-items: center; }
 .cover-hero-overlay { position: absolute; left: 48px; right: 48px; bottom: 56px; color: #fff; }
 .cover-hero-box { display: inline-block; background: var(--golden); color: #fff; padding: 6px 14px; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; }

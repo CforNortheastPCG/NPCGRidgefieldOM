@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "print": "node print.cjs",
-    "pdf": "node export.cjs"
+    "pdf": "node export.cjs",
+    "isochrones": "node scripts/gen-isochrones.mjs",
+    "map-labels": "node scripts/gen-map-labels.mjs"
   },
   "dependencies": {
     "d3-geo": "^3.1.1",

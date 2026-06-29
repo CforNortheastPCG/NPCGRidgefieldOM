@@ -35,7 +35,8 @@ async function embedMetadata(out) {
 
    Tunables (env or opts):
      DSF      deviceScaleFactor → DPI ≈ 960*DSF/11  (3 ≈ 262 · 2.5 ≈ 218; 200+)
-     QUALITY  JPEG quality 1-100 (drives file size; ~62 ≈ 13 MB for 34 pages)
+     QUALITY  JPEG quality 1-100 (drives file size; ~92 ≈ crisp text, ~30 MB /
+              34 pages · drop toward 80 for a smaller file if text stays clean)
      BRIGHTEN mild print-only lift on regular photos (paper prints darker)
      COVER    stronger lift on the cover/divider heroes (lifts dark scrims) */
 
@@ -53,8 +54,8 @@ function dealPdfName() {
 async function renderPdf({
   port = process.env.PORT || '5173',
   out = path.join(__dirname, dealPdfName()),
-  dsf = Number(process.env.DSF || 3),
-  quality = Number(process.env.QUALITY || 62),
+  dsf = Number(process.env.DSF || 3.5),
+  quality = Number(process.env.QUALITY || 92),
   brighten = Number(process.env.BRIGHTEN || 1.05),
   cover = Number(process.env.COVER || 1.18),
 } = {}) {
@@ -98,10 +99,28 @@ async function renderPdf({
   const files = [];
   for (let i = 0; i < pages.length; i++) {
     await pages[i].scrollIntoView();
-    const f = path.join(TMP, `page-${String(i).padStart(2, '0')}.jpg`);
-    await pages[i].screenshot({ path: f, type: 'jpeg', quality });
+    // Per-page format: JPEG rings a fuzzy halo around sharp black-on-light text
+    // (its 8x8 DCT can't hold a hard edge), and that ringing is very visible in
+    // print. So text-dominant pages are captured as LOSSLESS PNG — crisp, no
+    // halo. Photo-dominant pages stay JPEG (PNG would balloon the file with no
+    // visible gain). Heuristic: page is "photo-heavy" if <img> elements cover
+    // more than 55% of its area.
+    const photoHeavy = await pages[i].evaluate(el => {
+      const area = el.clientWidth * el.clientHeight || 1;
+      let imgArea = 0;
+      for (const img of el.querySelectorAll('img')) {
+        const r = img.getBoundingClientRect();
+        imgArea += Math.max(0, r.width) * Math.max(0, r.height);
+      }
+      return imgArea / area > 0.55;
+    });
+    const ext = photoHeavy ? 'jpg' : 'png';
+    const f = path.join(TMP, `page-${String(i).padStart(2, '0')}.${ext}`);
+    await pages[i].screenshot(photoHeavy
+      ? { path: f, type: 'jpeg', quality }
+      : { path: f, type: 'png' });
     files.push(f);
-    console.log(`Captured page ${i + 1}/${pages.length}`);
+    console.log(`Captured page ${i + 1}/${pages.length} · ${photoHeavy ? `jpeg q${quality}` : 'png (text)'}`);
   }
   await page.close();
 
@@ -135,7 +154,7 @@ async function renderPdf({
 
   const mb = (fs.statSync(out).size / 1024 / 1024).toFixed(1);
   console.log(`PDF saved to ${out} · ${mb} MB`);
-  if (Number(mb) > 14) console.log(`  ↳ large — rerun with a lower QUALITY (e.g. QUALITY=55) for a smaller file`);
+  if (Number(mb) > 35) console.log(`  ↳ large — rerun with a lower QUALITY (e.g. QUALITY=82) for a smaller file`);
   await browser.close();
   fs.rmSync(TMP, { recursive: true, force: true });
   return { out, mb, pages: pages.length };

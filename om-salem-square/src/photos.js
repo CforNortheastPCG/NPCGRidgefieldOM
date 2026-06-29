@@ -44,7 +44,7 @@ export const PHOTO_PAGES = [
   },
   {
     kind: 'gallery',
-    section: 'Property Photography', title: 'Commercial', accent: 'Space',
+    section: 'Property Photography', title: 'Commercial', accent: 'Interiors',
     subtitle: 'Ground-floor retail and service suites fronting New Haven Road.',
     hero: '/photos/comm-5.jpg',
     tiles: ['/photos/comm-6.jpg'],

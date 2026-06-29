@@ -18,6 +18,8 @@ function CoverHero({ pageNum }) {
     <div className="page">
       <div className="cover-hero">
         <img className="cover-hero-img" src={DEAL.coverImage} alt="" />
+        {/* Bottom shade — darkens lower portion so the title block pops */}
+        <div className="cover-hero-shade" />
         {/* NPCG logo — top right */}
         <div className="cover-hero-header" style={{ justifyContent: 'flex-end' }}>
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
@@ -829,10 +831,10 @@ function CityOverview({ pageNum }) {
 
         <div style={{ flex: '0 0 44%', display: 'flex', flexDirection: 'column', gap: 4 }}>
           <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-            <img src="/photos/area-1.jpg" alt="Naugatuck" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/naugatuck-1.jpg" alt="Naugatuck" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-            <img src="/photos/area-2.jpg" alt="Naugatuck" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/naugatuck-2.jpg" alt="Naugatuck" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
         </div>
       </div>
