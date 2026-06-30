@@ -1,0 +1,18 @@
+{
+  // ── Cloudflare Pages project config ──
+  // Build with `npm run build` (outputs to dist/), deploy with `npm run deploy`.
+  "name": "om-longwater",
+  "compatibility_date": "2026-06-30",
+  "pages_build_output_dir": "dist",
+
+  // Non-secret vars. CF_EMAIL_TOKEN is a SECRET — set it separately with
+  //   npx wrangler pages secret put CF_EMAIL_TOKEN
+  // (or in the dashboard under Settings → Variables and Secrets). Never put
+  // the token in this file.
+  "vars": {
+    "CF_ACCOUNT_ID": "fb496447ae8227cda0ed885897cc983c",
+    "LEAD_FROM": "leads@npcgexclusives.com",
+    "LEAD_FROM_NAME": "Longwater Corporate Center OM",
+    "LEAD_NOTIFY_TO": "tegbers@northeastpcg.com"
+  }
+}
