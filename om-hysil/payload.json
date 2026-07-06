@@ -1,0 +1,543 @@
+{
+  "version": 3,
+  "tenantId": "npcg",
+  "stylePack": "npcg-v1",
+  "deal": {
+    "id": "0cc75d88-e325",
+    "name": "20 Hysil Ave",
+    "address": "20 Hysil Ave",
+    "cityState": "Chelsea, MA",
+    "cityLong": "Chelsea, Massachusetts",
+    "status": "For Sale",
+    "propertyType": "multifamily",
+    "askingPrice": 4250000
+  },
+  "property": {
+    "buildingSf": 14478,
+    "unitCount": 16,
+    "yearBuilt": 1978,
+    "lotAcres": 0.153,
+    "stories": 3,
+    "parking": "Off-street asphalt parking lot",
+    "heat": "Electric baseboard",
+    "tenantPays": [
+      "Electric"
+    ],
+    "landlordPays": [
+      "Water & Sewer",
+      "Trash",
+      "Internet/Security"
+    ],
+    "parcelIds": [],
+    "occupancyPct": 87.5,
+    "extraFacts": []
+  },
+  "brokers": [
+    {
+      "name": "Francis Saenz",
+      "title": "Vice President, Investments",
+      "phone": "857.990.6803",
+      "email": "fsaenz@northeastpcg.com",
+      "photo": "/photos/team/francis-saenz.png"
+    },
+    {
+      "name": "Tom Egbers",
+      "title": "Associate",
+      "phone": "857.990.2022",
+      "email": "tegbers@northeastpcg.com",
+      "photo": "/photos/team/tom-egbers.jpg"
+    }
+  ],
+  "rentRoll": {
+    "basis": "monthly",
+    "columns": [
+      {
+        "key": "current",
+        "label": "In-Place / mo"
+      },
+      {
+        "key": "proForma",
+        "label": "Pro Forma"
+      }
+    ],
+    "rows": [
+      {
+        "group": "Residential",
+        "unit": "1",
+        "use": "2 Bed",
+        "tenant": "VACANT",
+        "sf": 900,
+        "rents": {
+          "current": 2500,
+          "proForma": 2550
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "2",
+        "use": "1 Bed",
+        "sf": 700,
+        "rents": {
+          "current": 1850,
+          "proForma": 2050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "3",
+        "use": "1 Bed",
+        "sf": 700,
+        "rents": {
+          "current": 1700,
+          "proForma": 2050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "4",
+        "use": "1 Bed",
+        "sf": 700,
+        "rents": {
+          "current": 1950,
+          "proForma": 2050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "5",
+        "use": "2 Bed",
+        "sf": 900,
+        "rents": {
+          "current": 2300,
+          "proForma": 2550
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "6",
+        "use": "1 Bed",
+        "sf": 700,
+        "rents": {
+          "current": 1900,
+          "proForma": 2050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "7",
+        "use": "3 Bed",
+        "sf": 1100,
+        "rents": {
+          "current": 2950,
+          "proForma": 3050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "8",
+        "use": "1 Bed",
+        "sf": 700,
+        "rents": {
+          "current": 1850,
+          "proForma": 2050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "9",
+        "use": "3 Bed",
+        "sf": 1100,
+        "rents": {
+          "current": 2650,
+          "proForma": 3050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "10",
+        "use": "1 Bed",
+        "sf": 700,
+        "rents": {
+          "current": 1850,
+          "proForma": 2050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "11",
+        "use": "3 Bed",
+        "tenant": "VACANT",
+        "sf": 1100,
+        "rents": {
+          "current": 2950,
+          "proForma": 3050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "12",
+        "use": "1 Bed",
+        "sf": 700,
+        "rents": {
+          "current": 1800,
+          "proForma": 2050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "14",
+        "use": "2 Bed",
+        "sf": 900,
+        "rents": {
+          "current": 2500,
+          "proForma": 2550
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "15",
+        "use": "1 Bed",
+        "sf": 700,
+        "rents": {
+          "current": 1850,
+          "proForma": 2050
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "16",
+        "use": "2 Bed",
+        "sf": 900,
+        "rents": {
+          "current": 2400,
+          "proForma": 2550
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "17",
+        "use": "1 Bed",
+        "sf": 700,
+        "rents": {
+          "current": 2100,
+          "proForma": 2050
+        }
+      }
+    ]
+  },
+  "incomeExpense": {
+    "columns": [
+      {
+        "key": "current",
+        "label": "In-Place / mo"
+      },
+      {
+        "key": "proForma",
+        "label": "Pro Forma"
+      }
+    ],
+    "otherIncomeLines": [
+      {
+        "label": "Laundry",
+        "note": "coin-op"
+      }
+    ],
+    "expenseLines": [
+      {
+        "label": "Taxes",
+        "amounts": {
+          "current": 41269.45,
+          "proForma": 41269.45
+        }
+      },
+      {
+        "label": "Insurance",
+        "amounts": {
+          "current": 18898.51,
+          "proForma": 16000
+        }
+      },
+      {
+        "label": "Water & Sewer",
+        "amounts": {
+          "current": 19283.24,
+          "proForma": 19283.24
+        }
+      },
+      {
+        "label": "Electric",
+        "note": "tenant paid"
+      },
+      {
+        "label": "Repairs & Maintenance",
+        "amounts": {
+          "current": 8000,
+          "proForma": 8000
+        }
+      },
+      {
+        "label": "Snow & Landscape",
+        "amounts": {
+          "current": 4000,
+          "proForma": 4000
+        }
+      },
+      {
+        "label": "Trash Removal (Estimated)",
+        "note": "high"
+      },
+      {
+        "label": "Internet / Security",
+        "amounts": {
+          "current": 3101.76,
+          "proForma": 3101.76
+        }
+      },
+      {
+        "label": "Cleaning / Pest Control",
+        "amounts": {
+          "current": 4676.38,
+          "proForma": 4676.38
+        }
+      }
+    ],
+    "assumptions": {
+      "vacancyPct": 0.04,
+      "mgmtPct": 0.04,
+      "mgmtBasis": "effectiveRentalIncome"
+    }
+  },
+  "positioning": {
+    "strengths": [
+      "Pro forma NOI of $315,899 vs $283,141 in place",
+      "16 units / 14,478 rentable SF brick apartment building (built 1978)",
+      "In-place cap rate 6.66% and 7.43% pro forma at the $4,250,000 list price",
+      "Tenants pay their own electric heat, limiting owner utility exposure",
+      "Ancillary income from coin-op laundry and rooftop cell antenna arrays (3 carrier units, assessed $21,000)",
+      "Only 4% underwritten vacancy; 14 of 16 units occupied"
+    ]
+  },
+  "photos": {
+    "cover": {
+      "path": "/photos/e0129f84-0e1a-4e51-961c-83e78a337c51.jpg"
+    },
+    "exterior": [
+      {
+        "path": "/photos/23575d65-b2ea-4842-8252-503103d3593a.jpg",
+        "caption": "Front/side street-level view with entrance canopy"
+      },
+      {
+        "path": "/photos/f2b83b23-d15c-4c63-ad46-a62b8400c3a7.jpg",
+        "caption": "Front elevation from the street"
+      },
+      {
+        "path": "/photos/b7ce31da-f6f9-4dbb-9245-96585dbf2630.jpg",
+        "caption": "Front elevation and parking lot"
+      },
+      {
+        "path": "/photos/13b803e2-bc3c-41b3-abb0-057f972a67c7.jpg",
+        "caption": "Side/rear view with parking"
+      },
+      {
+        "path": "/photos/6817523b-74ab-4a9d-b1ba-ad6b86d27946.jpg",
+        "caption": "Side alley and rear entrance"
+      }
+    ],
+    "interior": [
+      {
+        "path": "/photos/7a704bf7-5cc5-4d28-b65a-618437b70ba8.jpg",
+        "caption": "Renovated unit kitchen"
+      },
+      {
+        "path": "/photos/4e4bb743-9abf-4800-9ee2-561dab37b241.jpg",
+        "caption": "Unit kitchen"
+      },
+      {
+        "path": "/photos/a98450ba-11e9-4410-bde0-c9c1a25f05ba.jpg",
+        "caption": "Renovated unit bathroom"
+      },
+      {
+        "path": "/photos/989e21cd-9aee-49bd-8491-1ebd44b70aa9.jpg",
+        "caption": "Original-condition unit bathroom"
+      },
+      {
+        "path": "/photos/d0ab1b14-57aa-4ae7-af74-4b19b08e66a3.jpg",
+        "caption": "Unit bedroom with baseboard heat and window AC"
+      },
+      {
+        "path": "/photos/f1ce736e-3d67-4fee-bdf3-9c61eacb4421.jpg",
+        "caption": "Unit living/dining area"
+      },
+      {
+        "path": "/photos/06f4cb3b-49e3-47e4-a725-07af055c247c.jpg",
+        "caption": "Common coin-op laundry room"
+      },
+      {
+        "path": "/photos/12db4011-6e58-4d00-98c0-f4b4a2a51548.jpg",
+        "caption": "Basement electrical meter bank"
+      },
+      {
+        "path": "/photos/549be766-1948-4296-b574-0e2765fa8d6d.jpg",
+        "caption": "Fire alarm control panel"
+      }
+    ],
+    "aerial": [
+      {
+        "path": "/photos/5462e8cb-08e1-4375-bda0-2717cc69d030.jpg",
+        "caption": "Aerial showing the building and street frontage"
+      },
+      {
+        "path": "/photos/40a4d6af-23da-4db0-b532-1619938a6ecd.jpg",
+        "caption": "Aerial of the rear of the building"
+      },
+      {
+        "path": "/photos/012be568-59e6-4ce2-a424-2b4df5b4384d.jpg",
+        "caption": "Aerial showing rooftop and neighborhood context"
+      },
+      {
+        "path": "/photos/0a95fa05-b97f-47c5-8cf4-c1ba04faf458.jpg",
+        "caption": "Wide aerial of the surrounding area"
+      },
+      {
+        "path": "/photos/6aed1cc6-f15b-42bd-a0fc-4ac29f11853a.jpg",
+        "caption": "Wide aerial toward Boston Harbor"
+      }
+    ],
+    "area": [],
+    "plans": []
+  },
+  "market": {
+    "city": "Chelsea",
+    "county": "Greater Boston",
+    "driveTimeCities": [
+      "Boston",
+      "Cambridge",
+      "Everett",
+      "Revere",
+      "Somerville"
+    ]
+  },
+  "pages": [],
+  "computed": {
+    "rentRoll": {
+      "unitCount": 16,
+      "totalSf": 13200,
+      "vacantCount": 0,
+      "camAnnualTotal": 0,
+      "byColumn": {
+        "current": {
+          "monthly": 35100,
+          "annual": 421200,
+          "psfAnnual": 31.91
+        },
+        "proForma": {
+          "monthly": 37800,
+          "annual": 453600,
+          "psfAnnual": 34.36
+        }
+      },
+      "groups": [
+        {
+          "group": "Residential",
+          "unitCount": 16,
+          "totalSf": 13200,
+          "byColumn": {
+            "current": {
+              "monthly": 35100,
+              "annual": 421200,
+              "psfAnnual": 31.91
+            },
+            "proForma": {
+              "monthly": 37800,
+              "annual": 453600,
+              "psfAnnual": 34.36
+            }
+          }
+        }
+      ],
+      "unitMix": [
+        {
+          "use": "2 Bed",
+          "count": 4,
+          "totalSf": 3600,
+          "avgSf": 900,
+          "rentRange": {
+            "current": {
+              "min": 2300,
+              "max": 2500
+            },
+            "proForma": {
+              "min": 2550,
+              "max": 2550
+            }
+          }
+        },
+        {
+          "use": "1 Bed",
+          "count": 9,
+          "totalSf": 6300,
+          "avgSf": 700,
+          "rentRange": {
+            "current": {
+              "min": 1700,
+              "max": 2100
+            },
+            "proForma": {
+              "min": 2050,
+              "max": 2050
+            }
+          }
+        },
+        {
+          "use": "3 Bed",
+          "count": 3,
+          "totalSf": 3300,
+          "avgSf": 1100,
+          "rentRange": {
+            "current": {
+              "min": 2650,
+              "max": 2950
+            },
+            "proForma": {
+              "min": 3050,
+              "max": 3050
+            }
+          }
+        }
+      ]
+    },
+    "incomeExpense": {
+      "byColumn": {
+        "current": {
+          "grossScheduledRent": 421200,
+          "vacancyLoss": 16848,
+          "effectiveRentalIncome": 404352,
+          "otherIncome": 0,
+          "egi": 404352,
+          "mgmtFee": 16174,
+          "totalExpenses": 115403,
+          "noi": 288949
+        },
+        "proForma": {
+          "grossScheduledRent": 453600,
+          "vacancyLoss": 18144,
+          "effectiveRentalIncome": 435456,
+          "otherIncome": 0,
+          "egi": 435456,
+          "mgmtFee": 17418,
+          "totalExpenses": 113749,
+          "noi": 321707
+        }
+      }
+    },
+    "returns": {
+      "capRateByColumn": {
+        "current": 6.8,
+        "proForma": 7.57
+      },
+      "pricePerSf": 293.55,
+      "pricePerUnit": 265625,
+      "grm": 10.09
+    }
+  }
+}
