@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --carbon: #3f4753;
+  --golden: #F8971D;
+  --stone: #B1A8A0;
+  --graphite: #281B12;
+  --linen: #F6F2EE;
+  --border: #e0dbd6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #d9d4ce; font-family: 'Montserrat', sans-serif; }
+
+.flyer-deck { display: flex; justify-content: center; padding: 24px; }
+.flyer-page {
+  width: 1056px;
+  height: 816px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  color: var(--carbon);
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}

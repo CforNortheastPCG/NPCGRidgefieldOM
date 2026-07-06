@@ -1,0 +1,41 @@
+/* ═══════════════════ WEST END PORTFOLIO CLOSING FLYER ═══════════════════
+   Inherits .flyer-page (1056×816, Montserrat, carbon) from index.css.
+   Full-bleed collage cover + left scrim panel with the stat ladder + a
+   deal-contact bar across the bottom. Mirrors flyers/src/closing.css. */
+
+.cl-page { overflow: hidden; }
+
+.cl-hero { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* dark on the left (for the stat ladder) fading clear to the right, plus a
+   soft top darken so the address/logo read over the collage. */
+.cl-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(105deg, rgba(20,24,30,0.88) 0%, rgba(20,24,30,0.74) 24%, rgba(20,24,30,0.2) 44%, rgba(20,24,30,0) 56%),
+    linear-gradient(to bottom, rgba(20,24,30,0.28) 0%, rgba(20,24,30,0) 18%);
+}
+
+.cl-logo { position: absolute; top: 36px; right: 44px; height: 50px; object-fit: contain; z-index: 3; }
+
+/* ── left panel ── */
+.cl-panel { position: absolute; left: 56px; top: 54px; width: 470px; z-index: 2; color: #fff; }
+.cl-address { font-size: 11.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.88); white-space: nowrap; }
+.cl-dash { width: 64px; height: 5px; background: var(--golden); margin: 16px 0 14px; }
+.cl-status { font-size: 76px; font-weight: 800; line-height: 0.98; letter-spacing: -0.015em; }
+.cl-name { display: inline-block; margin-top: 18px; background: var(--golden); color: #fff; font-size: 16px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 9px 18px; }
+
+/* ── stat ladder ── */
+.cl-stats { margin-top: 30px; }
+.cl-stat { padding-left: 16px; border-left: 4px solid var(--golden); margin-bottom: 22px; }
+.cl-stat-l { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.72); }
+.cl-stat-v { font-size: 31px; font-weight: 800; color: #fff; line-height: 1.04; margin-top: 4px; }
+
+/* ── in-panel broker block (under the stat ladder) ── */
+.cl-pc-block { margin-top: 28px; }
+.cl-pc-tag { font-size: 9.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--golden); margin-bottom: 13px; }
+.cl-pc { display: flex; align-items: center; gap: 12px; margin-bottom: 13px; }
+.cl-pc img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid var(--golden); flex-shrink: 0; }
+.cl-pc-name { font-size: 13.5px; font-weight: 700; color: #fff; line-height: 1.1; }
+.cl-pc-title { font-size: 8px; font-weight: 500; letter-spacing: 0.03em; color: rgba(255,255,255,0.62); text-transform: uppercase; margin: 3px 0; line-height: 1.15; }
+.cl-pc-meta { font-size: 9px; color: rgba(255,255,255,0.85); font-weight: 500; line-height: 1.3; }
