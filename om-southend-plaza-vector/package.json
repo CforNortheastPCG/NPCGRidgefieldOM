@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "print": "node print.cjs",
     "pdf": "node export.cjs",
+    "fix-pdf": "node fix-pdf.cjs",
     "isochrones": "node scripts/gen-isochrones.mjs",
     "map-labels": "node scripts/gen-map-labels.mjs",
     "nearby": "node scripts/gen-nearby-pois.mjs",

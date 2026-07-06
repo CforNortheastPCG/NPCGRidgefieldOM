@@ -3,6 +3,7 @@ const fs = require('fs');
 const http = require('http');
 const { spawn, spawnSync } = require('child_process');
 const { renderPdf } = require('./print.cjs');
+const { fixPdf } = require('./fix-pdf.cjs');
 
 /* ═══════════════════ ONE-COMMAND OM EXPORT ═══════════════════
    `npm run pdf` → builds the site, serves the production bundle, renders the
@@ -88,7 +89,10 @@ function waitForServer(port, tries = 80) {
         `Another OM's preview/dev server is running on it — stop that server and re-run.`);
     }
     console.log('▸ Rendering PDF…');
-    await renderPdf({ port: String(PORT) });
+    const { out } = await renderPdf({ port: String(PORT) });
+    // Normalize Skia's ICC v4 colorspaces (pink photos in Acrobat/Preview) and
+    // embed the broker metadata.
+    await fixPdf(out);
   } catch (err) {
     console.error(err);
     process.exitCode = 1;
