@@ -532,6 +532,13 @@ function DealContacts({ pageNum }) {
         <aside className="dc-contacts">
           <h3 className="dc-disclaimer-title">Listed By</h3>
           <div className="dc-card" style={{ border: 'none', padding: 0 }}>
+            <img className="dc-avatar" src="https://northeastpcg.com/wp-content/uploads/2021/11/Francis-Saenz-430x488.png" alt="Francis Saenz" style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
+            <div className="dc-name">Francis Saenz</div>
+            <div className="dc-title">Vice President, Investments</div>
+            <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (857) 990-6803</div>
+            <div className="dc-meta" style={{ fontWeight: 700 }}>fsaenz@northeastpcg.com</div>
+          </div>
+          <div className="dc-card" style={{ border: 'none', padding: 0, marginTop: 18 }}>
             <img className="dc-avatar" src="https://northeastpcg.com/wp-content/uploads/2024/02/tom-430x488.jpg" alt="Tom Egbers" style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
             <div className="dc-name">Tom Egbers</div>
             <div className="dc-title">Investment Associate</div>

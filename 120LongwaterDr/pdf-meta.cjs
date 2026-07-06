@@ -12,6 +12,7 @@ const PROPERTY = 'Longwater Corporate Center — 120 Longwater Drive, Norwell, M
 const FIRM = 'Northeast Private Client Group (NPCG)';
 
 const BROKERS = [
+  { name: 'Francis Saenz', title: 'Vice President, Investments', phone: '(857) 990-6803', email: 'fsaenz@northeastpcg.com' },
   { name: 'Tom Egbers', title: 'Investment Associate', phone: '(857) 990-2022', email: 'tegbers@northeastpcg.com' },
 ];
 
