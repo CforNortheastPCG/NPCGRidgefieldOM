@@ -96,7 +96,7 @@ export default function RegionalMap({ pageNum }) {
           <strong>Central to Boston, Worcester, and Providence.</strong>{' '}
           Longwater Corporate Center sits in Norwell on metro Boston&rsquo;s affluent South Shore, within roughly an
           hour of southern New England&rsquo;s three major metros — Boston (~20 mi northwest), Providence (~45 mi
-          southwest), and Worcester (~55 mi west). The building is about a mile from Route&nbsp;3 (Exit&nbsp;13), the
+          southwest), and Worcester (~55 mi west). The building is about a mile from Route&nbsp;3 (Exit&nbsp;35), the
           expressway that runs from the Braintree split south to Plymouth and Cape Cod; downtown Boston and Logan
           International Airport are about 30&ndash;35 minutes north. The South Shore is a deep, supply-constrained
           suburban market anchored by professional, healthcare, and financial employers.
@@ -105,7 +105,7 @@ export default function RegionalMap({ pageNum }) {
         {/* Regional stat strip — golden-top boxes matching the Exec Summary house style */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 12 }}>
           {[
-            ['~1 mi', 'To Route 3 · Exit 13'],
+            ['~1 mi', 'To Route 3 · Exit 35'],
             ['~20 mi', 'To Boston (~30 min)'],
             ['~25 mi', 'To Logan Intl (BOS)'],
             ['~6 mi', 'To South Shore Hospital'],
@@ -150,7 +150,7 @@ export default function RegionalMap({ pageNum }) {
             <div>
               <h3 style={{ fontSize: 11, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 5, paddingBottom: 4, borderBottom: '2px solid var(--golden)' }}>Highway Access</h3>
               <div style={{ fontSize: 10, lineHeight: 1.45, color: 'var(--graphite)' }}>
-                <strong>Route 3</strong> — Exit 13 about a mile away; north to the Braintree split, I-93, and Boston,
+                <strong>Route 3</strong> — Exit 35 about a mile away; north to the Braintree split, I-93, and Boston,
                 south to Plymouth and the Sagamore Bridge. <strong>Route 53</strong> and <strong>Route 228</strong>
                 {' '}carry the local South Shore corridor through Norwell, Hanover, and Hingham.
               </div>

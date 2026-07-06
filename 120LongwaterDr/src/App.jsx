@@ -19,19 +19,20 @@ const DARK_LOGOS = new Set(['Jets.com'])
    Tenancy + financials transcribed from the underwriting workbook
    ("I&E - 120 Longwater Dr Norwell, MA.xlsx", the current source of truth —
    newer than the prior Canva OM, which carried a $9.0M price and a vacant
-   suite). Base rents shown annualized (workbook stores monthly). */
+   suite). Base rents shown annualized (workbook stores monthly). Pro forma =
+   in-place rents marked up 5% per the workbook. */
 const TENANTS = [
-  { name: 'NVNA Foundation, Inc.', suite: '200', sf: 26349, end: '9/11/26', curPSF: 26.91, cur: 708929, pfPSF: 26.91, pf: 708929, camYr: 37926, color: '#F8971D',
+  { name: 'NVNA Foundation, Inc.', suite: '200', sf: 26349, end: '9/11/26', curPSF: 26.91, cur: 708929, pfPSF: 28.25, pf: 744376, camYr: 37926, color: '#F8971D',
     blurb: 'NVNA and Hospice — a century-old South Shore nonprofit providing home health care, hospice, and palliative and behavioral-health services.', url: 'nvna.org' },
-  { name: 'Alera Group', suite: '102', sf: 8491, end: '5/31/29', curPSF: 23.50, cur: 199539, pfPSF: 23.00, pf: 195293, camYr: 8491, color: '#3F4753',
+  { name: 'Alera Group', suite: '102', sf: 8491, end: '5/31/29', curPSF: 23.50, cur: 199539, pfPSF: 24.68, pf: 209515, camYr: 8491, color: '#3F4753',
     blurb: 'A national, independent insurance and financial-services firm offering employee benefits, risk management, property & casualty insurance, and retirement planning.', url: 'aleragroup.com' },
-  { name: 'Veterans Development Corp', suite: '103', sf: 6317, end: '8/31/27', curPSF: 25.00, cur: 157925, pfPSF: 25.00, pf: 157925, camYr: 0, color: '#566573',
+  { name: 'Veterans Development Corp', suite: '103', sf: 6317, end: '8/31/27', curPSF: 25.00, cur: 157925, pfPSF: 26.25, pf: 165821, camYr: 0, color: '#566573',
     blurb: 'A certified Service-Disabled Veteran-Owned Small Business delivering general construction and design/build services for the VA, GSA, and other state and federal agencies.', url: 'vetdevcorp.com' },
-  { name: 'Jets.com', suite: '106', sf: 4401, end: '1/31/31', curPSF: 24.50, cur: 107824, pfPSF: 24.00, pf: 105624, camYr: 6602, color: '#7C8896',
+  { name: 'Jets.com', suite: '106', sf: 4401, end: '1/31/31', curPSF: 24.50, cur: 107824, pfPSF: 25.72, pf: 113216, camYr: 6602, color: '#7C8896',
     blurb: 'A leading private-jet charter operator offering flexible, on-demand air travel across a diverse fleet of aircraft.', url: 'jets.com' },
-  { name: 'Contravisory', suite: '101', sf: 3515, end: '5/31/26', curPSF: 25.26, cur: 88778, pfPSF: 25.00, pf: 87875, camYr: 5272, color: '#9aa4b1',
+  { name: 'Contravisory', suite: '101', sf: 3515, end: '5/31/26', curPSF: 25.26, cur: 88778, pfPSF: 26.52, pf: 93217, camYr: 5272, color: '#9aa4b1',
     blurb: 'An SEC-registered investment-advisory firm serving high-net-worth individuals and families through large corporations and institutions.', url: 'contravisory.com' },
-  { name: 'NORD', suite: '105', sf: 1962, end: '12/31/30', curPSF: 25.00, cur: 49050, pfPSF: 25.00, pf: 49050, camYr: 2943, color: '#c4cad2',
+  { name: 'NORD', suite: '105', sf: 1962, end: '12/31/30', curPSF: 25.00, cur: 49050, pfPSF: 26.25, pf: 51502, camYr: 2943, color: '#c4cad2',
     blurb: 'Office tenant occupying Suite 105 on a lease running through 2030.', url: null },
 ]
 const NRA = 51035
@@ -103,7 +104,7 @@ function ExecutiveSummary({ pageNum }) {
             <p style={{ fontSize: 11.6, lineHeight: 1.5, marginBottom: 10 }}>
               In-place net operating income is $779,410 &mdash; a 9.17% cap rate on the asking price &mdash; with
               tenant CAM and tax reimbursements of $61,234 per year that protect the bottom line from expense growth.
-              Insurance is the only material expense step in the pro forma.
+              A modest 5% mark-to-market on in-place rents lifts pro forma NOI to $832,332 &mdash; a 9.79% cap.
             </p>
             <p style={{ fontSize: 11.6, lineHeight: 1.5, marginBottom: 0 }}>
               Longwater Corporate Center offers a stabilized, fully occupied office investment with credit and
@@ -246,7 +247,7 @@ function PropertyOverview({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$8,500,000</span></div>
                 <div className="bldg-row"><span className="bldg-label">Price / SF</span><span className="bldg-val">$166.55</span></div>
                 <div className="bldg-row"><span className="bldg-label">In-Place NOI</span><span className="bldg-val">$779,410 · 9.17% cap</span></div>
-                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$766,493 · 9.02% cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$832,332 · 9.79% cap</span></div>
               </div>
             </div>
           </div>
@@ -360,8 +361,8 @@ function RentRollPage({ pageNum }) {
               <td style={{ ...cell, ...ct }}>—</td>
               <td style={{ ...cell, ...rt }}><strong>$25.71</strong></td>
               <td style={{ ...cell, ...rt }}><strong>$1,312,045</strong></td>
-              <td style={{ ...cell, ...rt }}><strong>$25.57</strong></td>
-              <td style={{ ...cell, ...rt }}><strong>$1,304,696</strong></td>
+              <td style={{ ...cell, ...rt }}><strong>$26.99</strong></td>
+              <td style={{ ...cell, ...rt }}><strong>$1,377,647</strong></td>
             </tr>
           </tbody>
         </table>
@@ -433,19 +434,19 @@ function IncomeExpense({ pageNum }) {
   )
   const noi = [
     { label: 'NOI — Current (In-Place)', val: '$779,410' },
-    { label: 'NOI — Pro Forma', val: '$766,493' },
+    { label: 'NOI — Pro Forma', val: '$832,332' },
   ]
   const income = [
-    ['Base Rental Income', '$1,312,045', '$25.71', '$1,304,696', '$25.57', false],
-    ['Less: Vacancy & Credit (5%)', '-$65,602', '-$1.29', '-$65,235', '-$1.28', false],
-    ['Effective Rental Income', '$1,246,443', '$24.42', '$1,239,462', '$24.29', true],
+    ['Base Rental Income', '$1,312,045', '$25.71', '$1,377,647', '$26.99', false],
+    ['Less: Vacancy & Credit (5%)', '-$65,602', '-$1.29', '-$68,882', '-$1.35', false],
+    ['Effective Rental Income', '$1,246,443', '$24.42', '$1,308,765', '$25.64', true],
     ['CAM / Tax Reimbursements', '$61,234', '$1.20', '$61,234', '$1.20', false],
   ]
   const expenses = [
     ['Real Estate Taxes', '$74,922', '$1.47', '$74,922', '$1.47'],
     ['Heat (Electric)', '$147,867', '$2.90', '$147,867', '$2.90'],
     ['Electric', '$77,118', '$1.51', '$77,118', '$1.51'],
-    ['Property Management (5%)', '$62,322', '$1.22', '$61,973', '$1.21'],
+    ['Property Management (5%)', '$62,322', '$1.22', '$65,438', '$1.28'],
     ['Snow & Landscape', '$55,015', '$1.08', '$50,000', '$0.98'],
     ['Janitorial / Cleaning', '$49,020', '$0.96', '$49,020', '$0.96'],
     ['Repairs & Maintenance', '$26,000', '$0.51', '$26,000', '$0.51'],
@@ -492,7 +493,7 @@ function IncomeExpense({ pageNum }) {
                 </tr>
               )
             })}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$1,307,677</td><td style={totBg}>$25.62</td><td style={totBg}>$1,300,696</td><td style={totBg}>$25.49</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$1,307,677</td><td style={totBg}>$25.62</td><td style={totBg}>$1,369,999</td><td style={totBg}>$26.84</td></tr>
           </tbody>
         </table>
 
@@ -513,8 +514,8 @@ function IncomeExpense({ pageNum }) {
                 {cells.map((c, j) => <td key={j} style={tds}>{c}</td>)}
               </tr>
             ))}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expenses</td><td style={totBg}>$528,267</td><td style={totBg}>$10.35</td><td style={totBg}>$534,202</td><td style={totBg}>$10.47</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$779,410</td><td style={noiBg}>$15.27</td><td style={noiBg}>$766,493</td><td style={noiBg}>$15.02</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expenses</td><td style={totBg}>$528,267</td><td style={totBg}>$10.35</td><td style={totBg}>$537,667</td><td style={totBg}>$10.54</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$779,410</td><td style={noiBg}>$15.27</td><td style={noiBg}>$832,332</td><td style={noiBg}>$16.31</td></tr>
           </tbody>
         </table>
       </div>

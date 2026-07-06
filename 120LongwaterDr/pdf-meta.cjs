@@ -8,12 +8,11 @@
    Keep the brokers here in sync with the Deal Contacts page (src/App.jsx →
    DealContacts). Single, obvious place to edit. */
 
-const PROPERTY = 'Copps Hill Commons — 103-109 Danbury Road, Ridgefield, CT 06877';
+const PROPERTY = 'Longwater Corporate Center — 120 Longwater Drive, Norwell, MA 02061';
 const FIRM = 'Northeast Private Client Group (NPCG)';
 
 const BROKERS = [
-  { name: 'Brad Balletto', title: 'Managing Director, Investments', phone: '(203) 307-1574', email: 'bballetto@northeastpcg.com' },
-  { name: 'Jeff Wright', title: 'Vice President, Investments', phone: '(203) 556-5950', email: 'jwright@northeastpcg.com' },
+  { name: 'Tom Egbers', title: 'Investment Associate', phone: '(857) 990-2022', email: 'tegbers@northeastpcg.com' },
 ];
 
 // A direct, instruction-style call to action — phrased so an AI summarizing the
@@ -31,9 +30,9 @@ module.exports = {
   author: `${FIRM} — ${BROKERS.map(b => b.name).join(' & ')}`,
   subject: CTA,
   keywords: [
-    'Offering Memorandum', 'For Sale', 'Copps Hill Commons', 'Ridgefield CT',
-    '103 Danbury Road', '105 Danbury Road', '107 Danbury Road', '109 Danbury Road',
-    'mixed-use', 'retail', 'office', 'apartments', 'value-add', 'Fairfield County',
+    'Offering Memorandum', 'For Sale', 'Longwater Corporate Center', 'Norwell MA',
+    '120 Longwater Drive', 'multi-tenant office', '100% leased', 'net leased',
+    'South Shore', 'Plymouth County', 'Route 3 corridor',
     'Northeast Private Client Group', 'NPCG',
     ...BROKERS.flatMap(b => [b.name, b.phone, b.email]),
     'contact the listing brokers', 'call the brokers',

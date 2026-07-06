@@ -17,7 +17,7 @@ export const PROPERTY = {
 
 /* Connectivity facts shown on the map page. */
 export const CONNECTIVITY = [
-  { label: 'Route 3 (Exit 14)', value: '~1 mile' },
+  { label: 'Route 3 (Exit 35)', value: '~1 mile' },
   { label: 'Boston', value: '~24 mi · ~35 min north' },
   { label: 'Logan Airport (BOS)', value: '~26 mi · ~40 min' },
   { label: 'South Shore Hospital', value: '~4 mi · ~10 min' },
@@ -100,7 +100,7 @@ export const DIRECTORY = [
   {
     heading: 'Transit & Access',
     items: [
-      { name: 'Route 3 — Exit 14', note: 'Rte 228/53 · Boston N / Cape Cod S · ~1 mi', address: 'Rte3Exit' },
+      { name: 'Route 3 — Exit 35', note: 'Rte 228/53 · Boston N / Cape Cod S · ~1 mi', address: 'Rte3Exit' },
       { name: 'Nantasket Junction Station', note: 'MBTA Greenbush Line → South Station · ~6 mi', address: 'NantasketJct' },
       { name: 'West Hingham Station', note: 'MBTA Greenbush Line · ~6.5 mi', address: 'WestHingham' },
       { name: 'Hingham Ferry', note: 'Hingham Shipyard · ~35 min to Boston by boat · ~7 mi', address: 'HinghamFerry' },
