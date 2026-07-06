@@ -26,7 +26,7 @@ function CoverHero({ pageNum }) {
         <div className="cover-hero-overlay" style={{ left: 40, right: 40, bottom: 40, textAlign: 'left' }}>
           <div style={{ color: '#fff', fontSize: 13, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 14 }}>{DEAL.status}</div>
           <div className="cover-hero-name" style={{ fontSize: 52, fontWeight: 800, lineHeight: 1.02, marginBottom: 8 }}>{DEAL.name}</div>
-          <div className="cover-hero-title" style={{ fontSize: 24, fontWeight: 600 }}>East Boston&rsquo;s Corridor to Downtown</div>
+          <div className="cover-hero-title" style={{ fontSize: 24, fontWeight: 600 }}>Chelsea Street Mixed Use</div>
           <div className="cover-hero-sub">{DEAL.cityLong}</div>
           <div className="cover-hero-rule" style={{ marginLeft: 0, marginRight: 'auto' }} />
           <div className="cover-hero-prep">{DEAL.type}</div>
