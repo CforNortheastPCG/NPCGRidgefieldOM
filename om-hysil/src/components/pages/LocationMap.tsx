@@ -169,25 +169,25 @@ export function LocationMap({ pageNum }: { pageNum?: number }) {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0, overflow: 'hidden' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 9, paddingBottom: 10, borderBottom: '1px solid var(--border)' }}>
-              <span style={{ flexShrink: 0, width: 16, height: 16, borderRadius: '50%', background: '#F8971D', border: '2px solid #fff', boxShadow: '0 0 0 1px var(--golden)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9.5, fontWeight: 800, color: '#fff', lineHeight: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 9, paddingLeft: 2, paddingBottom: 10, borderBottom: '1px solid var(--border)' }}>
+              <span className="pin-ring" style={{ flexShrink: 0, width: 16, height: 16, borderRadius: '50%', background: '#F8971D', border: '2px solid #fff', boxShadow: '0 0 0 1px var(--golden)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9.5, fontWeight: 800, color: '#fff', lineHeight: 1 }}>
                 P
               </span>
-              <span style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--carbon)' }}>Subject Property — {DEAL.address}</span>
+              <span style={{ fontSize: 15.5, fontWeight: 700, color: 'var(--carbon)' }}>Subject Property — {DEAL.address}</span>
             </div>
             <div style={{ columns: 2, columnGap: 22, flex: 1, minHeight: 0, overflow: 'hidden' }}>
               {groups.map((g) => (
                 <div key={g.heading} style={{ breakInside: 'avoid', marginBottom: 9 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 4 }}>
                     <span style={{ flexShrink: 0, width: 10, height: 10, borderRadius: '50%', background: g.swatch, border: '1px solid rgba(0,0,0,0.15)' }} />
-                    <span style={{ fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: g.swatch }}>{g.heading}</span>
+                    <span style={{ fontSize: 13.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: g.swatch }}>{g.heading}</span>
                   </div>
                   {g.items.map((p, k) => (
                     <div key={`${g.heading}-${k}`} style={{ display: 'flex', alignItems: 'baseline', gap: 8, padding: '2px 0' }}>
-                      <span style={{ flexShrink: 0, fontSize: 10.5, fontWeight: 700, color: g.swatch, width: 14, textAlign: 'right' }}>{p.n > 0 ? p.n : '·'}</span>
+                      <span style={{ flexShrink: 0, fontSize: 13.5, fontWeight: 700, color: g.swatch, width: 14, textAlign: 'right' }}>{p.n > 0 ? p.n : '·'}</span>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: 10.6, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.25 }}>{p.name}</div>
-                        {p.note && <div style={{ fontSize: 8.2, color: 'var(--stone)', lineHeight: 1.3, marginTop: 1 }}>{p.note}</div>}
+                        <div style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.25 }}>{p.name}</div>
+                        {p.note && <div style={{ fontSize: 11, color: 'var(--stone)', lineHeight: 1.3, marginTop: 1 }}>{p.note}</div>}
                       </div>
                     </div>
                   ))}

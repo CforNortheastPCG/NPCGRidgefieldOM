@@ -47,6 +47,7 @@ export function CoverHero({ pageNum }: { pageNum?: number }) {
         )}
         {/* Shade hugs whichever half holds the title so it reads on-photo. */}
         <div
+          className="cover-scrim"
           style={{
             position: 'absolute',
             left: 0,

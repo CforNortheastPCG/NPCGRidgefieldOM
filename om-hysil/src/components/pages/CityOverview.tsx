@@ -14,12 +14,12 @@ export function CityOverview({ pageNum }: { pageNum?: number }) {
           <div className="section-title" style={{ marginBottom: 2 }}>
             {c.heading} <span className="accent">Overview</span>
           </div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--carbon)', letterSpacing: '0.02em', marginBottom: 8 }}>
+          <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--carbon)', letterSpacing: '0.02em', marginBottom: 8 }}>
             {c.dek}
           </div>
           <div className="title-rule" />
 
-          <div style={{ fontSize: 11.5, lineHeight: 1.65, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div style={{ fontSize: 12.5, lineHeight: 1.65, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 14 }}>
             {c.paragraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
@@ -27,10 +27,10 @@ export function CityOverview({ pageNum }: { pageNum?: number }) {
 
           {c.bullets.length > 0 && (
             <>
-              <div className="eyebrow" style={{ marginTop: 'auto', paddingTop: 16, marginBottom: 10 }}>
+              <div className="eyebrow" style={{ paddingTop: 16, marginBottom: 10 }}>
                 {c.bulletsTitle}
               </div>
-              <ul className="highlights" style={{ fontSize: 11, lineHeight: 2.05 }}>
+              <ul className="highlights" style={{ fontSize: 12, lineHeight: 2.05 }}>
                 {c.bullets.map((b, i) => (
                   <li key={i}>{b}</li>
                 ))}

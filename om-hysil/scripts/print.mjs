@@ -11,7 +11,7 @@ import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs'
 import { resolve, dirname, join, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import puppeteer from 'puppeteer'
-import { PDFDocument } from 'pdf-lib'
+import { PDFDocument, PDFName, PDFArray, PDFDict, PDFRef, PDFStream, PDFNumber } from 'pdf-lib'
 
 const frameDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const distDir = join(frameDir, 'dist')
@@ -93,6 +93,61 @@ try {
         ? `${deal.name}, ${deal.address} — ${deal.cityState} · Offering Memorandum`
         : `${deal.address} — ${deal.cityState} · Offering Memorandum`
     const doc = await PDFDocument.load(pdfBytes, { updateMetadata: false })
+
+    /* COLORSPACE NORMALIZE (RENDER-PIPELINE.md §4, PDF-ARTIFACTS.md): Skia
+       tags every rendered image with a compact ICC v4 profile via
+       [/ICCBased n 0 R]. Chromium reads it, but Acrobat / macOS Preview /
+       print RIPs can fail the v4 parse and render photos PINK. The pixels
+       are plain sRGB, so swap each ICCBased colorspace to the matching
+       /Device* (3ch→RGB, 1ch→Gray, 4ch→CMYK) — universal, visually identical. */
+    {
+      const ctx = doc.context
+      const DEVICE = { 1: PDFName.of('DeviceGray'), 3: PDFName.of('DeviceRGB'), 4: PDFName.of('DeviceCMYK') }
+      const iccN = new Map()
+      for (const [ref, obj] of ctx.enumerateIndirectObjects()) {
+        if (obj instanceof PDFStream) {
+          const n = obj.dict.get(PDFName.of('N'))
+          if (n instanceof PDFNumber && !obj.dict.has(PDFName.of('Type'))) iccN.set(ref.toString(), n.asNumber())
+        }
+      }
+      const replacementFor = (obj) => {
+        if (!(obj instanceof PDFArray) || obj.size() !== 2) return null
+        const [tag, ref] = [obj.get(0), obj.get(1)]
+        if (!(tag instanceof PDFName && tag.asString() === '/ICCBased')) return null
+        if (!(ref instanceof PDFRef)) return null
+        return DEVICE[iccN.get(ref.toString())] || DEVICE[3]
+      }
+      let swapped = 0
+      const seen = new Set()
+      const walk = (obj) => {
+        if (obj instanceof PDFRef) {
+          if (seen.has(obj.toString())) return
+          seen.add(obj.toString())
+          const target = ctx.lookup(obj)
+          const rep = replacementFor(target)
+          if (rep) { ctx.assign(obj, rep); swapped++; return }
+          return walk(target)
+        }
+        if (obj instanceof PDFStream) return walk(obj.dict)
+        if (obj instanceof PDFDict) {
+          for (const key of obj.keys()) {
+            const val = obj.get(key)
+            const rep = replacementFor(val)
+            if (rep) { obj.set(key, rep); swapped++ } else walk(val)
+          }
+        }
+        if (obj instanceof PDFArray) {
+          for (let i = 0; i < obj.size(); i++) {
+            const val = obj.get(i)
+            const rep = replacementFor(val)
+            if (rep) { obj.set(i, rep); swapped++ } else walk(val)
+          }
+        }
+      }
+      for (const [ref] of ctx.enumerateIndirectObjects()) walk(ref)
+      console.log(`  colorspace: ${swapped} ICCBased → Device*`)
+    }
+
     doc.setTitle(title)
     doc.setAuthor('NorthEast Private Client Group')
     doc.setSubject(`Offering Memorandum — ${deal.address}, ${deal.cityState} (${deal.status ?? 'For Sale'})`)
@@ -102,7 +157,7 @@ try {
     const now = new Date()
     doc.setCreationDate(now)
     doc.setModificationDate(now)
-    outBytes = await doc.save()
+    outBytes = await doc.save({ useObjectStreams: false })
     console.log(`metadata: "${title}"`)
   } catch (err) {
     console.error(`  ! metadata pass skipped (${String(err?.message ?? err).slice(0, 120)})`)

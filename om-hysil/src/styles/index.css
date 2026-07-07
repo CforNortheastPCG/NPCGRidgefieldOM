@@ -225,7 +225,7 @@ body {
   right: 0;
   background: linear-gradient(transparent, rgba(40, 27, 18, 0.7));
   color: white;
-  padding: 20px 14px 8px;
+  padding: 9px 14px 7px;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -464,4 +464,23 @@ body {
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   /* No CSS filters on photos here — a filter forces Chromium to rasterize
      each JPEG into the PDF (~4x bloat) instead of passing it through. */
+  /* Skia rasterizes text-shadow/filter/box-shadow into luminosity soft-mask
+     groups that Apple CoreGraphics (Preview/Quick Look/Mail) and some in-app
+     PDF viewers composite as solid black or pink boxes (see PDF-ARTIFACTS.md).
+     Drop them in print — the cover scrim, logo, and borders stand alone. */
+  .page-header img { filter: none; }
+  .cover-hero-prep { text-shadow: none; }
+  .map-legend-card { box-shadow: none; }
+  .pin-ring { box-shadow: none; }
+  /* Gradients that fade toward transparent have VARYING alpha, which PDF
+     cannot express as a plain shading — Skia emits them as pattern fills
+     behind a luminosity soft-mask group, and Preview/Acrobat/Quick Look
+     composite that group as a PINK/MAGENTA box (see PDF-ARTIFACTS.md). A
+     CONSTANT-alpha fill uses a plain /ca graphics-state value, no soft mask.
+     Screen keeps the smooth gradient; print gets a flat scrim of equal reach. */
+  /* Cover fade isn't needed for legibility and a constant fill leaves a hard
+     edge — drop it entirely in print (screen keeps the gradient). */
+  .cover-scrim { display: none !important; }
+  .photo-caption { background: rgba(40, 27, 18, 0.72); }
+  .divider-bg::after { background: rgba(10, 12, 16, 0.42); }
 }

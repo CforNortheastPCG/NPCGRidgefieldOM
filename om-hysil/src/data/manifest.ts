@@ -100,8 +100,7 @@ export const MANIFEST: ManifestEntry[] = [
   {
     "id": "location-map",
     "type": "location-map",
-    "title": "Location & Amenities",
-    "contentModule": "location-map.content.ts"
+    "title": "Location & Amenities"
   },
   {
     "id": "drive-time-map",

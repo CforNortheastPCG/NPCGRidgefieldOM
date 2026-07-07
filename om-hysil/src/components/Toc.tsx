@@ -70,7 +70,6 @@ export function Toc({ pageNum }: { pageNum?: number }) {
           {accent && (
             <div style={{ borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
               <Img src={accent} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(63,71,83,0.55), rgba(63,71,83,0) 45%)', pointerEvents: 'none' }} />
             </div>
           )}
         </div>
