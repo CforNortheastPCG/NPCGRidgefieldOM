@@ -2,11 +2,11 @@
 import type { DealData } from '../lib/types.ts'
 
 export const DEAL: DealData = {
-  "name": "20 Hysil Avenue",
-  "address": "20 Hysil Avenue",
+  "name": "7 & 20 Hy-Sil Ave",
+  "address": "7 & 20 Hy-Sil Ave",
   "cityState": "Chelsea, MA",
   "cityLong": "Chelsea, Massachusetts",
-  "fullAddress": "20 Hysil Avenue, Chelsea, MA",
+  "fullAddress": "7 & 20 Hy-Sil Ave, Chelsea, MA",
   "status": "For Sale",
   "docType": "Offering Memorandum",
   "coverImage": "/photos/e0129f84-0e1a-4e51-961c-83e78a337c51.jpg"

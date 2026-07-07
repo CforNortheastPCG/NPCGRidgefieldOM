@@ -15,7 +15,7 @@ export function CountyOverview({ pageNum }: { pageNum?: number }) {
             {c.heading} <span className="accent">Overview</span>
           </div>
           <div className="title-rule" />
-          <div style={{ fontSize: 10.4, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
+          <div style={{ fontSize: 11.4, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
             <p>{c.intro}</p>
           </div>
 
@@ -26,12 +26,12 @@ export function CountyOverview({ pageNum }: { pageNum?: number }) {
                   {c.statsTitle}
                 </div>
               )}
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 9.6 }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 10.6 }}>
                 <thead>
                   <tr style={{ background: 'var(--carbon)', color: '#fff' }}>
-                    <th style={{ textAlign: 'left', padding: '5px 10px', fontSize: 8.6, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Metric</th>
-                    <th style={{ textAlign: 'right', padding: '5px 10px', fontSize: 8.6, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{c.localLabel ?? 'Local'}</th>
-                    <th style={{ textAlign: 'right', padding: '5px 10px', fontSize: 8.6, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{c.regionLabel ?? 'Region'}</th>
+                    <th style={{ textAlign: 'left', padding: '5px 10px', fontSize: 9.6, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Metric</th>
+                    <th style={{ textAlign: 'right', padding: '5px 10px', fontSize: 9.6, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{c.localLabel ?? 'Local'}</th>
+                    <th style={{ textAlign: 'right', padding: '5px 10px', fontSize: 9.6, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{c.regionLabel ?? 'Region'}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,7 +44,7 @@ export function CountyOverview({ pageNum }: { pageNum?: number }) {
                   ))}
                 </tbody>
               </table>
-              {c.sources && <div style={{ fontSize: 7.4, color: 'var(--stone)', marginTop: 4 }}>{c.sources}</div>}
+              {c.sources && <div style={{ fontSize: 8.4, color: 'var(--stone)', marginTop: 4 }}>{c.sources}</div>}
             </div>
           )}
 
@@ -56,8 +56,8 @@ export function CountyOverview({ pageNum }: { pageNum?: number }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {c.employerGroups.map((g) => (
                   <div key={g.label} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 12 }}>
-                    <div style={{ fontSize: 10.3, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3 }}>{g.label}</div>
-                    <div style={{ fontSize: 9.6, lineHeight: 1.45, color: 'var(--graphite)' }}>{g.items}</div>
+                    <div style={{ fontSize: 11.3, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3 }}>{g.label}</div>
+                    <div style={{ fontSize: 10.6, lineHeight: 1.45, color: 'var(--graphite)' }}>{g.items}</div>
                   </div>
                 ))}
               </div>

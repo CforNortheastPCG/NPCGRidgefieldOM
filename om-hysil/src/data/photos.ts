@@ -121,10 +121,10 @@ export const HIGHLIGHT_PHOTOS: Array<string | null> = [
   "/photos/13b803e2-bc3c-41b3-abb0-057f972a67c7.jpg"
 ]
 export const CITY_PHOTOS: Array<string | null> = [
-  "/photos/6817523b-74ab-4a9d-b1ba-ad6b86d27946.jpg",
-  "/photos/7a704bf7-5cc5-4d28-b65a-618437b70ba8.jpg"
+  "/photos/chelsea-drone-1.jpg",
+  "/photos/chelsea-drone-2.jpg"
 ]
 export const COUNTY_PHOTOS: Array<string | null> = [
-  "/photos/4e4bb743-9abf-4800-9ee2-561dab37b241.jpg",
-  "/photos/a98450ba-11e9-4410-bde0-c9c1a25f05ba.jpg"
+  "/photos/bf0abdd0-1b7c-43f8-b837-20dfbaa79d18.jpg",
+  "/photos/ea627ca6-5da4-4acd-b06a-6566b1794dd3.jpg"
 ]

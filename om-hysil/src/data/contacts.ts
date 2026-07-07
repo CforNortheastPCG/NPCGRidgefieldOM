@@ -10,10 +10,31 @@ export const BROKERS: BrokerData[] = [
     "photo": "/photos/team/francis-saenz.png"
   },
   {
-    "name": "Tom Egbers",
+    "name": "Drew Kirkland",
+    "title": "Vice President, Investments",
+    "phone": "857.990.6802",
+    "email": "dkirkland@northeastpcg.com",
+    "photo": "/photos/team/drew-kirkland.png"
+  },
+  {
+    "name": "Jim Casey",
+    "title": "Senior Associate",
+    "phone": "857.990.6821",
+    "email": "jcasey@northeastpcg.com",
+    "photo": "/photos/team/jim-casey.png"
+  },
+  {
+    "name": "Patrick Wheeler",
+    "title": "Investment Associate",
+    "phone": "857.990.6819",
+    "email": "pwheeler@northeastpcg.com",
+    "photo": "/photos/team/patrick-wheeler.jpg"
+  },
+  {
+    "name": "Anthony Rakauskas",
     "title": "Associate",
-    "phone": "857.990.2022",
-    "email": "tegbers@northeastpcg.com",
-    "photo": "/photos/team/tom-egbers.jpg"
+    "phone": "857.990.6807",
+    "email": "arakauskas@northeastpcg.com",
+    "photo": "/photos/team/anthony-rakauskas.png"
   }
 ]

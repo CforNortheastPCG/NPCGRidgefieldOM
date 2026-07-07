@@ -4,8 +4,8 @@
   "stylePack": "npcg-v1",
   "deal": {
     "id": "0cc75d88-e325",
-    "name": "20 Hysil Ave",
-    "address": "20 Hysil Ave",
+    "name": "7 & 20 Hy-Sil Ave",
+    "address": "7 & 20 Hy-Sil Ave",
     "cityState": "Chelsea, MA",
     "cityLong": "Chelsea, Massachusetts",
     "status": "For Sale",
@@ -41,11 +41,32 @@
       "photo": "/photos/team/francis-saenz.png"
     },
     {
-      "name": "Tom Egbers",
+      "name": "Drew Kirkland",
+      "title": "Vice President, Investments",
+      "phone": "857.990.6802",
+      "email": "dkirkland@northeastpcg.com",
+      "photo": "/photos/team/drew-kirkland.png"
+    },
+    {
+      "name": "Jim Casey",
+      "title": "Senior Associate",
+      "phone": "857.990.6821",
+      "email": "jcasey@northeastpcg.com",
+      "photo": "/photos/team/jim-casey.png"
+    },
+    {
+      "name": "Patrick Wheeler",
+      "title": "Investment Associate",
+      "phone": "857.990.6819",
+      "email": "pwheeler@northeastpcg.com",
+      "photo": "/photos/team/patrick-wheeler.jpg"
+    },
+    {
+      "name": "Anthony Rakauskas",
       "title": "Associate",
-      "phone": "857.990.2022",
-      "email": "tegbers@northeastpcg.com",
-      "photo": "/photos/team/tom-egbers.jpg"
+      "phone": "857.990.6807",
+      "email": "arakauskas@northeastpcg.com",
+      "photo": "/photos/team/anthony-rakauskas.png"
     }
   ],
   "rentRoll": {
@@ -410,11 +431,12 @@
     "city": "Chelsea",
     "county": "Greater Boston",
     "driveTimeCities": [
-      "Boston",
-      "Cambridge",
-      "Everett",
-      "Revere",
-      "Somerville"
+      "Boston, MA",
+      "Cambridge, MA",
+      "Somerville, MA",
+      "Everett, MA",
+      "Worcester, MA",
+      "Providence, RI"
     ]
   },
   "pages": [],

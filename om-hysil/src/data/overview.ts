@@ -8,7 +8,7 @@ export const OVERVIEW: OverviewData = {
       "rows": [
         {
           "label": "Address",
-          "value": "20 Hysil Avenue, Chelsea, MA"
+          "value": "7 & 20 Hy-Sil Ave, Chelsea, MA"
         },
         {
           "label": "Property Type",
