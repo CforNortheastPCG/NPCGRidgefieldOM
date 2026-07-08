@@ -360,6 +360,7 @@ body {
   padding-bottom: 6px;
   border-bottom: 2px solid var(--golden);
 }
+.rr-chart-grid .chart-card h3 { font-size: 8px; }
 
 /* ═══════════ OUR LOCATIONS ═══════════ */
 .loc {

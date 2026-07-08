@@ -32,6 +32,7 @@ export interface RentRowData {
   vacant?: boolean
   rents: Record<string, number>
   camAnnual?: number
+  note?: string
 }
 
 export interface RentRollData {

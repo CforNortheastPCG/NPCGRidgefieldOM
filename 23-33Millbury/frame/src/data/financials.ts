@@ -51,7 +51,8 @@ export const FINANCIALS: FinancialsData = {
         "rents": {
           "current": 1895,
           "proForma": 2400
-        }
+        },
+        "note": "Unit 25-1 in-place rent is $1,200/mo — long-tenured month-to-month tenant."
       },
       {
         "group": "Residential",
@@ -62,7 +63,8 @@ export const FINANCIALS: FinancialsData = {
         "rents": {
           "current": 1895,
           "proForma": 2400
-        }
+        },
+        "note": "Unit 25-2 in-place rent is $1,300/mo — long-tenured month-to-month tenant."
       },
       {
         "group": "Residential",

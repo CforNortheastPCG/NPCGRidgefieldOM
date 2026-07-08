@@ -33,6 +33,17 @@ function UnitRoll({ pageNum }: { pageNum?: number }) {
       ? `+${fmtMoney(rentBars[1]!.value - rentBars[0]!.value)} · +${Math.round(((rentBars[1]!.value - rentBars[0]!.value) / rentBars[0]!.value) * 100)}% rental upside`
       : undefined
 
+  const footnotes: string[] = []
+  const rowMarkers = roll.rows.map((r) => {
+    if (!r.note) return null
+    let idx = footnotes.indexOf(r.note)
+    if (idx === -1) {
+      footnotes.push(r.note)
+      idx = footnotes.length - 1
+    }
+    return idx + 1
+  })
+
   return (
     <div className="page">
       <PageHeader section="Rent Roll" />
@@ -61,7 +72,10 @@ function UnitRoll({ pageNum }: { pageNum?: number }) {
                     <strong>{r.group}</strong>
                   </td>
                 )}
-                <td>{r.unit}</td>
+                <td>
+                  {r.unit}
+                  {rowMarkers[i] != null && <sup style={{ color: '#B55D37', fontSize: 7 }}>{rowMarkers[i]}</sup>}
+                </td>
                 <td>{r.vacant ? `${r.use} · Vacant` : r.use}</td>
                 <td className="num">{r.sf != null ? fmtInt(r.sf) : '—'}</td>
                 {cols.map((c) => (
@@ -91,7 +105,17 @@ function UnitRoll({ pageNum }: { pageNum?: number }) {
             </tr>
           </tbody>
         </table>
+        {footnotes.length > 0 && (
+          <div style={{ marginTop: 6, fontSize: 8, lineHeight: 1.45, color: '#566573' }}>
+            {footnotes.map((f, i) => (
+              <div key={i}>
+                <sup style={{ color: '#B55D37', fontSize: 7 }}>{i + 1}</sup> {f}
+              </div>
+            ))}
+          </div>
+        )}
         <div
+          className="rr-chart-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: rentBars ? '1fr 1.15fr' : '1fr',
@@ -108,9 +132,16 @@ function UnitRoll({ pageNum }: { pageNum?: number }) {
             centerLabel={String(computed.unitCount)}
             centerSub="UNITS"
             fmt={(v) => String(v)}
+            size={118}
           />
           {rentBars && (
-            <BarChartCard title="Gross Scheduled Rent — In-Place vs Pro Forma" data={rentBars} note={upside} />
+            <BarChartCard
+              title="Gross Scheduled Rent — In-Place vs Pro Forma"
+              data={rentBars}
+              note={upside}
+              barHeight={26}
+              gap={16}
+            />
           )}
         </div>
       </div>

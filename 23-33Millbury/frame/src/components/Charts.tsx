@@ -123,10 +123,14 @@ export function BarChartCard({
   title,
   data,
   note,
+  barHeight = 34,
+  gap = 22,
 }: {
   title: string
   data: Array<{ label: string; value: number; color: string }>
   note?: string
+  barHeight?: number
+  gap?: number
 }) {
   const max = Math.max(...data.map((d) => d.value), 1)
   return (
@@ -138,7 +142,7 @@ export function BarChartCard({
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          gap: 22,
+          gap,
           minHeight: 0,
           padding: '0 8px',
         }}
@@ -149,7 +153,7 @@ export function BarChartCard({
               {d.label}
             </span>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-              <div style={{ width: `${(d.value / max) * 100}%`, height: 34, background: d.color, borderRadius: 4 }} />
+              <div style={{ width: `${(d.value / max) * 100}%`, height: barHeight, background: d.color, borderRadius: 4 }} />
             </div>
             <span style={{ flex: '0 0 84px', fontSize: 13, fontWeight: 800, color: 'var(--carbon)' }}>
               ${Math.round(d.value).toLocaleString()}
