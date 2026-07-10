@@ -13,15 +13,21 @@
 
 export const PARCEL = {
   id: 'NEW-MILFORD-PID-4961',
-  geocode: { lat: 41.577200, lng: -73.409000 },
-  // Bounding-box center — what the static map is framed on.
-  center: { lat: 41.577200, lng: -73.409000 },
-  // APPROXIMATE placeholder rectangle (~0.33 ac) as [lat, lng] pairs.
+  // Rooftop geocode for 29 West Street, New Milford, CT 06776 (Google, verified
+  // by reverse-geocode to "29 West St"). The rooftop point sits on the West
+  // Street frontage; the parcel/building extends south-east of it.
+  geocode: { lat: 41.5743564, lng: -73.4116566 },
+  // Bounding-box center — what the static map is framed on. Centered on the
+  // parcel (building + rear yard/parking), not the frontage geocode.
+  center: { lat: 41.574210, lng: -73.411500 },
+  // APPROXIMATE parcel rectangle (~0.33 ac, ~50m N-S × ~26m E-W) traced over the
+  // building footprint and paved lot from the aerial, as [lat, lng] pairs.
+  // Replace with the recorded outline when the survey is available.
   ring: [
-    [41.577360, -73.409220],
-    [41.577360, -73.408780],
-    [41.577040, -73.408780],
-    [41.577040, -73.409220],
-    [41.577360, -73.409220],
+    [41.574435, -73.411656],
+    [41.574435, -73.411344],
+    [41.573985, -73.411344],
+    [41.573985, -73.411656],
+    [41.574435, -73.411656],
   ],
 }

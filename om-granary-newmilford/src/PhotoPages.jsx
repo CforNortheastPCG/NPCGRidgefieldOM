@@ -9,11 +9,6 @@ function PhotoTile({ src, caption, pos }) {
   return (
     <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', minHeight: 0, height: '100%' }}>
       <img src={src} alt={caption} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: pos || 'center', display: 'block' }} />
-      <div style={{
-        position: 'absolute', left: 0, bottom: 0, background: 'rgba(63,71,83,0.82)', color: '#fff',
-        fontSize: 8, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase',
-        padding: '4px 10px', borderTopRightRadius: 4,
-      }}>{caption}</div>
     </div>
   )
 }
@@ -64,6 +59,54 @@ export function PhotoPage({ section, title, accent, subtitle, images, rows, note
               {row.map(img => (
                 <div key={img.src} style={{ flex: 1, minWidth: 0 }}>
                   <PhotoTile {...img} />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        {note && (
+          <div style={{ fontSize: 7.5, fontStyle: 'italic', color: 'var(--stone)', marginTop: 6 }}>{note}</div>
+        )}
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}
+
+/* Grid of representative unit floor plans (RISE / Cubicasa line drawings,
+   bottom SF summary cropped off). Plans are line art on white, so tiles use a
+   contained fit on a white card — never `cover` (would clip rooms). */
+export function FloorPlansPage({ section, title, accent, subtitle, plans, note, pageNum }) {
+  const rowSizes = rowsFor(plans.length)
+  const rowGroups = []
+  let idx = 0
+  for (const size of rowSizes) {
+    rowGroups.push(plans.slice(idx, idx + size))
+    idx += size
+  }
+  return (
+    <div className="page">
+      <PageHeader section={section} />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="section-title" style={{ marginBottom: 2 }}>
+          {title} <span style={{ color: '#F8971D' }}>{accent}</span>
+        </div>
+        <div className="title-rule" />
+        {subtitle && (
+          <div style={{ fontSize: 9.5, color: 'var(--stone)', marginBottom: 10 }}>{subtitle}</div>
+        )}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1, minHeight: 0 }}>
+          {rowGroups.map((row, ri) => (
+            <div key={ri} style={{ display: 'flex', gap: 10, flex: 1, minHeight: 0 }}>
+              {row.map(p => (
+                <div key={p.src} style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', minHeight: 0, border: '1px solid var(--linen)', borderRadius: 4, overflow: 'hidden', background: '#fff' }}>
+                  <div style={{ flex: 1, minHeight: 0, padding: 8 }}>
+                    <img src={p.src} alt={p.unit} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+                  </div>
+                  <div style={{ borderTop: '1px solid var(--linen)', padding: '5px 10px', display: 'flex', alignItems: 'baseline', gap: 8 }}>
+                    <span style={{ fontSize: 9, fontWeight: 800, color: 'var(--carbon)', letterSpacing: '0.04em' }}>{p.unit}</span>
+                    <span style={{ fontSize: 8.5, color: 'var(--stone)' }}>{p.type}</span>
+                  </div>
                 </div>
               ))}
             </div>

@@ -2,11 +2,11 @@ import { PageHeader, PageFooter } from './Shell.jsx'
 import { PARCEL } from './parcel.js'
 
 /* ═══════════════════ SITE MAP ═══════════════════
-   Google Static (hybrid satellite) map of the parcel at 2836 Fairfield Avenue,
-   with the real parcel outline — traced from the Connecticut State Parcel Layer
-   2023 (Bridgeport BEGIS) — drawn as a golden polygon over the aerial. Falls
-   back to a notice if no Maps key is set. Requires VITE_GOOGLE_MAPS_API_KEY
-   (enable Maps Static API). */
+   Google Static (hybrid satellite) map of the parcel at 29 West Street, New
+   Milford, CT, with an approximate parcel outline drawn as a golden polygon
+   over the aerial. Center is the verified rooftop geocode (see parcel.js).
+   Falls back to a notice if no Maps key is set. Requires
+   VITE_GOOGLE_MAPS_API_KEY (enable Maps Static API). */
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 

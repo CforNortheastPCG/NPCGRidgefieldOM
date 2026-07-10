@@ -18,17 +18,17 @@ import { ISOCHRONES } from './isochrones.js'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
-const SUBJECT = { lat: 41.157532, lng: -73.226828 } // 2836 Fairfield Ave, Black Rock
-const CENTER = { lat: 41.15, lng: -73.40 }
-const ZOOM = 8, W = 640, H = 460
+const SUBJECT = { lat: 41.5743564, lng: -73.4116566 } // 29 West Street, New Milford CT
+const CENTER = { lat: 41.42, lng: -73.32 }
+const ZOOM = 8, W = 640, H = 312 // wide-short frame matched to the map slot (see DRIVE_TIMES_MAP_FINAL.md)
 
 const CITIES = [
-  { name: 'Bridgeport', drive: '~3 mi · 10 min' },
-  { name: 'Stamford', drive: '~20 mi · 30 min' },
-  { name: 'New Haven', drive: '~22 mi · 30 min' },
-  { name: 'White Plains', drive: '~30 mi · 45 min' },
-  { name: 'Danbury', drive: '~30 mi · 45 min' },
-  { name: 'New York City', drive: '~55 mi · 75 min' },
+  { name: 'Brookfield', drive: '~9 mi · 13 min' },
+  { name: 'Danbury', drive: '~16 mi · 20 min' },
+  { name: 'Litchfield', drive: '~18 mi · 25 min' },
+  { name: 'Waterbury', drive: '~24 mi · 35 min' },
+  { name: 'Stamford', drive: '~38 mi · 55 min' },
+  { name: 'New York City', drive: '~68 mi · 90 min' },
 ]
 const BAND_HEX = { 15: '#229954', 30: '#2471A3', 45: '#7D3C98', 60: '#C0392B' }
 
@@ -101,25 +101,28 @@ export default function DriveTimeMap({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Drive <span style={{ color: '#F8971D' }}>Times</span></div>
         <div className="title-rule" />
         <div style={{ fontSize: 11.5, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
-          <strong>Road-network drive-time reach from the property.</strong> I-95 (Exits 24/25) and the Merritt
-          Parkway put Stamford and New Haven inside ~30 minutes and midtown Manhattan inside ~75, while Metro-North&rsquo;s
-          New Haven Line runs express to Grand Central &mdash; drawing on a deep Fairfield County and NYC-commuter
-          tenant pool.
+          <strong>Road-network drive-time reach from the property.</strong> Route 7 and US-202 tie into I-84 at
+          Danbury in about 20 minutes &mdash; opening the Waterbury and Hartford corridor to the east and the
+          Stamford/NYC metro to the southwest &mdash; while Metro-North&rsquo;s Danbury Branch and express bus feed
+          Manhattan commuters, drawing on a deep Litchfield County and NYC-commuter tenant pool.
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '4px 16px', marginBottom: 10, paddingBottom: 8, borderBottom: '1px solid var(--border)' }}>
-          <LegendRow color="#F8971D" label="2836 Fairfield Ave (subject)" pin />
+          <LegendRow color="#F8971D" label="29 West Street (subject)" pin />
           <LegendRow color={BAND_HEX[15]} label="15-min drive" ring />
           <LegendRow color={BAND_HEX[30]} label="30-min drive" ring />
           <LegendRow color={BAND_HEX[45]} label="45-min drive" ring />
           <LegendRow color={BAND_HEX[60]} label="60-min drive" ring />
         </div>
 
-        {/* MAP — layered: base → rings → labels overlay → subject marker */}
-        <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', flex: 1, minHeight: 0 }}>
+        {/* MAP — layered: base → rings → labels overlay → subject marker.
+            Box locked to the frame's aspect (W:H) so every stretch-fill layer
+            stays to-scale — no Mercator distortion (see DRIVE_TIMES_MAP_FINAL.md). */}
+        <div style={{ flex: 1, minHeight: 0, display: 'flex', justifyContent: 'center' }}>
+        <div style={{ position: 'relative', height: '100%', aspectRatio: `${W} / ${H}`, maxWidth: '100%', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)' }}>
           {ok ? (
             <>
-              <img src={baseUrl} alt="Drive-time map centered on Black Rock, Bridgeport CT" style={{ ...fill, objectFit: 'fill', display: 'block' }} />
+              <img src={baseUrl} alt="Drive-time map centered on New Milford, CT" style={{ ...fill, objectFit: 'fill', display: 'block' }} />
               <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" style={{ ...fill, pointerEvents: 'none' }}>
                 {/* Filled translucent bands (largest first → nested shading). Fills
                     tint only the reachable land; the Sound stays clear, so the
@@ -148,6 +151,7 @@ export default function DriveTimeMap({ pageNum }) {
               Set VITE_GOOGLE_MAPS_API_KEY in .env.local and enable Maps Static API.
             </div>
           )}
+        </div>
         </div>
 
         {/* DRIVE-TIME STRIP */}

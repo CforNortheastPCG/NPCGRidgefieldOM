@@ -22,7 +22,9 @@ const GOLDEN = '0xF8971D'
    on top, so co-located pins otherwise hide each other. Offsets are tiny
    (~50–90 m) — acceptable for a "nearby amenities" reference map. */
 function declutter(pois, anchor) {
-  const MIN = 0.00055 // ~60 m collision radius (in degrees latitude)
+  const MIN = 0.0013 // ~145 m collision radius — mid pins are ~50px tall at
+                     // zoom 14, so a wider gap is needed to keep the dense Bank
+                     // Street / Green cluster from stacking on itself.
   const placed = anchor ? [{ lat: anchor.lat, lng: anchor.lng }] : []
   const near = (aLat, aLng, bLat, bLng) => {
     const dLat = aLat - bLat
@@ -31,9 +33,9 @@ function declutter(pois, anchor) {
   }
   return pois.map(p => {
     let lat = p.lat, lng = p.lng, tries = 0
-    while (placed.some(q => near(lat, lng, q.lat, q.lng)) && tries < 20) {
+    while (placed.some(q => near(lat, lng, q.lat, q.lng)) && tries < 24) {
       const ang = (tries * 137.5 * Math.PI) / 180 // golden-angle spiral
-      const r = MIN * (1 + tries * 0.45)
+      const r = MIN * (1 + tries * 0.6)
       lat = p.lat + Math.sin(ang) * r
       lng = p.lng + (Math.cos(ang) * r) / Math.cos((p.lat * Math.PI) / 180)
       tries++
@@ -62,19 +64,17 @@ function buildStaticMapUrl() {
   )
 
   const params = [
-    // Fixed frame on the downtown cluster (auto-fit zoomed too tight). zoom 14
-    // shows the Fairfield Avenue corridor through Black Rock with room to breathe.
+    // Fixed frame on the village center. zoom 14 shows the Bank Street / Green
+    // core plus the Route 7 corridor (Big Y, Stop & Shop, hospital) with room.
     `center=${PROPERTY.lat},${PROPERTY.lng}`,
-    'zoom=15',
+    'zoom=14',
     'size=593x640',
     'scale=2',
     'maptype=hybrid',
     'format=png',
     ...style.map(s => `style=${encodeURIComponent(s)}`),
-    // The subject property sits at the map center — its marker is overlaid as a
-    // circular property photo in the component (see LocationMap render), so no
-    // Google "P" pin is drawn here. PROPERTY still anchors declutter() so
-    // amenity pins steer clear of the center.
+    // Subject property — gold "P" pin at the property's coords.
+    `markers=${encodeURIComponent(`size:mid|color:${GOLDEN}|label:P|${PROPERTY.lat},${PROPERTY.lng}`)}`,
     ...categoryMarkers,
     `key=${API_KEY}`,
   ]
@@ -105,68 +105,60 @@ export default function LocationMap({ pageNum = 9 }) {
           Location &amp; <span style={{ color: '#F8971D' }}>Amenities</span>
         </div>
         <div className="title-rule" />
-        <div style={{ fontSize: 9.5, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
-          Positioned on Black Rock&rsquo;s walkable Fairfield Avenue corridor, the property sits steps from the
-          neighborhood&rsquo;s dining, nightlife, waterfront, and everyday destinations &mdash; with convenient
-          Metro-North access to New York City via the nearby Fairfield Metro and Bridgeport stations.
+        <div style={{ fontSize: 10.5, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 12 }}>
+          29 West Street sits a short walk from the New Milford Green and the <strong>Bank Street</strong> village
+          core &mdash; independent restaurants, the Bank Street Theater, cafés, and shops all within a few blocks
+          &mdash; with the Housatonic riverfront at Young&rsquo;s Field just beyond. Everyday needs line the Route 7
+          corridor a few minutes south (Big Y, Stop &amp; Shop, CVS), and New Milford Hospital anchors Elm Street just
+          north of the Green.
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 1fr', gap: 16, flex: 1, minHeight: 0 }}>
-          {/* MAP — natural aspect (no crop) keeps Google attribution visible */}
-          <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', alignSelf: 'start' }}>
-            {mapUrl ? (
-              <img
-                src={mapUrl}
-                alt={`Map of ${FULL_ADDR} and nearby amenities`}
-                style={{ width: '100%', height: 'auto', display: 'block', background: 'var(--linen)' }}
-              />
-            ) : (
-              <div style={{ width: '100%', height: 480, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--linen)', color: 'var(--stone)', fontSize: 10, textAlign: 'center', padding: 24 }}>
-                Set VITE_GOOGLE_MAPS_API_KEY in .env.local
-                <br />and enable Maps Static API to render the map.
-              </div>
-            )}
-            {/* Subject property photo marker — the map is centered on the
-                property, so this sits at dead center; the pointer tip marks the
-                exact spot. */}
-            {mapUrl && (
-              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
-                <div style={{ width: 54, height: 54, borderRadius: '50%', overflow: 'hidden', border: '3px solid #F8971D', boxShadow: '0 2px 7px rgba(0,0,0,0.55)', background: '#fff' }}>
-                  <img src="/photos/property-pin.jpg" alt="Subject property" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          {/* MAP — scaled to fit the row (contain, no crop) so Google attribution
+              stays visible and the image never spills onto the footer. A small
+              caption notes that pins may be nudged to avoid overlap. */}
+          <div style={{ alignSelf: 'stretch', display: 'flex', flexDirection: 'column', minHeight: 0, gap: 4 }}>
+            <div style={{ position: 'relative', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)', flex: 1, minHeight: 0, display: 'flex' }}>
+              {mapUrl ? (
+                <img
+                  src={mapUrl}
+                  alt={`Map of ${FULL_ADDR} and nearby amenities`}
+                  style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', margin: 'auto', display: 'block', background: 'var(--linen)' }}
+                />
+              ) : (
+                <div style={{ width: '100%', height: 480, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--linen)', color: 'var(--stone)', fontSize: 10, textAlign: 'center', padding: 24 }}>
+                  Set VITE_GOOGLE_MAPS_API_KEY in .env.local
+                  <br />and enable Maps Static API to render the map.
                 </div>
-                <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '9px solid #F8971D', marginTop: -1 }} />
-              </div>
-            )}
-            {/* Branchville Station is ~3.5 mi SE, off-frame — point to it.
-                Top-right so it never covers Google's bottom attribution. */}
-            {mapUrl && (
-              <div style={{ position: 'absolute', right: 8, top: 8, background: 'rgba(44,62,80,0.94)', color: '#fff', padding: '5px 9px', borderRadius: 3, display: 'flex', alignItems: 'center', gap: 7 }}>
-                <span style={{ fontSize: 8.5, fontWeight: 600, lineHeight: 1.2 }}>Fairfield Metro Station<br />Metro-North &middot; 1.5 mi W</span>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                  <polyline points="10 18 18 18 18 10" />
-                </svg>
-              </div>
-            )}
+              )}
+            </div>
+            <div style={{ flexShrink: 0, fontSize: 7.5, lineHeight: 1.3, color: 'var(--stone)', fontStyle: 'italic' }}>
+              Map locations are approximate; nearby pins may be offset slightly to prevent overlap.
+            </div>
           </div>
 
           {/* SUBJECT PROPERTY + NUMBERED PIN LIST (two columns) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0, overflow: 'hidden' }}>
+          {/* padding keeps the subject-property "P" marker from being clipped by
+              this column's overflow:hidden (marker sits at the top-left, x=0/y=0). */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 0, overflow: 'hidden', paddingLeft: 3, paddingTop: 3 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingBottom: 8, borderBottom: '1px solid var(--border)' }}>
-              <span style={{ flexShrink: 0, width: 14, height: 14, borderRadius: '50%', background: '#F8971D', border: '2px solid #fff', boxShadow: '0 0 0 1px var(--golden)' }} />
+              <span style={{ flexShrink: 0, width: 17, height: 17, borderRadius: '50%', background: '#F8971D', border: '2px solid #fff', boxShadow: '0 0 0 1px var(--golden)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 10, fontWeight: 800, lineHeight: 1 }}>P</span>
               <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--carbon)' }}>Subject Property &mdash; {DEAL.address}</span>
             </div>
             <div style={{ columns: 2, columnGap: 18, minHeight: 0, overflow: 'hidden' }}>
             {groups.map(g => (
               <div key={g.label} style={{ breakInside: 'avoid', marginBottom: 7 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
-                  <span style={{ flexShrink: 0, width: 9, height: 9, borderRadius: '50%', background: g.swatch, border: '1px solid rgba(0,0,0,0.15)' }} />
-                  <span style={{ fontSize: 9.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: g.swatch }}>{g.label}</span>
+                  <span style={{ flexShrink: 0, width: 10, height: 10, borderRadius: '50%', background: g.swatch, border: '1px solid rgba(0,0,0,0.15)' }} />
+                  <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: g.swatch }}>{g.label}</span>
                 </div>
                 {g.items.map(p => (
-                  <div key={p.n} style={{ display: 'flex', alignItems: 'baseline', gap: 7, padding: '1px 0' }}>
-                    <span style={{ flexShrink: 0, fontSize: 9.5, fontWeight: 700, color: g.swatch, width: 13, textAlign: 'right' }}>{p.n}</span>
-                    <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.3, flex: 1 }}>{p.name}</span>
+                  <div key={p.n} style={{ display: 'flex', alignItems: 'baseline', gap: 7, padding: '2.5px 0' }}>
+                    <span style={{ flexShrink: 0, fontSize: 11.5, fontWeight: 700, color: g.swatch, width: 14, textAlign: 'right' }}>{p.n}</span>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.25 }}>{p.name}</div>
+                      {p.note && <div style={{ fontSize: 9.5, color: 'var(--stone)', lineHeight: 1.3, marginTop: 1 }}>{p.note}</div>}
+                    </div>
                   </div>
                 ))}
               </div>

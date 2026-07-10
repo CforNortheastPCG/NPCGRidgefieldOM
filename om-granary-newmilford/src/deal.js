@@ -10,7 +10,7 @@ export const DEAL = {
   name: 'The Granary',                       // marketing name (cover, footer)
   address: '29 West Street',                 // street line
   cityState: 'New Milford, CT 06776',        // city, state ZIP
-  cityLong: 'On the Green · New Milford, Connecticut', // long form for the cover subtitle
+  cityLong: 'New Milford, Connecticut', // long form for the cover subtitle
   status: 'For Sale',                        // listing status chip
   type: '14-Unit Adaptive-Reuse Apartment Building', // asset descriptor (cover)
   coverImage: '/photos/cover.jpg',           // full-bleed cover photo

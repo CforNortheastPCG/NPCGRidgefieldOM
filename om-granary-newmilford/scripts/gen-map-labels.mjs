@@ -16,7 +16,7 @@ import puppeteer from 'puppeteer'
 const KEY = readFileSync(new URL('../.env.local', import.meta.url), 'utf8')
   .match(/VITE_GOOGLE_MAPS_API_KEY=(\S+)/)[1].trim()
 
-const CENTER = { lat: 41.15, lng: -73.40 }, ZOOM = 8, W = 640, H = 460
+const CENTER = { lat: 41.42, lng: -73.32 }, ZOOM = 8, W = 640, H = 312
 
 // Labels + highways on a pure-white field (everything else white so it keys out).
 const LABELS_STYLE = [

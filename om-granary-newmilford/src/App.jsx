@@ -2,8 +2,7 @@ import './App.css'
 import { cloneElement } from 'react'
 import Toc from './Toc.jsx'
 import LocationMap from './LocationMap.jsx'
-import SiteMap from './SiteMap.jsx'
-import { PhotoPage } from './PhotoPages.jsx'
+import { PhotoPage, FloorPlansPage } from './PhotoPages.jsx'
 import { PHOTO_PAGES } from './photos.js'
 import Divider from './Divider.jsx'
 import RegionalMap from './RegionalMap.jsx'
@@ -19,8 +18,7 @@ function CoverHero({ pageNum }) {
     <div className="page">
       <div className="cover-hero">
         <img className="cover-hero-img" src={DEAL.coverImage} alt="" />
-        <div className="cover-hero-shade" />
-        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '55%', background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.85) 100%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', left: 0, bottom: 0, width: '68%', height: '56%', background: 'radial-gradient(120% 100% at 0% 100%, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.46) 44%, rgba(0,0,0,0) 74%)', pointerEvents: 'none' }} />
         <div className="cover-hero-header">
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
@@ -129,7 +127,6 @@ function PropertyOverview({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Lot Size</span><span className="bldg-val">0.33 Acres (~14,375 SF)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Year Built / Converted</span><span className="bldg-val">Historic / 2005</span></div>
                 <div className="bldg-row"><span className="bldg-label">Stories</span><span className="bldg-val">2.5 Stories + Basement</span></div>
-                <div className="bldg-row"><span className="bldg-label">Occupancy</span><span className="bldg-val">93% (13 of 14 leased)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Parking</span><span className="bldg-val">On-Site Paved Lot</span></div>
               </div>
             </div>
@@ -180,11 +177,11 @@ function PropertyOverview({ pageNum }) {
 /* ═══════════════════ THE GRANARY (history) ═══════════════════ */
 function BuildingHistory({ pageNum }) {
   const timeline = [
-    { y: '1707', t: 'New Milford settled', b: 'The town is founded on the Housatonic River and its village center laid out around what becomes one of the longest town greens in New England.' },
-    { y: '19th c.', t: 'West Street village core', b: 'West Street develops just off the Green as part of New Milford’s commercial and agricultural heart — the setting for the building that would become The Granary.' },
-    { y: 'Historic', t: 'A working building', b: 'The structure serves its original commercial use for generations, part of the everyday fabric of the village center.' },
-    { y: 'c. 2005', t: 'Adaptive reuse', b: 'The historic building is renovated and converted to 14 modern apartments — a full second life, with a wet sprinkler system and updated mechanicals.' },
-    { y: 'Today', t: '“The Granary”', b: 'A characterful, near-fully-leased apartment building that carries its heritage name — steps from the New Milford Green.' },
+    { y: '1800s–1900s', t: 'A grain-mill complex', b: 'The Granary grows as a collection of adjoining structures — including six tall grain elevators — built along West Street between the early 1800s and the early 1900s.' },
+    { y: 'Est. 1865', t: 'T. Soule & Co.', b: 'Known as the Turney Soule Granary, the mill operates as T. Soule & Co. — Flour, Grain & Feed and Poultry Supplies — anchoring the West Street village core for generations.' },
+    { y: '20th c.', t: 'Tobacco warehouse', b: 'The complex later serves as a tobacco warehouse before falling out of use and into disrepair in the decades that follow.' },
+    { y: '2006', t: 'Award-winning restoration', b: 'Jim and Cass Hancock, a father-and-son preservation team, convert the mill into loft apartments — earning a Connecticut Trust for Historic Preservation Award of Merit.' },
+    { y: 'Today', t: '“The Granary”', b: 'A characterful, near-fully-leased building of 14 loft-style apartments that carries its heritage name — steps from the New Milford Green.' },
   ]
   return (
     <div className="page">
@@ -200,10 +197,13 @@ function BuildingHistory({ pageNum }) {
           <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
             <p style={{ fontSize: 10, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 12 }}>
               29 West Street isn&rsquo;t just another apartment building &mdash; it&rsquo;s <strong>The Granary</strong>,
-              a historic New Milford building given a second life as 14 apartments in the heart of the village center,
-              a short walk from the town Green. For a buyer, that story is a marketing asset: a named, characterful
-              building in one of Litchfield County&rsquo;s most desirable small towns that tenants are proud to call
-              home.
+              the former <strong>Turney Soule Granary</strong> (T. Soule &amp; Co., Flour, Grain &amp; Feed): a
+              collection of adjoining mill structures with six tall grain elevators, built along West Street between the
+              early 1800s and early 1900s. After a later life as a tobacco warehouse and years of disuse, it was restored
+              by preservationists <strong>Jim and Cass Hancock</strong> into loft apartments &mdash; a project honored
+              with a <strong>Connecticut Trust for Historic Preservation Award of Merit</strong>. For a buyer, that story
+              is a marketing asset: a named, award-winning building in one of Litchfield County&rsquo;s most desirable
+              small towns that tenants are proud to call home.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
               {timeline.map((e, i) => (
@@ -227,18 +227,18 @@ function BuildingHistory({ pageNum }) {
           {/* Photo + character callout */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 0 }}>
             <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', borderRadius: 3 }}>
-              <img src="/photos/exterior-1.jpg" alt="The Granary, 29 West Street, New Milford" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src="/photos/history-1.jpg" alt="T. Soule & Co. — Flour, Grain and Feed, Poultry Supplies (Est. 1865) signage on The Granary" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div className="eyebrow" style={{ marginBottom: 4 }}>Highlights</div>
             <ul className="highlights ridge-highlights">
-              <li><strong>Named, characterful building</strong> — a heritage identity with built-in brand and curb appeal</li>
-              <li><strong>Fully sprinklered &amp; updated</strong> — wet fire-suppression system and modernized mechanicals in the conversion</li>
+              <li><strong>Authentic loft interiors</strong> — nine-foot ceilings, exposed beams, and hardwood floors, in the spirit of a New York loft conversion</li>
+              <li><strong>Preservation-grade restoration</strong> — original paint colors retained and a former grain elevator repurposed as the building&rsquo;s stair tower</li>
+              <li><strong>Renovated kitchens &amp; in-unit laundry</strong> — modern appliances and a washer/dryer paired with the building&rsquo;s historic character</li>
               <li><strong>Steps from the New Milford Green</strong> — the walkable heart of the village-center demand story</li>
-              <li><strong>Adaptive-reuse character</strong> — the distinctive detail today&rsquo;s renters seek out</li>
             </ul>
             <div style={{ fontSize: 7.4, color: 'var(--stone)', lineHeight: 1.4 }}>
-              History compiled from public records and local sources; dates approximate and conversion year per
-              assessor records. Verify independently.
+              History per the Connecticut Trust for Historic Preservation (<em>Connecticut Preservation News</em>,
+              May/June 2006) and local sources; dates approximate. Verify independently.
             </div>
           </div>
         </div>
@@ -611,11 +611,11 @@ function DealContacts({ pageNum }) {
             <div className="dc-meta" style={{ fontWeight: 700 }}>bballetto@northeastpcg.com</div>
           </div>
           <div className="dc-card" style={{ border: 'none', padding: 0 }}>
-            <img className="dc-avatar" src="/photos/team/rich-edwards.png" alt="Rich Edwards Jr." style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
-            <div className="dc-name">Rich Edwards Jr.</div>
-            <div className="dc-title">Vice President, Investments</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (203) 307-1577</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>redwards@northeastpcg.com</div>
+            <img className="dc-avatar" src="/photos/team/derek-mahabir.jpg" alt="Derek Mahabir" style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
+            <div className="dc-name">Derek Mahabir</div>
+            <div className="dc-title">Investment Associate</div>
+            <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (203) 751-1187</div>
+            <div className="dc-meta" style={{ fontWeight: 700 }}>dmahabir@northeastpcg.com</div>
           </div>
         </aside>
         <section className="dc-disclaimer">
@@ -638,44 +638,47 @@ function BlackRockOverview({ pageNum }) {
       <PageHeader section="Location Overview" />
       <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
         <div style={{ flex: '0 0 56%', padding: '28px 32px 24px 40px', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-          <div className="section-title" style={{ marginBottom: 2 }}>The <span style={{ color: '#F8971D' }}>New Milford Green</span></div>
+          <div className="section-title" style={{ marginBottom: 2 }}>New <span style={{ color: '#F8971D' }}>Milford</span></div>
           <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--carbon)', letterSpacing: '0.02em', marginBottom: 8 }}>Litchfield County&rsquo;s Quintessential Village Center</div>
           <div className="title-rule" />
 
-          <div style={{ fontSize: 10.3, lineHeight: 1.5, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 9 }}>
+          <div style={{ fontSize: 11.3, lineHeight: 1.5, color: 'var(--graphite)', display: 'flex', flexDirection: 'column', gap: 9 }}>
             <p>
-              New Milford is the picture of a New England town &mdash; a historic community on the Housatonic River
-              in Litchfield County, built around one of the <strong>longest town greens in New England</strong>. The
-              village center wrapped around the Green and <strong>Bank Street</strong> is genuinely walkable: locally
-              owned restaurants and cafés, boutiques, a historic theater, a farmers&rsquo; market, and a year-round
-              calendar of town events. The Granary sits a short walk from it all, on West Street just off the Green.
+              Settled in <strong>1707</strong> on the banks of the Housatonic River, New Milford grew up around a
+              village Green that ranks among the <strong>longest in New England</strong> &mdash; an elm-lined common
+              framed by white-clapboard churches, the vintage <strong>Bank Street Theater</strong>, and three
+              centuries of historic homes. It is Litchfield County&rsquo;s largest town, yet daily life still centers
+              on a compact, genuinely walkable core: independent restaurants and cafés, boutiques, the farmers&rsquo;
+              market, and a year-round calendar of green-side fairs and events. The Granary sits a short walk from it
+              all, on West Street just off the Green.
             </p>
             <p>
-              For an investor, the appeal is scarcity and stability. New Milford is a supply-constrained small-town
-              market where quality apartments in the walkable core rarely come available &mdash; and even more rarely
-              trade. That keeps a steady, year-round pool of renters: young professionals, families, commuters, and
-              downsizers who want village-center living without a mortgage. Demand is consistent, and turnover
-              re-prices quickly to market.
+              That blend of authentic New England character and real walkability is increasingly rare &mdash; and it
+              draws a discerning, year-round renter base of young professionals, families, remote workers, and
+              downsizers who want village-center living without a mortgage. New Milford pairs small-town charm with
+              genuine connectivity: Route 7 and US-202 reach I-84 at Danbury in about 20 minutes, with Candlewood
+              Lake, the Litchfield Hills, and Metro-North toward New York at the doorstep. Quality apartments in the
+              walkable core rarely come available &mdash; and even more rarely trade.
             </p>
           </div>
 
           <div className="eyebrow" style={{ marginTop: 10, marginBottom: 6 }}>About New Milford</div>
           <ul className="highlights ridge-highlights">
-            <li>Litchfield County&rsquo;s largest town — a historic village center on the Housatonic River</li>
-            <li>Anchored by one of the longest town greens in New England</li>
-            <li>Walkable Bank Street core — independent dining, shops, café culture &amp; the Bank Street Theater</li>
-            <li>Supply-constrained rental market — durable, year-round demand and quick turnover to market</li>
-            <li>Route 7 corridor — ~15 minutes to Danbury and I-84</li>
-            <li>Metro-North access toward New York City; weekend-destination Litchfield Hills at the doorstep</li>
+            <li>Settled 1707 on the Housatonic River — Litchfield County&rsquo;s largest town (~28,000 residents)</li>
+            <li>Built around one of the longest town greens in New England — an elm-lined village common</li>
+            <li>Walkable Bank Street core — independent dining, cafés, boutiques &amp; the historic Bank Street Theater</li>
+            <li>Year-round green-side life — farmers&rsquo; market, village fairs &amp; holiday events</li>
+            <li>Candlewood Lake, the Housatonic River &amp; the Litchfield Hills at the doorstep</li>
+            <li>Route 7 / US-202 to Danbury &amp; I-84 (~20 min); Metro-North Danbury Branch toward NYC</li>
           </ul>
         </div>
 
         <div style={{ flex: '0 0 44%', display: 'flex', flexDirection: 'column', gap: 4 }}>
           <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-            <img src="/photos/area-2.jpg" alt="New Milford Green and village center" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/drone-3.jpg" alt="New Milford village center from above" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-            <img src="/photos/area-3.jpg" alt="Bank Street, New Milford" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/photos/drone-1.jpg" alt="West Street and the New Milford village center" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
         </div>
       </div>
@@ -806,44 +809,61 @@ function FairfieldTax({ pageNum }) {
 
 /* ═══════════════════ NEW MILFORD / LITCHFIELD COUNTY ═══════════════════ */
 function FairfieldCounty({ pageNum }) {
+  const employers = [
+    { label: 'New Milford (local)', items: 'New Milford Hospital (Nuvance Health), the public school district and town government, and Route 7 corridor retail and services anchor the local job base.' },
+    { label: 'Greater Danbury (~20 min south)', items: 'Danbury Hospital (Nuvance Health), Boehringer Ingelheim in nearby Ridgefield, corporate offices (Ethan Allen, Cartus), and Western Connecticut State University — a deep metro job market down Route 7.' },
+    { label: 'Litchfield County & the region', items: 'The Litchfield Hills tourism and second-home economy, plus I-84 and Metro-North access to the Waterbury, Stamford, and New York markets.' },
+  ]
   return (
     <div className="page">
       <PageHeader section="Location Overview" />
       <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
-        <div style={{ flex: '0 0 55%', padding: '28px 32px 24px 40px', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div style={{ flex: '0 0 55%', padding: '24px 32px 18px 40px', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
           <div className="section-title" style={{ marginBottom: 2 }}>New Milford in <span style={{ color: '#F8971D' }}>Litchfield County</span></div>
           <div className="title-rule" />
-          <div style={{ fontSize: 10.3, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 14 }}>
-            <p style={{ marginBottom: 8 }}>New Milford sits in Litchfield County — Connecticut&rsquo;s scenic northwest corner, known for its historic villages, rolling farmland, and the Litchfield Hills weekend-destination economy. The county pairs small-town New England character with proximity to the Danbury and greater New York metro job markets, drawing both year-round residents and second-home owners.</p>
-            <p>New Milford is the county&rsquo;s largest town and one of its primary service centers — anchored by a walkable historic village around the Green, New Milford Hospital, a strong school district, and employers along the Route 7 corridor. Quality rental housing in the village core is scarce, which keeps demand for well-located apartments like The Granary deep and durable.</p>
+          <div style={{ fontSize: 10.2, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
+            <p>New Milford is Litchfield County&rsquo;s largest town and a primary service center for Connecticut&rsquo;s scenic northwest corner — pairing historic-village character and the Litchfield Hills weekend economy with proximity to the Danbury and New York job markets. Quality rentals in the walkable village core are scarce, keeping demand for apartments like The Granary durable.</p>
           </div>
 
           <div className="eyebrow" style={{ marginBottom: 6 }}>Demographics — Town of New Milford vs. Litchfield County</div>
-          <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
-            <table className="data-table" style={{ fontSize: 11, height: '100%' }}>
-              <thead>
-                <tr>
-                  <th>Metric</th>
-                  <th style={{ textAlign: 'right' }}>Town of New Milford</th>
-                  <th style={{ textAlign: 'right' }}>Litchfield County</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Population</td><td style={{ textAlign: 'right' }}>~28,100</td><td style={{ textAlign: 'right' }}>~185,000</td></tr>
-                <tr><td>Households</td><td style={{ textAlign: 'right' }}>~11,000</td><td style={{ textAlign: 'right' }}>~76,000</td></tr>
-                <tr><td>Median HH Income</td><td style={{ textAlign: 'right' }}>~$99,000</td><td style={{ textAlign: 'right' }}>~$88,000</td></tr>
-                <tr><td>Renter-Occupied</td><td style={{ textAlign: 'right' }}>~26%</td><td style={{ textAlign: 'right' }}>~24%</td></tr>
-                <tr><td>Median Age</td><td style={{ textAlign: 'right' }}>~44</td><td style={{ textAlign: 'right' }}>~47</td></tr>
-              </tbody>
-            </table>
+          <table className="data-table" style={{ fontSize: 10.3, marginBottom: 8 }}>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th style={{ textAlign: 'right' }}>Town of New Milford</th>
+                <th style={{ textAlign: 'right' }}>Litchfield County</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Population</td><td style={{ textAlign: 'right' }}>~28,100</td><td style={{ textAlign: 'right' }}>~185,000</td></tr>
+              <tr><td>Households</td><td style={{ textAlign: 'right' }}>~11,000</td><td style={{ textAlign: 'right' }}>~76,000</td></tr>
+              <tr><td>Median HH Income</td><td style={{ textAlign: 'right' }}>~$99,000</td><td style={{ textAlign: 'right' }}>~$88,000</td></tr>
+              <tr><td>Renter-Occupied</td><td style={{ textAlign: 'right' }}>~26%</td><td style={{ textAlign: 'right' }}>~24%</td></tr>
+              <tr><td>Median Age</td><td style={{ textAlign: 'right' }}>~44</td><td style={{ textAlign: 'right' }}>~47</td></tr>
+            </tbody>
+          </table>
+          <div style={{ fontSize: 7.4, color: 'var(--stone)', marginBottom: 8, lineHeight: 1.35 }}>
+            Source: U.S. Census ACS 5-Year Estimates (approximate; verify independently).
           </div>
-          <div style={{ fontSize: 8, color: 'var(--stone)', marginTop: 8, lineHeight: 1.4 }}>
-            New Milford combines above-county household incomes with a scarce supply of quality in-town rentals,
-            supporting durable apartment demand in the village center. Source: U.S. Census ACS 5-Year Estimates
-            (approximate; verify independently).
+
+          <div className="eyebrow" style={{ marginBottom: 6 }}>Major Area Employers</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 9, flex: 1, justifyContent: 'space-between' }}>
+            {employers.map(g => (
+              <div key={g.label} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 12 }}>
+                <div style={{ fontSize: 9.8, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3 }}>{g.label}</div>
+                <div style={{ fontSize: 9.1, lineHeight: 1.45, color: 'var(--graphite)' }}>{g.items}</div>
+              </div>
+            ))}
           </div>
         </div>
-        <div style={{ flex: '0 0 45%', position: 'relative' }}><img src="/photos/area-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>
+        <div style={{ flex: '0 0 45%', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+            <img src="/photos/divider.jpg" alt="Aerial of New Milford village center and the Housatonic River valley" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+            <img src="/photos/drone-4.jpg" alt="New Milford and the Litchfield Hills from above" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+        </div>
       </div>
       <PageFooter pageNum={pageNum} />
     </div>
@@ -904,36 +924,32 @@ function App() {
     <Toc />,
     <DealContacts />,
     <ExecutiveSummary />,
-    <Divider eyebrow="01" title="The Property" image="/photos/ext-1.jpg" />,
+    <Divider eyebrow="01" title="The Property" image="/photos/divider.jpg" />,
     <PropertyOverview />,
     <BuildingHistory />,
-    <SiteMap />,
     ...PHOTO_PAGES.map(p => <PhotoPage {...p} />),
-    <Divider eyebrow="02" title="Financial Analysis" image="/photos/ext-2.jpg" />,
+    <FloorPlansPage
+      section="Floor Plans"
+      title="Representative" accent="Unit Floor Plans"
+      subtitle="Sample layouts across the unit mix — one- and two-bedroom flats plus a two-story townhome"
+      plans={[
+        { src: '/photos/floorplans/fp-103.jpg', unit: 'Unit 103', type: '2 Bed / 1 Bath' },
+        { src: '/photos/floorplans/fp-105.jpg', unit: 'Unit 105', type: '2 Bed Townhome · two-story' },
+        { src: '/photos/floorplans/fp-202.jpg', unit: 'Unit 202', type: '2 Bed / 1 Bath' },
+        { src: '/photos/floorplans/fp-204.jpg', unit: 'Unit 204', type: '1 Bed / 1 Bath' },
+      ]}
+      note="Floor plans are representative; individual unit layouts and dimensions vary. Measurements deemed reliable but not guaranteed."
+    />,
+    <Divider eyebrow="02" title="Financial Analysis" image="/photos/divider.jpg" />,
     <RentRoll />,
     <IncomeExpense />,
-    <ManagementTransition />,
-    <Divider eyebrow="03" title="Location & Market" image="/photos/aerial-1.jpg" />,
+    <Divider eyebrow="03" title="Location & Market" image="/photos/divider.jpg" />,
     <BlackRockOverview />,
-    <WhyBlackRock />,
-    <FairfieldTax />,
-    <AerialContext src="/photos/aerial-2.jpg" points={[
-      { x: 50, y: 78, label: '29 West Street', primary: true },
-      { x: 38, y: 34, title: 'Village Center', label: 'New Milford Green\nBank Street\nBank Street Theater\nRailroad Station\nFarmers’ Market' },
-      { x: 72, y: 40, label: 'New Milford Green' },
-      { x: 50, y: 92, kind: 'street', angle: -6, label: 'West Street' },
-    ]} />,
-    <AerialContext src="/photos/aerial-3.jpg" points={[
-      { x: 48, y: 80, label: '29 West Street', primary: true },
-      { x: 60, y: 36, label: 'Housatonic River' },
-      { x: 28, y: 44, label: 'New Milford Green' },
-      { x: 78, y: 60, label: 'Route 7 Corridor' },
-    ]} />,
     <LocationMap />,
     <DriveTimeMap />,
     <FairfieldCounty />,
     <RegionalMap />,
-    <Divider eyebrow="04" title="The Team" image="/photos/parcel-1.jpg" />,
+    <Divider eyebrow="04" title="The Team" image="/photos/divider.jpg" />,
     <TeamPage />,
     <LocationsPage />,
   ]
