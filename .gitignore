@@ -13,3 +13,8 @@ om-exports/
 
 # Source photo drops
 /Links 3/
+
+# Local photo backups + scratch
+.photos-backup/
+**/.photos-backup/
+sssssss.txt

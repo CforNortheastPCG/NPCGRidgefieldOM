@@ -27,48 +27,51 @@ export const MAP_CATEGORIES = [
   { heading: 'Village, Shops & Culture', label: 'Village & Culture', color: '0x884EA0', swatch: '#884EA0' },
   { heading: 'Parks & Recreation', label: 'Parks & Recreation', color: '0x1E8449', swatch: '#1E8449' },
   { heading: 'Grocery & Markets', label: 'Grocery & Markets', color: '0x2471A3', swatch: '#2471A3' },
-  { heading: 'Daily Needs & Healthcare', label: 'Daily Needs', color: '0xB55D37', swatch: '#B55D37' },
+  { heading: 'Retail, Daily Needs & Healthcare', label: 'Retail & Daily Needs', color: '0xB55D37', swatch: '#B55D37' },
 ]
 
 export const DIRECTORY = [
   {
     heading: 'Dining — Bank Street & the Green',
     items: [
-      { name: 'Bank Street Tavern', note: 'Bank St · Neighborhood pub', lat: 41.57746, lng: -73.41181 },
-      { name: 'Salsa Restaurant', note: 'Railroad St · Latin American', lat: 41.57692, lng: -73.41264 },
-      { name: '59 Bank', note: 'Bank St · American bistro', lat: 41.57719, lng: -73.41248 },
-      { name: 'The Cookhouse', note: 'Danbury Rd (Rte 7) · BBQ', lat: 41.57033, lng: -73.41438 },
+      { name: 'Sparrow Bar & Restaurant', note: '31 Bank St · Global small plates', lat: 41.5773683, lng: -73.4117965 },
+      { name: 'Lucia Ristorante', note: '51 Bank St · Italian', lat: 41.5771958, lng: -73.4124737 },
+      { name: 'La Piccolina', note: '27 Main St · Italian, on the Green', lat: 41.5779930, lng: -73.4114395 },
+      { name: 'Cowboy Butter', note: '59 Bank St · American', lat: 41.5773745, lng: -73.4120694 },
+      { name: 'Yokohama Japanese Restaurant', note: '131 Danbury Rd · Sushi', lat: 41.5559667, lng: -73.4164457 },
     ],
   },
   {
     heading: 'Village, Shops & Culture',
     items: [
-      { name: 'New Milford Green', note: 'Historic town green & events', lat: 41.57792, lng: -73.41084 },
-      { name: 'Bank Street Theater', note: 'Bank St · Cinema & events', lat: 41.57752, lng: -73.41229 },
-      { name: 'Bank Street Book Nook', note: 'Bank St · Independent bookstore', lat: 41.57752, lng: -73.41194 },
+      { name: 'New Milford Green', note: 'Historic town green & events', lat: 41.5783758, lng: -73.4114703 },
+      { name: 'Bank Street Theater', note: '46 Bank St · Cinema & events', lat: 41.5777087, lng: -73.4123486 },
+      { name: 'Bank Street Book Nook', note: '36 Bank St · Independent bookstore', lat: 41.5775000, lng: -73.4121000 },
     ],
   },
   {
     heading: 'Parks & Recreation',
     items: [
-      { name: 'Young’s Field & River Walk', note: 'Housatonic riverfront park', lat: 41.57898, lng: -73.41615 },
-      { name: 'Lynn Deming Park', note: 'Candlewood Lake beach · ~10 min', lat: 41.56996, lng: -73.44031 },
-      { name: 'Harrybrooke Park', note: 'Riverside park & trails', lat: 41.54064, lng: -73.41201 },
+      { name: 'Young’s Field & River Walk', note: 'Housatonic riverfront park', lat: 41.5769078, lng: -73.4145178 },
+      { name: 'Lynn Deming Park', note: 'Candlewood Lake beach · ~10 min', lat: 41.5706500, lng: -73.4390108 },
+      { name: 'Harrybrooke Park', note: 'Riverside park & trails', lat: 41.5369736, lng: -73.4148304 },
     ],
   },
   {
     heading: 'Grocery & Markets',
     items: [
       { name: 'New Milford Farmers’ Market', note: 'The Green · Seasonal', lat: 41.57810, lng: -73.41100 },
-      { name: 'Big Y World Class Market', note: 'Danbury Rd · Supermarket', lat: 41.56827, lng: -73.41443 },
-      { name: 'Stop & Shop', note: 'Danbury Rd · Supermarket', lat: 41.55037, lng: -73.41920 },
+      { name: 'Big Y World Class Market', note: '1 Kent Rd · Supermarket', lat: 41.5739910, lng: -73.4197424 },
+      { name: 'Stop & Shop', note: '180 Danbury Rd · Supermarket', lat: 41.5505503, lng: -73.4192926 },
     ],
   },
   {
-    heading: 'Daily Needs & Healthcare',
+    heading: 'Retail, Daily Needs & Healthcare',
     items: [
+      { name: 'Walmart Supercenter', note: '164 Danbury Rd (Rte 7)', lat: 41.5520315, lng: -73.4197505 },
+      { name: 'The Home Depot', note: '104 Danbury Rd (Rte 7)', lat: 41.5594928, lng: -73.4176963 },
       { name: 'New Milford Hospital', note: 'Elm St · Nuvance Health', lat: 41.58181, lng: -73.40977 },
-      { name: 'CVS Pharmacy', note: 'Danbury Rd (Rte 7)', lat: 41.55286, lng: -73.41938 },
+      { name: 'CVS Pharmacy', note: '40 East St · Pharmacy', lat: 41.5793367, lng: -73.4077013 },
     ],
   },
 ]

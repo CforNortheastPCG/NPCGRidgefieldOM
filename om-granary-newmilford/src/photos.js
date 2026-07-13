@@ -30,33 +30,33 @@ export const PHOTO_PAGES = [
     ],
   },
   {
-    section: 'Property Photos', title: 'Townhome', accent: 'Units',
-    subtitle: 'Units 105 & 106 · two-bedroom townhomes · ~1,060 SF each',
-    rows: [1, 2], // one wide photo on top, two below
+    section: 'Property Photos', title: 'Unit 103', accent: '· Two-Bedroom',
+    subtitle: 'Representative two-bedroom flat — living, kitchen, bedroom & bath',
     images: [
-      { src: '/photos/comm-1.jpg', caption: 'Townhome Living Area' },
-      { src: '/photos/comm-2.jpg', caption: 'Two-Story Layout' },
-      { src: '/photos/comm-3.jpg', caption: 'Townhome Kitchen' },
+      { src: '/photos/unit103-1.jpg', caption: 'Living Area' },
+      { src: '/photos/unit103-2.jpg', caption: 'Kitchen' },
+      { src: '/photos/unit103-3.jpg', caption: 'Bedroom' },
+      { src: '/photos/unit103-4.jpg', caption: 'Full Bath' },
     ],
   },
   {
-    section: 'Property Photos', title: 'Unit', accent: 'Interiors',
-    subtitle: 'Representative renovated apartments — living & kitchens',
+    section: 'Property Photos', title: 'Unit 105', accent: '· Two-Bedroom Townhome',
+    subtitle: 'Representative two-story townhome — living, dining, bedroom & bath',
     images: [
-      { src: '/photos/apt-1.jpg', caption: 'Living Area' },
-      { src: '/photos/apt-2.jpg', caption: 'Kitchen' },
-      { src: '/photos/apt-3.jpg', caption: 'Open-Concept Living' },
-      { src: '/photos/apt-4.jpg', caption: 'Updated Kitchen' },
+      { src: '/photos/unit105-1.jpg', caption: 'Living Area & Stair' },
+      { src: '/photos/unit105-2.jpg', caption: 'Dining Area' },
+      { src: '/photos/unit105-3.jpg', caption: 'Bedroom' },
+      { src: '/photos/unit105-4.jpg', caption: 'Full Bath' },
     ],
   },
   {
-    section: 'Property Photos', title: 'Unit', accent: 'Interiors',
-    subtitle: 'Representative renovated apartments — bedrooms & baths',
+    section: 'Property Photos', title: 'Unit 204', accent: '· One-Bedroom',
+    subtitle: 'Representative one-bedroom flat — living, kitchen, bedroom & bath',
     images: [
-      { src: '/photos/apt-5.jpg', caption: 'Bedroom' },
-      { src: '/photos/apt-6.jpg', caption: 'Primary Bedroom' },
-      { src: '/photos/apt-7.jpg', caption: 'Full Bath' },
-      { src: '/photos/apt-8.jpg', caption: 'Renovated Interior' },
+      { src: '/photos/unit204-1.jpg', caption: 'Living Area' },
+      { src: '/photos/unit204-2.jpg', caption: 'Kitchen' },
+      { src: '/photos/unit204-3.jpg', caption: 'Bedroom' },
+      { src: '/photos/unit204-4.jpg', caption: 'Full Bath' },
     ],
   },
   {
@@ -70,7 +70,7 @@ export const PHOTO_PAGES = [
     ],
   },
   {
-    section: 'Property Photos', title: 'Basement, Storage', accent: '& Systems',
+    section: 'Property Photos', title: 'Storage Space', accent: '& Mechanicals',
     subtitle: 'Building systems, tenant storage & extra usable space',
     images: [
       { src: '/photos/vault-1.jpg', caption: 'Storage Area' },
@@ -78,6 +78,6 @@ export const PHOTO_PAGES = [
       { src: '/photos/storage-1.jpg', caption: 'Tenant Storage' },
       { src: '/photos/basement-2.jpg', caption: 'Building Systems' },
     ],
-    note: 'The building is fully sprinklered (wet system) with oil-fired forced-air heat and central AC.',
+    note: 'The building is fully sprinklered (wet system) with tenant-paid electric heat and central AC.',
   },
 ]

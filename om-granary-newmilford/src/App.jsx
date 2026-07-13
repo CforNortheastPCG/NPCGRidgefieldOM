@@ -18,7 +18,7 @@ function CoverHero({ pageNum }) {
     <div className="page">
       <div className="cover-hero">
         <img className="cover-hero-img" src={DEAL.coverImage} alt="" />
-        <div style={{ position: 'absolute', left: 0, bottom: 0, width: '68%', height: '56%', background: 'radial-gradient(120% 100% at 0% 100%, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.46) 44%, rgba(0,0,0,0) 74%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', left: 0, bottom: 0, width: '78%', height: '72%', background: 'radial-gradient(130% 110% at 0% 100%, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.32) 60%, rgba(0,0,0,0) 82%)', pointerEvents: 'none' }} />
         <div className="cover-hero-header">
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
@@ -41,7 +41,7 @@ function ExecutiveSummary({ pageNum }) {
   const stats = [
     { v: '$3,500,000', l: 'Asking Price' },
     { v: '14', l: 'Apartments' },
-    { v: '5.95%', l: 'Current Cap Rate' },
+    { v: '6.00%', l: 'Current Cap Rate' },
     { v: '$250,000', l: 'Price / Unit' },
   ]
   return (
@@ -61,33 +61,30 @@ function ExecutiveSummary({ pageNum }) {
                 </div>
               ))}
             </div>
-            <p style={{ fontSize: 9.2, lineHeight: 1.35, marginBottom: 6 }}>
-              Northeast Private Client Group is pleased to present <strong>The Granary</strong>, a 14-unit
-              adaptive-reuse apartment building at 29 West Street &mdash; steps from the historic{' '}
-              <strong>New Milford Green</strong> in the heart of Litchfield County&rsquo;s most charming village center.
+            <p style={{ fontSize: 10.7, lineHeight: 1.4, marginBottom: 8 }}>
+              Northeast Private Client Group is pleased to present the exclusive listing of <strong>The Granary</strong>,
+              a <strong>14-unit multifamily property</strong> located in New Milford, Connecticut. The property offers a
+              well-balanced unit mix of seven one-bedroom units, five two-bedroom units, and two two-bedroom townhome
+              units &mdash; providing new ownership with diversified tenant appeal across household sizes and price points.
             </p>
-            <p style={{ fontSize: 9.2, lineHeight: 1.35, marginBottom: 6 }}>
-              The property comprises <strong>14 renovated apartments</strong> &mdash; a deep, rentable mix of seven
-              one-bedrooms, five two-bedrooms, and two two-bedroom townhomes. A historic West Street building
-              converted to residential use, The Granary is a fully sprinklered, characterful walk-up that is{' '}
-              <strong>93% occupied</strong> (13 of 14) and produces durable income in a supply-constrained,
-              high-demand small-town rental market.
+            <p style={{ fontSize: 10.7, lineHeight: 1.4, marginBottom: 8 }}>
+              Originally built as the Turney Soule granary complex in the 1800s and thoughtfully redeveloped into
+              residential lofts, The Granary combines the durability and character of historic construction with the
+              operating simplicity of a boutique multifamily asset. Loft-style interiors, exposed beams, and hardwood
+              floors distinguish the property from typical garden-style competition in the submarket. Units feature
+              central air conditioning throughout, with heat and hot water provided by separately metered, tenant-paid
+              electric service; water is sub-metered and tenant-paid as well &mdash; a mechanical and utility structure
+              that minimizes owner-side operating expense exposure. Twelve of the fourteen units include in-unit
+              washer/dryers, with a coin-operated laundry facility in the basement serving the remaining units.
             </p>
-            <p style={{ fontSize: 9.2, lineHeight: 1.35, marginBottom: 6 }}>
-              The investment thesis is straightforward mark-to-market. In-place rents sit roughly{' '}
-              <strong>$26,300 per year below market</strong>, with one vacant townhome ready to lease; as units turn
-              to prevailing New Milford rents, pro-forma NOI grows about <strong>11%</strong> from $208,130 to
-              $231,848 &mdash; lifting the going-in yield from a <strong>5.95% cap to 6.62%</strong> without
-              speculative assumptions. New Milford&rsquo;s walkable village core and Litchfield County scarcity keep
-              renter demand deep and occupancy tight through every cycle.
+            <p style={{ fontSize: 10.7, lineHeight: 1.4, marginBottom: 8 }}>
+              The Granary offers a rare combination in the Fairfield/Litchfield County submarket: a{' '}
+              <strong>fully stabilized</strong>, architecturally distinct property in a walkable downtown location,
+              positioned for a new owner following New Milford&rsquo;s completed town-wide revaluation. With new tax
+              assessments effective <strong>July 1, 2026</strong>, buyers can underwrite the property&rsquo;s go-forward
+              tax basis with certainty. In-place rents also sit <strong>meaningfully below market</strong>, offering a
+              new owner straightforward upside with no renovation or capital investment required to achieve it.
             </p>
-            <div className="eyebrow" style={{ marginBottom: 6 }}>Investment Highlights</div>
-            <ul className="highlights ridge-highlights" style={{ flex: 1, justifyContent: 'space-between' }}>
-              <li><strong>Embedded Mark-to-Market Upside</strong> — In-place rents ~$26,300/yr below market; pro-forma NOI grows ~11% to $231,848 (6.62% cap)</li>
-              <li><strong>Immediate Lease-Up Upside</strong> — One vacant two-bedroom townhome ready to lease adds day-one income</li>
-              <li><strong>Historic Adaptive Reuse On the Green</strong> — Characterful, fully sprinklered building in New Milford&rsquo;s walkable village center</li>
-              <li><strong>Litchfield County Scarcity</strong> — Supply-constrained small-town market with durable, year-round renter demand</li>
-            </ul>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minHeight: 0 }}>
@@ -126,16 +123,17 @@ function PropertyOverview({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Net Rentable SF</span><span className="bldg-val">10,155 SF</span></div>
                 <div className="bldg-row"><span className="bldg-label">Lot Size</span><span className="bldg-val">0.33 Acres (~14,375 SF)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Year Built / Converted</span><span className="bldg-val">Historic / 2005</span></div>
-                <div className="bldg-row"><span className="bldg-label">Stories</span><span className="bldg-val">2.5 Stories + Basement</span></div>
-                <div className="bldg-row"><span className="bldg-label">Parking</span><span className="bldg-val">On-Site Paved Lot</span></div>
+                <div className="bldg-row"><span className="bldg-label">Stories</span><span className="bldg-val">3 Stories + Basement</span></div>
+                <div className="bldg-row"><span className="bldg-label">Parking</span><span className="bldg-val">On-Site Paved Lot (25 Spaces)</span></div>
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Utilities &amp; Mechanicals</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Heating / AC</span><span className="bldg-val">Oil-fired forced hot air · central AC</span></div>
-                <div className="bldg-row"><span className="bldg-label">Electric</span><span className="bldg-val">Tenant-metered units · house meter common areas</span></div>
-                <div className="bldg-row"><span className="bldg-label">Water / Sewer / Trash</span><span className="bldg-val">Municipal · owner-paid (sub-metering = upside)</span></div>
+                <div className="bldg-row"><span className="bldg-label">Heating / AC</span><span className="bldg-val">Electric Heat · Central AC</span></div>
+                <div className="bldg-row"><span className="bldg-label">Electric</span><span className="bldg-val">Tenant-Metered Units · House-Metered Common Areas</span></div>
+                <div className="bldg-row"><span className="bldg-label">Water / Sewer</span><span className="bldg-val">Municipal · Units Sub-Metered</span></div>
+                <div className="bldg-row"><span className="bldg-label">Trash</span><span className="bldg-val">Landlord-Paid (Not Municipal)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Fire Protection</span><span className="bldg-val">Full wet sprinkler system</span></div>
               </div>
             </div>
@@ -304,20 +302,20 @@ function RentRoll({ pageNum }) {
   // the 29 West Street (The Granary) analysis workbook, as of 07/06/2026.
   // Unit 105 (townhome) is currently vacant, shown at its $2,250 asking rent.
   const units = [
-    { unit: '101', type: '1BR / 1BA', sqft: 660, inPlace: 1775, market: 1780, proforma: 1850 },
-    { unit: '102', type: '2BR / 1BA', sqft: 790, inPlace: 2000, market: 2000, proforma: 2100 },
-    { unit: '103', type: '2BR / 1BA', sqft: 750, inPlace: 1950, market: 2000, proforma: 2100 },
-    { unit: '104', type: '1BR / 1BA', sqft: 620, inPlace: 1695, market: 1780, proforma: 1850 },
+    { unit: '101', type: '1BR / 1BA', sqft: 660, inPlace: 1775, market: 1780, proforma: 1900 },
+    { unit: '102', type: '2BR / 1BA', sqft: 790, inPlace: 2000, market: 2000, proforma: 2200 },
+    { unit: '103', type: '2BR / 1BA', sqft: 750, inPlace: 1950, market: 2000, proforma: 2200 },
+    { unit: '104', type: '1BR / 1BA', sqft: 620, inPlace: 1695, market: 1780, proforma: 1900 },
     { unit: '105', type: '2BR Townhome', sqft: 1060, inPlace: 2250, market: 2250, proforma: 2400 },
     { unit: '106', type: '2BR Townhome', sqft: 1060, inPlace: 2230, market: 2250, proforma: 2400 },
-    { unit: '201', type: '1BR / 1BA', sqft: 660, inPlace: 1730, market: 1780, proforma: 1850 },
-    { unit: '202', type: '2BR / 1BA', sqft: 790, inPlace: 1940, market: 2000, proforma: 2100 },
-    { unit: '203', type: '2BR / 1BA', sqft: 750, inPlace: 1930, market: 2000, proforma: 2100 },
-    { unit: '204', type: '1BR / 1BA', sqft: 620, inPlace: 1780, market: 1780, proforma: 1850 },
-    { unit: '301', type: '1BR / 1BA', sqft: 610, inPlace: 1650, market: 1780, proforma: 1850 },
-    { unit: '302', type: '2BR / 1BA', sqft: 765, inPlace: 1930, market: 2000, proforma: 2100 },
-    { unit: '303', type: '1BR / 1BA', sqft: 520, inPlace: 1675, market: 1780, proforma: 1850 },
-    { unit: '304', type: '1BR / 1BA', sqft: 500, inPlace: 1525, market: 1780, proforma: 1850 },
+    { unit: '201', type: '1BR / 1BA', sqft: 660, inPlace: 1730, market: 1780, proforma: 1900 },
+    { unit: '202', type: '2BR / 1BA', sqft: 790, inPlace: 1940, market: 2000, proforma: 2200 },
+    { unit: '203', type: '2BR / 1BA', sqft: 750, inPlace: 1930, market: 2000, proforma: 2200 },
+    { unit: '204', type: '1BR / 1BA', sqft: 620, inPlace: 1780, market: 1780, proforma: 1900 },
+    { unit: '301', type: '1BR / 1BA', sqft: 610, inPlace: 1650, market: 1780, proforma: 1900 },
+    { unit: '302', type: '2BR / 1BA', sqft: 765, inPlace: 1930, market: 2000, proforma: 2200 },
+    { unit: '303', type: '1BR / 1BA', sqft: 520, inPlace: 1675, market: 1675, proforma: 1700 },
+    { unit: '304', type: '1BR / 1BA', sqft: 500, inPlace: 1525, market: 1675, proforma: 1700 },
   ]
   const totSqft = units.reduce((s, u) => s + u.sqft, 0)
   const totIn = units.reduce((s, u) => s + u.inPlace, 0)
@@ -370,7 +368,7 @@ function RentRoll({ pageNum }) {
         </table>
         <div style={{ fontSize: 7.6, color: 'var(--stone)', marginTop: 4, lineHeight: 1.4 }}>
           Monthly figures. In-Place = current contract rent; Market = highest achieved on a comparable unit;
-          Pro Forma = stabilized mark-to-market target. Total In-Place $312,720/yr; Pro Forma $339,000/yr.
+          Pro Forma = stabilized mark-to-market target. Total In-Place $312,720/yr; Pro Forma $344,400/yr.
           &nbsp;* Unit 105 (townhome) is currently vacant, shown at its $2,250 asking rent. Units 303 &amp; 304
           are studio-sized, functional one-bedrooms.
         </div>
@@ -383,7 +381,7 @@ function RentRoll({ pageNum }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, flex: 1, justifyContent: 'center' }}>
               {[
                 { label: 'In-Place', monthly: '$26,060', avg: '$1,861 avg / unit', color: '#3F4753' },
-                { label: 'Market (High Achieved)', monthly: '$26,960', avg: '$1,926 avg / unit', color: '#6B7A8F' },
+                { label: 'Market (High Achieved)', monthly: '$26,750', avg: '$1,911 avg / unit', color: '#6B7A8F' },
               ].map(r => (
                 <div key={r.label} style={{ borderLeft: `3px solid ${r.color}`, paddingLeft: 10 }}>
                   <div style={{ fontSize: 8.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--stone)' }}>{r.label}</div>
@@ -393,8 +391,8 @@ function RentRoll({ pageNum }) {
               ))}
               <div style={{ borderTop: '1px solid var(--border)', paddingTop: 9, marginTop: 1 }}>
                 <div style={{ fontSize: 8.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--golden)' }}>Pro Forma</div>
-                <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1.1 }}>$28,250<span style={{ fontSize: 9, fontWeight: 600, color: 'var(--stone)' }}> /mo</span></div>
-                <div style={{ fontSize: 8.5, color: 'var(--stone)', fontWeight: 600 }}>$339,000 / yr &middot; 93% occupied</div>
+                <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1.1 }}>$28,700<span style={{ fontSize: 9, fontWeight: 600, color: 'var(--stone)' }}> /mo</span></div>
+                <div style={{ fontSize: 8.5, color: 'var(--stone)', fontWeight: 600 }}>$344,400 / yr &middot; 93% occupied</div>
               </div>
             </div>
           </div>
@@ -422,8 +420,8 @@ function IncomeExpense({ pageNum }) {
   )
 
   const noi = [
-    { label: 'NOI — Current (In-Place)', val: '$208,130' },
-    { label: 'NOI — Pro Forma', val: '$231,848' },
+    { label: 'NOI — Current (In-Place)', val: '$209,930' },
+    { label: 'NOI — Pro Forma', val: '$238,521' },
   ]
 
   return (
@@ -454,11 +452,11 @@ function IncomeExpense({ pageNum }) {
           </thead>
           <tbody>
             {[
-              ['Gross Potential Rent', '$339,000', '$24,214', '$339,000', '$24,214', false],
-              ['Loss to Lease (below market)', '-$26,280', '-$1,877', '$0', '$0', false],
-              ['Gross Scheduled Rent', '$312,720', '$22,337', '$339,000', '$24,214', true],
-              ['Vacancy & Collections Loss (5%)', '-$15,636', '-$1,117', '-$16,950', '-$1,211', false],
-              ['Effective Rental Income', '$297,084', '$21,220', '$322,050', '$23,004', true],
+              ['Gross Potential Rent', '$344,400', '$24,600', '$344,400', '$24,600', false],
+              ['Loss to Lease (below market)', '-$31,680', '-$2,263', '$0', '$0', false],
+              ['Gross Scheduled Rent', '$312,720', '$22,337', '$344,400', '$24,600', true],
+              ['Vacancy & Collections Loss (5%)', '-$15,636', '-$1,117', '-$17,220', '-$1,230', false],
+              ['Effective Rental Income', '$297,084', '$21,220', '$327,180', '$23,370', true],
               ['Other Income (laundry, storage, fees)', '$4,685', '$335', '$4,685', '$335', false],
             ].map(([label, ...cells]) => {
               const bold = cells.pop()
@@ -469,7 +467,7 @@ function IncomeExpense({ pageNum }) {
                 </tr>
               )
             })}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$301,769</td><td style={totBg}>$21,555</td><td style={totBg}>$326,735</td><td style={totBg}>$23,338</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$301,769</td><td style={totBg}>$21,555</td><td style={totBg}>$331,865</td><td style={totBg}>$23,705</td></tr>
           </tbody>
         </table>
 
@@ -486,13 +484,13 @@ function IncomeExpense({ pageNum }) {
           <tbody>
             {[
               ['Real Estate Taxes', '$31,260', '$2,233', '$31,260', '$2,233'],
-              ['Property Management (5%)', '$15,088', '$1,078', '$16,337', '$1,167'],
+              ['Property Management (5%)', '$15,088', '$1,078', '$16,593', '$1,185'],
               ['Property Insurance', '$16,299', '$1,164', '$16,299', '$1,164'],
               ['Water & Sewer', '$8,614', '$615', '$8,614', '$615'],
               ['Electric (Common)', '$2,222', '$159', '$2,222', '$159'],
               ['Trash Removal', '$2,321', '$166', '$2,321', '$166'],
               ['Repairs & Maintenance', '$7,000', '$500', '$7,000', '$500'],
-              ['Landscaping / Snow', '$6,000', '$429', '$6,000', '$429'],
+              ['Landscaping / Snow', '$4,200', '$300', '$4,200', '$300'],
               ['Property Lease', '$4,834', '$345', '$4,834', '$345'],
             ].map(([label, ...cells], i) => (
               <tr key={label} style={i % 2 === 1 ? { background: 'var(--linen)' } : undefined}>
@@ -500,16 +498,10 @@ function IncomeExpense({ pageNum }) {
                 {cells.map((c, j) => <td key={j} style={tds}>{c}</td>)}
               </tr>
             ))}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expenses</td><td style={totBg}>$93,639</td><td style={totBg}>$6,689</td><td style={totBg}>$94,887</td><td style={totBg}>$6,778</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$208,130</td><td style={noiBg}>5.95% Cap</td><td style={noiBg}>$231,848</td><td style={noiBg}>6.62% Cap</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expenses</td><td style={totBg}>$91,839</td><td style={totBg}>$6,560</td><td style={totBg}>$93,344</td><td style={totBg}>$6,667</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$209,930</td><td style={noiBg}>6.00% Cap</td><td style={noiBg}>$238,521</td><td style={noiBg}>6.81% Cap</td></tr>
           </tbody>
         </table>
-        <div style={{ fontSize: 7.6, color: 'var(--stone)', marginTop: 2, lineHeight: 1.4 }}>
-          Current reflects in-place rents (Unit 105 modeled at asking); Pro Forma marks the 14 apartments to market
-          (+$26,280/yr). Expense ratio 31.0% (Current) / 29.0% (Pro Forma). Caps on the $3,500,000 asking price.
-          Property Lease reflects an existing land/parking lease. Property management and a 5% vacancy factor are
-          underwriting assumptions and may differ from current owner operations.
-        </div>
       </div>
       <PageFooter pageNum={pageNum} />
     </div>
@@ -523,12 +515,12 @@ function ManagementTransition({ pageNum }) {
   // analysis workbook + 2025 QuickBooks P&L.
   const bars = [
     { m: 'T-12 Actual (2025)', noi: 146354, color: '#6B7A8F' },
-    { m: 'Current (In-Place)', noi: 208130, color: '#3F4753' },
-    { m: 'Pro Forma (Market)', noi: 231848, color: '#F8971D' },
+    { m: 'Current (In-Place)', noi: 209930, color: '#3F4753' },
+    { m: 'Pro Forma (Market)', noi: 238521, color: '#F8971D' },
   ]
   const maxNoi = Math.max(...bars.map(x => x.noi))
   const steps = [
-    { t: 'Burn off loss-to-lease', b: 'In-place rents sit ~$26,300/yr below market; as leases turn to prevailing New Milford rents, scheduled rent grows to $339,000.' },
+    { t: 'Burn off loss-to-lease', b: 'In-place rents sit ~$31,680/yr below market; as leases turn to prevailing New Milford rents, scheduled rent grows to $344,400.' },
     { t: 'Lease up the vacant townhome', b: 'Unit 105 (2BR townhome) is currently vacant; leasing it at its ~$2,250 asking adds immediate income.' },
     { t: 'Normalize operating expenses', b: 'Trailing-twelve expenses carried one-time repair and mechanical costs; the underwriting normalizes R&M, management, and reserves to a stabilized ~29–31% ratio.' },
   ]
@@ -541,8 +533,8 @@ function ManagementTransition({ pageNum }) {
         <div style={{ fontSize: 9.5, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
           The property&rsquo;s trailing-twelve operations (calendar year 2025) reflect its actual, as-managed
           performance &mdash; carrying one vacant unit and several one-time repair and mechanical costs. Normalizing
-          to in-place rents and a stabilized expense load lifts NOI to a <strong>Current</strong> $208,130, and a
-          straightforward mark-to-market takes <strong>Pro Forma</strong> NOI to $231,848. The bridge below is a
+          to in-place rents and a stabilized expense load lifts NOI to a <strong>Current</strong> $209,930, and a
+          straightforward mark-to-market takes <strong>Pro Forma</strong> NOI to $238,521. The bridge below is a
           clean operating baseline for a buyer.
         </div>
 
@@ -810,7 +802,7 @@ function FairfieldTax({ pageNum }) {
 /* ═══════════════════ NEW MILFORD / LITCHFIELD COUNTY ═══════════════════ */
 function FairfieldCounty({ pageNum }) {
   const employers = [
-    { label: 'New Milford (local)', items: 'New Milford Hospital (Nuvance Health), the public school district and town government, and Route 7 corridor retail and services anchor the local job base.' },
+    { label: 'New Milford (local)', items: 'Kimberly-Clark’s New Milford mill on Pickett District Road — a Kleenex® tissue plant and one of the town’s largest private employers (~350 jobs) — plus New Milford Hospital (Nuvance Health), the public school district and town government, and Route 7 corridor retail (Walmart, The Home Depot, Big Y) anchor the local job base.' },
     { label: 'Greater Danbury (~20 min south)', items: 'Danbury Hospital (Nuvance Health), Boehringer Ingelheim in nearby Ridgefield, corporate offices (Ethan Allen, Cartus), and Western Connecticut State University — a deep metro job market down Route 7.' },
     { label: 'Litchfield County & the region', items: 'The Litchfield Hills tourism and second-home economy, plus I-84 and Metro-North access to the Waterbury, Stamford, and New York markets.' },
   ]
@@ -819,14 +811,14 @@ function FairfieldCounty({ pageNum }) {
       <PageHeader section="Location Overview" />
       <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
         <div style={{ flex: '0 0 55%', padding: '24px 32px 18px 40px', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-          <div className="section-title" style={{ marginBottom: 2 }}>New Milford in <span style={{ color: '#F8971D' }}>Litchfield County</span></div>
+          <div className="section-title" style={{ marginBottom: 2, transform: 'translateY(0.3px)' }}>New Milford in <span style={{ color: '#F8971D' }}>Litchfield County</span></div>
           <div className="title-rule" />
-          <div style={{ fontSize: 10.2, lineHeight: 1.5, color: 'var(--graphite)', marginBottom: 10 }}>
+          <div style={{ fontSize: 9.5, lineHeight: 1.42, color: 'var(--graphite)', marginBottom: 8 }}>
             <p>New Milford is Litchfield County&rsquo;s largest town and a primary service center for Connecticut&rsquo;s scenic northwest corner — pairing historic-village character and the Litchfield Hills weekend economy with proximity to the Danbury and New York job markets. Quality rentals in the walkable village core are scarce, keeping demand for apartments like The Granary durable.</p>
           </div>
 
-          <div className="eyebrow" style={{ marginBottom: 6 }}>Demographics — Town of New Milford vs. Litchfield County</div>
-          <table className="data-table" style={{ fontSize: 10.3, marginBottom: 8 }}>
+          <div className="eyebrow" style={{ marginBottom: 5 }}>Demographics — Town of New Milford vs. Litchfield County</div>
+          <table className="data-table" style={{ fontSize: 9.6, marginBottom: 6 }}>
             <thead>
               <tr>
                 <th>Metric</th>
@@ -842,16 +834,16 @@ function FairfieldCounty({ pageNum }) {
               <tr><td>Median Age</td><td style={{ textAlign: 'right' }}>~44</td><td style={{ textAlign: 'right' }}>~47</td></tr>
             </tbody>
           </table>
-          <div style={{ fontSize: 7.4, color: 'var(--stone)', marginBottom: 8, lineHeight: 1.35 }}>
+          <div style={{ fontSize: 7.4, color: 'var(--stone)', marginBottom: 6, lineHeight: 1.35 }}>
             Source: U.S. Census ACS 5-Year Estimates (approximate; verify independently).
           </div>
 
-          <div className="eyebrow" style={{ marginBottom: 6 }}>Major Area Employers</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 9, flex: 1, justifyContent: 'space-between' }}>
+          <div className="eyebrow" style={{ marginBottom: 5 }}>Major Area Employers</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 7, flex: 1, justifyContent: 'space-between' }}>
             {employers.map(g => (
               <div key={g.label} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 12 }}>
-                <div style={{ fontSize: 9.8, fontWeight: 800, color: 'var(--carbon)', marginBottom: 3 }}>{g.label}</div>
-                <div style={{ fontSize: 9.1, lineHeight: 1.45, color: 'var(--graphite)' }}>{g.items}</div>
+                <div style={{ fontSize: 9.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 2 }}>{g.label}</div>
+                <div style={{ fontSize: 8.6, lineHeight: 1.38, color: 'var(--graphite)' }}>{g.items}</div>
               </div>
             ))}
           </div>
@@ -915,6 +907,85 @@ function AerialContext({ src, points = [], logo = '/logos/npcg-white-hires.png' 
   )
 }
 
+/* ═══════════════════ INVESTMENT HIGHLIGHTS ═══════════════════ */
+function InvestmentHighlights({ pageNum }) {
+  const groups = [
+    {
+      title: 'The Asset',
+      big: true,
+      items: [
+        {
+          head: 'Historic Character, Modern Performance',
+          body: 'A rare adaptive reuse of the Turney Soule granary — original nine-foot ceilings, exposed beams, and hardwood floors preserved throughout, delivering a tenant experience competing sets can’t replicate.',
+        },
+        {
+          head: 'Award-Recognized Preservation',
+          body: 'Recipient of a 2006 Connecticut Trust for Historic Preservation Award of Merit, underscoring the quality and integrity of the redevelopment.',
+        },
+        {
+          head: 'Minimal Owner Expense Exposure',
+          body: 'Central air conditioning throughout, with heat and hot water on separately metered, tenant-paid electric service, and water sub-metered and tenant-paid — significantly limiting owner-side utility exposure relative to typical multifamily assets in the submarket.',
+        },
+        {
+          head: 'Boutique, Manageable Scale',
+          body: '14 units offer new ownership an efficient, low-management-intensity asset — ideal for a 1031 buyer or an owner-operator looking to add a turnkey property without the operational complexity of a larger portfolio.',
+        },
+      ],
+    },
+    {
+      title: 'The Investment',
+      items: [
+        {
+          head: 'Post-Revaluation Tax Certainty',
+          body: 'New Milford’s town-wide revaluation is complete, with new assessments effective July 1, 2026. Buyers underwrite a known tax figure rather than pricing in reassessment risk — a meaningful advantage over comparable listings still trading ahead of their market’s revaluation cycle.',
+        },
+        {
+          head: 'Strong Location Fundamentals',
+          body: 'Positioned in downtown New Milford, within walking distance of the Village Green, local retail, and dining — supporting durable rental demand from tenants who value walkability and character over commodity apartment product.',
+        },
+        {
+          head: 'Pure Mark-to-Market Upside',
+          body: 'In-place rents sit $31,680 annually below current market levels, with no renovation, capital investment, or deferred maintenance required to capture the increase — upside is achieved simply through natural turnover and lease renewals at market rates.',
+        },
+      ],
+    },
+  ]
+  const TextBox = ({ group }) => (
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+      <div style={{ fontSize: 11.5, fontWeight: 800, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8, paddingBottom: 5, borderBottom: '2px solid var(--golden)' }}>{group.title}</div>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 9, justifyContent: 'flex-start', minHeight: 0 }}>
+        {group.items.map((it, i) => (
+          <div key={i} style={{ borderLeft: '3px solid var(--golden)', paddingLeft: 10 }}>
+            <div style={{ fontSize: group.big ? 11.5 : 10.5, fontWeight: 800, color: 'var(--carbon)', marginBottom: 2, lineHeight: 1.18 }}>{it.head}</div>
+            <p style={{ fontSize: group.big ? 10 : 9, lineHeight: 1.38, color: 'var(--graphite)', margin: 0 }}>{it.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+  return (
+    <div className="page">
+      <PageHeader section="Investment Highlights" />
+      <div className="section--tight" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div className="eyebrow">Why The Granary</div>
+        <div className="section-title" style={{ marginBottom: 2 }}>Investment <span style={{ color: '#F8971D' }}>Highlights</span></div>
+        <div className="title-rule" />
+        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1.35fr 1fr', gap: 14, minHeight: 0, paddingTop: 6 }}>
+          <TextBox group={groups[0]} />
+          <div style={{ borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
+            <img src="/photos/invest-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <div style={{ borderRadius: 3, overflow: 'hidden', minHeight: 0 }}>
+            <img src="/photos/invest-2.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <TextBox group={groups[1]} />
+        </div>
+      </div>
+      <PageFooter pageNum={pageNum} />
+    </div>
+  )
+}
+
 /* ═══════════════════ MAIN APP ═══════════════════ */
 function App() {
   // Page order is the single source of truth — pageNum is auto-assigned by
@@ -924,19 +995,20 @@ function App() {
     <Toc />,
     <DealContacts />,
     <ExecutiveSummary />,
+    <InvestmentHighlights />,
     <Divider eyebrow="01" title="The Property" image="/photos/divider.jpg" />,
-    <PropertyOverview />,
     <BuildingHistory />,
+    <PropertyOverview />,
     ...PHOTO_PAGES.map(p => <PhotoPage {...p} />),
     <FloorPlansPage
       section="Floor Plans"
       title="Representative" accent="Unit Floor Plans"
       subtitle="Sample layouts across the unit mix — one- and two-bedroom flats plus a two-story townhome"
       plans={[
-        { src: '/photos/floorplans/fp-103.jpg', unit: 'Unit 103', type: '2 Bed / 1 Bath' },
-        { src: '/photos/floorplans/fp-105.jpg', unit: 'Unit 105', type: '2 Bed Townhome · two-story' },
-        { src: '/photos/floorplans/fp-202.jpg', unit: 'Unit 202', type: '2 Bed / 1 Bath' },
-        { src: '/photos/floorplans/fp-204.jpg', unit: 'Unit 204', type: '1 Bed / 1 Bath' },
+        { src: '/photos/floorplans/fp-103.jpg', unit: 'Unit 103', type: '2 Bed / 1 Bath', sub: 'Near-identical layout to Unit 203' },
+        { src: '/photos/floorplans/fp-105.jpg', unit: 'Unit 105', type: '2 Bed Townhome · two-story', sub: 'Near-identical layout to Unit 106' },
+        { src: '/photos/floorplans/fp-202.jpg', unit: 'Unit 202', type: '2 Bed / 1 Bath', sub: 'Near-identical layout to Unit 102' },
+        { src: '/photos/floorplans/fp-204.jpg', unit: 'Unit 204', type: '1 Bed / 1 Bath', sub: 'Near-identical layout to Unit 104' },
       ]}
       note="Floor plans are representative; individual unit layouts and dimensions vary. Measurements deemed reliable but not guaranteed."
     />,

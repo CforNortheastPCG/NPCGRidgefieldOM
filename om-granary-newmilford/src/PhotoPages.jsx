@@ -103,9 +103,12 @@ export function FloorPlansPage({ section, title, accent, subtitle, plans, note, 
                   <div style={{ flex: 1, minHeight: 0, padding: 8 }}>
                     <img src={p.src} alt={p.unit} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
                   </div>
-                  <div style={{ borderTop: '1px solid var(--linen)', padding: '5px 10px', display: 'flex', alignItems: 'baseline', gap: 8 }}>
-                    <span style={{ fontSize: 9, fontWeight: 800, color: 'var(--carbon)', letterSpacing: '0.04em' }}>{p.unit}</span>
-                    <span style={{ fontSize: 8.5, color: 'var(--stone)' }}>{p.type}</span>
+                  <div style={{ borderTop: '1px solid var(--linen)', padding: '5px 10px' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+                      <span style={{ fontSize: 9, fontWeight: 800, color: 'var(--carbon)', letterSpacing: '0.04em' }}>{p.unit}</span>
+                      <span style={{ fontSize: 8.5, color: 'var(--stone)' }}>{p.type}</span>
+                    </div>
+                    {p.sub && <div style={{ fontSize: 7.5, fontStyle: 'italic', color: 'var(--stone)', marginTop: 1 }}>{p.sub}</div>}
                   </div>
                 </div>
               ))}

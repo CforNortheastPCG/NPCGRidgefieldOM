@@ -107,10 +107,11 @@ export default function LocationMap({ pageNum = 9 }) {
         <div className="title-rule" />
         <div style={{ fontSize: 10.5, lineHeight: 1.55, color: 'var(--graphite)', marginBottom: 12 }}>
           29 West Street sits a short walk from the New Milford Green and the <strong>Bank Street</strong> village
-          core &mdash; independent restaurants, the Bank Street Theater, cafés, and shops all within a few blocks
-          &mdash; with the Housatonic riverfront at Young&rsquo;s Field just beyond. Everyday needs line the Route 7
-          corridor a few minutes south (Big Y, Stop &amp; Shop, CVS), and New Milford Hospital anchors Elm Street just
-          north of the Green.
+          core &mdash; independent restaurants (Sparrow, Lucia, La Piccolina), the Bank Street Theater, cafés, and
+          shops all within a few blocks &mdash; with the Housatonic riverfront at Young&rsquo;s Field just beyond.
+          Big-box retail and everyday needs line the Route 7 corridor a few minutes south &mdash; Walmart, The Home
+          Depot, Big Y, Stop &amp; Shop, and CVS &mdash; and New Milford Hospital anchors Elm Street just north of the
+          Green.
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 1fr', gap: 16, flex: 1, minHeight: 0 }}>

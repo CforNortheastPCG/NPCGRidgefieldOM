@@ -14,7 +14,7 @@ export function PageHeader({ section }) {
       <img src="/logos/npcg-white-hires.png" alt="NPCG" />
       <div className="section-label">
         <strong>{section}</strong>
-        {FULL_ADDR}
+        <span style={{ display: 'block', transform: 'translateY(0.3px)' }}>{FULL_ADDR}</span>
       </div>
     </div>
   )
