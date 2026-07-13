@@ -695,9 +695,14 @@ a.team__big:hover .team__avatar { border-color: var(--terracotta); }
 
 /* ── PRINT ── */
 @media print {
+  /* Keep header bars, scrims, table headers, and zebra rows on paper (needed
+     alongside printBackground:true in the vector page.pdf() render). */
+  * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   body { background: white; }
   .om-container { padding: 0; }
   .page { box-shadow: none; margin: 0; page-break-after: always; }
+  /* Kill the trailing blank sheet the last page-break would otherwise emit. */
+  .page:last-child { page-break-after: auto; }
 }
 
 /* ── DRAFT WATERMARK ── diagonal notice on every page; toggled by the `draft`

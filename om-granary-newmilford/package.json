@@ -10,11 +10,14 @@
     "preview": "vite preview",
     "print": "node print.cjs",
     "pdf": "node export.cjs",
+    "pdf:vector": "node export-vector.cjs",
+    "fix-pdf": "node fix-pdf.cjs",
     "isochrones": "node scripts/gen-isochrones.mjs",
     "map-labels": "node scripts/gen-map-labels.mjs"
   },
   "dependencies": {
     "d3-geo": "^3.1.1",
+    "pdf-lib": "^1.17.1",
     "puppeteer": "^25.1.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
