@@ -1,0 +1,1238 @@
+{
+  "version": 3,
+  "tenantId": "npcg",
+  "stylePack": "npcg-v1",
+  "deal": {
+    "id": "merrimack-24-lowell",
+    "name": "24 Merrimack Street",
+    "address": "24 Merrimack St",
+    "cityState": "Lowell, MA",
+    "cityLong": "Lowell, Massachusetts",
+    "status": "For Sale",
+    "propertyType": "mixed-use",
+    "askingPrice": 15000000
+  },
+  "property": {
+    "buildingSf": 66764,
+    "unitCount": 53,
+    "yearBuilt": 1906,
+    "yearRenovated": 2016,
+    "lotAcres": 0.27,
+    "stories": 5,
+    "construction": "Masonry",
+    "zoning": "DMU (Downtown Mixed Use)",
+    "metering": "Individually metered",
+    "landlordPays": [
+      "Gas",
+      "Electric (CAM)",
+      "Water & Sewer",
+      "Trash"
+    ],
+    "parcelIds": [],
+    "occupancyPct": null,
+    "extraFacts": [
+      {
+        "label": "Rentable SF",
+        "value": "58,884 SF"
+      },
+      {
+        "label": "Sprinklers",
+        "value": "Wet system"
+      },
+      {
+        "label": "Elevator",
+        "value": "Yes (serviced under contract)"
+      },
+      {
+        "label": "Opportunity Zone",
+        "value": "Yes"
+      },
+      {
+        "label": "Submarket",
+        "value": "Downtown Lowell"
+      },
+      {
+        "label": "Occupancy",
+        "value": "49 of 53 units (92.5%)"
+      }
+    ]
+  },
+  "brokers": [
+    {
+      "name": "Francis Saenz",
+      "title": "Vice President, Investments",
+      "phone": "857.990.6803",
+      "email": "fsaenz@northeastpcg.com",
+      "photo": "/photos/team/francis-saenz.png"
+    },
+    {
+      "name": "Drew Kirkland",
+      "title": "Vice President, Investments",
+      "phone": "857.990.6802",
+      "email": "dkirkland@northeastpcg.com",
+      "photo": "/photos/team/drew-kirkland.png"
+    },
+    {
+      "name": "Jim Casey",
+      "title": "Senior Associate",
+      "phone": "857.990.6821",
+      "email": "jcasey@northeastpcg.com",
+      "photo": "/photos/team/jim-casey.png"
+    },
+    {
+      "name": "Patrick Wheeler",
+      "title": "Investment Associate",
+      "phone": "857.990.6819",
+      "email": "pwheeler@northeastpcg.com",
+      "photo": "/photos/team/patrick-wheeler.jpg"
+    },
+    {
+      "name": "Anthony Rakauskas",
+      "title": "Associate",
+      "phone": "857.990.6807",
+      "email": "arakauskas@northeastpcg.com",
+      "photo": "/photos/team/anthony-rakauskas.png"
+    }
+  ],
+  "rentRoll": {
+    "basis": "monthly",
+    "columns": [
+      {
+        "key": "current",
+        "label": "Current"
+      },
+      {
+        "key": "highAchieved",
+        "label": "High Achieved"
+      },
+      {
+        "key": "proForma",
+        "label": "Pro Forma"
+      }
+    ],
+    "rows": [
+      {
+        "group": "Residential",
+        "unit": "201",
+        "use": "One Bed",
+        "sf": 757,
+        "rents": {
+          "current": 1960,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "202",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2165,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "203",
+        "use": "One Bed",
+        "sf": 757,
+        "rents": {
+          "current": 1785,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "204",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2140,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "205",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2100,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "206",
+        "use": "One Bed",
+        "sf": 757,
+        "rents": {
+          "current": 1815,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "207",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2160,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "208",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2050,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "209",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2180,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "210",
+        "use": "One Bed",
+        "sf": 757,
+        "rents": {
+          "current": 1935,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "301",
+        "use": "One Bed",
+        "sf": 665,
+        "vacant": true,
+        "rents": {
+          "current": 1935,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "302",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2010,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "303",
+        "use": "One Bed",
+        "sf": 757,
+        "rents": {
+          "current": 1875,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "304",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2040,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "305",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 1975,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "306",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2040,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "307",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 1995,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "308",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2000,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "309",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2035,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "310",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 1975,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "401",
+        "use": "One Bed",
+        "sf": 757,
+        "rents": {
+          "current": 1905,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "402",
+        "use": "Two Bed",
+        "sf": 1190,
+        "vacant": true,
+        "rents": {
+          "current": 2065,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "403",
+        "use": "One Bed",
+        "sf": 757,
+        "rents": {
+          "current": 1900,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "404",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2200,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "405",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2045,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "406",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 1975,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "407",
+        "use": "Three Bed",
+        "sf": 1044,
+        "rents": {
+          "current": 2385,
+          "highAchieved": 2385,
+          "proForma": 2600
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "408",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 1950,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "409",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2130,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "410",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2115,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "501",
+        "use": "One Bed",
+        "sf": 757,
+        "vacant": true,
+        "rents": {
+          "current": 1900,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "502",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2065,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "503",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2080,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "504",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2050,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "505",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2065,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "506",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2070,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "507",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2120,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "508",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2050,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "509",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 1978,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "510",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 2060,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "601",
+        "use": "One Bed",
+        "sf": 757,
+        "rents": {
+          "current": 1855,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "602",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 1915,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "603",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 1980,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "604",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 1950,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "605",
+        "use": "Two Bed",
+        "sf": 1190,
+        "rents": {
+          "current": 1980,
+          "highAchieved": 2200,
+          "proForma": 2400
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "606",
+        "use": "One Bed",
+        "sf": 757,
+        "rents": {
+          "current": 1925,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "607",
+        "use": "One Bed",
+        "sf": 757,
+        "rents": {
+          "current": 1885,
+          "highAchieved": 1960,
+          "proForma": 2100
+        }
+      },
+      {
+        "group": "Commercial",
+        "unit": "COM1",
+        "use": "Commercial",
+        "tenant": "Navy, US",
+        "sf": 1137,
+        "rents": {
+          "current": 3501.44,
+          "highAchieved": 3501.44,
+          "proForma": 3501.44
+        }
+      },
+      {
+        "group": "Commercial",
+        "unit": "COM2",
+        "use": "Commercial",
+        "tenant": "Dunkin Donuts",
+        "sf": 1749,
+        "vacant": true,
+        "rents": {
+          "current": 6987.19,
+          "highAchieved": 6987.19,
+          "proForma": 6987.19
+        }
+      },
+      {
+        "group": "Commercial",
+        "unit": "COM3",
+        "use": "Commercial",
+        "tenant": "Global Boutique",
+        "sf": 1730,
+        "rents": {
+          "current": 4678.33,
+          "highAchieved": 4678.33,
+          "proForma": 4678.33
+        }
+      },
+      {
+        "group": "Commercial",
+        "unit": "COM4",
+        "use": "Commercial",
+        "tenant": "Flip Flop Vintage",
+        "sf": 2422,
+        "rents": {
+          "current": 0,
+          "highAchieved": 0,
+          "proForma": 2422
+        }
+      },
+      {
+        "group": "Commercial",
+        "unit": "COM5",
+        "use": "Commercial",
+        "tenant": "Commercial",
+        "sf": 550,
+        "rents": {
+          "current": 625,
+          "highAchieved": 625,
+          "proForma": 625
+        }
+      },
+      {
+        "group": "Commercial",
+        "unit": "COM6",
+        "use": "Commercial",
+        "tenant": "Fitness Center",
+        "sf": 800,
+        "rents": {
+          "current": 625,
+          "highAchieved": 625,
+          "proForma": 625
+        }
+      }
+    ]
+  },
+  "incomeExpense": {
+    "columns": [
+      {
+        "key": "t12",
+        "label": "Trailing 12"
+      },
+      {
+        "key": "current",
+        "label": "Current"
+      },
+      {
+        "key": "proForma",
+        "label": "Pro Forma"
+      }
+    ],
+    "preRentLines": [
+      {
+        "label": "Gross Potential Rent",
+        "amounts": {
+          "t12": 1815864,
+          "current": 1815864,
+          "proForma": 1815864
+        }
+      },
+      {
+        "label": "Below Market Rent (-26.52%)",
+        "amounts": {
+          "t12": -481644,
+          "current": -481644,
+          "proForma": 0
+        }
+      }
+    ],
+    "otherIncomeLines": [
+      {
+        "label": "Other (MTM, Pet, Late, CAM)",
+        "amounts": {
+          "t12": 41367,
+          "current": 41367,
+          "proForma": 41367
+        }
+      },
+      {
+        "label": "Pet Fee",
+        "amounts": {
+          "t12": 1440,
+          "current": 1440,
+          "proForma": 1440
+        }
+      }
+    ],
+    "expenseLines": [
+      {
+        "label": "Management Fee",
+        "amounts": {
+          "t12": 42306,
+          "current": 39309,
+          "proForma": 88394
+        }
+      },
+      {
+        "label": "Payroll - Property Manager",
+        "amounts": {
+          "t12": 42236,
+          "current": 42236,
+          "proForma": 42236
+        }
+      },
+      {
+        "label": "Taxes Payroll",
+        "amounts": {
+          "t12": 9152,
+          "current": 9152,
+          "proForma": 9152
+        }
+      },
+      {
+        "label": "Advertising/Marketing",
+        "amounts": {
+          "t12": 4886,
+          "current": 4886,
+          "proForma": 4886
+        }
+      },
+      {
+        "label": "Fitness/Business Ctr Expense",
+        "amounts": {
+          "t12": 7720,
+          "current": 7720,
+          "proForma": 7720
+        }
+      },
+      {
+        "label": "Real Estate Tax",
+        "amounts": {
+          "t12": 104905.88,
+          "current": 104905.88,
+          "proForma": 104905.88
+        }
+      },
+      {
+        "label": "Insurance",
+        "amounts": {
+          "t12": 75967,
+          "current": 75967,
+          "proForma": 75967
+        }
+      },
+      {
+        "label": "Insurance Workers Comp/Health",
+        "amounts": {
+          "t12": 14462,
+          "current": 14462,
+          "proForma": 14462
+        }
+      },
+      {
+        "label": "Gas",
+        "amounts": {
+          "t12": 16387,
+          "current": 16387,
+          "proForma": 16387
+        }
+      },
+      {
+        "label": "Electric CAM",
+        "amounts": {
+          "t12": 13495,
+          "current": 13495,
+          "proForma": 13495
+        }
+      },
+      {
+        "label": "Trash Removal",
+        "amounts": {
+          "t12": 25151,
+          "current": 25151,
+          "proForma": 25151
+        }
+      },
+      {
+        "label": "Telephone/ANS",
+        "amounts": {
+          "t12": 11009,
+          "current": 11009,
+          "proForma": 11009
+        }
+      },
+      {
+        "label": "Cleaning Contract",
+        "amounts": {
+          "t12": 26753,
+          "current": 26753,
+          "proForma": 26753
+        }
+      },
+      {
+        "label": "Repairs & Maintenance 5%",
+        "amounts": {
+          "t12": 68851,
+          "current": 68851,
+          "proForma": 68851
+        }
+      },
+      {
+        "label": "Park Space Expense",
+        "amounts": {
+          "t12": 4987,
+          "current": 4987,
+          "proForma": 4987
+        }
+      },
+      {
+        "label": "Elevator Contract",
+        "amounts": {
+          "t12": 10043,
+          "current": 10043,
+          "proForma": 10043
+        }
+      },
+      {
+        "label": "Exterm Contract",
+        "amounts": {
+          "t12": 3086,
+          "current": 3086,
+          "proForma": 3086
+        }
+      },
+      {
+        "label": "Water & Sewer",
+        "amounts": {
+          "t12": 16387,
+          "current": 16387,
+          "proForma": 16387
+        }
+      }
+    ],
+    "assumptions": {
+      "vacancyPct": 0.05,
+      "mgmtPct": null,
+      "mgmtBasis": "effectiveGrossIncome"
+    }
+  },
+  "financing": {
+    "interestRate": 2.53,
+    "amortYears": 30,
+    "ltvPct": 75,
+    "loanAmount": 11250000,
+    "downPayment": 3750000,
+    "annualDebtService": 535521,
+    "dscr": 1.52,
+    "cashOnCash": {
+      "current": 7.47,
+      "proForma": 18.36
+    }
+  },
+  "positioning": {
+    "thesisLine": "Downtown Lowell landmark block at 26.52% below-market rents — $481,644 of marked GPR upside lifts the cap from 5.44% to 8.16%.",
+    "strengths": [
+      "53 units — 47 apartments over 6 ground-floor commercial spaces, 58,884 rentable SF (66,764 SF GBA), built 1906, converted 2016",
+      "In-place rents 26.52% below market: $481,644/yr Below Market Rent line in the workbook; GSR $1,334,220 vs $1,815,864 GPR",
+      "Cap rates: 5.86% T12 / 5.44% current / 8.16% pro forma at the $15,000,000 ask ($283,019/unit, $225/SF on GBA)",
+      "Workbook debt model: 2.53% rate, 30-yr am, 75% LTV ($11,250,000 loan), $535,521 ADS, 1.52x DSCR, 7.47% current / 18.36% pro forma cash-on-cash",
+      "High Achieved rents already prove the marks: $1,960 1BR / $2,200 2BR achieved in-building vs $1,890 / $2,050 current averages",
+      "49 of 53 units occupied (92.5%); vacant: units 301, 402, 501 and former Dunkin Donuts space (COM2)"
+    ],
+    "marketNotes": [
+      "CoStar (Jul 2026): Downtown Lowell submarket; subject asking $1,914/unit avg vs $2,234 submarket 3-5 star and $3,011 Boston market overall",
+      "CoStar: submarket 3-5 star vacancy 4.8%; market sales price per unit $245,320 (12-mo)",
+      "CoStar: subject in a federal Opportunity Zone; pedestrian rating 100 — exceptionally friendly",
+      "CoStar transit: Lowell commuter rail station (MBTA Lowell Line to Boston North Station) 0.9 mi — 2 min drive / 16 min walk",
+      "CoStar demographics: 44,358 population / $59,502 median HH income within 1 mi; 138,453 / $84,132 within 3 mi; 18,564 daytime employees within 1 mi",
+      "CoStar loan record (CMBS): $9,200,000 originated 11/2021, 2.53% fixed, matures 11/2056, $8,390,084 current balance, performing",
+      "Commercial tenants on the roll: Navy US recruiting, Global Boutique, Flip Flop Vintage, fitness center; Dunkin Donuts space vacant at $6,987/mo high-achieved",
+      "Traffic: 12,920 vehicles/day on Merrimack St at John St; 14,269-17,097 on Bridge St (2025 counts)"
+    ]
+  },
+  "photos": {
+    "cover": {
+      "path": "/photos/merrimack-ext-corner.jpg"
+    },
+    "exterior": [
+      {
+        "path": "/photos/merrimack-ext-corner.jpg",
+        "caption": "The corner of Merrimack and John Streets — five stories of 1906 masonry"
+      },
+      {
+        "path": "/photos/merrimack-entrance.jpg",
+        "caption": "The Merrimack — main residential entrance on Merrimack Street"
+      }
+    ],
+    "interior": [
+      {
+        "path": "/photos/merrimack-lobby.jpg",
+        "caption": "Resident lobby and elevator lounge"
+      },
+      {
+        "path": "/photos/merrimack-kitchen-galley.jpg",
+        "caption": "Galley kitchen with granite counters, gas range, and track lighting"
+      },
+      {
+        "path": "/photos/merrimack-kitchen-loft.jpg",
+        "caption": "Open-plan kitchen and living area with island and high ceilings"
+      },
+      {
+        "path": "/photos/merrimack-living.jpg",
+        "caption": "Living room with oversized windows and downtown views"
+      },
+      {
+        "path": "/photos/merrimack-loft-room.jpg",
+        "caption": "Loft-style living space with original window lines"
+      },
+      {
+        "path": "/photos/merrimack-bedroom.jpg",
+        "caption": "Unit bedroom with double closets"
+      },
+      {
+        "path": "/photos/merrimack-bedroom-2.jpg",
+        "caption": "Bedroom with high ceilings and downtown outlooks"
+      },
+      {
+        "path": "/photos/merrimack-bath.jpg",
+        "caption": "Unit bathroom — granite vanity and full tub/shower"
+      }
+    ],
+    "aerial": [],
+    "area": [],
+    "plans": []
+  },
+  "market": {
+    "city": "Lowell",
+    "county": "Greater Boston",
+    "driveTimeCities": [
+      "Boston, MA",
+      "Cambridge, MA",
+      "Nashua, NH",
+      "Manchester, NH",
+      "Worcester, MA",
+      "Providence, RI"
+    ]
+  },
+  "pages": [],
+  "computed": {
+    "rentRoll": {
+      "unitCount": 53,
+      "totalSf": 58884,
+      "vacantCount": 4,
+      "camAnnualTotal": 0,
+      "avgRentByColumn": {
+        "current": 2098,
+        "highAchieved": 2210,
+        "proForma": 2420
+      },
+      "detailMonthlyByColumn": {
+        "current": 111185,
+        "highAchieved": 117121,
+        "proForma": 128238
+      },
+      "byColumn": {
+        "current": {
+          "monthly": 111185,
+          "annual": 1334220,
+          "psfAnnual": 22.66
+        },
+        "highAchieved": {
+          "monthly": 142628,
+          "annual": 1711538,
+          "psfAnnual": 29.07
+        },
+        "proForma": {
+          "monthly": 151322,
+          "annual": 1815864,
+          "psfAnnual": 30.84
+        }
+      },
+      "groups": [
+        {
+          "group": "Residential",
+          "unitCount": 47,
+          "totalSf": 50496,
+          "byColumn": {
+            "current": {
+              "monthly": 94768,
+              "annual": 1137216,
+              "psfAnnual": 22.52
+            },
+            "highAchieved": {
+              "monthly": 100705,
+              "annual": 1208460,
+              "psfAnnual": 23.93
+            },
+            "proForma": {
+              "monthly": 109400,
+              "annual": 1312800,
+              "psfAnnual": 26
+            }
+          }
+        },
+        {
+          "group": "Commercial",
+          "unitCount": 6,
+          "totalSf": 8388,
+          "byColumn": {
+            "current": {
+              "monthly": 16417,
+              "annual": 197004,
+              "psfAnnual": 23.49
+            },
+            "highAchieved": {
+              "monthly": 16417,
+              "annual": 197004,
+              "psfAnnual": 23.49
+            },
+            "proForma": {
+              "monthly": 18839,
+              "annual": 226068,
+              "psfAnnual": 26.95
+            }
+          }
+        }
+      ],
+      "unitMix": [
+        {
+          "use": "One Bed",
+          "count": 12,
+          "totalSf": 8992,
+          "avgSf": 749,
+          "avgRent": {
+            "current": 1890,
+            "highAchieved": 1960,
+            "proForma": 2100
+          },
+          "rentRange": {
+            "current": {
+              "min": 1785,
+              "max": 1960
+            },
+            "highAchieved": {
+              "min": 1960,
+              "max": 1960
+            },
+            "proForma": {
+              "min": 2100,
+              "max": 2100
+            }
+          }
+        },
+        {
+          "use": "Two Bed",
+          "count": 34,
+          "totalSf": 40460,
+          "avgSf": 1190,
+          "avgRent": {
+            "current": 2050,
+            "highAchieved": 2200,
+            "proForma": 2400
+          },
+          "rentRange": {
+            "current": {
+              "min": 1915,
+              "max": 2200
+            },
+            "highAchieved": {
+              "min": 2200,
+              "max": 2200
+            },
+            "proForma": {
+              "min": 2400,
+              "max": 2400
+            }
+          }
+        },
+        {
+          "use": "Three Bed",
+          "count": 1,
+          "totalSf": 1044,
+          "avgSf": 1044,
+          "avgRent": {
+            "current": 2385,
+            "highAchieved": 2385,
+            "proForma": 2600
+          },
+          "rentRange": {
+            "current": {
+              "min": 2385,
+              "max": 2385
+            },
+            "highAchieved": {
+              "min": 2385,
+              "max": 2385
+            },
+            "proForma": {
+              "min": 2600,
+              "max": 2600
+            }
+          }
+        },
+        {
+          "use": "Commercial",
+          "count": 6,
+          "totalSf": 8388,
+          "avgSf": 1398,
+          "avgRent": {
+            "current": 2736,
+            "highAchieved": 6987,
+            "proForma": 6987
+          },
+          "rentRange": {
+            "current": {
+              "min": 625,
+              "max": 6987
+            },
+            "highAchieved": {
+              "min": 625,
+              "max": 6987
+            },
+            "proForma": {
+              "min": 625,
+              "max": 6987
+            }
+          }
+        }
+      ]
+    },
+    "incomeExpense": {
+      "byColumn": {
+        "t12": {
+          "grossScheduledRent": 1334220,
+          "vacancyLoss": 0,
+          "effectiveRentalIncome": 1334220,
+          "otherIncome": 42807,
+          "egi": 1377027,
+          "mgmtFee": 42306,
+          "totalExpenses": 497784,
+          "noi": 879242
+        },
+        "current": {
+          "grossScheduledRent": 1334220,
+          "vacancyLoss": 66711,
+          "effectiveRentalIncome": 1267509,
+          "otherIncome": 42807,
+          "egi": 1310316,
+          "mgmtFee": 39309,
+          "totalExpenses": 494788,
+          "noi": 815528
+        },
+        "proForma": {
+          "grossScheduledRent": 1815864,
+          "vacancyLoss": 90793,
+          "effectiveRentalIncome": 1725071,
+          "otherIncome": 42807,
+          "egi": 1767878,
+          "mgmtFee": 88394,
+          "totalExpenses": 543872,
+          "noi": 1224006
+        }
+      }
+    },
+    "returns": {
+      "capRateByColumn": {
+        "t12": 5.86,
+        "current": 5.44,
+        "proForma": 8.16
+      },
+      "pricePerSf": 225,
+      "pricePerUnit": 283019,
+      "grm": 11.24
+    }
+  }
+}
