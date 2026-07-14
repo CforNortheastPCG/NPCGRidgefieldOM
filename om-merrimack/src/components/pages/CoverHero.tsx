@@ -72,7 +72,7 @@ export function CoverHero({ pageNum }: { pageNum?: number }) {
         {!logoInTitleStack && (
           <div style={{ ...logoStyle, textAlign: logoCorner.includes('r') ? 'right' : 'left' }}>
             <img
-              src={assetUrl('/logos/npcg-white-hires.png')}
+              src={assetUrl('/logos/npcg-color-hires.png')}
               alt="NPCG"
               style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }}
             />
@@ -95,7 +95,7 @@ export function CoverHero({ pageNum }: { pageNum?: number }) {
         <div className="cover-hero-overlay" style={{ ...cornerBox(titleCorner), position: 'absolute' }}>
           {logoInTitleStack && (
             <img
-              src={assetUrl('/logos/npcg-white-hires.png')}
+              src={assetUrl('/logos/npcg-color-hires.png')}
               alt="NPCG"
               style={{
                 maxHeight: 40,

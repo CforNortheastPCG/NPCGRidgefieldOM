@@ -654,17 +654,9 @@ export const FINANCIALS: FinancialsData = {
       {
         "label": "Other (MTM, Pet, Late, CAM)",
         "amounts": {
-          "t12": 41367,
-          "current": 41367,
-          "proForma": 41367
-        }
-      },
-      {
-        "label": "Pet Fee",
-        "amounts": {
-          "t12": 1440,
-          "current": 1440,
-          "proForma": 1440
+          "t12": 42807,
+          "current": 42807,
+          "proForma": 42807
         }
       }
     ],

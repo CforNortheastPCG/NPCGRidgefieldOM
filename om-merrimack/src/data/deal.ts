@@ -2,7 +2,7 @@
 import type { DealData } from '../lib/types.ts'
 
 export const DEAL: DealData = {
-  "name": "24 Merrimack Street",
+  "name": "The Merrimack",
   "address": "24 Merrimack St",
   "cityState": "Lowell, MA",
   "cityLong": "Lowell, Massachusetts",

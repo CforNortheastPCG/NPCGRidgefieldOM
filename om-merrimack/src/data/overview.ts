@@ -135,31 +135,6 @@ export const OVERVIEW: OverviewData = {
           "value": "$1,224,006 · 8.16% cap"
         }
       ]
-    },
-    {
-      "title": "Debt Assumptions (Workbook Model)",
-      "rows": [
-        {
-          "label": "Interest Rate",
-          "value": "2.53% · 30-yr amortization"
-        },
-        {
-          "label": "Loan Amount",
-          "value": "$11,250,000 (75% LTV)"
-        },
-        {
-          "label": "Annual Debt Service",
-          "value": "$535,521"
-        },
-        {
-          "label": "DSCR",
-          "value": "1.52x"
-        },
-        {
-          "label": "Cash-on-Cash (Cur / PF)",
-          "value": "7.47% / 18.36%"
-        }
-      ]
     }
   ]
 }

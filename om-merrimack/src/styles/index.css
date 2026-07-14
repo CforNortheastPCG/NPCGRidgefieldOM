@@ -289,9 +289,9 @@ body {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0) 100%);
   pointer-events: none;
 }
-.cover-hero-overlay { position: absolute; left: 40px; right: 40px; bottom: 40px; text-align: left; color: #fff; }
+.cover-hero-overlay { position: absolute; left: 40px; right: 40px; bottom: 40px; text-align: left; color: var(--carbon); }
 .cover-hero-status { font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 14px; }
-.cover-hero-name { font-size: 52px; font-weight: 800; line-height: 1.02; margin-bottom: 8px; }
+.cover-hero-name { font-size: 52px; font-weight: 800; line-height: 1.02; margin-bottom: 8px; color: var(--carbon); }
 .cover-hero-title { font-size: 24px; font-weight: 600; }
 .cover-hero-sub { font-size: 16px; opacity: 0.9; margin-bottom: 16px; }
 .cover-hero-rule { width: 60px; height: 3px; background: var(--golden); margin-bottom: 14px; }
