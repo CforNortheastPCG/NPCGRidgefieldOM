@@ -65,7 +65,7 @@ export const PHOTO_PAGES: PhotoPageData[] = [
   }
 ]
 
-export const EXEC_PHOTO: string | null = "/photos/merrimack-entrance.jpg"
+export const EXEC_PHOTO: string | null = "/photos/merrimack-ext-corner.jpg"
 export const HIGHLIGHT_PHOTOS: Array<string | null> = [
   "/photos/merrimack-lobby.jpg",
   "/photos/merrimack-kitchen-galley.jpg"

@@ -1,6 +1,5 @@
 import { PageHeader, PageFooter, Img } from './Shell.tsx'
 import { MANIFEST } from '../data/manifest.ts'
-import { CITY_PHOTOS, COUNTY_PHOTOS, EXEC_PHOTO } from '../data/photos.ts'
 
 /**
  * Table of contents in the book's editorial style: dotted leaders, section
@@ -31,10 +30,10 @@ export function Toc({ pageNum }: { pageNum?: number }) {
     rows.push({ label: entry.title, page: i + 1, sub: inSection })
   })
 
-  // Accent photo — a clean exterior establishing shot of the building. For
-  // this deal the CITY/COUNTY photo arrays are interiors, so prefer the
-  // front-facade EXEC_PHOTO and fall back gracefully.
-  const accent = EXEC_PHOTO ?? CITY_PHOTOS[0] ?? COUNTY_PHOTOS[0] ?? CITY_PHOTOS[1] ?? COUNTY_PHOTOS[1]
+  // Accent photo — pinned to the residential entrance shot (exec summary now
+  // carries the corner facade; keeping the ToC on the entrance avoids the
+  // same photo appearing on back-to-back pages).
+  const accent: string | null = '/photos/merrimack-entrance.jpg'
 
   return (
     <div className="page">

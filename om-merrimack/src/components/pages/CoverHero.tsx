@@ -49,16 +49,23 @@ export function CoverHero({ pageNum }: { pageNum?: number }) {
         ) : (
           <div className="cover-hero-fallback" />
         )}
-        {/* Shade hugs whichever half holds the title so it reads on-photo. */}
-        <div
+        {/* Shade hugs whichever half holds the title so it reads on-photo.
+            Pre-baked RGBA PNG, NOT a CSS gradient: Skia prints gradient alpha
+            as a luminosity soft-mask group that Acrobat/CoreGraphics composite
+            as nothing (title unreadable). PNG alpha embeds as a plain image
+            SMask, which every viewer honors. Dark edge is at the top of the
+            asset; flip when the title sits in a bottom corner. */}
+        <img
           className="cover-scrim"
+          src={assetUrl('/scrim-feather.png')}
+          alt=""
           style={{
             position: 'absolute',
             left: 0,
             right: 0,
-            ...(titleOnTop ? { top: 0 } : { bottom: 0 }),
+            width: '100%',
+            ...(titleOnTop ? { top: 0 } : { bottom: 0, transform: 'scaleY(-1)' }),
             height: '52%',
-            background: `linear-gradient(${titleOnTop ? 'to bottom' : 'to top'}, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0) 100%)`,
             pointerEvents: 'none',
           }}
         />

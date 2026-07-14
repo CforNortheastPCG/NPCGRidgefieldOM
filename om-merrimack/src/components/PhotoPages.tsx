@@ -12,7 +12,6 @@ export function PhotoGallery({ page, pageNum }: { page: PhotoPageData; pageNum?:
           {page.photos.map((p, i) => (
             <div className="photo-item" key={i}>
               <Img src={p.src} />
-              {p.caption && <div className="photo-caption">{p.caption}</div>}
             </div>
           ))}
         </div>
