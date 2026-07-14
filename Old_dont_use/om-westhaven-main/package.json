@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "isochrones": "node scripts/gen-isochrones.mjs",
+    "map-labels": "node scripts/gen-map-labels.mjs"
   },
   "dependencies": {
     "d3-geo": "^3.1.1",

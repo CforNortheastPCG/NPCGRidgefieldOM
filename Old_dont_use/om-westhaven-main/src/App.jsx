@@ -6,6 +6,7 @@ import { PhotoGallery, PhotoComingSoon } from './PhotoPages.jsx'
 import { PHOTO_PAGES } from './photos.js'
 import Divider from './Divider.jsx'
 import RegionalMap from './RegionalMap.jsx'
+import DriveTimeMap from './DriveTimeMap.jsx'
 import LocationsPage from './LocationsPage.jsx'
 import TeamPage from './TeamPage.jsx'
 import { ADDR, CITY_STATE, FULL_ADDR, PageHeader, PageFooter, StaticShell } from './Shell.jsx'
@@ -16,9 +17,9 @@ function CoverHero({ pageNum }) {
     <div className="page">
       <div className="cover-hero">
         <img className="cover-hero-img" src="/photos/main/main-1.jpg" alt="" />
-        <div className="cover-hero-shade" />
-        {/* Stronger bottom scrim so the overlay text reads clearly */}
-        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '55%', background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.85) 100%)', pointerEvents: 'none' }} />
+        {/* Soft feathered glow localized behind the bottom-left title text — lifts
+            the white type off the photo without a hard band or heavy black cast */}
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 60% 46% at 24% 90%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.34) 42%, rgba(0,0,0,0) 74%)', pointerEvents: 'none' }} />
         <div className="cover-hero-header">
           <img src="/logos/npcg-white-hires.png" alt="NPCG" style={{ maxHeight: 44, maxWidth: 220, objectFit: 'contain' }} />
         </div>
@@ -667,6 +668,7 @@ function App() {
     <Divider eyebrow="03" title="Location & Market" />,
     <WestHavenCombined />,
     <LocationMap />,
+    <DriveTimeMap />,
     <NewHavenCounty />,
     <RegionalMap />,
     <Divider eyebrow="04" title="The Team" />,

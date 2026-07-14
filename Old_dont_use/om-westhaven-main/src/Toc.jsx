@@ -16,11 +16,12 @@ const TOC = [
   { n: 12, label: 'Location & Market', section: true },
   { n: 13, label: 'West Haven', sub: true },
   { n: 14, label: 'Location & Amenities', sub: true },
-  { n: 15, label: 'New Haven County', sub: true },
-  { n: 16, label: 'Regional Positioning', sub: true },
-  { n: 17, label: 'The Team', section: true },
-  { n: 18, label: 'Team', sub: true },
-  { n: 19, label: 'Our Locations', sub: true },
+  { n: 15, label: 'Drive Times', sub: true },
+  { n: 16, label: 'New Haven County', sub: true },
+  { n: 17, label: 'Regional Positioning', sub: true },
+  { n: 18, label: 'The Team', section: true },
+  { n: 19, label: 'Team', sub: true },
+  { n: 20, label: 'Our Locations', sub: true },
 ]
 
 export default function Toc({ pageNum }) {
