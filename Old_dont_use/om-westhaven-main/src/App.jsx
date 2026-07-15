@@ -16,7 +16,7 @@ function CoverHero({ pageNum }) {
   return (
     <div className="page">
       <div className="cover-hero">
-        <img className="cover-hero-img" src="/photos/main/main-1.jpg" alt="" />
+        <img className="cover-hero-img" src="/photos/main/cover.png" alt="" />
         {/* Soft feathered glow localized behind the bottom-left title text — lifts
             the white type off the photo without a hard band or heavy black cast */}
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 60% 46% at 24% 90%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.34) 42%, rgba(0,0,0,0) 74%)', pointerEvents: 'none' }} />
@@ -58,27 +58,27 @@ function ExecutiveSummary({ pageNum }) {
               </div>
             </div>
             <p style={{ fontSize: 11.5, lineHeight: 1.55, marginBottom: 10 }}>
-              Northeast Private Client Group is pleased to present {ADDR}, a 10-unit multifamily property in the
-              Allingtown section of West Haven, Connecticut. The offering comprises two attached, Tudor-style
-              buildings on a single corner parcel ({ADDR} &amp; 491 Washington Avenue), held by the same family
-              ownership for more than 40 years.
+              Northeast Private Client Group is pleased to present {ADDR}, a 10-unit multifamily property located
+              in West Haven, Connecticut. The property is a Tudor-style building on a corner parcel, held by the
+              same family ownership for more than 40 years.
             </p>
             <p style={{ fontSize: 11.5, lineHeight: 1.55, marginBottom: 10 }}>
-              The property offers an all one-bedroom unit mix &mdash; spacious, classic layouts with hardwood
-              floors &mdash; plus an additional rental room. It sits minutes from the University of New Haven, the
-              VA Connecticut medical campus, Yale, and the West Haven Metro-North station, anchoring a deep,
-              recession-resilient base of students, medical workers, and professionals.
+              The property consists of 10 one-bedroom units plus an additional room rental. All units feature
+              high ceilings, large floorplans, and hardwood floors. Eight of the ten units feature a full-size
+              dining room. It sits minutes from the University of New Haven, the VA Connecticut medical campus,
+              Yale, and the West Haven Metro-North station, anchoring a deep, recession-resilient base of
+              students, medical workers, and professionals.
             </p>
             <p style={{ fontSize: 11.5, lineHeight: 1.55, marginBottom: 12 }}>
-              All qualified parties are invited to request the full offering package and schedule a private
-              tour through Northeast Private Client Group.
+              All qualified parties are invited to request the full offering package.
             </p>
             <div className="eyebrow" style={{ marginBottom: 8 }}>Investment Highlights</div>
-            <ul className="highlights highlights--lg" style={{ gap: 12 }}>
-              <li><strong>Below-Market Rents</strong> — In-place ~$1,157 vs. ~$1,550 market; ~34% mark-to-market upside</li>
+            <ul className="highlights highlights--lg" style={{ gap: 10 }}>
+              <li><strong>Value-Add Opportunity</strong> — In-place ~$1,157 vs. ~$1,600 pro forma; ~38% mark-to-market upside</li>
+              <li><strong>Below-Market Rents, Large Floorplans, Flexible Layouts</strong> — High ceilings, hardwood floors &amp; full-size dining rooms in 8 of 10 units</li>
               <li><strong>Irreplaceable Location</strong> — Minutes to University of New Haven, VA Hospital, Yale &amp; downtown New Haven</li>
               <li><strong>Durable Tenant Demand</strong> — Students, medical workers &amp; faculty; Metro-North to NYC at West Haven Station</li>
-              <li><strong>Long-Term, Well-Maintained Asset</strong> — 40+ years of pride of ownership; clean value-add path</li>
+              <li><strong>Legacy Ownership, Well-Maintained Asset</strong> — 40+ years of pride of ownership; clean value-add path</li>
             </ul>
           </div>
 
@@ -147,7 +147,7 @@ function BuildingDescriptions({ pageNum }) {
                 <div className="bldg-row"><span className="bldg-label">Unit Mix</span><span className="bldg-val">10 &times; 1BR + 1 Rental Room</span></div>
                 <div className="bldg-row"><span className="bldg-label">Avg In-Place Rent</span><span className="bldg-val">$1,157 / mo</span></div>
                 <div className="bldg-row"><span className="bldg-label">High Achieved</span><span className="bldg-val">$1,260 / mo</span></div>
-                <div className="bldg-row"><span className="bldg-label">Pro Forma Rent</span><span className="bldg-val">$1,550 / mo</span></div>
+                <div className="bldg-row"><span className="bldg-label">Pro Forma Rent</span><span className="bldg-val">$1,600 / mo</span></div>
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
@@ -155,8 +155,8 @@ function BuildingDescriptions({ pageNum }) {
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$1,400,000 ($140K/Unit)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Price / SF</span><span className="bldg-val">$159 / SF</span></div>
-                <div className="bldg-row"><span className="bldg-label">NOI (Year 1 &rarr; PF)</span><span className="bldg-val">$68,430 &rarr; $101,008</span></div>
-                <div className="bldg-row"><span className="bldg-label">Cap (Year 1 &rarr; PF)</span><span className="bldg-val">4.89% &rarr; 7.21%</span></div>
+                <div className="bldg-row"><span className="bldg-label">NOI (Year 1 &rarr; PF)</span><span className="bldg-val">$68,430 &rarr; $110,142</span></div>
+                <div className="bldg-row"><span className="bldg-label">Cap (Year 1 &rarr; PF)</span><span className="bldg-val">4.89% &rarr; 7.87%</span></div>
               </div>
             </div>
           </div>
@@ -218,16 +218,16 @@ function ChartCard({ title, data, centerLabel, centerSub }) {
 
 function RentRoll({ pageNum }) {
   const units = [
-    { unit: '1M', bldg: '300 Main', type: '1 BR', inPlace: 1185, market: 1260, proforma: 1550, start: '7/1/2025', end: '6/30/2026' },
-    { unit: '2M', bldg: '300 Main', type: '1 BR', inPlace: 1205, market: 1260, proforma: 1550, start: '12/1/2025', end: '8/31/2026' },
-    { unit: '3M', bldg: '300 Main', type: '1 BR', inPlace: 1210, market: 1260, proforma: 1550, start: '8/1/2025', end: '7/31/2026' },
-    { unit: '4M', bldg: '300 Main', type: '1 BR', inPlace: 1210, market: 1260, proforma: 1550, start: '8/1/2025', end: '7/31/2026' },
-    { unit: '6M', bldg: '300 Main', type: '1 BR', inPlace: 995, market: 1260, proforma: 1550, start: '7/1/2025', end: '6/30/2026' },
-    { unit: '1W', bldg: '491 Washington', type: '1 BR', inPlace: 1260, market: 1260, proforma: 1550, start: '7/1/2025', end: '6/30/2026' },
-    { unit: '2W', bldg: '491 Washington', type: '1 BR', inPlace: 1180, market: 1260, proforma: 1550, start: '9/1/2025', end: '8/31/2026' },
-    { unit: '3W', bldg: '491 Washington', type: '1 BR', inPlace: 1185, market: 1260, proforma: 1550, start: '7/1/2025', end: '6/30/2026' },
-    { unit: '4W', bldg: '491 Washington', type: '1 BR', inPlace: 1180, market: 1260, proforma: 1550, start: '7/1/2025', end: '6/30/2026' },
-    { unit: '5W', bldg: '491 Washington', type: '1 BR', inPlace: 960, market: 1260, proforma: 1550, start: '9/1/2025', end: '8/31/2026' },
+    { unit: '1M', bldg: '300 Main', type: '1 BR', inPlace: 1185, market: 1260, proforma: 1600, start: '7/1/2025', end: '6/30/2026' },
+    { unit: '2M', bldg: '300 Main', type: '1 BR', inPlace: 1205, market: 1260, proforma: 1600, start: '12/1/2025', end: '8/31/2026' },
+    { unit: '3M', bldg: '300 Main', type: '1 BR', inPlace: 1210, market: 1260, proforma: 1600, start: '8/1/2025', end: '7/31/2026' },
+    { unit: '4M', bldg: '300 Main', type: '1 BR', inPlace: 1210, market: 1260, proforma: 1600, start: '8/1/2025', end: '7/31/2026' },
+    { unit: '6M', bldg: '300 Main', type: '1 BR', inPlace: 995, market: 1260, proforma: 1600, start: '7/1/2025', end: '6/30/2026' },
+    { unit: '1W', bldg: '491 Washington', type: '1 BR', inPlace: 1260, market: 1260, proforma: 1600, start: '7/1/2025', end: '6/30/2026' },
+    { unit: '2W', bldg: '491 Washington', type: '1 BR', inPlace: 1180, market: 1260, proforma: 1600, start: '9/1/2025', end: '8/31/2026' },
+    { unit: '3W', bldg: '491 Washington', type: '1 BR', inPlace: 1185, market: 1260, proforma: 1600, start: '7/1/2025', end: '6/30/2026' },
+    { unit: '4W', bldg: '491 Washington', type: '1 BR', inPlace: 1180, market: 1260, proforma: 1600, start: '7/1/2025', end: '6/30/2026' },
+    { unit: '5W', bldg: '491 Washington', type: '1 BR', inPlace: 960, market: 1260, proforma: 1600, start: '9/1/2025', end: '8/31/2026' },
   ]
   const totalInPlace = units.reduce((s, u) => s + u.inPlace, 0)
   const totalMarket = units.reduce((s, u) => s + u.market, 0)
@@ -279,8 +279,8 @@ function RentRoll({ pageNum }) {
               <tbody>
                 <tr><td>In-Place</td><td style={{ textAlign: 'right' }}>$11,570</td><td style={{ textAlign: 'right' }}>$138,840</td><td style={{ textAlign: 'right' }}>$1,157</td></tr>
                 <tr><td>High Achieved</td><td style={{ textAlign: 'right' }}>$12,600</td><td style={{ textAlign: 'right' }}>$151,200</td><td style={{ textAlign: 'right' }}>$1,260</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>Pro Forma</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$15,500</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$186,000</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$1,550</td></tr>
-                <tr className="total-row"><td><strong>Total Upside</strong></td><td style={{ textAlign: 'right' }}><strong>+$3,930</strong></td><td style={{ textAlign: 'right' }}><strong>+$47,160</strong></td><td style={{ textAlign: 'right' }}><strong>+$393</strong></td></tr>
+                <tr><td style={{ fontWeight: 700 }}>Pro Forma</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$16,000</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$192,000</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$1,600</td></tr>
+                <tr className="total-row"><td><strong>Total Upside</strong></td><td style={{ textAlign: 'right' }}><strong>+$4,430</strong></td><td style={{ textAlign: 'right' }}><strong>+$53,160</strong></td><td style={{ textAlign: 'right' }}><strong>+$443</strong></td></tr>
               </tbody>
             </table>
           </div>
@@ -311,7 +311,7 @@ function IncomeExpense({ pageNum }) {
 
   const noi = [
     { label: 'NOI — Year 1', val: '$68,430' },
-    { label: 'NOI — Pro Forma', val: '$101,008' },
+    { label: 'NOI — Pro Forma', val: '$110,142' },
   ]
 
   return (
@@ -346,11 +346,11 @@ function IncomeExpense({ pageNum }) {
           </thead>
           <tbody>
             {[
-              ['Gross Potential Rent', '$186,000', '—', '—', '$186,000', '—', '—', false],
-              ['Below Market Rent', '-$40,218', '—', '-27.59%', '$0', '—', '0.00%', false],
-              ['Gross Scheduled Rent', '$145,782', '—', '—', '$186,000', '—', '—', true],
-              ['Vacancy & Collections Loss', '-$7,289', '—', '5.00%', '-$9,300', '—', '5.00%', false],
-              ['Effective Rental Income', '$138,493', '—', '—', '$176,700', '—', '—', true],
+              ['Gross Potential Rent', '$192,000', '—', '—', '$192,000', '—', '—', false],
+              ['Below Market Rent', '-$46,218', '—', '-31.70%', '$0', '—', '0.00%', false],
+              ['Gross Scheduled Rent', '$145,782', '—', '—', '$192,000', '—', '—', true],
+              ['Vacancy & Collections Loss', '-$7,289', '—', '5.00%', '-$9,600', '—', '5.00%', false],
+              ['Effective Rental Income', '$138,493', '—', '—', '$182,400', '—', '—', true],
               ['Room Income', '$3,720', '$372', '—', '$3,720', '$372', '—', false],
               ['Application Fees', '$50', '$5', '—', '$50', '$5', '—', false],
               ['Laundry Income', '$510', '$51', '—', '$510', '$51', '—', false],
@@ -366,7 +366,7 @@ function IncomeExpense({ pageNum }) {
                 </tr>
               )
             })}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$144,973</td><td style={totBg}>&mdash;</td><td style={totBg}>&mdash;</td><td style={totBg}>$183,180</td><td style={totBg}>&mdash;</td><td style={totBg}>&mdash;</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$144,973</td><td style={totBg}>&mdash;</td><td style={totBg}>&mdash;</td><td style={totBg}>$188,880</td><td style={totBg}>&mdash;</td><td style={totBg}>&mdash;</td></tr>
           </tbody>
         </table>
 
@@ -382,8 +382,8 @@ function IncomeExpense({ pageNum }) {
           </thead>
           <tbody>
             {[
-              ['Property Management', '$7,249', '$725', '5.00%', '$9,159', '$916', '5.00%'],
-              ['Real Estate Tax', '$26,281', '$2,628', '—', '$30,000', '$3,000', '—'],
+              ['Property Management', '$7,249', '$725', '5.00%', '$9,444', '$944', '5.00%'],
+              ['Real Estate Tax', '$26,281', '$2,628', '—', '$26,281', '$2,628', '—'],
               ['Property Insurance', '$10,347', '$1,035', '—', '$10,347', '$1,035', '—'],
               ['Electric', '$2,282', '$228', '—', '$2,282', '$228', '—'],
               ['Gas', '$12,066', '$1,207', '—', '$12,066', '$1,207', '—'],
@@ -397,8 +397,8 @@ function IncomeExpense({ pageNum }) {
                 {cells.map((c, j) => <td key={j} style={tds}>{c}</td>)}
               </tr>
             ))}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$76,542</td><td style={totBg}>$7,654</td><td style={totBg}>52.80%</td><td style={totBg}>$82,172</td><td style={totBg}>$8,217</td><td style={totBg}>44.86%</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$68,430</td><td style={noiBg}>&mdash;</td><td style={noiBg}>&mdash;</td><td style={noiBg}>$101,008</td><td style={noiBg}>&mdash;</td><td style={noiBg}>&mdash;</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$76,542</td><td style={totBg}>$7,654</td><td style={totBg}>52.80%</td><td style={totBg}>$78,738</td><td style={totBg}>$7,874</td><td style={totBg}>41.69%</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$68,430</td><td style={noiBg}>&mdash;</td><td style={noiBg}>&mdash;</td><td style={noiBg}>$110,142</td><td style={noiBg}>&mdash;</td><td style={noiBg}>&mdash;</td></tr>
           </tbody>
         </table>
       </div>
