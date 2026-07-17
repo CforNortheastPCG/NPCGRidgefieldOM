@@ -55,6 +55,7 @@ export const DIRECTORY = [
       { name: 'Young’s Field & River Walk', note: 'Housatonic riverfront park', lat: 41.5769078, lng: -73.4145178 },
       { name: 'Lynn Deming Park', note: 'Candlewood Lake beach · ~10 min', lat: 41.5706500, lng: -73.4390108 },
       { name: 'Harrybrooke Park', note: 'Riverside park & trails', lat: 41.5369736, lng: -73.4148304 },
+      { name: 'Lovers Leap State Park', note: 'Housatonic gorge trails & falls bridge', lat: 41.5402800, lng: -73.4050000 },
     ],
   },
   {
