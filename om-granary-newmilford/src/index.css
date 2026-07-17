@@ -703,6 +703,11 @@ a.team__big:hover .team__avatar { border-color: var(--terracotta); }
   .page { box-shadow: none; margin: 0; page-break-after: always; }
   /* Kill the trailing blank sheet the last page-break would otherwise emit. */
   .page:last-child { page-break-after: auto; }
+  /* No CSS effects without a PDF primitive: Skia rasterizes filter /
+     box-shadow / text-shadow / blend into soft-mask groups that Firefox,
+     Preview & Quick Look composite as pink or black boxes. */
+  .page, .page * { box-shadow: none !important; filter: none !important;
+    text-shadow: none !important; mix-blend-mode: normal !important; }
 }
 
 /* ── DRAFT WATERMARK ── diagonal notice on every page; toggled by the `draft`
