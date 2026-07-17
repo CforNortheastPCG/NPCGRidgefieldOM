@@ -148,17 +148,17 @@ export default function LocationMap({ pageNum = 9 }) {
             </div>
             <div style={{ columns: 2, columnGap: 18, minHeight: 0, overflow: 'hidden' }}>
             {groups.map(g => (
-              <div key={g.label} style={{ breakInside: 'avoid', marginBottom: 7 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
+              <div key={g.label} style={{ breakInside: 'avoid', marginBottom: 5 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
                   <span style={{ flexShrink: 0, width: 10, height: 10, borderRadius: '50%', background: g.swatch, border: '1px solid rgba(0,0,0,0.15)' }} />
-                  <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: g.swatch }}>{g.label}</span>
+                  <span style={{ fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: g.swatch }}>{g.label}</span>
                 </div>
                 {g.items.map(p => (
-                  <div key={p.n} style={{ display: 'flex', alignItems: 'baseline', gap: 7, padding: '2.5px 0' }}>
-                    <span style={{ flexShrink: 0, fontSize: 11.5, fontWeight: 700, color: g.swatch, width: 14, textAlign: 'right' }}>{p.n}</span>
+                  <div key={p.n} style={{ display: 'flex', alignItems: 'baseline', gap: 7, padding: '1.5px 0' }}>
+                    <span style={{ flexShrink: 0, fontSize: 11, fontWeight: 700, color: g.swatch, width: 14, textAlign: 'right' }}>{p.n}</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.25 }}>{p.name}</div>
-                      {p.note && <div style={{ fontSize: 9.5, color: 'var(--stone)', lineHeight: 1.3, marginTop: 1 }}>{p.note}</div>}
+                      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--carbon)', lineHeight: 1.2 }}>{p.name}</div>
+                      {p.note && <div style={{ fontSize: 8.5, color: 'var(--stone)', lineHeight: 1.25, marginTop: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.note}</div>}
                     </div>
                   </div>
                 ))}

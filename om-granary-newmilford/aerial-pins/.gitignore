@@ -1,0 +1,7 @@
+# Reproducible render output & working scraps — rebuild with:
+#   node shot.cjs south.html "The Granary - Aerial South Pinned.png" 1600 1200 2
+The Granary - Aerial * Pinned.png
+preview-*.png
+crop-*.png
+tune-test.png
+contact-sheet.png

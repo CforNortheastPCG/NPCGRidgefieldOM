@@ -19,12 +19,14 @@ const TOC = [
   { n: 20, label: 'Location & Market', section: true },
   { n: 21, label: 'New Milford', sub: true },
   { n: 22, label: 'Location & Amenities', sub: true },
-  { n: 23, label: 'Drive Times', sub: true },
-  { n: 24, label: 'New Milford & Litchfield County', sub: true },
-  { n: 25, label: 'Regional Positioning', sub: true },
-  { n: 26, label: 'The Team', section: true },
-  { n: 27, label: 'Team', sub: true },
-  { n: 28, label: 'Our Locations', sub: true },
+  { n: 23, label: 'Aerial Overview — Village Center', sub: true },
+  { n: 24, label: 'Aerial Overview — Route 7 Corridor', sub: true },
+  { n: 25, label: 'Drive Times', sub: true },
+  { n: 26, label: 'New Milford & Litchfield County', sub: true },
+  { n: 27, label: 'Regional Positioning', sub: true },
+  { n: 28, label: 'The Team', section: true },
+  { n: 29, label: 'Team', sub: true },
+  { n: 30, label: 'Our Locations', sub: true },
 ]
 
 export default function Toc({ pageNum }) {

@@ -65,7 +65,7 @@ async function renderPdf({
   // container so their dark scrims lighten too (white text stays white).
   await page.addStyleTag({ content: `
     .page img:not(.cover-hero-img) { filter: brightness(${brighten}); }
-    .cover-hero { filter: brightness(${cover}); }
+    .cover-hero:not(.aerial-pinned) { filter: brightness(${cover}); }
   ` });
   // One more paint cycle so everything is composited before we capture.
   await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));

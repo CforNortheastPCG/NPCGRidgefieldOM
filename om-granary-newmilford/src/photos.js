@@ -23,7 +23,7 @@ export const PHOTO_PAGES = [
     section: 'Property Photos', title: 'Exterior', accent: '& Grounds',
     subtitle: 'Front elevation, entries, streetscape & grounds',
     images: [
-      { src: '/photos/exterior-1.jpg', caption: 'Front Elevation — West Street' },
+      { src: '/photos/exterior-1.jpg', caption: 'Building & Grounds' },
       { src: '/photos/exterior-2.jpg', caption: 'Building & Streetscape' },
       { src: '/photos/exterior-3.jpg', caption: 'Residential Entry' },
       { src: '/photos/exterior-4.jpg', caption: 'Grounds & On-Site Parking' },
@@ -76,8 +76,8 @@ export const PHOTO_PAGES = [
       { src: '/photos/vault-1.jpg', caption: 'Storage Area' },
       { src: '/photos/basement-1.jpg', caption: 'Basement Mechanicals' },
       { src: '/photos/storage-1.jpg', caption: 'Tenant Storage' },
-      { src: '/photos/basement-2.jpg', caption: 'Building Systems' },
+      { src: '/photos/basement-2.jpg', caption: 'Entry Lobby & Rent Drop' },
     ],
-    note: 'The building is fully sprinklered (wet system) with tenant-paid electric heat and central AC.',
+    note: 'The building is fully sprinklered (wet system) with tenant-paid electric heat-pump heating and central AC.',
   },
 ]

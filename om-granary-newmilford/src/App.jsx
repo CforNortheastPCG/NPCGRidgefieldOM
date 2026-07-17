@@ -70,10 +70,10 @@ function ExecutiveSummary({ pageNum }) {
             <p style={{ fontSize: 10.7, lineHeight: 1.4, marginBottom: 8 }}>
               Originally built as the Turney Soule granary complex in the 1800s and thoughtfully redeveloped into
               residential lofts, The Granary combines the durability and character of historic construction with the
-              operating simplicity of a boutique multifamily asset. Loft-style interiors, exposed beams, and hardwood
-              floors distinguish the property from typical garden-style competition in the submarket. Units feature
-              central air conditioning throughout, with heat and hot water provided by separately metered, tenant-paid
-              electric service; water is sub-metered and tenant-paid as well &mdash; a mechanical and utility structure
+              operating simplicity of a boutique multifamily asset. Loft-style interiors, exposed beams, and nine-foot
+              ceilings distinguish the property from typical garden-style competition in the submarket. Units are
+              heated and cooled by efficient electric heat pumps, with heat, air conditioning, and hot water all on
+              separately metered, tenant-paid electric service; water is sub-metered and tenant-paid as well &mdash; a mechanical and utility structure
               that minimizes owner-side operating expense exposure. Twelve of the fourteen units include in-unit
               washer/dryers, with a coin-operated laundry facility in the basement serving the remaining units.
             </p>
@@ -130,7 +130,7 @@ function PropertyOverview({ pageNum }) {
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Utilities &amp; Mechanicals</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Heating / AC</span><span className="bldg-val">Electric Heat · Central AC</span></div>
+                <div className="bldg-row"><span className="bldg-label">Heating / AC</span><span className="bldg-val">Electric Heat Pumps · Heating &amp; Central AC</span></div>
                 <div className="bldg-row"><span className="bldg-label">Electric</span><span className="bldg-val">Tenant-Metered Units · House-Metered Common Areas</span></div>
                 <div className="bldg-row"><span className="bldg-label">Water / Sewer</span><span className="bldg-val">Municipal · Units Sub-Metered</span></div>
                 <div className="bldg-row"><span className="bldg-label">Trash</span><span className="bldg-val">Landlord-Paid (Not Municipal)</span></div>
@@ -229,7 +229,7 @@ function BuildingHistory({ pageNum }) {
             </div>
             <div className="eyebrow" style={{ marginBottom: 4 }}>Highlights</div>
             <ul className="highlights ridge-highlights">
-              <li><strong>Authentic loft interiors</strong> — nine-foot ceilings, exposed beams, and hardwood floors, in the spirit of a New York loft conversion</li>
+              <li><strong>Authentic loft interiors</strong> — nine-foot ceilings and exposed beams, in the spirit of a New York loft conversion</li>
               <li><strong>Preservation-grade restoration</strong> — original paint colors retained and a former grain elevator repurposed as the building&rsquo;s stair tower</li>
               <li><strong>Renovated kitchens &amp; in-unit laundry</strong> — modern appliances and a washer/dryer paired with the building&rsquo;s historic character</li>
               <li><strong>Steps from the New Milford Green</strong> — the walkable heart of the village-center demand story</li>
@@ -458,10 +458,10 @@ function IncomeExpense({ pageNum }) {
               ['Vacancy & Collections Loss (5%)', '-$15,636', '-$1,117', '-$17,220', '-$1,230', false],
               ['Effective Rental Income', '$297,084', '$21,220', '$327,180', '$23,370', true],
               ['Other Income (laundry, storage, fees)', '$4,685', '$335', '$4,685', '$335', false],
-            ].map(([label, ...cells]) => {
+            ].map(([label, ...cells], i) => {
               const bold = cells.pop()
               return (
-                <tr key={label}>
+                <tr key={label} style={i % 2 === 1 ? { background: 'var(--linen)' } : undefined}>
                   <td style={bold ? { ...tdl, fontWeight: 700 } : tdl}>{label}</td>
                   {cells.map((c, j) => <td key={j} style={bold ? { ...tds, fontWeight: 700 } : tds}>{c}</td>)}
                 </tr>
@@ -499,7 +499,7 @@ function IncomeExpense({ pageNum }) {
               </tr>
             ))}
             <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expenses</td><td style={totBg}>$91,839</td><td style={totBg}>$6,560</td><td style={totBg}>$93,344</td><td style={totBg}>$6,667</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$209,930</td><td style={noiBg}>6.00% Cap</td><td style={noiBg}>$238,521</td><td style={noiBg}>6.81% Cap</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$209,930</td><td style={noiBg}>$14,995</td><td style={noiBg}>$238,521</td><td style={noiBg}>$17,037</td></tr>
           </tbody>
         </table>
       </div>
@@ -892,6 +892,20 @@ function AerialStreet({ x, y, label, angle = 0 }) {
   )
 }
 
+/* Full-bleed pre-rendered aerial pin map (built in aerial-pins/ — logos, arrows
+   and subject box are baked into the image; edit there and re-export, not here).
+   The `aerial-pinned` class tells print.cjs to skip ALL brightness lifts — these
+   drone shots are already color-graded and blow out under the cover lift. */
+function AerialPinned({ src, alt }) {
+  return (
+    <div className="page">
+      <div className="cover-hero aerial-pinned">
+        <img className="cover-hero-img" src={src} alt={alt} />
+      </div>
+    </div>
+  )
+}
+
 function AerialContext({ src, points = [], logo = '/logos/npcg-white-hires.png' }) {
   return (
     <div className="page">
@@ -916,7 +930,7 @@ function InvestmentHighlights({ pageNum }) {
       items: [
         {
           head: 'Historic Character, Modern Performance',
-          body: 'A rare adaptive reuse of the Turney Soule granary — original nine-foot ceilings, exposed beams, and hardwood floors preserved throughout, delivering a tenant experience competing sets can’t replicate.',
+          body: 'A rare adaptive reuse of the Turney Soule granary — original nine-foot ceilings and exposed beams preserved throughout, delivering a tenant experience competing sets can’t replicate.',
         },
         {
           head: 'Award-Recognized Preservation',
@@ -924,7 +938,7 @@ function InvestmentHighlights({ pageNum }) {
         },
         {
           head: 'Minimal Owner Expense Exposure',
-          body: 'Central air conditioning throughout, with heat and hot water on separately metered, tenant-paid electric service, and water sub-metered and tenant-paid — significantly limiting owner-side utility exposure relative to typical multifamily assets in the submarket.',
+          body: 'Heat-pump heating and cooling throughout, with heat, AC, and hot water on separately metered, tenant-paid electric service, and water sub-metered and tenant-paid — significantly limiting owner-side utility exposure relative to typical multifamily assets in the submarket.',
         },
         {
           head: 'Boutique, Manageable Scale',
@@ -1007,7 +1021,7 @@ function App() {
       plans={[
         { src: '/photos/floorplans/fp-103.jpg', unit: 'Unit 103', type: '2 Bed / 1 Bath', sub: 'Near-identical layout to Unit 203' },
         { src: '/photos/floorplans/fp-105.jpg', unit: 'Unit 105', type: '2 Bed Townhome · two-story', sub: 'Near-identical layout to Unit 106' },
-        { src: '/photos/floorplans/fp-202.jpg', unit: 'Unit 202', type: '2 Bed / 1 Bath', sub: 'Near-identical layout to Unit 102' },
+        { src: '/photos/floorplans/fp-202.jpg', unit: 'Unit 202', type: '2 Bed / 1 Bath', sub: 'Near-identical layout to Units 102 & 302' },
         { src: '/photos/floorplans/fp-204.jpg', unit: 'Unit 204', type: '1 Bed / 1 Bath', sub: 'Near-identical layout to Unit 104' },
       ]}
       note="Floor plans are representative; individual unit layouts and dimensions vary. Measurements deemed reliable but not guaranteed."
@@ -1018,6 +1032,8 @@ function App() {
     <Divider eyebrow="03" title="Location & Market" image="/photos/divider.jpg" />,
     <BlackRockOverview />,
     <LocationMap />,
+    <AerialPinned src="/photos/aerial-pinned-north.jpg" alt="Pinned aerial looking north over downtown New Milford — Town Green, Bank Street, and New Milford Hospital" />,
+    <AerialPinned src="/photos/aerial-pinned-south.jpg" alt="Pinned aerial over the Housatonic River and Route 7 retail corridor — Litchfield Crossing, New Milford Plaza, and Route 7 South retail" />,
     <DriveTimeMap />,
     <FairfieldCounty />,
     <RegionalMap />,

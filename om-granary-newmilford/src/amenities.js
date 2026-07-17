@@ -63,6 +63,7 @@ export const DIRECTORY = [
       { name: 'New Milford Farmers’ Market', note: 'The Green · Seasonal', lat: 41.57810, lng: -73.41100 },
       { name: 'Big Y World Class Market', note: '1 Kent Rd · Supermarket', lat: 41.5739910, lng: -73.4197424 },
       { name: 'Stop & Shop', note: '180 Danbury Rd · Supermarket', lat: 41.5505503, lng: -73.4192926 },
+      { name: 'Aldi', note: '125 Danbury Rd (Rte 7)', lat: 41.5565100, lng: -73.4171900 },
     ],
   },
   {
@@ -70,6 +71,7 @@ export const DIRECTORY = [
     items: [
       { name: 'Walmart Supercenter', note: '164 Danbury Rd (Rte 7)', lat: 41.5520315, lng: -73.4197505 },
       { name: 'The Home Depot', note: '104 Danbury Rd (Rte 7)', lat: 41.5594928, lng: -73.4176963 },
+      { name: 'Litchfield Crossing & New Milford Plaza', note: 'Kohl’s, TJ Maxx, Petco & more', lat: 41.5513168, lng: -73.4149253 },
       { name: 'New Milford Hospital', note: 'Elm St · Nuvance Health', lat: 41.58181, lng: -73.40977 },
       { name: 'CVS Pharmacy', note: '40 East St · Pharmacy', lat: 41.5793367, lng: -73.4077013 },
     ],
