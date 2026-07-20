@@ -1,23 +1,18 @@
-import { StaticShell } from './Shell.jsx'
-import { LEADERSHIP, SENIOR_INVESTMENT_SALES, INVESTMENT_SALES } from './firm.js'
+import { StaticShell, assetUrl } from '../Shell.tsx'
+import { LEADERSHIP, SENIOR_INVESTMENT_SALES, INVESTMENT_SALES, type FirmMember } from '../../data/firm.ts'
 
-/* ═══════════════════ OUR TEAM ═══════════════════
-   Big avatar cards for Leadership + Senior Investment Sales, with the
-   full Investment Sales roster in a compact grid below. On the standard
-   white page shell. Headshots fall back to initials until member.photo
-   is set in firm.js. */
+/* ═══════════ OUR TEAM (protected, firm-static) ═══════════ */
 
-function initials(name) {
+function initials(name: string) {
   return name.split(/\s+/).map((p) => p[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()
 }
 
-function Avatar({ member }) {
-  if (member.photo) return <img className="team__avatar" src={member.photo} alt={member.name} />
+function Avatar({ member }: { member: FirmMember }) {
+  if (member.photo) return <img className="team__avatar" src={assetUrl(member.photo)} alt={member.name} />
   return <div className="team__avatar team__avatar--ph">{initials(member.name)}</div>
 }
 
-// Wrap in a link to the member's agent page when one exists, else a plain div.
-function CardLink({ member, className, children }) {
+function CardLink({ member, className, children }: { member: FirmMember; className: string; children: React.ReactNode }) {
   if (member.url) {
     return (
       <a className={className} href={member.url} target="_blank" rel="noreferrer">
@@ -28,7 +23,7 @@ function CardLink({ member, className, children }) {
   return <div className={className}>{children}</div>
 }
 
-function BigCard({ member }) {
+function BigCard({ member }: { member: FirmMember }) {
   return (
     <CardLink member={member} className="team__big">
       <Avatar member={member} />
@@ -40,7 +35,7 @@ function BigCard({ member }) {
   )
 }
 
-function CompactCard({ member }) {
+function CompactCard({ member }: { member: FirmMember }) {
   return (
     <CardLink member={member} className="team__compact">
       <div className="team__compact-name">{member.name}</div>
@@ -51,28 +46,34 @@ function CompactCard({ member }) {
   )
 }
 
-export default function TeamPage({ pageNum }) {
+export function TeamPage({ pageNum }: { pageNum?: number }) {
   return (
     <StaticShell section="Our Team" title="Our Team" pageNum={pageNum}>
       <div className="team">
         <section className="team__section">
           <h2 className="team__heading">Leadership Team</h2>
-          <div className="team__row" style={{ '--cols': 5 }}>
-            {LEADERSHIP.map((m) => <BigCard key={m.name} member={m} />)}
+          <div className="team__row" style={{ '--cols': 5 } as React.CSSProperties}>
+            {LEADERSHIP.map((m) => (
+              <BigCard key={m.name} member={m} />
+            ))}
           </div>
         </section>
 
         <section className="team__section">
           <h2 className="team__heading">Senior Investment Sales</h2>
-          <div className="team__row" style={{ '--cols': 5 }}>
-            {SENIOR_INVESTMENT_SALES.map((m) => <BigCard key={m.name} member={m} />)}
+          <div className="team__row" style={{ '--cols': 5 } as React.CSSProperties}>
+            {SENIOR_INVESTMENT_SALES.map((m) => (
+              <BigCard key={m.name} member={m} />
+            ))}
           </div>
         </section>
 
         <section className="team__section">
           <h2 className="team__heading">Investment Sales</h2>
           <div className="team__compact-grid">
-            {INVESTMENT_SALES.map((m) => <CompactCard key={m.name} member={m} />)}
+            {INVESTMENT_SALES.map((m) => (
+              <CompactCard key={m.name} member={m} />
+            ))}
           </div>
         </section>
       </div>

@@ -74,7 +74,7 @@ function ExecutiveSummary({ pageNum }) {
             </p>
             <div className="eyebrow" style={{ marginBottom: 8 }}>Investment Highlights</div>
             <ul className="highlights highlights--lg" style={{ gap: 10 }}>
-              <li><strong>Value-Add Opportunity</strong> — In-place ~$1,157 vs. ~$1,600 pro forma; ~38% mark-to-market upside</li>
+              <li><strong>Value-Add Opportunity</strong> — In-place ~$1,157 vs. ~$1,740 pro forma; ~50% mark-to-market upside</li>
               <li><strong>Below-Market Rents, Large Floorplans, Flexible Layouts</strong> — High ceilings, hardwood floors &amp; full-size dining rooms in 8 of 10 units</li>
               <li><strong>Irreplaceable Location</strong> — Minutes to University of New Haven, VA Hospital, Yale &amp; downtown New Haven</li>
               <li><strong>Durable Tenant Demand</strong> — Students, medical workers &amp; faculty; Metro-North to NYC at West Haven Station</li>
@@ -144,10 +144,10 @@ function BuildingDescriptions({ pageNum }) {
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Unit Mix &amp; Rents</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Unit Mix</span><span className="bldg-val">10 &times; 1BR + 1 Rental Room</span></div>
+                <div className="bldg-row"><span className="bldg-label">Unit Mix</span><span className="bldg-val">8 &times; 1BR + Dining &middot; 2 &times; 1BR + 1 Room</span></div>
                 <div className="bldg-row"><span className="bldg-label">Avg In-Place Rent</span><span className="bldg-val">$1,157 / mo</span></div>
-                <div className="bldg-row"><span className="bldg-label">High Achieved</span><span className="bldg-val">$1,260 / mo</span></div>
-                <div className="bldg-row"><span className="bldg-label">Pro Forma Rent</span><span className="bldg-val">$1,600 / mo</span></div>
+                <div className="bldg-row"><span className="bldg-label">Pro Forma (1BR + Dining)</span><span className="bldg-val">$1,800 / mo</span></div>
+                <div className="bldg-row"><span className="bldg-label">Pro Forma (1BR)</span><span className="bldg-val">$1,500 / mo</span></div>
               </div>
             </div>
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
@@ -155,8 +155,8 @@ function BuildingDescriptions({ pageNum }) {
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$1,400,000 ($140K/Unit)</span></div>
                 <div className="bldg-row"><span className="bldg-label">Price / SF</span><span className="bldg-val">$159 / SF</span></div>
-                <div className="bldg-row"><span className="bldg-label">NOI (Year 1 &rarr; PF)</span><span className="bldg-val">$68,430 &rarr; $110,142</span></div>
-                <div className="bldg-row"><span className="bldg-label">Cap (Year 1 &rarr; PF)</span><span className="bldg-val">4.89% &rarr; 7.87%</span></div>
+                <div className="bldg-row"><span className="bldg-label">NOI (Year 1 &rarr; PF)</span><span className="bldg-val">$68,430 &rarr; $125,304</span></div>
+                <div className="bldg-row"><span className="bldg-label">Cap (Year 1 &rarr; PF)</span><span className="bldg-val">4.89% &rarr; 8.95%</span></div>
               </div>
             </div>
           </div>
@@ -170,21 +170,30 @@ function BuildingDescriptions({ pageNum }) {
 /* ═══════════════════ RENT ROLL ═══════════════════ */
 function DonutChart({ data, size = 112, thickness = 20, centerLabel, centerSub }) {
   const r = (size - thickness) / 2
-  const C = 2 * Math.PI * r
+  const cx = size / 2
+  const cy = size / 2
   const total = data.reduce((s, d) => s + d.value, 0)
+  // Real arc paths (not stroke-dasharray circles) — Chrome renders the dash
+  // wrap seam as a skewed diagonal notch where a segment ends at the path start.
+  const pt = (angle) => [cx + r * Math.cos(angle), cy + r * Math.sin(angle)]
+  let cum = 0
+  const arcs = data.map((d) => {
+    const a0 = -Math.PI / 2 + (cum / total) * 2 * Math.PI
+    cum += d.value
+    // Cap just under a full turn so a 100% segment still renders as an arc.
+    const sweep = Math.min((d.value / total) * 2 * Math.PI, 2 * Math.PI - 1e-4)
+    const a1 = a0 + sweep
+    const [x0, y0] = pt(a0)
+    const [x1, y1] = pt(a1)
+    const largeArc = sweep > Math.PI ? 1 : 0
+    return { d: `M ${x0} ${y0} A ${r} ${r} 0 ${largeArc} 1 ${x1} ${y1}`, color: d.color }
+  })
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ display: 'block', flexShrink: 0 }}>
-      <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#ece7e1" strokeWidth={thickness} />
-        {data.map((d, i) => {
-          const len = (d.value / total) * C
-          const offset = data.slice(0, i).reduce((s, x) => s + (x.value / total) * C, 0)
-          return (
-            <circle key={i} cx={size / 2} cy={size / 2} r={r} fill="none" stroke={d.color}
-              strokeWidth={thickness} strokeDasharray={`${len} ${C - len}`} strokeDashoffset={-offset} />
-          )
-        })}
-      </g>
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#ece7e1" strokeWidth={thickness} />
+      {arcs.map((a, i) => (
+        <path key={i} d={a.d} fill="none" stroke={a.color} strokeWidth={thickness} />
+      ))}
       {centerLabel && (
         <text x="50%" y="47%" textAnchor="middle" dominantBaseline="middle" style={{ fontSize: 22, fontWeight: 800, fill: 'var(--carbon)' }}>{centerLabel}</text>
       )}
@@ -218,23 +227,22 @@ function ChartCard({ title, data, centerLabel, centerSub }) {
 
 function RentRoll({ pageNum }) {
   const units = [
-    { unit: '1M', bldg: '300 Main', type: '1 BR', inPlace: 1185, market: 1260, proforma: 1600, start: '7/1/2025', end: '6/30/2026' },
-    { unit: '2M', bldg: '300 Main', type: '1 BR', inPlace: 1205, market: 1260, proforma: 1600, start: '12/1/2025', end: '8/31/2026' },
-    { unit: '3M', bldg: '300 Main', type: '1 BR', inPlace: 1210, market: 1260, proforma: 1600, start: '8/1/2025', end: '7/31/2026' },
-    { unit: '4M', bldg: '300 Main', type: '1 BR', inPlace: 1210, market: 1260, proforma: 1600, start: '8/1/2025', end: '7/31/2026' },
-    { unit: '6M', bldg: '300 Main', type: '1 BR', inPlace: 995, market: 1260, proforma: 1600, start: '7/1/2025', end: '6/30/2026' },
-    { unit: '1W', bldg: '491 Washington', type: '1 BR', inPlace: 1260, market: 1260, proforma: 1600, start: '7/1/2025', end: '6/30/2026' },
-    { unit: '2W', bldg: '491 Washington', type: '1 BR', inPlace: 1180, market: 1260, proforma: 1600, start: '9/1/2025', end: '8/31/2026' },
-    { unit: '3W', bldg: '491 Washington', type: '1 BR', inPlace: 1185, market: 1260, proforma: 1600, start: '7/1/2025', end: '6/30/2026' },
-    { unit: '4W', bldg: '491 Washington', type: '1 BR', inPlace: 1180, market: 1260, proforma: 1600, start: '7/1/2025', end: '6/30/2026' },
-    { unit: '5W', bldg: '491 Washington', type: '1 BR', inPlace: 960, market: 1260, proforma: 1600, start: '9/1/2025', end: '8/31/2026' },
+    { unit: '1M', type: '1 BR + Dining', inPlace: 1185, proforma: 1800, start: '7/1/2025', end: '6/30/2026' },
+    { unit: '2M', type: '1 BR + Dining', inPlace: 1205, proforma: 1800, start: '12/1/2025', end: '8/31/2026' },
+    { unit: '3M', type: '1 BR + Dining', inPlace: 1210, proforma: 1800, start: '8/1/2025', end: '7/31/2026' },
+    { unit: '4M', type: '1 BR + Dining', inPlace: 1210, proforma: 1800, start: '8/1/2025', end: '7/31/2026' },
+    { unit: '6M', type: '1 BR', inPlace: 995, proforma: 1500, start: '7/1/2025', end: '6/30/2026' },
+    { unit: '1W', type: '1 BR + Dining', inPlace: 1260, proforma: 1800, start: '7/1/2025', end: '6/30/2026' },
+    { unit: '2W', type: '1 BR + Dining', inPlace: 1180, proforma: 1800, start: '9/1/2025', end: '8/31/2026' },
+    { unit: '3W', type: '1 BR + Dining', inPlace: 1185, proforma: 1800, start: '7/1/2025', end: '6/30/2026' },
+    { unit: '4W', type: '1 BR + Dining', inPlace: 1180, proforma: 1800, start: '7/1/2025', end: '6/30/2026' },
+    { unit: '5W', type: '1 BR', inPlace: 960, proforma: 1500, start: '9/1/2025', end: '8/31/2026' },
   ]
   const totalInPlace = units.reduce((s, u) => s + u.inPlace, 0)
-  const totalMarket = units.reduce((s, u) => s + u.market, 0)
   const totalProforma = units.reduce((s, u) => s + u.proforma, 0)
   const unitMix = [
-    { label: '300 Main Street', value: 5, color: '#3F4753' },
-    { label: '491 Washington Ave', value: 5, color: '#F8971D' },
+    { label: '1 BR + Dining Room', value: 8, color: '#3F4753' },
+    { label: '1 BR', value: 2, color: '#F8971D' },
   ]
   return (
     <div className="page">
@@ -243,15 +251,13 @@ function RentRoll({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Unit Mix & <span style={{ color: '#F8971D' }}>Rent Roll</span></div>
         <div className="title-rule" />
         <table className="data-table" style={{ fontSize: 9.5 }}>
-          <thead><tr><th>Unit</th><th>Building</th><th>Type</th><th style={{ textAlign: 'right' }}>Current Rent</th><th style={{ textAlign: 'right' }}>High Achieved</th><th style={{ textAlign: 'right' }}>Pro Forma</th><th style={{ textAlign: 'right' }}>Lease Start</th><th style={{ textAlign: 'right' }}>Lease End</th></tr></thead>
+          <thead><tr><th>Unit</th><th>Type</th><th style={{ textAlign: 'right' }}>Current Rent</th><th style={{ textAlign: 'right' }}>Pro Forma</th><th style={{ textAlign: 'right' }}>Lease Start</th><th style={{ textAlign: 'right' }}>Lease End</th></tr></thead>
           <tbody>
             {units.map((u, i) => (
               <tr key={i}>
                 <td>{u.unit}</td>
-                <td>{u.bldg}</td>
                 <td>{u.type}</td>
                 <td style={{ textAlign: 'right' }}>${u.inPlace.toLocaleString()}</td>
-                <td style={{ textAlign: 'right' }}>${u.market.toLocaleString()}</td>
                 <td style={{ textAlign: 'right' }}>${u.proforma.toLocaleString()}</td>
                 <td style={{ textAlign: 'right' }}>{u.start}</td>
                 <td style={{ textAlign: 'right' }}>{u.end}</td>
@@ -259,10 +265,8 @@ function RentRoll({ pageNum }) {
             ))}
             <tr className="total-row">
               <td><strong>Monthly Total</strong></td>
-              <td><strong>2 Bldgs</strong></td>
               <td><strong>10 Units</strong></td>
               <td style={{ textAlign: 'right' }}><strong>${totalInPlace.toLocaleString()}</strong></td>
-              <td style={{ textAlign: 'right' }}><strong>${totalMarket.toLocaleString()}</strong></td>
               <td style={{ textAlign: 'right' }}><strong>${totalProforma.toLocaleString()}</strong></td>
               <td />
               <td />
@@ -271,16 +275,15 @@ function RentRoll({ pageNum }) {
         </table>
 
         <div style={{ display: 'flex', gap: 14, marginTop: 14, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
-          <ChartCard title="By Building" data={unitMix} centerLabel="10" centerSub="UNITS" />
+          <ChartCard title="Unit Mix" data={unitMix} centerLabel="10" centerSub="UNITS" />
           <div style={{ padding: '2px 6px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
             <h3 style={{ fontSize: 10, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10, paddingBottom: 6, borderBottom: '2px solid var(--golden)' }}>Monthly Income Summary</h3>
             <table className="data-table" style={{ fontSize: 9 }}>
               <thead><tr><th>Scenario</th><th style={{ textAlign: 'right' }}>Monthly</th><th style={{ textAlign: 'right' }}>Annual</th><th style={{ textAlign: 'right' }}>Per Unit</th></tr></thead>
               <tbody>
                 <tr><td>In-Place</td><td style={{ textAlign: 'right' }}>$11,570</td><td style={{ textAlign: 'right' }}>$138,840</td><td style={{ textAlign: 'right' }}>$1,157</td></tr>
-                <tr><td>High Achieved</td><td style={{ textAlign: 'right' }}>$12,600</td><td style={{ textAlign: 'right' }}>$151,200</td><td style={{ textAlign: 'right' }}>$1,260</td></tr>
-                <tr><td style={{ fontWeight: 700 }}>Pro Forma</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$16,000</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$192,000</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$1,600</td></tr>
-                <tr className="total-row"><td><strong>Total Upside</strong></td><td style={{ textAlign: 'right' }}><strong>+$4,430</strong></td><td style={{ textAlign: 'right' }}><strong>+$53,160</strong></td><td style={{ textAlign: 'right' }}><strong>+$443</strong></td></tr>
+                <tr><td style={{ fontWeight: 700 }}>Pro Forma</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$17,400</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$208,800</td><td style={{ textAlign: 'right', fontWeight: 700 }}>$1,740</td></tr>
+                <tr className="total-row"><td><strong>Total Upside</strong></td><td style={{ textAlign: 'right' }}><strong>+$5,830</strong></td><td style={{ textAlign: 'right' }}><strong>+$69,960</strong></td><td style={{ textAlign: 'right' }}><strong>+$583</strong></td></tr>
               </tbody>
             </table>
           </div>
@@ -311,7 +314,7 @@ function IncomeExpense({ pageNum }) {
 
   const noi = [
     { label: 'NOI — Year 1', val: '$68,430' },
-    { label: 'NOI — Pro Forma', val: '$110,142' },
+    { label: 'NOI — Pro Forma', val: '$125,304' },
   ]
 
   return (
@@ -346,11 +349,11 @@ function IncomeExpense({ pageNum }) {
           </thead>
           <tbody>
             {[
-              ['Gross Potential Rent', '$192,000', '—', '—', '$192,000', '—', '—', false],
-              ['Below Market Rent', '-$46,218', '—', '-31.70%', '$0', '—', '0.00%', false],
-              ['Gross Scheduled Rent', '$145,782', '—', '—', '$192,000', '—', '—', true],
-              ['Vacancy & Collections Loss', '-$7,289', '—', '5.00%', '-$9,600', '—', '5.00%', false],
-              ['Effective Rental Income', '$138,493', '—', '—', '$182,400', '—', '—', true],
+              ['Gross Potential Rent', '$208,800', '—', '—', '$208,800', '—', '—', false],
+              ['Below Market Rent', '-$63,018', '—', '-43.23%', '$0', '—', '0.00%', false],
+              ['Gross Scheduled Rent', '$145,782', '—', '—', '$208,800', '—', '—', true],
+              ['Vacancy & Collections Loss', '-$7,289', '—', '5.00%', '-$10,440', '—', '5.00%', false],
+              ['Effective Rental Income', '$138,493', '—', '—', '$198,360', '—', '—', true],
               ['Room Income', '$3,720', '$372', '—', '$3,720', '$372', '—', false],
               ['Application Fees', '$50', '$5', '—', '$50', '$5', '—', false],
               ['Laundry Income', '$510', '$51', '—', '$510', '$51', '—', false],
@@ -366,7 +369,7 @@ function IncomeExpense({ pageNum }) {
                 </tr>
               )
             })}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$144,973</td><td style={totBg}>&mdash;</td><td style={totBg}>&mdash;</td><td style={totBg}>$188,880</td><td style={totBg}>&mdash;</td><td style={totBg}>&mdash;</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Effective Gross Income</td><td style={totBg}>$144,973</td><td style={totBg}>&mdash;</td><td style={totBg}>&mdash;</td><td style={totBg}>$204,840</td><td style={totBg}>&mdash;</td><td style={totBg}>&mdash;</td></tr>
           </tbody>
         </table>
 
@@ -382,7 +385,7 @@ function IncomeExpense({ pageNum }) {
           </thead>
           <tbody>
             {[
-              ['Property Management', '$7,249', '$725', '5.00%', '$9,444', '$944', '5.00%'],
+              ['Property Management', '$7,249', '$725', '5.00%', '$10,242', '$1,024', '5.00%'],
               ['Real Estate Tax', '$26,281', '$2,628', '—', '$26,281', '$2,628', '—'],
               ['Property Insurance', '$10,347', '$1,035', '—', '$10,347', '$1,035', '—'],
               ['Electric', '$2,282', '$228', '—', '$2,282', '$228', '—'],
@@ -397,8 +400,8 @@ function IncomeExpense({ pageNum }) {
                 {cells.map((c, j) => <td key={j} style={tds}>{c}</td>)}
               </tr>
             ))}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$76,542</td><td style={totBg}>$7,654</td><td style={totBg}>52.80%</td><td style={totBg}>$78,738</td><td style={totBg}>$7,874</td><td style={totBg}>41.69%</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$68,430</td><td style={noiBg}>&mdash;</td><td style={noiBg}>&mdash;</td><td style={noiBg}>$110,142</td><td style={noiBg}>&mdash;</td><td style={noiBg}>&mdash;</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expense</td><td style={totBg}>$76,542</td><td style={totBg}>$7,654</td><td style={totBg}>52.80%</td><td style={totBg}>$79,536</td><td style={totBg}>$7,954</td><td style={totBg}>38.83%</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$68,430</td><td style={noiBg}>&mdash;</td><td style={noiBg}>&mdash;</td><td style={noiBg}>$125,304</td><td style={noiBg}>&mdash;</td><td style={noiBg}>&mdash;</td></tr>
           </tbody>
         </table>
       </div>

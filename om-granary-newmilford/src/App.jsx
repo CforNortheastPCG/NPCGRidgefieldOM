@@ -75,7 +75,7 @@ function ExecutiveSummary({ pageNum }) {
               washer/dryers, with a coin-operated laundry facility in the basement serving the remaining units.
             </p>
             <p style={{ fontSize: 11.7, lineHeight: 1.4, marginBottom: 8 }}>
-              The Granary offers a rare combination in the Fairfield/Litchfield County submarket: a fully stabilized,
+              The Granary offers a rare combination in the Fairfield/Litchfield County submarket: an
               architecturally distinct property in a walkable downtown location, positioned for a new owner following
               New Milford&rsquo;s completed town-wide revaluation. With new tax assessments effective July 1, 2026,
               buyers can underwrite the property&rsquo;s go-forward tax basis with certainty. In-place rents also sit
@@ -167,7 +167,7 @@ function BuildingHistory({ pageNum }) {
     { y: 'Est. 1865', t: 'T. Soule & Co.', b: 'Known as the Turney Soule Granary, the mill operates as T. Soule & Co. — Flour, Grain & Feed and Poultry Supplies — anchoring the West Street village core for generations.' },
     { y: '20th c.', t: 'Tobacco warehouse', b: 'The complex later serves as a tobacco warehouse before falling out of use and into disrepair in the decades that follow.' },
     { y: '2006', t: 'Award-winning restoration', b: 'Jim and Cass Hancock, a father-and-son preservation team, convert the mill into loft apartments — earning a Connecticut Trust for Historic Preservation Award of Merit.' },
-    { y: 'Today', t: '“The Granary”', b: 'A characterful, near-fully-leased building of 14 loft-style apartments that carries its heritage name — steps from the New Milford Green.' },
+    { y: 'Today', t: '“The Granary”', b: 'A characterful building of 14 loft-style apartments that carries its heritage name — steps from the New Milford Green.' },
   ]
   return (
     <div className="page">
@@ -187,7 +187,7 @@ function BuildingHistory({ pageNum }) {
               collection of adjoining mill structures with six tall grain elevators, built along West Street between the
               early 1800s and early 1900s. After a later life as a tobacco warehouse and years of disuse, it was restored
               by preservationists Jim and Cass Hancock into loft apartments &mdash; a project honored
-              with a Connecticut Trust for Historic Preservation Award of Merit. For a buyer, that story
+              with a Connecticut Trust for Historic Preservation Award of Merit. For an owner, that story
               is a marketing asset: a named, award-winning building in one of Litchfield County&rsquo;s most desirable
               small towns that tenants are proud to call home.
             </p>

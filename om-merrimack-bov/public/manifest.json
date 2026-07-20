@@ -1,0 +1,126 @@
+[
+ {
+  "id": "cover",
+  "type": "cover",
+  "title": "Cover",
+  "contentModule": "cover.content.ts"
+ },
+ {
+  "id": "toc",
+  "type": "toc",
+  "title": "Table of Contents"
+ },
+ {
+  "id": "contacts",
+  "type": "contacts",
+  "title": "Deal Contacts"
+ },
+ {
+  "id": "exec-summary",
+  "type": "exec-summary",
+  "title": "Executive Summary",
+  "contentModule": "exec-summary.content.ts"
+ },
+ {
+  "id": "highlights",
+  "type": "highlights",
+  "title": "Investment Highlights",
+  "contentModule": "highlights.content.ts"
+ },
+ {
+  "id": "divider-1",
+  "type": "divider",
+  "title": "The Property",
+  "eyebrow": "01",
+  "image": "/photos/merrimack-ext-corner.jpg"
+ },
+ {
+  "id": "property-overview",
+  "type": "property-overview",
+  "title": "Property Overview"
+ },
+ {
+  "id": "photos-1",
+  "type": "photos",
+  "title": "Property Photos"
+ },
+ {
+  "id": "photos-2",
+  "type": "photos",
+  "title": "Property Photos"
+ },
+ {
+  "id": "photos-3",
+  "type": "photos",
+  "title": "Property Photos"
+ },
+ {
+  "id": "divider-2",
+  "type": "divider",
+  "title": "Financial Analysis",
+  "eyebrow": "02",
+  "image": "/photos/merrimack-ext-corner.jpg"
+ },
+ {
+  "id": "rent-roll",
+  "type": "rent-roll",
+  "title": "Rent Roll"
+ },
+ {
+  "id": "income-expense",
+  "type": "income-expense",
+  "title": "Income & Expense"
+ },
+ {
+  "id": "divider-3",
+  "type": "divider",
+  "title": "Location & Market",
+  "eyebrow": "03",
+  "image": "/photos/merrimack-ext-corner.jpg"
+ },
+ {
+  "id": "city-overview",
+  "type": "city-overview",
+  "title": "Lowell Overview",
+  "contentModule": "city-overview.content.ts"
+ },
+ {
+  "id": "location-map",
+  "type": "location-map",
+  "title": "Location & Amenities"
+ },
+ {
+  "id": "drive-time-map",
+  "type": "drive-time-map",
+  "title": "Drive Times"
+ },
+ {
+  "id": "county-overview",
+  "type": "county-overview",
+  "title": "Greater Boston Overview",
+  "contentModule": "county-overview.content.ts"
+ },
+ {
+  "id": "regional-map",
+  "type": "regional-map",
+  "title": "Regional Positioning",
+  "contentModule": "regional-map.content.ts"
+ },
+ {
+  "id": "divider-4",
+  "type": "divider",
+  "title": "The Team",
+  "eyebrow": "04",
+  "image": "/photos/merrimack-ext-corner.jpg"
+ },
+ {
+  "id": "team",
+  "type": "team",
+  "title": "Our Team"
+ },
+ {
+  "id": "locations",
+  "type": "locations",
+  "title": "Our Locations"
+ }
+]
