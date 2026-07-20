@@ -664,11 +664,11 @@ function DealContacts({ pageNum }) {
             <div className="dc-meta" style={{ fontWeight: 700 }}>bballetto@northeastpcg.com</div>
           </div>
           <div className="dc-card" style={{ border: 'none', padding: 0 }}>
-            <img className="dc-avatar" src="/photos/team/joe-ferrandino.jpg" alt="Joe Ferrandino" style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
-            <div className="dc-name">Joe Ferrandino</div>
+            <img className="dc-avatar" src="/photos/team/collin-murphy.jpg" alt="Collin Murphy" style={{ border: '3px solid var(--golden)', boxShadow: '0 0 0 2px #fff inset' }} />
+            <div className="dc-name">Collin Murphy</div>
             <div className="dc-title">Associate, Investments</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (914) 440-0908</div>
-            <div className="dc-meta" style={{ fontWeight: 700 }}>jferrandino@northeastpcg.com</div>
+            <div className="dc-meta" style={{ fontWeight: 700 }}>Direct: (203) 307-1580</div>
+            <div className="dc-meta" style={{ fontWeight: 700 }}>cmurphy@northeastpcg.com</div>
           </div>
         </aside>
         <section className="dc-disclaimer">
