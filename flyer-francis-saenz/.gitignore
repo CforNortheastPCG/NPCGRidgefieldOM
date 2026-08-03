@@ -1,0 +1,33 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Render + QA artifacts
+qa-shots/
+*.pdf
+
+# NOTE: src/data/comps.json, src/data/photos.json and public/properties/*.jpg
+# ARE committed on purpose — they are the D1 snapshot, and committing them is
+# what lets `npm run pdf` build offline and reproducibly. Regenerate with
+# `npm run data`.

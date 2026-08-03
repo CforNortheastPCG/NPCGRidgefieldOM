@@ -18,3 +18,6 @@ om-exports/
 .photos-backup/
 **/.photos-backup/
 sssssss.txt
+
+# Wrangler CLI cache (created by pull-comps.cjs runs)
+.wrangler/

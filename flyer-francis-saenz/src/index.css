@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+/* ═══════════════════ NPCG STYLE PACK — PORTRAIT (8.5x11) ═══════════════════
+   Tokens are the firm standard (NPCGStyleGuide.md); the page box is the one
+   thing that differs from every other deck in this repo. The OMs are 960x742
+   landscape — this is a bio/track-record piece, so it is 816x1056 portrait
+   (8.5x11in @96dpi). print-vector.cjs renders at exactly these dimensions. */
+
+:root {
+  --carbon: #3f4753;
+  --terracotta: #B55D37;
+  --golden: #F8971D;
+  --stone: #B1A8A0;
+  --graphite: #281B12;
+  --linen: #F6F2EE;
+  --white: #ffffff;
+  --border: #e0dbd6;
+
+  --page-w: 816px;
+  --page-h: 1056px;
+
+  /* Chrome is lighter than the landscape decks': a 62px header and 34px footer
+     eat a much larger share of a narrower sheet. Content box works out to
+     1056 - 46 - 28 = 982px, and 954px after section padding. */
+  --header-h: 46px;
+  --footer-h: 28px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #d0ccc8;
+  color: var(--carbon);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.deck { display: flex; flex-direction: column; align-items: center; padding: 40px 0; }
+
+/* ── PAGE SHELL ── */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  margin: 0 auto 48px;
+  background: var(--white);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.page img { image-rendering: auto; }
+
+/* ── PAGE HEADER (dark bar) ── */
+.page-header {
+  background: var(--carbon);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 34px;
+  flex-shrink: 0;
+  height: var(--header-h);
+}
+/* No filter here (the landscape decks lift the logo with contrast/saturate).
+   In a vector render any CSS filter forces Chromium to bake the image as
+   lossless FlateDecode instead of passing the JPEG through as DCTDecode. */
+.page-header img { height: 26px; max-width: 170px; object-fit: contain; }
+.page-header .section-label {
+  font-size: 8.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--stone);
+  text-align: right;
+  line-height: 1.35;
+}
+.page-header .section-label strong {
+  display: block;
+  color: var(--white);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+/* ── PAGE FOOTER (linen bar) ── */
+.page-footer {
+  border-top: 1px solid var(--border);
+  padding: 0 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--linen);
+  margin-top: auto;
+  flex-shrink: 0;
+  height: var(--footer-h);
+}
+.page-footer .conf { font-size: 8px; color: var(--stone); letter-spacing: 0.04em; }
+.page-footer .page-num { font-size: 9.5px; font-weight: 700; color: var(--carbon); }
+
+/* ── SECTION ── */
+.section {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 16px 34px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.section-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--carbon);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.section-title span { color: var(--golden); }
+.title-rule { width: 54px; height: 3px; background: var(--golden); margin: 8px 0 10px; }
+.title-sub { font-size: 9px; color: var(--stone); font-weight: 600; line-height: 1.4; margin-bottom: 10px; }
+
+/* Slim variant for continuation pages — buys back ~46px of table. */
+.title-strip {
+  display: flex; align-items: baseline; gap: 10px;
+  border-bottom: 2px solid var(--golden);
+  padding-bottom: 6px; margin-bottom: 8px;
+}
+.title-strip h2 { font-size: 13px; font-weight: 800; color: var(--carbon); letter-spacing: -0.005em; }
+.title-strip .range { font-size: 8.5px; font-weight: 700; color: var(--stone); letter-spacing: 0.1em; text-transform: uppercase; margin-left: auto; }
+
+.footnote { font-size: 7.2px; color: var(--stone); line-height: 1.35; font-weight: 500; }
+
+/* ── DATA TABLES ── */
+.data-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.data-table th {
+  background: var(--carbon);
+  color: var(--white);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 7.2px;
+  padding: 4px 6px;
+  text-align: left;
+  line-height: 1.2;
+}
+.data-table td {
+  padding: 3px 6px;
+  border-bottom: 1px solid var(--border);
+  color: var(--graphite);
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.data-table tr:nth-child(even) { background: var(--linen); }
+.data-table td:first-child { font-weight: 600; color: var(--carbon); }
+.data-table .num { text-align: right; }
+.data-table .total-row { background: var(--carbon) !important; }
+.data-table .total-row td { color: var(--white); font-weight: 800; border-bottom: none; }
+.data-table .total-row td:first-child { color: var(--white); }
+
+/* ── PRINT ── */
+@media print {
+  /* Keep header bars, table headers and zebra rows on paper — required
+     alongside printBackground:true in the vector page.pdf() render. */
+  * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  body { background: white; }
+  .deck { padding: 0; }
+  .page { box-shadow: none; margin: 0; page-break-after: always; }
+  /* Kill the trailing blank sheet the last page-break would otherwise emit. */
+  .page:last-child { page-break-after: auto; }
+  /* No CSS effects without a PDF primitive: Skia rasterizes filter / box-shadow
+     / text-shadow / blend into soft-mask groups that Acrobat, Preview and Quick
+     Look composite as pink or black boxes. A filter on a photo additionally
+     forces lossless FlateDecode (~4x bloat) instead of DCTDecode passthrough. */
+  .page, .page * { box-shadow: none !important; filter: none !important;
+    text-shadow: none !important; mix-blend-mode: normal !important; }
+}
