@@ -10,7 +10,7 @@
     "cityLong": "Chelsea, Massachusetts",
     "status": "For Sale",
     "propertyType": "multifamily",
-    "askingPrice": 4250000
+    "askingPrice": 4195000
   },
   "property": {
     "buildingSf": 14478,
@@ -26,6 +26,7 @@
     "landlordPays": [
       "Water & Sewer",
       "Trash",
+      "Common Electric",
       "Internet/Security"
     ],
     "parcelIds": [],
@@ -260,7 +261,11 @@
     "otherIncomeLines": [
       {
         "label": "Laundry",
-        "note": "coin-op"
+        "note": "coin-op",
+        "amounts": {
+          "current": 3302,
+          "proForma": 3302
+        }
       }
     ],
     "expenseLines": [
@@ -286,8 +291,11 @@
         }
       },
       {
-        "label": "Electric",
-        "note": "tenant paid"
+        "label": "Electric (Common)",
+        "amounts": {
+          "current": 3109.52,
+          "proForma": 3109.52
+        }
       },
       {
         "label": "Repairs & Maintenance",
@@ -305,7 +313,10 @@
       },
       {
         "label": "Trash Removal (Estimated)",
-        "note": "high"
+        "amounts": {
+          "current": 6000,
+          "proForma": 6000
+        }
       },
       {
         "label": "Internet / Security",
@@ -323,19 +334,19 @@
       }
     ],
     "assumptions": {
-      "vacancyPct": 0.04,
+      "vacancyPct": 0.03,
       "mgmtPct": 0.04,
       "mgmtBasis": "effectiveRentalIncome"
     }
   },
   "positioning": {
     "strengths": [
-      "Pro forma NOI of $315,899 vs $283,141 in place",
+      "Pro forma NOI of $320,254 vs $287,185 in place",
       "16 units / 14,478 rentable SF brick apartment building (built 1978)",
-      "In-place cap rate 6.66% and 7.43% pro forma at the $4,250,000 list price",
+      "In-place cap rate 6.75% and 7.53% pro forma at the $4,195,000 list price",
       "Tenants pay their own electric heat, limiting owner utility exposure",
       "Ancillary income from coin-op laundry and rooftop cell antenna arrays (3 carrier units, assessed $21,000)",
-      "Only 4% underwritten vacancy; 14 of 16 units occupied"
+      "Only 3% underwritten vacancy; 14 of 16 units occupied"
     ]
   },
   "photos": {
@@ -444,7 +455,7 @@
     "rentRoll": {
       "unitCount": 16,
       "totalSf": 13200,
-      "vacantCount": 0,
+      "vacantCount": 2,
       "camAnnualTotal": 0,
       "byColumn": {
         "current": {
@@ -532,34 +543,34 @@
       "byColumn": {
         "current": {
           "grossScheduledRent": 421200,
-          "vacancyLoss": 16848,
-          "effectiveRentalIncome": 404352,
-          "otherIncome": 0,
-          "egi": 404352,
-          "mgmtFee": 16174,
-          "totalExpenses": 115403,
-          "noi": 288949
+          "vacancyLoss": 12636,
+          "effectiveRentalIncome": 408564,
+          "otherIncome": 3302,
+          "egi": 411866,
+          "mgmtFee": 16343,
+          "totalExpenses": 124681,
+          "noi": 287185
         },
         "proForma": {
           "grossScheduledRent": 453600,
-          "vacancyLoss": 18144,
-          "effectiveRentalIncome": 435456,
-          "otherIncome": 0,
-          "egi": 435456,
-          "mgmtFee": 17418,
-          "totalExpenses": 113749,
-          "noi": 321707
+          "vacancyLoss": 13608,
+          "effectiveRentalIncome": 439992,
+          "otherIncome": 3302,
+          "egi": 443294,
+          "mgmtFee": 17600,
+          "totalExpenses": 123040,
+          "noi": 320254
         }
       }
     },
     "returns": {
       "capRateByColumn": {
-        "current": 6.8,
-        "proForma": 7.57
+        "current": 6.85,
+        "proForma": 7.63
       },
-      "pricePerSf": 293.55,
-      "pricePerUnit": 265625,
-      "grm": 10.09
+      "pricePerSf": 289.75,
+      "pricePerUnit": 262188,
+      "grm": 9.96
     }
   }
 }

@@ -3,11 +3,11 @@ import type { StatTile } from '../lib/types.ts'
 
 export const EXEC_TILES: StatTile[] = [
   {
-    "v": "$4,250,000",
+    "v": "$4,195,000",
     "l": "Offering Price"
   },
   {
-    "v": "6.76%",
+    "v": "6.85%",
     "l": "In-Place Cap"
   },
   {
@@ -47,6 +47,6 @@ export const SUMMARY_ROWS: Array<[string, string]> = [
   ],
   [
     "Cap Rate (Cur / PF)",
-    "6.76% / 7.54%"
+    "6.85% / 7.63%"
   ]
 ]

@@ -8,8 +8,8 @@ export const HIGHLIGHTS: HighlightsContent = {
       title: 'Income & Value-Add Upside',
       items: [
         {
-          head: '6.8% In-Place Cap Rate',
-          body: 'At the $4,250,000 asking price, in-place net operating income of $287,185 delivers a 6.8% going-in yield, rising to 7.54% on a $320,254 pro forma.',
+          head: '6.85% In-Place Cap Rate',
+          body: 'At the $4,195,000 asking price, in-place net operating income of $287,185 delivers a 6.85% going-in yield, rising to 7.63% on a $320,254 pro forma.',
         },
         {
           head: 'Built-In Rent Upside',
@@ -17,7 +17,7 @@ export const HIGHLIGHTS: HighlightsContent = {
         },
         {
           head: 'Ancillary Income Streams',
-          body: 'Coin-op laundry and a rooftop leased to three wireless carriers (antennas assessed at $21,000) add income, while tenant-paid electric heat keeps owner utility costs low.',
+          body: 'Coin-op laundry adds $3,302 of underwritten income, and a rooftop leased to three wireless carriers (antennas assessed at $21,000) sits outside the numbers, while tenant-paid electric heat keeps owner costs low.',
         },
       ],
     },
@@ -33,8 +33,8 @@ export const HIGHLIGHTS: HighlightsContent = {
           body: 'Everett, Revere, Somerville, and Boston all border the site; Somerville is a routed ~6 miles and about 13 minutes, keeping the property central to Boston’s inner suburbs.',
         },
         {
-          head: '$265,625 Per Unit Basis',
-          body: 'The $4,250,000 price pencils to $265,625 per unit and $293.55 per square foot for 14,478 square feet of brick, 1978-vintage apartments.',
+          head: '$262,188 Per Unit Basis',
+          body: 'The $4,195,000 price pencils to $262,188 per unit and $289.75 per square foot for 14,478 square feet of brick, 1978-vintage apartments.',
         },
       ],
     },

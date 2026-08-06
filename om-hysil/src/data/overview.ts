@@ -45,7 +45,7 @@ export const OVERVIEW: OverviewData = {
         },
         {
           "label": "Landlord Pays",
-          "value": "Water & Sewer, Trash, Internet/Security"
+          "value": "Water & Sewer, Trash, Common Electric, Internet/Security"
         }
       ]
     },
@@ -88,23 +88,23 @@ export const OVERVIEW: OverviewData = {
       "rows": [
         {
           "label": "Offering Price",
-          "value": "$4,250,000"
+          "value": "$4,195,000"
         },
         {
           "label": "Price / Unit",
-          "value": "$265,625"
+          "value": "$262,188"
         },
         {
           "label": "Price / SF",
-          "value": "$293.55"
+          "value": "$289.75"
         },
         {
           "label": "Current NOI",
-          "value": "$287,185 · 6.76% cap"
+          "value": "$287,185 · 6.85% cap"
         },
         {
           "label": "Pro Forma NOI",
-          "value": "$320,254 · 7.54% cap"
+          "value": "$320,254 · 7.63% cap"
         }
       ]
     }
