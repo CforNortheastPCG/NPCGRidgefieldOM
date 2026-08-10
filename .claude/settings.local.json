@@ -38,7 +38,8 @@
       "Bash(npx eslint *)",
       "Bash(echo \"exit: $?\")",
       "Read(//c/Users/CAMERO~1/AppData/Local/Temp/claude/C--NPCGRidgefieldOM/373aed9c-55b7-4411-8093-ca7280542603/scratchpad/**)",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Bash(node -e ' *)"
     ]
   }
 }
