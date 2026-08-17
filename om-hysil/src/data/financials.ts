@@ -2,7 +2,7 @@
 import type { FinancialsData } from '../lib/types.ts'
 
 export const FINANCIALS: FinancialsData = {
-  "askingPrice": 4195000,
+  "askingPrice": 4000000,
   "unitCount": 16,
   "buildingSf": 14478,
   "rentRoll": {
@@ -385,12 +385,12 @@ export const FINANCIALS: FinancialsData = {
     },
     "returns": {
       "capRateByColumn": {
-        "current": 6.85,
-        "proForma": 7.63
+        "current": 7.18,
+        "proForma": 8.01
       },
-      "pricePerSf": 289.75,
-      "pricePerUnit": 262188,
-      "grm": 9.96
+      "pricePerSf": 276.28,
+      "pricePerUnit": 250000,
+      "grm": 9.5
     }
   }
 }

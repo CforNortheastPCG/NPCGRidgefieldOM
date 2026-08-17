@@ -9,7 +9,7 @@ export const REGIONAL_MAP: RegionalMapContent = {
     { v: '~11 min', l: 'To Downtown Boston' },
     { v: '~16 min', l: 'To Cambridge' },
     { v: '~1 hr', l: 'To Providence' },
-    { v: '$262,188', l: 'Price Per Unit' },
+    { v: '$250,000', l: 'Price Per Unit' },
   ],
   highwayAccess:
     'The **Tobin Bridge (U.S. Route 1)** crosses Chelsea and feeds straight into downtown Boston, tying into **I-93** and **Route 16**; from there **I-90 (the Mass Pike)** and **I-95 / Route 128** carry the regional corridors toward Worcester and Providence. The **Silver Line SL3** adds dedicated-lane bus rapid transit to Logan Airport, the Seaport, and South Station.',

@@ -88,23 +88,23 @@ export const OVERVIEW: OverviewData = {
       "rows": [
         {
           "label": "Offering Price",
-          "value": "$4,195,000"
+          "value": "$4,000,000"
         },
         {
           "label": "Price / Unit",
-          "value": "$262,188"
+          "value": "$250,000"
         },
         {
           "label": "Price / SF",
-          "value": "$289.75"
+          "value": "$276.28"
         },
         {
           "label": "Current NOI",
-          "value": "$287,185 · 6.85% cap"
+          "value": "$287,185 · 7.18% cap"
         },
         {
           "label": "Pro Forma NOI",
-          "value": "$320,254 · 7.63% cap"
+          "value": "$320,254 · 8.01% cap"
         }
       ]
     }
