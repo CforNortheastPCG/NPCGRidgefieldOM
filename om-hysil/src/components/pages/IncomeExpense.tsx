@@ -65,6 +65,17 @@ export function IncomeExpense({ pageNum }: { pageNum?: number }) {
   const byCol = (f: (k: string) => number | undefined) =>
     Object.fromEntries(cols.map((c) => [c.key, f(c.key)])) as Record<string, number | undefined>
 
+  // Vacancy % per column, derived from the computed amounts (columns can differ).
+  const vacLabel = [
+    ...new Set(
+      cols.map((c) => {
+        const b = computed.byColumn[c.key]
+        const p = b && b.grossScheduledRent > 0 ? (b.vacancyLoss / b.grossScheduledRent) * 100 : ie.vacancyPct * 100
+        return p.toFixed(1).replace(/\.0$/, '')
+      })
+    ),
+  ].join('% / ')
+
   return (
     <div className="page">
       <PageHeader section="Income & Expense" />
@@ -106,7 +117,7 @@ export function IncomeExpense({ pageNum }: { pageNum?: number }) {
               {valueCells(byCol((k) => computed.byColumn[k]?.grossScheduledRent), true)}
             </tr>
             <tr>
-              <td style={tdl}>Vacancy &amp; Credit Loss ({(ie.vacancyPct * 100).toFixed(1).replace(/\.0$/, '')}%)</td>
+              <td style={tdl}>Vacancy &amp; Credit Loss ({vacLabel}%)</td>
               {valueCells(byCol((k) => computed.byColumn[k]?.vacancyLoss), false, true)}
             </tr>
             {ie.otherIncomeLines.map((l) => (

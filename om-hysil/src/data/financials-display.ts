@@ -7,7 +7,7 @@ export const EXEC_TILES: StatTile[] = [
     "l": "Offering Price"
   },
   {
-    "v": "7.18%",
+    "v": "7.22%",
     "l": "In-Place Cap"
   },
   {
@@ -39,14 +39,14 @@ export const SUMMARY_ROWS: Array<[string, string]> = [
   ],
   [
     "Net Operating Income",
-    "$287,185 (current)"
+    "$288,640 (current)"
   ],
   [
     "Pro Forma NOI",
-    "$320,254"
+    "$314,282"
   ],
   [
     "Cap Rate (Cur / PF)",
-    "7.18% / 8.01%"
+    "7.22% / 7.86%"
   ]
 ]

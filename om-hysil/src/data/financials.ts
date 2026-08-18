@@ -25,7 +25,7 @@ export const FINANCIALS: FinancialsData = {
         "tenant": "VACANT",
         "sf": 900,
         "rents": {
-          "current": 2500,
+          "current": 2475,
           "proForma": 2550
         }
       },
@@ -65,7 +65,7 @@ export const FINANCIALS: FinancialsData = {
         "use": "2 Bed",
         "sf": 900,
         "rents": {
-          "current": 2300,
+          "current": 2450,
           "proForma": 2550
         }
       },
@@ -105,7 +105,7 @@ export const FINANCIALS: FinancialsData = {
         "use": "3 Bed",
         "sf": 1100,
         "rents": {
-          "current": 2650,
+          "current": 2850,
           "proForma": 3050
         }
       },
@@ -207,8 +207,8 @@ export const FINANCIALS: FinancialsData = {
       {
         "label": "Taxes",
         "amounts": {
-          "current": 41269.45,
-          "proForma": 41269.45
+          "current": 42887.27,
+          "proForma": 42887.27
         }
       },
       {
@@ -279,9 +279,9 @@ export const FINANCIALS: FinancialsData = {
       "camAnnualTotal": 0,
       "byColumn": {
         "current": {
-          "monthly": 35100,
-          "annual": 421200,
-          "psfAnnual": 31.91
+          "monthly": 35375,
+          "annual": 424500,
+          "psfAnnual": 32.16
         },
         "proForma": {
           "monthly": 37800,
@@ -316,7 +316,7 @@ export const FINANCIALS: FinancialsData = {
           "avgSf": 900,
           "rentRange": {
             "current": {
-              "min": 2300,
+              "min": 2400,
               "max": 2500
             },
             "proForma": {
@@ -348,7 +348,7 @@ export const FINANCIALS: FinancialsData = {
           "avgSf": 1100,
           "rentRange": {
             "current": {
-              "min": 2650,
+              "min": 2850,
               "max": 2950
             },
             "proForma": {
@@ -362,31 +362,31 @@ export const FINANCIALS: FinancialsData = {
     "incomeExpense": {
       "byColumn": {
         "current": {
-          "grossScheduledRent": 421200,
-          "vacancyLoss": 12636,
-          "effectiveRentalIncome": 408564,
+          "grossScheduledRent": 424500,
+          "vacancyLoss": 12735,
+          "effectiveRentalIncome": 411765,
           "otherIncome": 3302,
-          "egi": 411866,
-          "mgmtFee": 16343,
-          "totalExpenses": 124681,
-          "noi": 287185
+          "egi": 415067,
+          "mgmtFee": 16471,
+          "totalExpenses": 126427,
+          "noi": 288640
         },
         "proForma": {
           "grossScheduledRent": 453600,
-          "vacancyLoss": 13608,
-          "effectiveRentalIncome": 439992,
+          "vacancyLoss": 18144,
+          "effectiveRentalIncome": 435456,
           "otherIncome": 3302,
-          "egi": 443294,
-          "mgmtFee": 17600,
-          "totalExpenses": 123040,
-          "noi": 320254
+          "egi": 438758,
+          "mgmtFee": 17418,
+          "totalExpenses": 124476,
+          "noi": 314282
         }
       }
     },
     "returns": {
       "capRateByColumn": {
-        "current": 7.18,
-        "proForma": 8.01
+        "current": 7.22,
+        "proForma": 7.86
       },
       "pricePerSf": 276.28,
       "pricePerUnit": 250000,

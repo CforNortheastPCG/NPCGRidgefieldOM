@@ -63,7 +63,7 @@ export const OVERVIEW: OverviewData = {
       "rows": [
         {
           "label": "2 Bed",
-          "value": "4 units · 900 SF · $2,300–$2,500"
+          "value": "4 units · 900 SF · $2,400–$2,500"
         },
         {
           "label": "1 Bed",
@@ -71,11 +71,11 @@ export const OVERVIEW: OverviewData = {
         },
         {
           "label": "3 Bed",
-          "value": "3 units · 1,100 SF · $2,650–$2,950"
+          "value": "3 units · 1,100 SF · $2,850–$2,950"
         },
         {
           "label": "In-Place Rent",
-          "value": "$35,100 / mo · $421,200 / yr"
+          "value": "$35,375 / mo · $424,500 / yr"
         },
         {
           "label": "Pro Forma Rent",
@@ -100,11 +100,11 @@ export const OVERVIEW: OverviewData = {
         },
         {
           "label": "Current NOI",
-          "value": "$287,185 · 7.18% cap"
+          "value": "$288,640 · 7.22% cap"
         },
         {
           "label": "Pro Forma NOI",
-          "value": "$320,254 · 8.01% cap"
+          "value": "$314,282 · 7.86% cap"
         }
       ]
     }

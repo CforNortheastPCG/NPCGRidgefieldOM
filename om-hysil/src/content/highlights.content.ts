@@ -8,12 +8,12 @@ export const HIGHLIGHTS: HighlightsContent = {
       title: 'Income & Value-Add Upside',
       items: [
         {
-          head: '7.18% In-Place Cap Rate',
-          body: 'At the $4,000,000 asking price, in-place net operating income of $287,185 delivers a 7.18% going-in yield, rising to 8.01% on a $320,254 pro forma.',
+          head: '7.22% In-Place Cap Rate',
+          body: 'At the $4,000,000 asking price, in-place net operating income of $288,640 delivers a 7.22% going-in yield, rising to 7.86% on a $314,282 pro forma.',
         },
         {
           head: 'Built-In Rent Upside',
-          body: 'Marking units to market lifts gross scheduled rent from $421,200 to $453,600 — a $32,400 annual gain with no change to the physical plant.',
+          body: 'Marking units to market lifts gross scheduled rent from $424,500 to $453,600 — a $29,100 annual gain with no change to the physical plant.',
         },
         {
           head: 'Ancillary Income Streams',
