@@ -45,7 +45,7 @@ function ExecutiveSummary({ pageNum }) {
     ['Number of Units', '10'],
     ['Unit Mix', '(4) Studio · (6) 1BR'],
     ['Year Built', '1850'],
-    ['Price / Unit', '$195,000'],
+    ['Price / Unit', '$185,000'],
     ['Net Operating Income', '$100,003'],
     ['Pro Forma NOI', '$139,128'],
   ]
@@ -60,15 +60,15 @@ function ExecutiveSummary({ pageNum }) {
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1.35fr 1fr 1fr', gap: 8, marginBottom: 12 }}>
               <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$1,950,000</div>
+                <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$1,850,000</div>
                 <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>Offering Price</div>
               </div>
               <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>5.13%</div>
+                <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>5.41%</div>
                 <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>Cap Rate</div>
               </div>
               <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>7.13%</div>
+                <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>7.52%</div>
                 <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>Pro Forma Cap</div>
               </div>
             </div>
@@ -183,9 +183,9 @@ function BuildingDescriptions({ pageNum }) {
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Tenancy &amp; Income</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Offering</span><span className="bldg-val">$1,950,000 · $195,000 / Unit</span></div>
-                <div className="bldg-row"><span className="bldg-label">In-Place NOI</span><span className="bldg-val">$100,003 · 5.13% Cap</span></div>
-                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$139,128 · 7.13% Cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">Offering</span><span className="bldg-val">$1,850,000 · $185,000 / Unit</span></div>
+                <div className="bldg-row"><span className="bldg-label">In-Place NOI</span><span className="bldg-val">$100,003 · 5.41% Cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$139,128 · 7.52% Cap</span></div>
               </div>
             </div>
           </div>
@@ -445,7 +445,7 @@ function IncomeExpense({ pageNum }) {
           Pro Forma marks all ten units to market (+$42,900 gross scheduled rent). Ownership pays gas heat and
           hot water; tenants pay their own electric. Property management at 5% of EGI and the vacancy factor are underwriting
           assumptions. Expense ratio 37.3% (Current) / 30.6% (Pro Forma); $/Unit on 10 units. The property is offered at
-          $1,950,000 &mdash; $195,000 per unit, a 5.13% capitalization rate on in-place income and 7.13% on pro forma.
+          $1,850,000 &mdash; $185,000 per unit, a 5.41% capitalization rate on in-place income and 7.52% on pro forma.
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
