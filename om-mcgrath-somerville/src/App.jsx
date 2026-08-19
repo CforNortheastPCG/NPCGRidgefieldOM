@@ -46,10 +46,10 @@ function ExecutiveSummary({ pageNum }) {
     ['Lot Size', '5,624 SF'],
     ['Number of Units', '4'],
     ['Year Built / Renovated', '1920 / 2016'],
-    ['Price / SF', '$486.77'],
-    ['Price / Unit', '$575,000'],
-    ['Cap Rate', '5.01%'],
-    ['Pro Forma Cap Rate', '6.55%'],
+    ['Price / SF', '$465.61'],
+    ['Price / Unit', '$550,000'],
+    ['Cap Rate', '5.23%'],
+    ['Pro Forma Cap Rate', '6.90%'],
     ['Net Operating Income', '$115,126'],
   ]
   return (
@@ -63,7 +63,7 @@ function ExecutiveSummary({ pageNum }) {
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 12 }}>
               <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
-                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$2,300,000</div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--carbon)', lineHeight: 1 }}>$2,200,000</div>
                 <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--stone)', marginTop: 3 }}>Offering Price</div>
               </div>
               <div style={{ textAlign: 'center', padding: '6px 4px', borderTop: '3px solid var(--golden)' }}>
@@ -182,10 +182,10 @@ function BuildingDescriptions({ pageNum }) {
             <div className="bldg-card" style={{ padding: '12px 14px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <h3 style={{ fontSize: 11, marginBottom: 6, paddingBottom: 4 }}>Investment Profile</h3>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$2,300,000</span></div>
-                <div className="bldg-row"><span className="bldg-label">Price / Unit · / SF</span><span className="bldg-val">$575,000 · $487 / SF</span></div>
-                <div className="bldg-row"><span className="bldg-label">In-Place NOI</span><span className="bldg-val">$115,126 · 5.01% cap</span></div>
-                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$150,731 · 6.55% cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$2,200,000</span></div>
+                <div className="bldg-row"><span className="bldg-label">Price / Unit · / SF</span><span className="bldg-val">$550,000 · $466 / SF</span></div>
+                <div className="bldg-row"><span className="bldg-label">In-Place NOI</span><span className="bldg-val">$115,126 · 5.23% cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$151,719 · 6.90% cap</span></div>
               </div>
             </div>
           </div>
@@ -270,13 +270,13 @@ function BarChartCard({ title, data, note }) {
 
 /* ═══════════════════ RENT ROLL ═══════════════════ */
 /* Full per-unit rent roll — in-place vs pro forma, with lease expirations.
-   All four leases roll in 2026, supporting a near-term mark-to-market. */
+   All four leases roll in 2027, supporting a near-term mark-to-market. */
 function RentRoll({ pageNum }) {
   const rows = [
-    { unit: '416', type: '3 BR / 2 BA', sf: '1,160', inPlace: '$3,600', ips: '$3.10', pf: '$4,200', pfs: '$3.62', end: '8/31/2026' },
-    { unit: '418', type: '4 BR / 2 BA', sf: '1,200', inPlace: '$3,300', ips: '$2.75', pf: '$4,600', pfs: '$3.83', end: '8/31/2026' },
-    { unit: '420', type: '4 BR / 2 BA', sf: '1,200', inPlace: '$4,000', ips: '$3.33', pf: '$4,600', pfs: '$3.83', end: '8/31/2026' },
-    { unit: '422', type: '3 BR / 2 BA', sf: '1,160', inPlace: '$3,000', ips: '$2.59', pf: '$4,200', pfs: '$3.62', end: '10/31/2026' },
+    { unit: '416', type: '3 BR / 2 BA', sf: '1,160', inPlace: '$3,600', ips: '$3.10', pf: '$4,200', pfs: '$3.62', end: '8/31/2027' },
+    { unit: '418', type: '4 BR / 2 BA', sf: '1,200', inPlace: '$3,300', ips: '$2.75', pf: '$4,600', pfs: '$3.83', end: '8/31/2027' },
+    { unit: '420', type: '4 BR / 2 BA', sf: '1,200', inPlace: '$4,000', ips: '$3.33', pf: '$4,600', pfs: '$3.83', end: '8/31/2027' },
+    { unit: '422', type: '3 BR / 2 BA', sf: '1,160', inPlace: '$3,000', ips: '$2.59', pf: '$4,200', pfs: '$3.62', end: '10/31/2027' },
   ]
   const unitMix = [
     { label: '3 BR / 2 BA', value: 2, color: '#3F4753' },
@@ -332,7 +332,7 @@ function RentRoll({ pageNum }) {
         </table>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 40, marginTop: 36, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
           <ChartCard title="Units by Type" data={unitMix} centerLabel="4" centerSub="UNITS" size={170} />
-          <BarChartCard title="Gross Scheduled Rent — In-Place vs Pro Forma" data={grossRent} note="+$44,400 · +27% rental upside on 2026 rollover" />
+          <BarChartCard title="Gross Scheduled Rent — In-Place vs Pro Forma" data={grossRent} note="+$44,400 · +27% rental upside on 2027 rollover" />
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -361,7 +361,7 @@ function IncomeExpense({ pageNum }) {
 
   const noi = [
     { label: 'NOI — Current (In-Place)', val: '$115,126' },
-    { label: 'NOI — Pro Forma', val: '$150,731' },
+    { label: 'NOI — Pro Forma', val: '$151,719' },
   ]
 
   return (
@@ -419,7 +419,7 @@ function IncomeExpense({ pageNum }) {
           </thead>
           <tbody>
             {[
-              ['Real Estate Taxes', '$16,755', '$4,189', '$22,729', '$5,682'],
+              ['Real Estate Taxes', '$16,755', '$4,189', '$21,740', '$5,435'],
               ['Insurance', '$10,248', '$2,562', '$8,000', '$2,000'],
               ['Water & Sewer', '$6,519', '$1,630', '$6,519', '$1,630'],
               ['Electric (Common)', '$240', '$60', '$240', '$60'],
@@ -433,8 +433,8 @@ function IncomeExpense({ pageNum }) {
                 {cells.map((c, j) => <td key={j} style={tds}>{c}</td>)}
               </tr>
             ))}
-            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expenses</td><td style={totBg}>$48,338</td><td style={totBg}>$12,084</td><td style={totBg}>$54,133</td><td style={totBg}>$13,533</td></tr>
-            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$115,126</td><td style={noiBg}>5.01% Cap</td><td style={noiBg}>$150,731</td><td style={noiBg}>6.55% Cap</td></tr>
+            <tr><td style={{ ...totBg, textAlign: 'left' }}>Total Expenses</td><td style={totBg}>$48,338</td><td style={totBg}>$12,084</td><td style={totBg}>$53,145</td><td style={totBg}>$13,286</td></tr>
+            <tr><td style={{ ...noiBg, textAlign: 'left' }}>Net Operating Income</td><td style={noiBg}>$115,126</td><td style={noiBg}>5.23% Cap</td><td style={noiBg}>$151,719</td><td style={noiBg}>6.90% Cap</td></tr>
           </tbody>
         </table>
       </div>
@@ -643,7 +643,7 @@ function InvestmentHighlights({ pageNum }) {
       title: 'Income & Value-Add Upside',
       items: [
         { head: 'Rents Below Market with Near-Term Roll', body: 'In-place rents average $3,475/mo and mark to $4,400 pro forma, lifting gross scheduled rent 27% from $166,800 to $211,200.' },
-        { head: 'All Four Leases Expire in 2026', body: 'Three units roll 8/31/2026 and one 10/31/2026 — the full mark-to-market is achievable within the first year of ownership.' },
+        { head: 'All Four Leases Expire in 2027', body: 'Three units roll 8/31/2027 and one 10/31/2027 — the full mark-to-market is achievable within the first year of ownership.' },
         { head: 'Spacious 3–4 Bedroom Layouts', body: 'Large (2) 3BR/2BA and (2) 4BR/2BA townhouse-style units (1,160–1,200 SF) command premium rents near major universities.' },
         { head: 'Tenant-Paid Utilities', body: 'Separately metered gas and electric keep operating costs low and insulate margins from energy price swings.' },
       ],
