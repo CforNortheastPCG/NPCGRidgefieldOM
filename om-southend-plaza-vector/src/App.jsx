@@ -72,7 +72,7 @@ function ExecutiveSummary({ pageNum }) {
               Exits 38 and 39.
             </p>
             <p style={{ fontSize: 11.9, lineHeight: 1.5, marginBottom: 10 }}>
-              The apartment rents currently run between $1,300 and $1,600 a month, and the occupied commercial suites
+              The apartment rents run between $1,300 and $1,600 a month, and the occupied commercial suites
               average about $14.20 per square foot. The commercial tenants are Thomaston Smoke &amp; Vape, KC&rsquo;s
               Package Store, Elegant Nail &amp; Spa, and S &amp; S Laundry. Two of the commercial leases date to 2011
               and 2013.
@@ -162,7 +162,7 @@ function BuildingDescriptions({ pageNum }) {
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div className="bldg-row"><span className="bldg-label">Offering Price</span><span className="bldg-val">$2,450,000</span></div>
                 <div className="bldg-row"><span className="bldg-label">Price / Unit · / SF</span><span className="bldg-val">$128,900 · $168 / SF</span></div>
-                <div className="bldg-row"><span className="bldg-label">In-Place NOI (Norm.)</span><span className="bldg-val">$158,400 · 6.47% cap</span></div>
+                <div className="bldg-row"><span className="bldg-label">Year 1 NOI</span><span className="bldg-val">$158,400 · 6.47% cap</span></div>
                 <div className="bldg-row"><span className="bldg-label">Pro Forma NOI</span><span className="bldg-val">$196,491 · 8.02% cap</span></div>
               </div>
             </div>
@@ -248,7 +248,7 @@ function BarChartCard({ title, data, note }) {
 
 /* ═══════════════════ RENT ROLL (per-suite / per-unit) ═══════════════════
    Line-by-line rent roll mirroring the underwriting workbook: commercial by
-   suite and residential by unit, each with in-place and pro forma rents. The
+   suite and residential by unit, each with Year 1 and pro forma rents. The
    totals tie to the Unit Mix and Income & Expense pages ($260,700 → $303,100). */
 function RentRollPage({ pageNum }) {
   const COMM = [
@@ -283,7 +283,7 @@ function RentRollPage({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Rent <span style={{ color: '#F8971D' }}>Roll</span></div>
         <div className="title-rule" />
 
-        <div className="eyebrow" style={{ marginBottom: 5 }}>Commercial — In-Place vs Pro Forma</div>
+        <div className="eyebrow" style={{ marginBottom: 5 }}>Commercial — Year 1 vs Pro Forma</div>
         <table className="data-table">
           <thead>
             <tr>
@@ -291,8 +291,8 @@ function RentRollPage({ pageNum }) {
               <th style={{ ...th, ...ct }}>Suite</th>
               <th style={{ ...th, ...rt }}>SF</th>
               <th style={{ ...th, ...ct }}>Lease End</th>
-              <th style={{ ...th, ...rt }}>Cur. $/SF</th>
-              <th style={{ ...th, ...rt }}>Current Rent</th>
+              <th style={{ ...th, ...rt }}>Yr 1 $/SF</th>
+              <th style={{ ...th, ...rt }}>Year 1 Rent</th>
               <th style={{ ...th, ...rt }}>PF $/SF</th>
               <th style={{ ...th, ...rt }}>Pro Forma</th>
             </tr>
@@ -323,7 +323,7 @@ function RentRollPage({ pageNum }) {
           </tbody>
         </table>
 
-        <div className="eyebrow" style={{ margin: '12px 0 5px' }}>Residential — In-Place vs Pro Forma</div>
+        <div className="eyebrow" style={{ margin: '12px 0 5px' }}>Residential — Year 1 vs Pro Forma</div>
         <table className="data-table">
           <thead>
             <tr>
@@ -331,8 +331,8 @@ function RentRollPage({ pageNum }) {
               <th style={th}>Type</th>
               <th style={{ ...th, ...rt }}>SF</th>
               <th style={{ ...th, ...ct }}>Lease End</th>
-              <th style={{ ...th, ...rt }}>Cur. / Mo</th>
-              <th style={{ ...th, ...rt }}>Cur. / Yr</th>
+              <th style={{ ...th, ...rt }}>Yr 1 / Mo</th>
+              <th style={{ ...th, ...rt }}>Yr 1 / Yr</th>
               <th style={{ ...th, ...rt }}>PF / Mo</th>
               <th style={{ ...th, ...rt }}>PF / Yr</th>
             </tr>
@@ -369,12 +369,12 @@ function RentRollPage({ pageNum }) {
 }
 
 /* Mixed-use rent roll — gross scheduled commercial rent vs apartment ranges,
-   in-place vs pro forma. Per-suite/per-unit detail lives in the BOV / data room. */
+   Year 1 vs pro forma. Per-suite/per-unit detail lives in the BOV / data room. */
 function RentRoll({ pageNum }) {
   const rows = [
-    { comp: '1BR / 1BA Apartments', count: '3 units', inPlace: '$48,000', pf: '$54,000', note: '600 SF · avg $1,333/mo → $1,500 pro forma' },
-    { comp: '2BR / 1BA Apartments', count: '7 units', inPlace: '$127,800', pf: '$142,800', note: '850 SF · avg $1,521/mo → $1,700 pro forma' },
-    { comp: 'Commercial Retail', count: '9 suites', inPlace: '$84,900', pf: '$106,300', note: 'Suites 4 & 6 vacant (~500 SF ea.) · mark to $17.50–$20/SF' },
+    { comp: '1BR / 1BA Apartments', count: '3 units', yr1: '$48,000', pf: '$54,000', note: '600 SF · avg $1,333/mo → $1,500 pro forma' },
+    { comp: '2BR / 1BA Apartments', count: '7 units', yr1: '$127,800', pf: '$142,800', note: '850 SF · avg $1,521/mo → $1,700 pro forma' },
+    { comp: 'Commercial Retail', count: '9 suites', yr1: '$84,900', pf: '$106,300', note: 'Suites 4 & 6 vacant (~500 SF ea.) · mark to $17.50–$20/SF' },
   ]
   const useMix = [
     { label: '1BR Apartments', value: 3, color: '#3F4753' },
@@ -382,7 +382,7 @@ function RentRoll({ pageNum }) {
     { label: 'Commercial Suites', value: 9, color: '#F8971D' },
   ]
   const grossRent = [
-    { label: 'In-Place', value: 260700, color: '#3F4753' },
+    { label: 'Year 1', value: 260700, color: '#3F4753' },
     { label: 'Pro Forma', value: 303100, color: '#F8971D' },
   ]
   return (
@@ -392,13 +392,13 @@ function RentRoll({ pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Unit <span style={{ color: '#F8971D' }}>Mix</span></div>
         <div className="title-rule" />
         <table className="data-table" style={{ fontSize: 11 }}>
-          <thead><tr><th>Income Component</th><th style={{ textAlign: 'center' }}>Count</th><th style={{ textAlign: 'right' }}>In-Place</th><th style={{ textAlign: 'right' }}>Pro Forma</th></tr></thead>
+          <thead><tr><th>Income Component</th><th style={{ textAlign: 'center' }}>Count</th><th style={{ textAlign: 'right' }}>Year 1</th><th style={{ textAlign: 'right' }}>Pro Forma</th></tr></thead>
           <tbody>
             {rows.map((r, i) => (
               <tr key={i}>
                 <td>{r.comp}</td>
                 <td style={{ textAlign: 'center' }}>{r.count}</td>
-                <td style={{ textAlign: 'right' }}>{r.inPlace}</td>
+                <td style={{ textAlign: 'right' }}>{r.yr1}</td>
                 <td style={{ textAlign: 'right' }}>{r.pf}</td>
               </tr>
             ))}
@@ -411,16 +411,16 @@ function RentRoll({ pageNum }) {
           </tbody>
         </table>
         <div style={{ fontSize: 8.5, color: 'var(--stone)', marginTop: 6, lineHeight: 1.45 }}>
-          Figures are gross scheduled rent (annual); the ten apartments average $1,465/mo in place. Tenants include
+          Figures are gross scheduled rent (annual); the ten apartments average $1,465/mo in Year 1. Tenants include
           Thomaston Smoke &amp; Vape, KC&rsquo;s Package Store, Elegant Nail &amp; Spa, S &amp; S Laundry, and a Suite 9
           service tenant; two leases date to 2011 and 2013. Water and sewer is landlord-paid and partly recovered
-          through CAM, with room to raise recovery. Effective and normalized figures appear on the Income &amp;
+          through CAM, with room to raise recovery. Effective and Year 1 figures appear on the Income &amp;
           Expense page; per-suite and per-unit detail is in the data room.
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 40, marginTop: 40, flex: 1, minHeight: 0, alignItems: 'stretch' }}>
           <ChartCard title="Units by Use" data={useMix} centerLabel="19" centerSub="UNITS" size={170} />
-          <BarChartCard title="Gross Scheduled Rent — In-Place vs Pro Forma" data={grossRent} note="+$42,400 · +16% residential & commercial upside" />
+          <BarChartCard title="Gross Scheduled Rent — Year 1 vs Pro Forma" data={grossRent} note="+$42,400 · +16% residential & commercial upside" />
         </div>
       </div>
       <PageFooter pageNum={pageNum} />
@@ -429,7 +429,7 @@ function RentRoll({ pageNum }) {
 }
 
 /* ═══════════════════ INCOME & EXPENSE ═══════════════════ */
-/* Income statement — Current (in-place) vs Pro Forma, each with a $/Unit column
+/* Income statement — Year 1 vs Pro Forma, each with a $/Unit column
    (19 units). Gross scheduled rent → vacancy → effective rental → EGI, then the
    full itemized operating-expense schedule and the NOI / cap. */
 function IncomeExpense({ pageNum }) {
@@ -448,7 +448,7 @@ function IncomeExpense({ pageNum }) {
   )
 
   const noi = [
-    { label: 'NOI — Current (In-Place)', val: '$158,400' },
+    { label: 'NOI — Year 1', val: '$158,400' },
     { label: 'NOI — Pro Forma', val: '$196,491' },
   ]
 
@@ -474,7 +474,7 @@ function IncomeExpense({ pageNum }) {
           <thead>
             <tr style={{ background: 'var(--carbon)' }}>
               <th style={{ ...thl, color: '#fff' }}>Income</th>
-              <th style={{ ...thr, color: '#fff' }}>Current</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
+              <th style={{ ...thr, color: '#fff' }}>Year 1</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
               <th style={{ ...thr, color: '#fff' }}>Pro Forma</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
             </tr>
           </thead>
@@ -506,7 +506,7 @@ function IncomeExpense({ pageNum }) {
           <thead>
             <tr style={{ background: 'var(--carbon)' }}>
               <th style={{ ...thl, color: '#fff' }}>Expense</th>
-              <th style={{ ...thr, color: '#fff' }}>Current</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
+              <th style={{ ...thr, color: '#fff' }}>Year 1</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
               <th style={{ ...thr, color: '#fff' }}>Pro Forma</th><th style={{ ...thr, color: '#fff' }}>$/Unit</th>
             </tr>
           </thead>
@@ -531,11 +531,11 @@ function IncomeExpense({ pageNum }) {
           </tbody>
         </table>
         <div style={{ fontSize: 7.6, color: 'var(--stone)', marginTop: 2, lineHeight: 1.4 }}>
-          Current reflects in-place rents with a 5% residential vacancy and holds the two vacant commercial suites;
+          Year 1 reflects the rent roll as written with a 5% residential vacancy and holds the two vacant commercial suites;
           Pro Forma marks commercial rents to $17.50&ndash;$20/SF and apartments to market (+$36,014/yr effective rental
-          income) and grows CAM water/sewer recovery. Expense ratio 41.5% (Current) / 36.8% (Pro Forma); $/Unit on 19
+          income) and grows CAM water/sewer recovery. Expense ratio 41.5% (Year 1) / 36.8% (Pro Forma); $/Unit on 19
           units. Caps on the $2,450,000 asking price. Real estate taxes reflect the 2025 revaluation (27.21 mill rate);
-          property management and the 5% vacancy are underwriting assumptions and may differ from current owner operations.
+          property management and the 5% vacancy are underwriting assumptions and may differ from actual owner operations.
         </div>
         <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: 8, paddingTop: 10 }}>
           <span style={{ flex: 1, borderTop: '1px solid var(--border)' }} />
@@ -558,16 +558,16 @@ function UnderwritingNotes({ pageNum }) {
     { v: '$2,450,000', l: 'Offering Price' },
     { v: '$128,900', l: 'Price / Unit' },
     { v: '$168 / SF', l: 'Price / SF' },
-    { v: '6.47% → 8.02%', l: 'Cap: In-Place → Pro Forma' },
+    { v: '6.47% → 8.02%', l: 'Cap: Year 1 → Pro Forma' },
   ]
   const notes = [
     {
       head: 'Going-In Basis',
-      body: 'At $2,450,000 the offering prices to $128,900 per unit and $168/SF — a 6.47% going-in cap on normalized in-place NOI of $158,400 and an 8.02% pro forma cap on $196,491. At $168/SF against $300-plus all-in construction, the building trades at roughly 56% of replacement cost.',
+      body: 'At $2,450,000 the offering prices to $128,900 per unit and $168/SF — a 6.47% going-in cap on Year 1 NOI of $158,400 and an 8.02% pro forma cap on $196,491. At $168/SF against $300-plus all-in construction, the building trades at roughly 56% of replacement cost.',
     },
     {
       head: 'Rental Income',
-      body: 'Current effective rental income of $251,910 applies a 5% residential vacancy and holds the two vacant commercial suites. Pro forma marks commercial rents to $17.50–$20/SF and lifts the ten apartments from an average $1,465 toward $1,640, raising effective rental income to $287,924 (residential $175,800 → $196,800; commercial $84,900 → $106,300).',
+      body: 'Year 1 effective rental income of $251,910 applies a 5% residential vacancy and holds the two vacant commercial suites. Pro forma marks commercial rents to $17.50–$20/SF and lifts the ten apartments from an average $1,465 toward $1,640, raising effective rental income to $287,924 (residential $175,800 → $196,800; commercial $84,900 → $106,300).',
     },
     {
       head: 'Commercial Lease-Up & Mark-to-Market',
@@ -583,13 +583,13 @@ function UnderwritingNotes({ pageNum }) {
     },
     {
       head: 'Management & Operating Assumptions',
-      body: 'Management is underwritten at 5% of EGI and a 5% residential vacancy/collection-loss factor is applied in both columns. Electric, water & sewer, trash, and landscaping & snow removal are held at recent actuals. The resulting expense ratio is 41.5% (Current) and 36.8% (Pro Forma).',
+      body: 'Management is underwritten at 5% of EGI and a 5% residential vacancy/collection-loss factor is applied in both columns. Electric, water & sewer, trash, and landscaping & snow removal are held at recent actuals. The resulting expense ratio is 41.5% (Year 1) and 36.8% (Pro Forma).',
     },
   ]
   const half = Math.ceil(notes.length / 2)
   const cols = [notes.slice(0, half), notes.slice(half)]
   const noiBridge = [
-    { label: 'In-Place', value: 158400, color: '#3F4753' },
+    { label: 'Year 1', value: 158400, color: '#3F4753' },
     { label: 'Pro Forma', value: 196491, color: '#F8971D' },
   ]
   const Note = (n) => (
@@ -628,10 +628,10 @@ function UnderwritingNotes({ pageNum }) {
           ))}
         </div>
 
-        {/* Compact value-creation strip — headline NOI growth, in-place → pro forma. */}
+        {/* Compact value-creation strip — headline NOI growth, Year 1 → pro forma. */}
         <div style={{ flexShrink: 0, marginTop: 14, paddingTop: 12, borderTop: '1px solid var(--border)' }}>
           <div style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--carbon)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 9 }}>
-            Net Operating Income — In-Place vs Pro Forma
+            Net Operating Income — Year 1 vs Pro Forma
           </div>
           {noiBridge.map(d => (
             <div key={d.label} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 7 }}>
