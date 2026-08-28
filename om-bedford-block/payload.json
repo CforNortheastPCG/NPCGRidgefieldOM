@@ -1,0 +1,1138 @@
+{
+  "version": 3,
+  "tenantId": "npcg",
+  "stylePack": "npcg-v1",
+  "deal": {
+    "id": "bedford-block-1331-elm",
+    "name": "Bedford Block Luxury Lofts",
+    "address": "1331 Elm Street",
+    "cityState": "Manchester, NH",
+    "cityLong": "Manchester, New Hampshire",
+    "status": "Broker Opinion of Value",
+    "propertyType": "multifamily",
+    "askingPrice": 14500000,
+    "docType": "Broker Opinion of Value"
+  },
+  "property": {
+    "buildingSf": 62550,
+    "unitCount": 62,
+    "yearBuilt": 1896,
+    "yearRenovated": 2020,
+    "stories": 4,
+    "parking": "45 off-street parking spots",
+    "heat": "Forced hot air / mini-split HVAC (2020)",
+    "tenantPays": [],
+    "landlordPays": [
+      "All utilities (separately metered — pass-through opportunity)"
+    ],
+    "parcelIds": [],
+    "extraFacts": [
+      "County: Hillsborough",
+      "Construction: brick masonry",
+      "Roof: rubber membrane (2019)",
+      "Fire: monitored & sprinklered (2020)",
+      "Hot water: gas — two boilers + five recirculating valves (2020)",
+      "Water/Sewer: city",
+      "Fully furnished lofts; secure-access building",
+      "App-operated laundry on every floor (4 washers / 4 dryers)",
+      "New PVC plumbing throughout; new electrical service panels (2019)",
+      "Low-flow toilets"
+    ]
+  },
+  "brokers": [
+    {
+      "name": "Drew Kirkland",
+      "title": "Vice President, Investments",
+      "phone": "857.990.6802",
+      "email": "dkirkland@northeastpcg.com",
+      "photo": "/photos/team/drew-kirkland.png"
+    },
+    {
+      "name": "Bradford Carlson",
+      "title": "Investment Associate",
+      "phone": "857.990.6831",
+      "email": "bcarlson@northeastpcg.com",
+      "photo": "/photos/team/bradford-carlson.jpg"
+    },
+    {
+      "name": "Brett Curtis",
+      "title": "Associate",
+      "phone": "857.990.6807",
+      "email": "bcurtis@northeastpcg.com",
+      "photo": "/photos/team/brett-curtis.jpg"
+    }
+  ],
+  "brokerOfRecord": {
+    "name": "Kurt Jackson",
+    "state": "NH",
+    "license": "068275",
+    "email": "kurtjacksonre@northeastpcg.com",
+    "phone": "603-479-6303"
+  },
+  "rentRoll": {
+    "basis": "monthly",
+    "columns": [
+      {
+        "key": "current",
+        "label": "In-Place / mo"
+      },
+      {
+        "key": "proForma",
+        "label": "Pro Forma"
+      }
+    ],
+    "rows": [
+      {
+        "group": "Commercial",
+        "unit": "100–300",
+        "use": "Commercial",
+        "sf": 17600,
+        "rents": {
+          "current": 22057,
+          "proForma": 24000
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "211",
+        "use": "Premium End",
+        "sf": 550,
+        "rents": {
+          "current": 2199,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "212",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "213",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1789,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "214",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1899,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "221",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1899,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "222",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "223",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1799,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "224",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1899,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "231",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 2350,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "232",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1680,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "233",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1849,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "234",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1849,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "251",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1899,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "252",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "253",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1849,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "254",
+        "use": "Premium End",
+        "sf": 550,
+        "rents": {
+          "current": 2199,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "311",
+        "use": "Premium End",
+        "sf": 550,
+        "rents": {
+          "current": 2199,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "312",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "313",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1849,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "314",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1899,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "321",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1899,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "322",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "323",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1849,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "324",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1799,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "331",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1899,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "332",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "333",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1849,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "334",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1899,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "341",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1899,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "342",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "343",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1849,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "344",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1889,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "411",
+        "use": "Premium End",
+        "sf": 550,
+        "rents": {
+          "current": 2199,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "412",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "413",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1820,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "414",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1849,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "421",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1919,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "422",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1719,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "423",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1800,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "424",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1919,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "431",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1919,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "432",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "433",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1869,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "434",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1919,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "441",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1919,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "442",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "443",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1849,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "444",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1889,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "451",
+        "use": "Deluxe",
+        "sf": 550,
+        "rents": {
+          "current": 1919,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "452",
+        "use": "Economy",
+        "sf": 400,
+        "rents": {
+          "current": 1699,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "453",
+        "use": "Standard",
+        "sf": 500,
+        "rents": {
+          "current": 1849,
+          "proForma": 2150
+        }
+      },
+      {
+        "group": "Residential",
+        "unit": "454",
+        "use": "Premium End",
+        "sf": 550,
+        "rents": {
+          "current": 2129,
+          "proForma": 2150
+        }
+      }
+    ]
+  },
+  "incomeExpense": {
+    "columns": [
+      {
+        "key": "current",
+        "label": "In-Place / mo"
+      },
+      {
+        "key": "proForma",
+        "label": "Pro Forma"
+      }
+    ],
+    "otherIncomeLines": [
+      {
+        "label": "Laundry Income",
+        "amounts": {
+          "current": 19616,
+          "proForma": 19616
+        }
+      },
+      {
+        "label": "Cleaning Income",
+        "amounts": {
+          "current": 14396,
+          "proForma": 14396
+        }
+      },
+      {
+        "label": "Other Income",
+        "amounts": {
+          "current": 21480,
+          "proForma": 21480
+        }
+      }
+    ],
+    "expenseLines": [
+      {
+        "label": "Real Estate Tax",
+        "amounts": {
+          "current": 132304,
+          "proForma": 150000
+        }
+      },
+      {
+        "label": "Insurance",
+        "amounts": {
+          "current": 12849,
+          "proForma": 12849
+        }
+      },
+      {
+        "label": "Electric",
+        "amounts": {
+          "current": 79048,
+          "proForma": 79048
+        }
+      },
+      {
+        "label": "Gas",
+        "amounts": {
+          "current": 17658,
+          "proForma": 17658
+        }
+      },
+      {
+        "label": "Water & Sewer",
+        "amounts": {
+          "current": 13709,
+          "proForma": 13709
+        }
+      },
+      {
+        "label": "Trash Removal",
+        "amounts": {
+          "current": 12657,
+          "proForma": 12657
+        }
+      },
+      {
+        "label": "Landscaping & Snow Removal",
+        "amounts": {
+          "current": 5944,
+          "proForma": 5944
+        }
+      },
+      {
+        "label": "Repairs & Maintenance",
+        "amounts": {
+          "current": 31000,
+          "proForma": 31000
+        }
+      },
+      {
+        "label": "Payroll",
+        "amounts": {
+          "current": 57915,
+          "proForma": 57915
+        }
+      },
+      {
+        "label": "Leasing & Advertising",
+        "amounts": {
+          "current": 2500,
+          "proForma": 2500
+        }
+      },
+      {
+        "label": "Laundry Expense",
+        "amounts": {
+          "current": 1300,
+          "proForma": 1300
+        }
+      },
+      {
+        "label": "Internet Expense",
+        "amounts": {
+          "current": 28951,
+          "proForma": 12000
+        }
+      },
+      {
+        "label": "Short-Term Rental Fees",
+        "amounts": {
+          "current": 3973,
+          "proForma": 3973
+        }
+      },
+      {
+        "label": "Dues & Subscriptions",
+        "amounts": {
+          "current": 2491,
+          "proForma": 2491
+        }
+      },
+      {
+        "label": "Bank Fees",
+        "amounts": {
+          "current": 3924,
+          "proForma": 3924
+        }
+      },
+      {
+        "label": "Cable TV Expense",
+        "amounts": {
+          "current": 5089,
+          "proForma": 5089
+        }
+      }
+    ],
+    "assumptions": {
+      "vacancyPctCommercial": 0.05,
+      "vacancyPctResidential": 0.04,
+      "mgmtPct": null
+    }
+  },
+  "debt": {
+    "loanAmount": 10875000,
+    "ltv": 0.75,
+    "interestRate": 0.0585,
+    "amortYears": 30,
+    "interestOnlyYears": 0,
+    "annualDebtService": 769873,
+    "initialEquity": 3625000,
+    "closingCost": 72500,
+    "totalCashIn": 3697500,
+    "year1Dcr": 1.3
+  },
+  "investmentReview": {
+    "year1LeveredCoC": 0.0624,
+    "avgCoC7yr": 0.1072,
+    "equityMultiple": 4.06,
+    "leveredIrr7yr": 0.2494,
+    "exitYear": 7,
+    "exitCapRate": 0.06,
+    "costOfSalePct": 0.01,
+    "outstandingDebtBalance": 9721953
+  },
+  "cashFlow": {
+    "years": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "gprCommercial": [
+      264687,
+      267334,
+      275354,
+      283615,
+      292123,
+      300887
+    ],
+    "vacancyCommercial": [
+      13234,
+      13367,
+      13768,
+      14181,
+      14606,
+      15044
+    ],
+    "gprResidential": [
+      1165344,
+      1250000,
+      1350000,
+      1390500,
+      1432215,
+      1475181
+    ],
+    "vacancyResidential": [
+      46614,
+      62500,
+      67500,
+      69525,
+      71611,
+      73759
+    ],
+    "additionalIncome": [
+      55492,
+      56602,
+      57734,
+      58889,
+      60066,
+      61268
+    ],
+    "egi": [
+      1425675,
+      1498069,
+      1601820,
+      1649298,
+      1698188,
+      1748533
+    ],
+    "totalExpense": [
+      425078,
+      437830,
+      450965,
+      464494,
+      478429,
+      492782
+    ],
+    "noi": [
+      1000597,
+      1060239,
+      1150855,
+      1184803,
+      1219759,
+      1255751
+    ],
+    "debtService": [
+      769873,
+      769873,
+      769873,
+      769873,
+      769873,
+      769873
+    ],
+    "leveredCashflow": [
+      230724,
+      290366,
+      380982,
+      414930,
+      449886,
+      485878
+    ],
+    "leveredCoC": [
+      6.24,
+      7.85,
+      10.3,
+      11.22,
+      12.17,
+      13.14
+    ],
+    "dscr": [
+      1.3,
+      1.38,
+      1.49,
+      1.54,
+      1.58,
+      1.63
+    ]
+  },
+  "positioning": {
+    "strengths": [
+      "52 fully furnished lofts + 10 commercial suites, 62,550 SF, gut rehabbed 2019-2020",
+      "$14,500,000 list — 6.90% in-place cap on $1,000,597 NOI; 8.25% pro forma",
+      "Value-add: mark residential rents to $2,150 market and pass separately metered utilities to tenants",
+      "45 parking spots; secure access; walking distance to downtown Manchester retail",
+      "7-year levered IRR 24.94%; 4.06x equity multiple; Year 1 CoC 6.24%",
+      "All-new systems: roof (2019), HVAC/sprinkler/boilers (2020), plumbing, electrical panels"
+    ]
+  },
+  "photos": {
+    "cover": null,
+    "exterior": [],
+    "interior": [],
+    "aerial": [],
+    "area": [],
+    "plans": []
+  },
+  "market": {
+    "city": "Manchester",
+    "county": "Hillsborough County",
+    "driveTimeCities": [
+      "Boston, MA",
+      "Nashua, NH",
+      "Concord, NH",
+      "Portsmouth, NH",
+      "Worcester, MA",
+      "Portland, ME"
+    ],
+    "demographics": {
+      "radii": [
+        "0.25 mi",
+        "0.5 mi",
+        "1 mi"
+      ],
+      "totalPopulation": [
+        1631,
+        6069,
+        25844
+      ],
+      "averageAge": [
+        32.5,
+        37.2,
+        36.1
+      ],
+      "totalHouseholds": [
+        815,
+        3231,
+        12419
+      ],
+      "personsPerHousehold": [
+        2,
+        1.9,
+        2.1
+      ],
+      "averageHhIncome": [
+        54222,
+        56716,
+        62584
+      ],
+      "averageHouseValue": [
+        26463,
+        87476,
+        183940
+      ]
+    }
+  },
+  "pages": [],
+  "computed": {
+    "rentRoll": {
+      "unitCount": 62,
+      "totalSf": 43150,
+      "vacantCount": 0,
+      "camAnnualTotal": 0,
+      "byColumn": {
+        "current": {
+          "monthly": 119169,
+          "annual": 1430028,
+          "psfAnnual": 33.14
+        },
+        "proForma": {
+          "monthly": 135800,
+          "annual": 1629600,
+          "psfAnnual": 37.77
+        }
+      },
+      "groups": [
+        {
+          "group": "Commercial",
+          "unitCount": 10,
+          "totalSf": 17600,
+          "byColumn": {
+            "current": {
+              "monthly": 22057,
+              "annual": 264684,
+              "psfAnnual": 15.04
+            },
+            "proForma": {
+              "monthly": 24000,
+              "annual": 288000,
+              "psfAnnual": 16.36
+            }
+          }
+        },
+        {
+          "group": "Residential",
+          "unitCount": 52,
+          "totalSf": 25550,
+          "byColumn": {
+            "current": {
+              "monthly": 97112,
+              "annual": 1165344,
+              "psfAnnual": 45.61
+            },
+            "proForma": {
+              "monthly": 111800,
+              "annual": 1341600,
+              "psfAnnual": 52.51
+            }
+          }
+        }
+      ],
+      "unitMix": [
+        {
+          "use": "Commercial",
+          "count": 10,
+          "totalSf": 17600,
+          "avgSf": null,
+          "rentRange": {
+            "current": {
+              "min": 22057,
+              "max": 22057
+            },
+            "proForma": {
+              "min": 24000,
+              "max": 24000
+            }
+          }
+        },
+        {
+          "use": "Economy",
+          "count": 16,
+          "totalSf": 6400,
+          "avgSf": 400,
+          "rentRange": {
+            "current": {
+              "min": 1680,
+              "max": 1919
+            },
+            "proForma": {
+              "min": 2150,
+              "max": 2150
+            }
+          }
+        },
+        {
+          "use": "Standard",
+          "count": 13,
+          "totalSf": 6500,
+          "avgSf": 500,
+          "rentRange": {
+            "current": {
+              "min": 1789,
+              "max": 1869
+            },
+            "proForma": {
+              "min": 2150,
+              "max": 2150
+            }
+          }
+        },
+        {
+          "use": "Deluxe",
+          "count": 18,
+          "totalSf": 9900,
+          "avgSf": 550,
+          "rentRange": {
+            "current": {
+              "min": 1849,
+              "max": 2350
+            },
+            "proForma": {
+              "min": 2150,
+              "max": 2150
+            }
+          }
+        },
+        {
+          "use": "Premium End",
+          "count": 5,
+          "totalSf": 2750,
+          "avgSf": 550,
+          "rentRange": {
+            "current": {
+              "min": 2129,
+              "max": 2199
+            },
+            "proForma": {
+              "min": 2150,
+              "max": 2150
+            }
+          }
+        }
+      ]
+    },
+    "incomeExpense": {
+      "byColumn": {
+        "current": {
+          "grossScheduledRent": 1430031,
+          "vacancyLoss": 59848,
+          "effectiveRentalIncome": 1370183,
+          "otherIncome": 55492,
+          "egi": 1425675,
+          "mgmtFee": 0,
+          "totalExpenses": 425078,
+          "noi": 1000597
+        },
+        "proForma": {
+          "grossScheduledRent": 1629600,
+          "vacancyLoss": 67831,
+          "effectiveRentalIncome": 1561769,
+          "otherIncome": 55492,
+          "egi": 1617261,
+          "mgmtFee": 0,
+          "totalExpenses": 421472,
+          "noi": 1195789
+        }
+      }
+    },
+    "returns": {
+      "capRateByColumn": {
+        "current": 6.9,
+        "proForma": 8.25
+      },
+      "pricePerSf": 231.81,
+      "pricePerUnit": 233871,
+      "grm": 10.14
+    }
+  }
+}
