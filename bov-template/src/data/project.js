@@ -27,4 +27,28 @@ export const PROJECT = {
   // Always shown — the "this is not an appraisal" note.
   note: 'This Broker Opinion of Value is an opinion of probable market value prepared by a licensed real estate broker. It is not an appraisal and has not been prepared in accordance with the Uniform Standards of Professional Appraisal Practice (USPAP).',
   photo: '/photos/project-1.jpg',
+
+  /* ── EXECUTIVE SUMMARY ──────────────────────────────────────────────
+     One-paragraph orientation, then the numbered investment highlights.
+     These are the first substantive page of the deck and, in the short
+     format, the only place the thesis is argued in prose.
+
+     Rules that keep them credible AND keep the page from filling with
+     grey text — the charts beside them are doing the arguing:
+       · 4 highlights. Five is already padding.
+       · `title` ≤ 5 words, `body` ≤ 18 words. Hard caps.
+       · Every `body` carries a hard number — a rent gap, a ratio, a count.
+         A highlight with no number is an adjective.
+       · Lead with the strongest. A reader takes two and skims the rest.
+       · No "nestled", "boasts", "prime location", "turnkey", "rare
+         opportunity". Say the number instead. */
+  summary:
+    '12 units on 0.52 acres, fully occupied, separately metered with tenant-paid heat — and rents below what the same floor plans already achieve.', // SAMPLE — replace
+
+  highlights: [ // SAMPLE — replace
+    { title: 'Mark-to-market on turnover', body: '$26,400 of annual upside at rents already achieved in-house. Leasing, not capital.' },
+    { title: 'Tenants pay their own utilities', body: 'Separately metered, tenant-paid heat and power. Expense load holds near 31% of EGI.' },
+    { title: 'Stabilized physical plant', body: 'Roof 2018, water heaters 2020. Near-term capital is elective, not deferred.' },
+    { title: 'Financeable in place', body: '1.28x DSCR at 65% leverage, 3.9% cash-on-cash today rising to 6.7% stabilized.' },
+  ],
 }

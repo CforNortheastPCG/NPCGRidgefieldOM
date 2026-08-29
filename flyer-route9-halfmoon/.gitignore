@@ -1,0 +1,9 @@
+node_modules
+dist
+
+# Generated deck output — re-render with `npm run print`
+out/
+
+*.pdf
+.DS_Store
+*.local

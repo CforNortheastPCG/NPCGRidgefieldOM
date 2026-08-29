@@ -1,0 +1,91 @@
+/* ═══════════ ROUTE 9 FLYER — ADDITIONS TO THE HOUSE SYSTEM ═══════════
+   tokens.css + index.css are copied verbatim from om-hysil (AutoOM style
+   pack v1) — do not edit them here; re-copy to pick up house changes.
+   Everything below is flyer-only vocabulary built from the same tokens. */
+
+@import './index.css';
+
+/* The deck is 4 pages, not a book — no 48px gutter under the last page. */
+.om-container { padding: 24px 0; }
+
+/* ── Lead paragraph — the golden-rule treatment from .hl-item ── */
+.lead {
+  border-left: 3px solid var(--golden);
+  padding-left: 12px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--carbon);
+  margin-bottom: 12px;
+}
+
+/* ── Body prose ── */
+.prose p { font-size: var(--fs-body); line-height: var(--lh-body); color: var(--graphite); margin-bottom: 8px; }
+.prose p:last-child { margin-bottom: 0; }
+
+/* ── Cover: stat band under the hero (house .stat-tile, 6 across) ── */
+.cover-statband {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0 18px;
+  padding: 16px 40px 18px;
+  background: var(--white);
+}
+.cover-hero-note {
+  position: absolute;
+  left: 40px;
+  top: 34px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* ── Two-column body ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; flex: 1; min-height: 0; }
+.two-col--wide-left { grid-template-columns: 1.06fr 1fr; }
+/* overflow:hidden so a column that outgrows its row clips instead of
+   silently painting over the block below it. */
+.col { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+.stack-gap { margin-top: 14px; }
+
+/* ── Site inset — the trade-area aerial zoomed to the subject pin ── */
+.site-inset { position: relative; flex: 1; min-height: 0; overflow: hidden; background: var(--carbon); }
+.site-inset img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.inset-cap { font-size: 8px; color: var(--stone); letter-spacing: 0.04em; line-height: 1.35; margin-top: 5px; }
+
+/* ── Page 3 — full-page trade-area aerial ──
+   It is a labelled graphic, not a photo: contain it so no callout is cropped,
+   on carbon rather than linen so the letterbox reads as intentional. */
+.aerial-full { flex: 1; min-height: 0; position: relative; background: var(--carbon); overflow: hidden; }
+.aerial-full img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.aerial-cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: var(--graphite);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 9px; letter-spacing: 0.04em; padding: 7px 40px;
+}
+
+/* Page 4 photo strip — three drone shots across */
+.photo-grid.g-3up { grid-template-columns: 1fr 1fr 1fr; flex: 0 0 168px; }
+
+/* Watch items read in terracotta, matching the book's caution accent */
+.highlights--watch li::before { background: var(--terracotta); }
+
+/* Accented figure in a data table (the asking price) */
+.data-table td.accent { color: var(--golden); font-weight: 800; }
+
+/* Tighter rows so a 14-fact table fits one flyer column */
+.data-table--compact td { padding: 4px 10px; }
+.data-table--compact th { padding: 6px 10px; }
+
+/* ── Paths to Value — house .hl-item in a 2×2 ── */
+.paths-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 26px; }
+
+/* ── Deal contacts — a second phone line under the direct ── */
+.dc-meta + .dc-meta { font-weight: 500; opacity: 0.75; }
+.dc-office { font-size: 9px; color: var(--stone); letter-spacing: 0.04em; margin-top: 10px; line-height: 1.45; }
+.dc-bio { font-size: 10px; line-height: 1.5; color: var(--graphite); margin-bottom: 10px; }
+.dc-disclaimer p.fine { font-size: 8px; line-height: 1.45; color: var(--stone); }

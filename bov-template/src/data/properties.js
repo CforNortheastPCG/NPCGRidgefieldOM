@@ -48,3 +48,10 @@ export const PROPERTIES = [
 ]
 
 export const IS_PORTFOLIO = PROPERTIES.length > 1
+
+/* ── PORTFOLIO PROFILE (portfolio decks only) ──────────────────────────
+   With 2+ properties the Executive Summary should describe the PORTFOLIO,
+   not building one. Fill this in and the short format uses it; leave it
+   null and the summary falls back to PROPERTIES[0]. Same row shape as
+   `siteRows` / `utilityRows`. */
+export const PORTFOLIO_PROFILE = null

@@ -4,10 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NPCG Broker Opinion of Value — Template</title>
-    <meta name="description" content="Offering Memorandum — The Granary, 29 West Street, New Milford, CT 06776. 14-unit adaptive-reuse apartment building steps from the New Milford Green, presented by Northeast Private Client Group." />
+
+    <!-- ══ EDIT-ME ══ Rename all three <title>/og:title strings per deal.
+         This is NOT wired to deal.js — it's plain HTML. It matters beyond
+         cosmetics: export.cjs and qa-shots.cjs compare the served <title>
+         against dist/index.html's to prove they're rendering THIS deck and
+         not a sibling clone squatting the port. If every clone keeps the
+         same title, that guard silently passes on the wrong deck. -->
+    <title>NPCG BOV — REPLACE ME</title>
+    <meta name="description" content="Broker Opinion of Value — REPLACE ME (property name, address, unit count), prepared by Northeast Private Client Group." />
     <meta name="author" content="Northeast Private Client Group" />
-    <meta property="og:title" content="NPCG Broker Opinion of Value — Template" />
+    <meta property="og:title" content="NPCG BOV — REPLACE ME" />
     <meta property="og:description" content="Broker Opinion of Value prepared by Northeast Private Client Group." />
     <meta property="og:type" content="website" />
   </head>

@@ -1,0 +1,12 @@
+{
+  "name": "flyer-route9-halfmoon",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Route 9, Halfmoon NY — 4-page NPCG property flyer. No dev server: print-flyer.cjs builds out/preview.html and the PDF straight from src/data.js + src/flyer.css.",
+  "scripts": {
+    "print": "NODE_PATH=../om-southend-plaza/node_modules node print-flyer.cjs",
+    "dev": "npm run print && open out/preview.html",
+    "open": "open out/preview.html"
+  }
+}

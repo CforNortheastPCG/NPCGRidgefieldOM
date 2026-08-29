@@ -1,0 +1,30 @@
+/* ═══════════ NPCG STYLE PACK v1 — DESIGN TOKENS ═══════════
+   The brand canon (NPCGStyleGuide.md): Carbon Blue, Stone Beige,
+   Golden Orange accent, Terracotta, Graphite, Linen; Montserrat.
+   A new tenant = a new tokens.css (+ STYLE.md + CONVENTIONS.md).
+   inject.mjs copies this file to frame/src/styles/tokens.css. */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --carbon: #3f4753;
+  --terracotta: #b55d37;
+  --golden: #f8971d;
+  --stone: #b1a8a0;
+  --graphite: #281b12;
+  --linen: #f6f2ee;
+  --white: #ffffff;
+  --border: #e0dbd6;
+
+  --font-brand: 'Montserrat', sans-serif;
+
+  --page-w: 960px;
+  --page-h: 742px;
+
+  --fs-body: 10.5px;
+  --lh-body: 1.45;
+  --fs-section-title: 28px;
+  --fs-eyebrow: 10px;
+  --fs-page-header: 11px;
+  --fs-footer: 10px;
+}
