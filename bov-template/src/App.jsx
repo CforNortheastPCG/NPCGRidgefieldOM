@@ -23,6 +23,7 @@ import PortfolioSummary from './pages/PortfolioSummary.jsx'
 import AssessmentTaxPage from './pages/AssessmentTaxPage.jsx'
 import AsGivenPage from './pages/AsGivenPage.jsx'
 import WhyNpcg from './pages/WhyNpcg.jsx'
+import ProvenPerformancePage from './pages/ProvenPerformancePage.jsx'
 import TrackRecordPage from './pages/TrackRecordPage.jsx'
 import UnitMixIePage from './pages/UnitMixIePage.jsx'
 import UnderwritingPage from './pages/UnderwritingPage.jsx'
@@ -30,12 +31,20 @@ import ValuationPage from './pages/ValuationPage.jsx'
 import SalesCompsPage from './pages/SalesCompsPage.jsx'
 import RentCompsPage from './pages/RentCompsPage.jsx'
 import ConclusionPage from './pages/ConclusionPage.jsx'
+import SellingStagesPage from './pages/SellingStagesPage.jsx'
+import TimelinePage from './pages/TimelinePage.jsx'
+import VisibilityPage from './pages/VisibilityPage.jsx'
+import BuyerTrackingPage from './pages/BuyerTrackingPage.jsx'
+import ReportingPage from './pages/ReportingPage.jsx'
 import ProcessPage from './pages/ProcessPage.jsx'
 import ExpectPage from './pages/ExpectPage.jsx'
 import ContractPage from './pages/ContractPage.jsx'
 import ClosingPage from './pages/ClosingPage.jsx'
 import MarketOverview from './pages/MarketOverview.jsx'
 import MarketActivity from './pages/MarketActivity.jsx'
+import WhyOwnersSellPage from './pages/WhyOwnersSellPage.jsx'
+import TaxDeferralPage from './pages/TaxDeferralPage.jsx'
+import FlywheelPage from './pages/FlywheelPage.jsx'
 
 /* ═══════════════════ MAIN APP ═══════════════════
    pageDefs is the single source of truth for page ORDER, page NUMBERS, and
@@ -52,7 +61,8 @@ import MarketActivity from './pages/MarketActivity.jsx'
               comparables that support it, the team, and the close-out.
               Nothing to skim past.
      'full'   those same pages, plus the pitch around them: TOC, advisors,
-              Why NPCG, track record, comps, marketing process, market,
+              Why NPCG, track record, comps, the firm's marketing-process
+              pages, market, the owner-advisory "Beyond the Sale" section,
               team. Use when the BOV doubles as the listing pitch.
 
    `full(...)` below marks entries that appear only in the long format, so
@@ -98,6 +108,7 @@ const pageDefs = [
   ...full(...propertyPages()),
   ...full(
     { el: <WhyNpcg />, toc: 'Why NPCG' },
+    { el: <ProvenPerformancePage />, toc: 'Proven Performance' },
     { el: <TrackRecordPage />, toc: 'Our Track Record' },
     { el: <Divider eyebrow="02" title="Financial Analysis & Valuation" image="/photos/divider.jpg" />, toc: 'Financial Analysis & Valuation', section: true },
   ),
@@ -111,8 +122,17 @@ const pageDefs = [
 
   ...photoPages(),
 
+  /* The marketing section opens with the firm's standard pitch pages — the
+     three-stage process, the twelve-week timeline, syndication, buyer
+     tracking, and reporting — then the deal-facing pages on what the owner
+     decides, signs, and receives. */
   ...full(
     { el: <Divider eyebrow="03" title="The Marketing Process" image="/photos/divider.jpg" />, toc: 'The Marketing Process', section: true },
+    { el: <SellingStagesPage />, toc: 'Selling Process Stages' },
+    { el: <TimelinePage />, toc: 'Marketing Timeline' },
+    { el: <VisibilityPage />, toc: 'National Visibility' },
+    { el: <BuyerTrackingPage />, toc: 'Buyer Tracking & Follow-Up' },
+    { el: <ReportingPage />, toc: 'Client Reporting & Communication' },
     { el: <ProcessPage />, toc: 'The Process' },
     { el: <ExpectPage />, toc: 'What to Expect' },
     { el: <ContractPage />, toc: 'Contract & Due Diligence' },
@@ -121,10 +141,17 @@ const pageDefs = [
     { el: <Divider eyebrow="04" title="The Market" image="/photos/divider.jpg" />, toc: 'The Market', section: true },
     { el: <MarketOverview />, toc: 'Market Overview' },
     { el: <MarketActivity />, toc: 'Development & Regulation' },
+
+    /* Owner-advisory pages: why owners sell, what to do with the proceeds,
+       and the relationship that continues after the close. */
+    { el: <Divider eyebrow="05" title="Beyond the Sale" image="/photos/divider.jpg" />, toc: 'Beyond the Sale', section: true },
+    { el: <WhyOwnersSellPage />, toc: 'Why Property Owners Sell' },
+    { el: <TaxDeferralPage />, toc: 'Deferring Capital Gains Taxes' },
+    { el: <FlywheelPage />, toc: 'The Strategic Advisory Flywheel' },
   ),
 
   ...full(
-    { el: <Divider eyebrow="05" title="The Team" image="/photos/divider.jpg" />, toc: 'The Team', section: true },
+    { el: <Divider eyebrow="06" title="The Team" image="/photos/divider.jpg" />, toc: 'The Team', section: true },
     { el: <TeamPage />, toc: 'Our Team' },
     { el: <LocationsPage />, toc: 'Our Locations' },
   ),

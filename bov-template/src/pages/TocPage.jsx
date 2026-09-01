@@ -5,8 +5,25 @@ import { DISCLAIMER_CONDENSED } from '../data/advisors.js'
    Entries are DERIVED from App.jsx's pageDefs — labels and numbers stay in
    sync automatically when pages are added, removed, or reordered. The side
    column carries the condensed confidentiality notice (full text lives on
-   the Your Advisors page). */
+   the Your Advisors page).
+
+   Past ~28 entries the list splits into two columns, breaking at the
+   section head nearest the midpoint so a section never straddles the gap. */
+const TWO_COL_AT = 28
+
+function splitEntries(entries) {
+  if (entries.length <= TWO_COL_AT) return [entries]
+  const mid = entries.length / 2
+  let split = Math.ceil(mid)
+  entries.forEach((e, i) => {
+    if (e.section && i > 0 && Math.abs(i - mid) < Math.abs(split - mid)) split = i
+  })
+  return [entries.slice(0, split), entries.slice(split)]
+}
+
 export default function TocPage({ entries = [], pageNum }) {
+  const cols = splitEntries(entries)
+  const dense = cols.length > 1
   return (
     <div className="page">
       <PageHeader section="Contents" />
@@ -14,26 +31,30 @@ export default function TocPage({ entries = [], pageNum }) {
         <div className="section-title" style={{ marginBottom: 2 }}>Table of <span style={{ color: '#F8971D' }}>Contents</span></div>
         <div className="title-rule" />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 22, flex: 1, minHeight: 0 }}>
-          {/* Contents list */}
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingTop: 4, minHeight: 0 }}>
-            {entries.map(item => (
-              <div
-                key={`${item.n}-${item.label}`}
-                style={{ display: 'flex', alignItems: 'baseline', gap: 8, paddingLeft: item.section ? 0 : 16 }}
-              >
-                <span style={{
-                  fontSize: item.section ? 11 : 10,
-                  fontWeight: item.section ? 800 : 500,
-                  color: item.section ? 'var(--carbon)' : 'var(--graphite)',
-                  textTransform: item.section ? 'uppercase' : 'none',
-                  letterSpacing: item.section ? '0.06em' : '0',
-                  whiteSpace: 'nowrap',
-                }}>
-                  {item.label}
-                </span>
-                <span style={{ flex: 1, borderBottom: '1px dotted var(--stone)', transform: 'translateY(-3px)', opacity: 0.6 }} />
-                <span style={{ fontSize: 9.2, fontWeight: 700, color: item.section ? 'var(--golden)' : 'var(--carbon)' }}>{item.n}</span>
+        <div style={{ display: 'grid', gridTemplateColumns: dense ? '2fr 1fr' : '1.5fr 1fr', gap: 22, flex: 1, minHeight: 0 }}>
+          {/* Contents list — one column, or two when the long format runs past the fold */}
+          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols.length}, 1fr)`, gap: 26, minHeight: 0 }}>
+            {cols.map((col, ci) => (
+              <div key={ci} style={{ display: 'flex', flexDirection: 'column', justifyContent: dense ? 'flex-start' : 'space-between', gap: dense ? 5 : 0, paddingTop: 4, minHeight: 0 }}>
+                {col.map(item => (
+                  <div
+                    key={`${item.n}-${item.label}`}
+                    style={{ display: 'flex', alignItems: 'baseline', gap: 8, paddingLeft: item.section ? 0 : (dense ? 12 : 16), marginTop: dense && item.section ? 6 : 0 }}
+                  >
+                    <span style={{
+                      fontSize: item.section ? (dense ? 9.4 : 11) : (dense ? 8.8 : 10),
+                      fontWeight: item.section ? 800 : 500,
+                      color: item.section ? 'var(--carbon)' : 'var(--graphite)',
+                      textTransform: item.section ? 'uppercase' : 'none',
+                      letterSpacing: item.section ? '0.06em' : '0',
+                      whiteSpace: 'nowrap',
+                    }}>
+                      {item.label}
+                    </span>
+                    <span style={{ flex: 1, borderBottom: '1px dotted var(--stone)', transform: 'translateY(-3px)', opacity: 0.6 }} />
+                    <span style={{ fontSize: dense ? 8.6 : 9.2, fontWeight: 700, color: item.section ? 'var(--golden)' : 'var(--carbon)' }}>{item.n}</span>
+                  </div>
+                ))}
               </div>
             ))}
           </div>

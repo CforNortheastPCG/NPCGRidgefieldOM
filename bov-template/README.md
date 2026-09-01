@@ -14,11 +14,11 @@ covers every page on screen until the numbers are final.
 `pageDefs` array in `src/App.jsx`, so page numbers and the TOC follow
 automatically.
 
-| | `'short'` — 9 pages (default) | `'full'` — 33 pages |
+| | `'short'` — 9 pages (default) | `'full'` — 41 pages |
 |---|---|---|
 | **What it is** | The analytical BOV. The document itself, nothing to skim past. | The same nine analytical pages plus the pitch around them. |
 | **When** | Most owner conversations. You are answering "what is it worth?" | The BOV doubles as the listing pitch, or the owner is deciding between brokers. |
-| **Pages** | Cover · Executive Summary · Valuation & Pricing · Property Record Card · Rent Roll & Unit Mix · Operating Statement · Real Estate Taxes · Photography · Conclusion & Contact | + TOC, Advisors, Disclaimer, The Project, Property Information, Why NPCG, Track Record, Unit Mix & Income, Sales Comps, Rent Comps, Process/Expect/Contract/Closing, Market Overview, Development & Regulation, Team, Locations |
+| **Pages** | Cover · Executive Summary · Valuation & Pricing · Property Record Card · Rent Roll & Unit Mix · Operating Statement · Real Estate Taxes · Photography · Conclusion & Contact | + TOC, Advisors, Disclaimer, The Project, Property Information, Why NPCG, Proven Performance, Track Record, Unit Mix & Income, Sales Comps, Rent Comps, Selling Process Stages, Marketing Timeline, National Visibility, Buyer Tracking, Client Reporting, Process/Expect/Contract/Closing, Market Overview, Development & Regulation, Beyond the Sale (Why Owners Sell, Tax Deferral, Advisory Flywheel), Team, Locations |
 
 Conclusion & Contact is always the last page — a BOV should end on the stated
 opinion and a phone number.
@@ -58,7 +58,7 @@ formats and from the TOC. Don't ship an empty shell.
    | `trackRecord.js` | Our Track Record (hand-author from the Salesforce closed-deal report) |
    | `market.js` | Market Overview (demographics vs state) + Development & Regulation |
    | `photos.js` | photo pages. The first entry's first three images also fill the Record Card strip |
-   | `process.js`, `firm.js` | firm-standard marketing-process + Why NPCG copy — usually untouched |
+   | `process.js`, `firm.js`, `advisory.js` | firm-standard copy: marketing-process pages (stages, timeline, visibility, buyer tracking, reporting), Why NPCG / Proven Performance / Locations, and the Beyond the Sale pages — usually untouched |
 5. **Drop photos** in `public/photos/` at the placeholder filenames
    (cover.jpg, toc.jpg, divider.jpg, project-1.jpg, property-1.jpg,
    exterior-*.jpg, interior-*.jpg, market-*.jpg). Regenerate placeholders

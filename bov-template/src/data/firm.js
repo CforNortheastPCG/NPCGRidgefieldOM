@@ -91,3 +91,39 @@ export const FIRM_NARRATIVE = {
     'We aim to guide you with market knowledge that helps you make the right decision — at the right time — to maximize value and return on your investment.',
   ],
 }
+
+/* ═══════════════════ PROVEN PERFORMANCE (BOV pitch page) ═══════════════════
+   "Proven Performance. Trusted by Owners. Relied on by the Market." — the
+   six proof points from the firm's standard BOV pitch pages. The stat strip
+   reuses FIRM_STATS so the numbers can't drift from the Why NPCG page.
+   `icon` keys resolve in src/components/Icons.jsx. */
+export const PROVEN_PERFORMANCE = {
+  subtitle: 'Relied on by the Market',
+  stats: [
+    { v: '15+', l: 'Years of Exclusive Seller Representation' },
+    { v: FIRM_STATS[1].val, l: 'Closed Transactions' },
+    { v: FIRM_STATS[0].val, l: 'Closed Volume Since 2014' },
+    { v: String(OFFICES.length), l: 'Offices, New England to Florida' },
+  ],
+  points: [
+    { icon: 'award', title: '15+ Years of Exclusive Seller Representation', body: 'We’ve built our business around one thing: selling buildings. Our focus is singular, and our execution is proven.' },
+    { icon: 'briefcase', title: 'Hundreds of Transactions Closed', body: 'From private sales to complex portfolio dispositions, our team has closed hundreds of commercial real estate transactions across asset types and deal sizes.' },
+    { icon: 'dollar-sign', title: 'Billions in Total Sales Volume', body: 'We’ve consistently delivered top-tier outcomes for our clients — navigating market cycles, uncovering hidden value, and driving competitive bidding environments.' },
+    { icon: 'share-2', title: 'Established Buyer Network', body: 'Our long-standing track record means we know who the real buyers are. We’ve built and maintained an exclusive, qualified buyer database that drives real-time results.' },
+    { icon: 'map-pin', title: 'Deep Local Market Knowledge', body: 'We’ve seen the evolution of our markets firsthand — giving us the insight to accurately price, position, and negotiate on your behalf.' },
+    { icon: 'users', title: 'Repeat Clients & Long-Term Relationships', body: 'Our success is measured not just in sales, but in the trust we’ve earned. Many of our clients are multi-transaction partners who rely on us year after year.' },
+  ],
+  note: 'Volume and transaction counts reflect closed business firm-wide since 2014, not projections.',
+}
+
+/* ═══════════════════ OUR LOCATIONS — narrative ═══════════════════
+   "Local Presence. Regional Collaboration." — the copy that runs beside the
+   office map. The directory itself is OFFICES above. */
+export const LOCATIONS_NARRATIVE = {
+  lead: 'We are deeply embedded in the markets we serve — not just observing them, but operating in them.',
+  items: [
+    { icon: 'map-pin', label: 'Local Presence', body: 'Our agents are deployed in the field, meeting owners, touring properties, and staying close to buyer behavior in real time.' },
+    { icon: 'globe', label: 'Regional Collaboration', body: 'With offices working together across our footprint, we cross-market listings and share buyer intelligence to amplify reach and uncover hidden opportunities.' },
+  ],
+  close: 'We operate as one connected team — delivering coverage no single agent can match.',
+}

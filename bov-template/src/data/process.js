@@ -99,3 +99,110 @@ export const CLOSING = {
     { q: 'What happens after closing?', a: 'A post-close debrief: transaction summary, any 30-day true-ups mediated by NPCG, and 1031 or next-asset planning if that’s the goal.' },
   ],
 }
+
+/* ═══════════════════ FIRM-STANDARD PITCH PAGES ═══════════════════
+   The five marketing pages carried over from the firm's standard BOV deck:
+   Selling Process Stages, Marketing Timeline, National Visibility, Buyer
+   Tracking, and Client Reporting. Firm copy — leave alone per deal. */
+
+/* ── Page: Selling Process Stages — three numbered stages, bullets ── */
+export const SELLING_STAGES = [
+  {
+    num: '01', title: 'Sales and Marketing',
+    items: [
+      'Evaluate, underwrite, and position the property to achieve maximum value',
+      'Conduct extensive market research including rent and sales comps to support our valuations',
+      'Create offering memorandum to articulate the investment and its potential to investors',
+      'Enforce, advocate, and educate buyers on the strengths of the deal and mitigate any possible concerns',
+      'Conduct broad and/or targeted marketing via direct and digital campaigns',
+      'Constantly follow up with interested parties',
+      'Coordinate property tours with seller / property manager & buyers',
+      'Generate a competitive environment to further drive value',
+      'Communicate with seller — marketing process updates',
+      'Track offers, tours and activity — share with seller as needed',
+      'Request and update financials as process moves — rents may have increased, etc.',
+      'Create “deal room” with relevant info (precursor to due diligence)',
+    ],
+  },
+  {
+    num: '02', title: 'Negotiation & Contract',
+    items: [
+      'Facilitate and negotiate offers from potential buyers',
+      'Screen and qualify buyers',
+      'Negotiate best possible price and terms for the seller',
+      'Assist in selecting a buyer with the highest probability of closing',
+      'Maintain deal momentum and buyer interest through contract negotiations',
+      'Confirm offer terms are included in purchase and sale agreement',
+      'Compile and reconcile all requested due diligence documentation to ensure that there are no unexpected issues',
+    ],
+  },
+  {
+    num: '03', title: 'Transaction Management',
+    items: [
+      'Facilitate transmission of due diligence documentation including taxes, insurance, water, utilities, etc.',
+      'Coordinate with buyer, seller, lender, and attorneys on all due diligence activities including appraisal, inspection, environmental, and financing (if applicable)',
+      'Confirm receipt of any 3rd party reports and/or lender’s commitment letter',
+      'Track key contract dates and manage process through all open contingencies',
+      'Manage and mitigate any possible unforeseen issues and/or buyer re-trade requests',
+      'Track any contract amendments and other negotiated changes including closing date',
+    ],
+  },
+]
+
+/* ── Page: Marketing Timeline — four phases by week ── */
+export const TIMELINE = {
+  subtitle: 'A proven process to maximize value and drive certainty of close',
+  lead: 'We execute a well-defined marketing process designed to generate urgency, drive competition, and produce the highest price the market will bear.',
+  phases: [
+    { weeks: '1–2', label: 'Prepare', items: ['Finalize pricing and listing agreement', 'Collect property financials and due diligence', 'Schedule photography / video', 'Build marketing materials (OM, flyers, email campaigns)', 'Begin quiet marketing to qualified buyers'] },
+    { weeks: '3–6', label: 'Launch', items: ['Go live on CoStar, LoopNet, CREXi, and other CRE platforms', 'Launch email and call campaigns', 'Conduct property tours', 'Provide weekly activity and market feedback', 'Call for Offers typically set at end of Week 6'] },
+    { weeks: '7–8', label: 'Offers', items: ['Receive and underwrite offers', 'Conduct best-and-final round (if needed)', 'Qualify buyers and negotiate LOI'] },
+    { weeks: '9–12', label: 'Escrow', items: ['Execute PSA', 'Manage due diligence and buyer financing', 'Coordinate closing process', 'Proactive involvement through close'] },
+  ],
+}
+
+/* ── Page: National Visibility — syndication platforms ──
+   Logos live in public/logos/platforms/. `span: 2` gives a tile double
+   width in the four-column grid (CoStar + LoopNet share one artwork). */
+export const VISIBILITY = {
+  subtitle: 'Syndication & Digital Reach',
+  lead: 'Beyond our private database, we leverage the most powerful digital tools in commercial real estate to broadcast your property nationwide.',
+  bullets: [
+    'Featured on CoStar, LoopNet, CREXi, and top national CRE networks',
+    'Enhanced exposure through our website, email campaigns, and listing syndication',
+    'Designed to reach institutional, private, and 1031 exchange buyers coast-to-coast',
+  ],
+  platforms: [
+    { name: 'CoStar & LoopNet', logo: '/logos/platforms/costar-loopnet.png', span: 2 },
+    { name: 'CREXi', logo: '/logos/platforms/crexi.png' },
+    { name: 'Brevitas', logo: '/logos/platforms/brevitas.png' },
+    { name: 'RealNex Marketplace', logo: '/logos/platforms/marketplace.png' },
+    { name: 'theBrokerList', logo: '/logos/platforms/thebrokerlist.png' },
+    { name: 'CommercialEdge', logo: '/logos/platforms/commercialedge.png', span: 2 },
+  ],
+  banner: 'Our mission is to create a market for your asset — not wait for one.',
+}
+
+/* ── Page: Buyer Tracking & Follow-Up — four quadrants ── */
+export const BUYER_TRACKING = {
+  subtitle: 'Proactive Buyer Management. Relentless Follow-Up.',
+  lead: 'Our job isn’t just to “list” your property — it’s to sell it. That means making sure every serious buyer is identified, engaged, and followed up with consistently.',
+  close: 'We don’t wait for buyers to come to us — we go to them, stay with them, and bring them to the finish line.',
+  quadrants: [
+    { icon: 'target', title: 'Centralized Buyer Tracking System', items: ['Every buyer inquiry is logged, tracked, and categorized', 'CRM-integrated tracking for contact history, tour status, and follow-up cadence', 'Instant access to engagement history and notes — no one falls through the cracks'] },
+    { icon: 'repeat', title: 'Structured Follow-Up Process', items: ['Systematic outreach to all interested parties post-launch, post-tour, and post-OM delivery', 'Personalized follow-up based on buyer profile and interest level', 'Deadlines and key milestones clearly communicated to drive urgency'] },
+    { icon: 'trending-up', title: 'Buyer Engagement Reports', items: ['Weekly updates on active buyer conversations', 'Heat mapping of top prospects based on timing, capital, and fit', 'Early identification of likely bidders and potential pricing feedback'] },
+    { icon: 'users', title: 'Continuous Re-Engagement', items: ['If a buyer slows down, we re-engage them with new insights or angles', 'If they pass, we ask why — and use that data to adjust positioning if needed', 'If they’re active elsewhere, we track timing and stay on their radar'] },
+  ],
+}
+
+/* ── Page: Client Reporting & Communication — three columns ── */
+export const REPORTING = {
+  subtitle: 'Transparent. Consistent. Proactive.',
+  lead: 'We believe in full transparency and proactive communication throughout the entire sales process. Our reporting keeps you informed, involved, and confident — from launch to close.',
+  columns: [
+    { icon: 'bar-chart-2', title: 'Weekly Activity Reports', items: ['Summary of new inquiries, signed CAs, and buyer interest', 'Tour activity and feedback from prospective buyers', 'Marketing analytics and campaign performance', 'Real-time insights into market sentiment'] },
+    { icon: 'file-text', title: 'Offer Summary Reports', items: ['Detailed breakdown of all submitted offers', 'Side-by-side comparisons of pricing, terms, and contingencies', 'Buyer qualification summaries (track record, capital, financing)', 'Strategic guidance on recommended path forward'] },
+    { icon: 'phone', title: 'Ongoing Communication', items: ['Regular phone / video check-ins to keep alignment', 'Fast response to all owner questions and updates', 'Clear next steps at each phase of the process'] },
+  ],
+}
