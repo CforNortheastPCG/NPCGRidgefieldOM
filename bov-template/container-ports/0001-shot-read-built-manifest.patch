@@ -1,0 +1,23 @@
+--- a/scripts/shot.mjs
++++ b/scripts/shot.mjs
+@@ -21,8 +21,18 @@
+   process.exit(2)
+ }
+ 
+-const manifestSrc = readFileSync(join(frameDir, 'src', 'data', 'manifest.ts'), 'utf8')
+-const manifest = JSON.parse(manifestSrc.slice(manifestSrc.indexOf('= [') + 2, manifestSrc.lastIndexOf(']') + 1))
++/* Prefer the manifest the BUILD emitted: it is produced from the same
++   module App.tsx renders from, so it cannot drift from the DOM, and it
++   works whether the manifest is a JSON-style literal (the OM frame) or
++   computed (the BOV, where FORMAT and ASSET_CLASS select pages). Falls back
++   to parsing the source for a tree with no build yet. */
++const builtManifest = join(distDir, 'manifest.json')
++const manifest = existsSync(builtManifest)
++  ? JSON.parse(readFileSync(builtManifest, 'utf8'))
++  : (() => {
++      const src = readFileSync(join(frameDir, 'src', 'data', 'manifest.ts'), 'utf8')
++      return JSON.parse(src.slice(src.indexOf('= [') + 2, src.lastIndexOf(']') + 1))
++    })()
+ const idx = manifest.findIndex((e) => e.id === pageId)
+ if (idx < 0) {
+   console.error(`page "${pageId}" not in manifest`)

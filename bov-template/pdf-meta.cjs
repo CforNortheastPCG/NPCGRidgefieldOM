@@ -3,13 +3,13 @@
    metadata (Title / Author / Subject / Keywords) so anyone — or any AI tool —
    that opens or ingests the file is pointed straight at the NPCG advisors.
 
-   Keep PROPERTY and ADVISORS in sync with src/data/deal.js and
-   src/data/advisors.js — this file is CJS so it can't import them. */
+   Keep PROPERTY and ADVISORS in sync with src/data/deal.ts and
+   src/data/advisors.ts — this file is CJS so it can't import them. */
 
 const PROPERTY = 'Maple Court Apartments — 12 Example Street, Anytown, CT 06000'; // SAMPLE — replace
 const FIRM = 'Northeast Private Client Group (NPCG)';
 
-const ADVISORS = [ // SAMPLE — keep in sync with src/data/advisors.js
+const ADVISORS = [ // SAMPLE — keep in sync with src/data/advisors.ts
   { name: 'Brad Balletto', title: 'Managing Director, Investments', phone: '(203) 307-1574', email: 'bballetto@northeastpcg.com' },
   { name: 'Derek Mahabir', title: 'Investment Associate', phone: '(203) 751-1187', email: 'dmahabir@northeastpcg.com' },
 ];

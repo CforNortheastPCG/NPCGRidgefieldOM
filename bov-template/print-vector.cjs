@@ -20,13 +20,13 @@ const puppeteer = require('puppeteer');
      • node print.cjs [port] [outfile]   — against a server you already started
      • require('./print.cjs').renderPdf() — from export.cjs (full auto pipeline) */
 
-// Pull the output filename from src/data/deal.js (single source of truth)
+// Pull the output filename from src/data/deal.ts (single source of truth)
 // without an ESM import from this CJS script — a regex on the literal is
 // enough. Fails loudly rather than silently falling back to a stale name.
 function dealPdfName() {
-  const src = fs.readFileSync(path.join(__dirname, 'src', 'data', 'deal.js'), 'utf8');
+  const src = fs.readFileSync(path.join(__dirname, 'src', 'data', 'deal.ts'), 'utf8');
   const m = src.match(/pdfName:\s*['"]([^'"]+)['"]/);
-  if (!m) throw new Error('pdfName not found — set DEAL.pdfName in src/data/deal.js as a quoted single-line string.');
+  if (!m) throw new Error('pdfName not found — set DEAL.pdfName in src/data/deal.ts as a quoted single-line string.');
   return m[1];
 }
 

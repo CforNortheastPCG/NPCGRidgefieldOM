@@ -1,0 +1,46 @@
+/* ═══════════ NPCG BOV STYLE PACK — DESIGN TOKENS (product layer) ═══════════
+   The brand canon (NPCGStyleGuide.md): Carbon Blue, Stone Beige, Golden
+   Orange accent, Terracotta, Graphite, Linen; Montserrat.
+
+   This file is the ONE place the BOV deliberately diverges from the OM
+   frame's style pack. The OM book is a presentation (--fs-body 10.5px,
+   --fs-section-title 28px); a BOV is an analyst document and runs a denser
+   ramp. Do not "sync" this file from the frame — sync index.css instead. */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --carbon: #3f4753;
+  --terracotta: #B55D37;
+  --golden: #F8971D;
+  --stone: #B1A8A0;
+  --graphite: #281B12;
+  --linen: #F6F2EE;
+  --white: #ffffff;
+  --border: #e0dbd6;
+
+  --font-brand: 'Montserrat', sans-serif;
+
+  --page-w: 960px;
+  --page-h: 742px;
+
+  /* Type ramp — BOV density. These are analyst-document sizes, not
+     presentation sizes: a finished page should read as a filled sheet, the
+     way the Echo Hill / Homecrest reference BOVs do. Pages are fixed
+     960×742 overflow:hidden boxes, so anything you enlarge here can clip
+     silently — always re-run `node scripts/qa-shots.cjs` (exits 4) after
+     touching this block. */
+  --fs-body: 9px;
+  --lh-body: 1.45;
+  --fs-section-title: 21px;
+  --fs-eyebrow: 8.5px;
+  --fs-page-header: 10px;
+  --fs-footer: 8.5px;
+
+  --fs-table: 8.6px;
+  --fs-table-head: 7.4px;
+  --fs-note: 7.2px;
+  --fs-kpi: 19px;
+  --fs-kpi-label: 7.2px;
+  --fs-sub: 8.2px;
+}

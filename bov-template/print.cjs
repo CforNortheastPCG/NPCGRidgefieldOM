@@ -18,13 +18,13 @@ const puppeteer = require('puppeteer');
      BRIGHTEN mild print-only lift on regular photos (paper prints darker)
      COVER    stronger lift on the cover/divider heroes (lifts dark scrims) */
 
-// Pull the output filename from src/data/deal.js (single source of truth)
+// Pull the output filename from src/data/deal.ts (single source of truth)
 // without an ESM import from this CJS script — a regex on the literal is
 // enough. Fails loudly rather than silently falling back to a stale name.
 function dealPdfName() {
-  const src = fs.readFileSync(path.join(__dirname, 'src', 'data', 'deal.js'), 'utf8');
+  const src = fs.readFileSync(path.join(__dirname, 'src', 'data', 'deal.ts'), 'utf8');
   const m = src.match(/pdfName:\s*['"]([^'"]+)['"]/);
-  if (!m) throw new Error('pdfName not found — set DEAL.pdfName in src/data/deal.js as a quoted single-line string.');
+  if (!m) throw new Error('pdfName not found — set DEAL.pdfName in src/data/deal.ts as a quoted single-line string.');
   return m[1];
 }
 
